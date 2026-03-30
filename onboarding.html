@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>LiveCloud Backend Onboarding</title>
+<style>
+body { font-family: system-ui; background: #0f1117; color: #e4e7ef; padding: 20px; }
+h1 { color: #818cf8; margin-bottom: 20px; }
+.section { margin: 20px 0; padding: 15px; background: #1a1d27; border-left: 3px solid #6366f1; }
+.step { margin: 10px 0; padding: 10px; background: #242836; border-radius: 4px; }
+code { background: #2e3345; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
+</style>
+</head>
+<body>
+<h1>LiveCloud Backend Onboarding Guide</h1>
+<div class="section">
+<h2>1. Development Environment Setup</h2>
+<div class="step">Clone the repository and install dependencies</div>
+<div class="step">Configure environment variables from .env.example</div>
+<div class="step">Run database migrations: <code>npm run migrate</code></div>
+</div>
+<div class="section">
+<h2>2. Core Architecture</h2>
+<div class="step">Review API documentation in /docs/api</div>
+<div class="step">Understand the database schema</div>
+<div class="step">Familiarize with authentication flow</div>
+</div>
+<div class="section">
+<h2>3. Development Workflow</h2>
+<div class="step">Create feature branches from main</div>
+<div class="step">Write tests for all new features</div>
+<div class="step">Submit pull requests for code review</div>
+</div>
+<div class="section">
+<h2>4. Deployment</h2>
+<div class="step">Run tests: <code>npm test</code></div>
+<div class="step">Build production bundle: <code>npm run build</code></div>
+<div class="step">Deploy to staging then production</div>
+</div>
+</body>
+</html>
