@@ -631,86 +631,52 @@
   }
 
   /* ===== MOBILE CARD VIEW ===== */
-  .mobile-task-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 12px;
-    margin-bottom: 8px;
-  }
 
-  .mobile-task-card .mtc-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 6px;
-    gap: 8px;
-  }
-
-  .mobile-task-card .mtc-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text);
-    flex: 1;
-  }
-
-  .mobile-task-card .mtc-phase {
-    font-size: 10px;
-    font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 10px;
-    color: white;
-    white-space: nowrap;
-  }
-
-  .mobile-task-card .mtc-phase.build { background: var(--blue); }
-  .mobile-task-card .mtc-phase.test { background: var(--yellow); color: #000; }
-  .mobile-task-card .mtc-phase.live { background: var(--green); }
-  .mobile-task-card .mtc-phase.critical { background: var(--red); }
-  .mobile-task-card .mtc-phase.scale { background: var(--purple); }
-  .mobile-task-card .mtc-phase.polish { background: var(--cyan); }
-
-  .mobile-task-card .mtc-meta {
-    display: flex;
-    gap: 12px;
-    font-size: 11px;
-    color: var(--text-muted);
-    flex-wrap: wrap;
-  }
-
-  .mobile-task-card .mtc-ws {
-    background: var(--surface2);
-    padding: 1px 6px;
-    border-radius: 4px;
-    font-size: 10px;
-    font-weight: 600;
-  }
-
-  .mobile-section-header {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--accent-light);
-    padding: 12px 0 6px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 8px;
-  }
 
   @media (max-width: 768px) {
+    /* Hide desktop button filters, show dropdowns */
     .filters { display: none !important; }
     .mobile-filters { display: flex !important; }
     .legend { display: none !important; }
 
+    /* Compact header */
     .header { padding: 12px; }
     .header h1 { font-size: 16px; }
     .header-meta { font-size: 11px; }
 
-    /* In detail/overview: hide gantt, show card list */
-    /* Timeline stays visible and scrollable on mobile */
+    /* Timeline: scrollable, min-width for readability, auto-scroll to today */
+    .timeline-container { padding: 8px !important; overflow-x: auto !important; -webkit-overflow-scrolling: touch; }
+    .timeline { min-width: 900px !important; }
 
-    .timeline-container { padding: 12px !important; }
+    /* Compact gantt rows */
+    .timeline-header,
+    .timeline-row { grid-template-columns: minmax(50px, 130px) 1fr !important; }
+    .timeline-header-label { font-size: 9px; }
+    .row-label { font-size: 10px; padding: 0 4px; }
+    .row-label .tag { font-size: 8px; padding: 1px 3px; }
+    .gantt-bar { font-size: 8px; height: 16px; padding: 0 2px; }
+    .month-header { font-size: 9px; padding: 2px 0; }
 
-    .stats-bar { padding: 8px 12px; gap: 12px; flex-wrap: wrap; }
-    .stat-value { font-size: 14px; }
+    /* Capacity: 2-col grid for cards */
+    .capacity-dashboard { grid-template-columns: repeat(2, 1fr) !important; gap: 8px; }
+    .capacity-card { padding: 10px; }
+    .capacity-card h3 { font-size: 11px; margin-bottom: 8px; }
+    .capacity-card .metric { font-size: 12px; }
+    .capacity-card .metric-value { font-size: 15px; }
+    .capacity-person-row { grid-template-columns: minmax(50px, 110px) 1fr !important; gap: 8px; padding: 8px 0; }
+    .person-name { font-size: 11px; }
+    .bar-label { font-size: 10px; min-width: 45px; }
+
+    /* Compact velocity chart */
+    .velocity-label { min-width: 55px; font-size: 10px; }
+    .velocity-row { gap: 6px; }
+
+    /* Risk section */
+    .risk-section { padding: 12px; margin-bottom: 12px; }
+
+    /* Stats bar */
+    .stats-bar { padding: 6px 12px; gap: 10px; flex-wrap: wrap; }
+    .stat-value { font-size: 13px; }
     .stat-label { font-size: 9px; }
   }
   </style>
@@ -1083,7 +1049,7 @@ const sprintData = [
     id: 4, name: 'Sprint 4', subtitle: 'Kritiske fixes + fundament',
     dates: '30. mar – 12. apr', colStart: 0, colSpan: 2,
     type: 'active', tickets: 25, capacity: 26,
-    goal: 'Ret kritiske Bodegafest-findings. Onboard Simon (7. apr). Påbegynd B2B flows. Start Swedbank API (Tony). Afklar billet-scanning. Test Sprint 3 features.',
+    goal: 'Ret kritiske Bodegafest-findings. Onboard Simon (1. apr). Påbegynd B2B flows. Start Swedbank API (Tony). Afklar billet-scanning. Test Sprint 3 features.',
     persons: { 'Michael': { count: 7, focus: 'Backend onboarding, billettyper, B2B, dashboard, Beats' }, 'Tony': { count: 8, focus: 'POS findings + feedback, Swedbank integration' }, 'Mikkel': { count: 7, focus: 'Onboarding app, app findings' }, 'Jakob': { count: 3, focus: 'Accessibility fix, scanning-løsningsdesign, gate design, UX' } },
     workstreams: ['WS1','WS2','WS3','WS4','Test']
   },
