@@ -1,40 +1,693 @@
 <!DOCTYPE html>
-<html>
+<html lang="da">
 <head>
-<title>LiveCloud Backend Onboarding</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LiveCloud — Simon Onboarding Plan</title>
 <style>
-body { font-family: system-ui; background: #0f1117; color: #e4e7ef; padding: 20px; }
-h1 { color: #818cf8; margin-bottom: 20px; }
-.section { margin: 20px 0; padding: 15px; background: #1a1d27; border-left: 3px solid #6366f1; }
-.step { margin: 10px 0; padding: 10px; background: #242836; border-radius: 4px; }
-code { background: #2e3345; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #232733;
+    --border: #2d3141;
+    --text: #e4e4e7;
+    --text-dim: #9ca3af;
+    --accent: #6366f1;
+    --accent-light: #818cf8;
+    --green: #22c55e;
+    --green-bg: rgba(34,197,94,0.12);
+    --yellow: #eab308;
+    --yellow-bg: rgba(234,179,8,0.12);
+    --red: #ef4444;
+    --red-bg: rgba(239,68,68,0.12);
+    --blue: #3b82f6;
+    --blue-bg: rgba(59,130,246,0.12);
+    --purple: #a855f7;
+    --purple-bg: rgba(168,85,247,0.12);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height:1.6; padding:2rem; }
+
+  .container { max-width:1100px; margin:0 auto; }
+
+  h1 { font-size:1.8rem; font-weight:700; margin-bottom:0.3rem; }
+  .subtitle { color: var(--text-dim); font-size:0.95rem; margin-bottom:2rem; }
+
+  /* Summary box */
+  .summary-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+  .summary-item { text-align:center; }
+  .summary-item .label { font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-dim); margin-bottom:0.3rem; }
+  .summary-item .value { font-size:1.6rem; font-weight:700; }
+  .summary-item .detail { font-size:0.8rem; color:var(--text-dim); }
+
+  /* Section */
+  .section { margin-bottom:2.5rem; }
+  .section-title { font-size:1.15rem; font-weight:600; margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem; }
+  .section-title .icon { font-size:1.2rem; }
+
+  /* Profile card */
+  .profile-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .profile-card h3 { font-size:1rem; font-weight:600; margin-bottom:0.8rem; color:var(--accent-light); }
+  .req-grid {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 2rem;
+  }
+  .req-item { display:flex; align-items:baseline; gap:0.4rem; font-size:0.9rem; }
+  .req-item .check { color:var(--green); font-weight:700; }
+  .req-item .nice { color:var(--yellow); font-weight:700; }
+
+  /* Timeline */
+  .timeline { position:relative; padding-left:2rem; }
+  .timeline::before {
+    content:'';
+    position:absolute;
+    left:0.55rem;
+    top:0.5rem;
+    bottom:0.5rem;
+    width:2px;
+    background: var(--border);
+  }
+  .week-block {
+    position:relative;
+    margin-bottom:1.5rem;
+  }
+  .week-block::before {
+    content:'';
+    position:absolute;
+    left:-1.55rem;
+    top:0.45rem;
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+  }
+  .week-block.milestone::before { background: var(--green); width:14px; height:14px; left:-1.6rem; }
+  .week-header {
+    display:flex;
+    align-items:center;
+    gap:0.8rem;
+    margin-bottom:0.5rem;
+  }
+  .week-label {
+    font-weight:700;
+    font-size:0.95rem;
+  }
+  .week-dates {
+    font-size:0.8rem;
+    color:var(--text-dim);
+  }
+  .week-tag {
+    font-size:0.7rem;
+    font-weight:600;
+    padding:0.15rem 0.5rem;
+    border-radius:4px;
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+  }
+  .tag-onboard { background:var(--purple-bg); color:var(--purple); }
+  .tag-rampup { background:var(--blue-bg); color:var(--blue); }
+  .tag-productive { background:var(--green-bg); color:var(--green); }
+  .tag-independent { background:var(--yellow-bg); color:var(--yellow); }
+
+  .week-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+  }
+  .week-content p { font-size:0.88rem; color:var(--text-dim); margin-bottom:0.5rem; }
+  .week-content p:last-child { margin-bottom:0; }
+  .task-list { list-style:none; }
+  .task-list li {
+    font-size:0.88rem;
+    padding:0.3rem 0;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:baseline;
+    gap:0.4rem;
+  }
+  .task-list li:last-child { border-bottom:none; }
+  .task-list .bullet { color:var(--accent-light); font-weight:700; flex-shrink:0; }
+  .task-list .mentor { color:var(--text-dim); font-size:0.78rem; margin-left:auto; white-space:nowrap; }
+
+  /* Ticket handoff table */
+  .handoff-table {
+    width:100%;
+    border-collapse:collapse;
+    font-size:0.88rem;
+  }
+  .handoff-table th {
+    text-align:left;
+    font-size:0.75rem;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    color:var(--text-dim);
+    padding:0.5rem 0.8rem;
+    border-bottom:2px solid var(--border);
+  }
+  .handoff-table td {
+    padding:0.6rem 0.8rem;
+    border-bottom:1px solid var(--border);
+  }
+  .handoff-table tr:last-child td { border-bottom:none; }
+  .ws-badge {
+    display:inline-block;
+    font-size:0.7rem;
+    font-weight:600;
+    padding:0.1rem 0.4rem;
+    border-radius:3px;
+    background:var(--surface2);
+    color:var(--text-dim);
+    margin-right:0.3rem;
+  }
+  .priority-high { color:var(--red); font-weight:600; }
+  .priority-med { color:var(--yellow); font-weight:600; }
+
+  /* Impact chart */
+  .impact-grid {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:1rem;
+    margin-top:1rem;
+  }
+  .impact-card {
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:1.2rem;
+  }
+  .impact-card h4 { font-size:0.85rem; font-weight:600; margin-bottom:0.6rem; color:var(--text-dim); }
+  .bar-container { margin-bottom:0.6rem; }
+  .bar-label { display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:0.25rem; }
+  .bar-track { height:8px; background:var(--surface2); border-radius:4px; overflow:hidden; }
+  .bar-fill { height:100%; border-radius:4px; transition:width 0.5s; }
+  .bar-fill.red { background:var(--red); }
+  .bar-fill.yellow { background:var(--yellow); }
+  .bar-fill.green { background:var(--green); }
+  .bar-fill.blue { background:var(--blue); }
+
+  /* Cost section */
+  .cost-row {
+    display:flex;
+    justify-content:space-between;
+    padding:0.5rem 0;
+    font-size:0.9rem;
+    border-bottom:1px solid var(--border);
+  }
+  .cost-row:last-child { border-bottom:none; }
+  .cost-row .amount { font-weight:600; }
+
+  /* Risks */
+  .risk-item {
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:1rem 1.2rem;
+    margin-bottom:0.8rem;
+  }
+  .risk-item .risk-title { font-weight:600; font-size:0.9rem; margin-bottom:0.3rem; }
+  .risk-item .risk-desc { font-size:0.85rem; color:var(--text-dim); }
+  .risk-item .mitigation { font-size:0.85rem; color:var(--green); margin-top:0.3rem; }
+
+  @media (max-width:700px) {
+    .summary-box { grid-template-columns:repeat(2,1fr); }
+    .req-grid { grid-template-columns:1fr; }
+    .impact-grid { grid-template-columns:1fr; }
+  }
 </style>
 </head>
 <body>
-<h1>LiveCloud Backend Onboarding Guide</h1>
-<div class="section">
-<h2>1. Development Environment Setup</h2>
-<div class="step">Clone the repository and install dependencies</div>
-<div class="step">Configure environment variables from .env.example</div>
-<div class="step">Run database migrations: <code>npm run migrate</code></div>
+<div class="container">
+
+<h1>Simon — Onboarding Plan</h1>
+<p class="subtitle">LiveCloud ApS · Ringsted Festival 2026 · Oprettet 30. marts 2026</p>
+
+<!-- Summary -->
+<div class="summary-box">
+  <div class="summary-item">
+    <div class="label">Ansættelsesmål</div>
+    <div class="value" style="color:var(--red)">7. apr</div>
+    <div class="detail">Senest uge 15</div>
+  </div>
+  <div class="summary-item">
+    <div class="label">Ramp-up</div>
+    <div class="value" style="color:var(--yellow)">3 uger</div>
+    <div class="detail">Produktiv fra Sprint 6</div>
+  </div>
+  <div class="summary-item">
+    <div class="label">Ekstra kapacitet</div>
+    <div class="value" style="color:var(--green)">+28-35</div>
+    <div class="detail">Tickets før festival</div>
+  </div>
+  <div class="summary-item">
+    <div class="label">Michael aflastning</div>
+    <div class="value" style="color:var(--blue)">40-50%</div>
+    <div class="detail">Af backlog-tickets</div>
+  </div>
 </div>
+
+<!-- Profil -->
 <div class="section">
-<h2>2. Core Architecture</h2>
-<div class="step">Review API documentation in /docs/api</div>
-<div class="step">Understand the database schema</div>
-<div class="step">Familiarize with authentication flow</div>
+  <div class="section-title"><span class="icon">👤</span> Ønsket profil</div>
+  <div class="profile-card">
+    <h3>Must-have kompetencer</h3>
+    <div class="req-grid">
+      <div class="req-item"><span class="check">✓</span> Node.js / TypeScript (2+ år)</div>
+      <div class="req-item"><span class="check">✓</span> REST API design & implementering</div>
+      <div class="req-item"><span class="check">✓</span> PostgreSQL (queries, migrations, relations)</div>
+      <div class="req-item"><span class="check">✓</span> Git workflow (PRs, branching, code review)</div>
+      <div class="req-item"><span class="check">✓</span> Selvstændig — kan arbejde fra Jira-tickets</div>
+      <div class="req-item"><span class="check">✓</span> Dansk eller flydende engelsk</div>
+    </div>
+  </div>
+  <div class="profile-card">
+    <h3>Nice-to-have</h3>
+    <div class="req-grid">
+      <div class="req-item"><span class="nice">+</span> Erfaring med event/ticketing-domæner</div>
+      <div class="req-item"><span class="nice">+</span> Payment gateway integration (Swedbank/Nets)</div>
+      <div class="req-item"><span class="nice">+</span> React Native (kan hjælpe med API-lag)</div>
+      <div class="req-item"><span class="nice">+</span> NFC / hardware-integration</div>
+    </div>
+  </div>
 </div>
+
+<!-- Mentor-fordeling -->
 <div class="section">
-<h2>3. Development Workflow</h2>
-<div class="step">Create feature branches from main</div>
-<div class="step">Write tests for all new features</div>
-<div class="step">Submit pull requests for code review</div>
+  <div class="section-title"><span class="icon">👥</span> Mentor-fordeling (delt ansvar)</div>
+  <div class="profile-card">
+    <p style="font-size:0.88rem; color:var(--text-dim); margin-bottom:1rem;">
+      Michael arbejder kun <strong style="color:var(--yellow)">tirsdag + torsdag + ½ fredag</strong> (~2,5 dage/uge) på LiveCloud.
+      Hans velocity (~7 tickets/sprint) afspejler allerede denne tilgængelighed.
+      Onboarding skal derfor fordeles på 3 mentorer, så ny dev aldrig sidder fast på Michaels off-dage.
+    </p>
+    <table class="handoff-table">
+      <thead>
+        <tr>
+          <th>Mentor</th>
+          <th>Tilgængelighed</th>
+          <th>Ansvarsområder i onboarding</th>
+          <th>Timer/uge (uge 1-2)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:var(--accent-light)">Jakob</strong></td>
+          <td>Alle dage</td>
+          <td>Produkt-vision, roadmap, Jira-workflow, domæne-forklaring, daglig sparring man+ons</td>
+          <td style="color:var(--yellow)">~5 timer</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--green)">Tony</strong></td>
+          <td>Alle dage</td>
+          <td>DevOps, env-setup, CI/CD, deployment, code-tours (FMS + Commerce), PR-review (primær), DB-walkthrough</td>
+          <td style="color:var(--yellow)">~7 timer</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--blue)">Michael</strong></td>
+          <td>Ti + To + ½ Fre</td>
+          <td>Backend-arkitektur deep-dive (ti), pair-programming ved behov (to), arkitektur-sparring</td>
+          <td style="color:var(--green)">~3 timer (af 20 tilgængelige)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+
+<!-- Onboarding Timeline -->
 <div class="section">
-<h2>4. Deployment</h2>
-<div class="step">Run tests: <code>npm test</code></div>
-<div class="step">Build production bundle: <code>npm run build</code></div>
-<div class="step">Deploy to staging then production</div>
+  <div class="section-title"><span class="icon">📅</span> Onboarding-tidslinje (dag for dag, uge 1-2)</div>
+
+  <div class="timeline">
+
+    <!-- Week 1 -->
+    <div class="week-block">
+      <div class="week-header">
+        <span class="week-label">Uge 1 — Orientering</span>
+        <span class="week-dates">7-11. apr (Sprint 4)</span>
+        <span class="week-tag tag-onboard">Onboarding</span>
+      </div>
+      <div class="week-content">
+        <p><strong>Mål:</strong> Forstå platformen, kør lokalt miljø, lav første commit</p>
+        <p style="font-size:0.82rem; color:var(--accent-light); margin-bottom:0.8rem;">Dag-for-dag plan tilpasset Michaels ti/to/fre-skema:</p>
+        <ul class="task-list">
+          <li><span class="bullet">MA</span> Velkomst: vision, produkt-demo, roadmap, Jira-intro <span class="mentor">Jakob</span></li>
+          <li><span class="bullet">MA</span> Opsæt lokalt miljø: repo, DB, Docker, env-vars, kør projekt <span class="mentor">Tony</span></li>
+          <li><span class="bullet">MA</span> Adgang: Jira, Confluence, Slack, GitHub, staging, Postmark <span class="mentor">Jakob</span></li>
+          <li><span class="bullet">TI</span> Backend-arkitektur walkthrough: services, domæner, API-lag <span class="mentor">Michael</span></li>
+          <li><span class="bullet">TI</span> Code-tour: Commerce API (orders, tickets, claim-flow) <span class="mentor">Tony</span></li>
+          <li><span class="bullet">ON</span> CI/CD pipeline, deployment-flow, staging vs. production <span class="mentor">Tony</span></li>
+          <li><span class="bullet">ON</span> Domæne-walkthrough: FMS, Beats, B2B-koncepter (produkt-perspektiv) <span class="mentor">Jakob</span></li>
+          <li><span class="bullet">ON</span> Selvstændig: Læs FMS-kodebase, prøv endpoints i Postman <span class="mentor">Selv</span></li>
+          <li><span class="bullet">TO</span> Code-tour: FMS-kodebase (events, program, content) <span class="mentor">Tony</span></li>
+          <li><span class="bullet">TO</span> Første PR: lille bugfix eller doc-opdatering <span class="mentor">Tony review</span></li>
+          <li><span class="bullet">FR</span> DB-struktur walkthrough, migrations, seed-data <span class="mentor">Tony</span></li>
+          <li><span class="bullet">FR</span> Opsamling + ugens spørgsmål (kort 1:1) <span class="mentor">Jakob</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Week 2 -->
+    <div class="week-block">
+      <div class="week-header">
+        <span class="week-label">Uge 2 — Guided tasks</span>
+        <span class="week-dates">14-18. apr (Sprint 5 start)</span>
+        <span class="week-tag tag-rampup">Ramp-up</span>
+      </div>
+      <div class="week-content">
+        <p><strong>Mål:</strong> Løs 3-4 afgrænsede tickets, lær PR-flow</p>
+        <p style="font-size:0.82rem; color:var(--accent-light); margin-bottom:0.8rem;">Ny dev arbejder selvstændigt man+ons, guided sessions ti+to+fre:</p>
+        <ul class="task-list">
+          <li><span class="bullet">MA</span> Selvstændigt: Start FMS dashboard-ticket (CRUD, afgrænsset) <span class="mentor">Selv (Jakob backup)</span></li>
+          <li><span class="bullet">MA</span> Test-setup intro: skriv tests for eget arbejde <span class="mentor">Edwin</span></li>
+          <li><span class="bullet">TI</span> PR-review af mandagens arbejde + feedback <span class="mentor">Tony</span></li>
+          <li><span class="bullet">TI</span> Arkitektur deep-dive: Beats/Credits domæne + kode-gennemgang <span class="mentor">Michael</span></li>
+          <li><span class="bullet">ON</span> Selvstændigt: Næste FMS-ticket + API-endpoint (read-only) <span class="mentor">Selv (Tony backup)</span></li>
+          <li><span class="bullet">ON</span> Jira-workflow: ticket-livscyklus, sprint-board, transitions <span class="mentor">Jakob</span></li>
+          <li><span class="bullet">TO</span> PR-review + feedback på ugens arbejde <span class="mentor">Tony</span></li>
+          <li><span class="bullet">TO</span> Pair-programming: Commerce order-flow (dybere forståelse) <span class="mentor">Tony</span></li>
+          <li><span class="bullet">FR</span> Deployment: deploy eget arbejde til staging <span class="mentor">Tony</span></li>
+          <li><span class="bullet">FR</span> Ugentlig opsamling + planlæg uge 3 tickets <span class="mentor">Jakob</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Week 3 -->
+    <div class="week-block">
+      <div class="week-header">
+        <span class="week-label">Uge 3 — Selvstændige tasks</span>
+        <span class="week-dates">21-25. apr (Sprint 5)</span>
+        <span class="week-tag tag-rampup">Ramp-up</span>
+      </div>
+      <div class="week-content">
+        <p><strong>Mål:</strong> Løs 4-5 tickets selvstændigt, code review begge veje</p>
+        <ul class="task-list">
+          <li><span class="bullet">→</span> Overtag FMS/Dashboard-backlog (12 tickets) som primært domæne <span class="mentor">Selvstændig</span></li>
+          <li><span class="bullet">→</span> Start Webshop Web UI-tickets (webticket, checkout-flow) <span class="mentor">Jakob product context</span></li>
+          <li><span class="bullet">→</span> Deltag i sprint planning som fuldt teammedlem <span class="mentor">Team</span></li>
+          <li><span class="bullet">→</span> Begynd at reviewe Michaels PRs (lær codebase dybere) <span class="mentor">Selvstændig</span></li>
+          <li><span class="bullet">→</span> Man+ons: selvstændig dev, spørgsmål via Slack til Jakob/Tony <span class="mentor">Jakob/Tony</span></li>
+          <li><span class="bullet">→</span> PR-review med Tony (daglig), arkitektur-sparring med Michael (ti ved behov) <span class="mentor">Tony / Michael</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Week 4+ -->
+    <div class="week-block milestone">
+      <div class="week-header">
+        <span class="week-label">Uge 4+ — Produktiv</span>
+        <span class="week-dates">28. apr → (Sprint 6+)</span>
+        <span class="week-tag tag-productive">Produktiv</span>
+      </div>
+      <div class="week-content">
+        <p><strong>Mål:</strong> 5-7 tickets/sprint, ejer FMS + Webshop Web UI, starter B2B backend</p>
+        <ul class="task-list">
+          <li><span class="bullet">→</span> Primær ejer: FMS/Dashboard, Webshop Web UI (webticket)</li>
+          <li><span class="bullet">→</span> Sekundær: B2B flow backend (WS5) — overtager fra Michael</li>
+          <li><span class="bullet">→</span> Async PR-review med Tony — Michael kun ved arkitektur-spørgsmål</li>
+          <li><span class="bullet">→</span> Deltag i test-push (hjælp med at reducere 82-ticket test-kø)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Week 8+ -->
+    <div class="week-block milestone">
+      <div class="week-header">
+        <span class="week-label">Uge 8+ — Selvkørende</span>
+        <span class="week-dates">jun (Sprint 8-9)</span>
+        <span class="week-tag tag-independent">Selvkørende</span>
+      </div>
+      <div class="week-content">
+        <p><strong>Mål:</strong> Fuldt selvstændigt teammedlem, kan håndtere on-call under festival</p>
+        <ul class="task-list">
+          <li><span class="bullet">→</span> Ejer FMS, Webshop Web UI og B2B backend selvstændigt</li>
+          <li><span class="bullet">→</span> Deltag i hardening og regression-test (Sprint 9)</li>
+          <li><span class="bullet">→</span> Deltag i load-test forberedelse (Sprint 10)</li>
+          <li><span class="bullet">→</span> Del af vagtordning under Ringsted Festival</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Ticket Handoff -->
+<div class="section">
+  <div class="section-title"><span class="icon">🎫</span> Simons ansvarsområder (progression)</div>
+  <p style="font-size:0.88rem; color:var(--text-dim); margin-bottom:1rem;">
+    Simon starter med FMS (isoleret, lav risiko), bygger op til Webshop Web UI, og overtager til sidst B2B backend fra Michael. Aflaster primært Michael, sekundært Tony.
+  </p>
+  <div class="profile-card" style="padding:0.5rem 0;">
+    <table class="handoff-table">
+      <thead>
+        <tr>
+          <th>Domæne</th>
+          <th>Tickets</th>
+          <th>Prioritet</th>
+          <th>Hvornår</th>
+          <th>Risiko</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="ws-badge">WS4</span> FMS / Dashboard</td>
+          <td>~12</td>
+          <td class="priority-med">Medium</td>
+          <td>Sprint 5 (uge 2-3)</td>
+          <td style="color:var(--green)">Lav — isoleret CRUD, perfekt starter</td>
+        </tr>
+        <tr>
+          <td><span class="ws-badge">WS6</span> Webticket / Webshop (Web UI)</td>
+          <td>~10</td>
+          <td class="priority-high">High</td>
+          <td>Sprint 6-7 (uge 4-6)</td>
+          <td style="color:var(--yellow)">Medium — checkout + ticket-flows</td>
+        </tr>
+        <tr>
+          <td><span class="ws-badge">WS5</span> B2B flows (backend)</td>
+          <td>~8</td>
+          <td class="priority-high">High</td>
+          <td>Sprint 7-8 (uge 6+)</td>
+          <td style="color:var(--yellow)">Medium — commerce integration</td>
+        </tr>
+        <tr>
+          <td><span class="ws-badge" style="background:rgba(239,68,68,0.12);color:var(--red)">Hard</span> Backend hardening + bugfix</td>
+          <td>~5+</td>
+          <td class="priority-med">Medium</td>
+          <td>Sprint 9-10</td>
+          <td style="color:var(--green)">Lav — stabilisering</td>
+        </tr>
+        <tr style="font-weight:600;">
+          <td>Total Simon-kapacitet</td>
+          <td>~30</td>
+          <td></td>
+          <td>Sprint 5-10</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Capacity Impact -->
+<div class="section">
+  <div class="section-title"><span class="icon">📊</span> Kapacitets-impact</div>
+  <div class="impact-grid">
+    <div class="impact-card">
+      <h4>Michael — UDEN ny udvikler</h4>
+      <div class="bar-container">
+        <div class="bar-label"><span>Must-do (50)</span><span>Kapacitet: 49</span></div>
+        <div class="bar-track"><div class="bar-fill red" style="width:102%"></div></div>
+      </div>
+      <div class="bar-container">
+        <div class="bar-label"><span>+ Critical backlog (25)</span><span>Kapacitet: 49</span></div>
+        <div class="bar-track"><div class="bar-fill red" style="width:153%"></div></div>
+      </div>
+      <p style="font-size:0.82rem; color:var(--red); margin-top:0.5rem;">⚠ Overskridelse: 26 tickets mangler kapacitet. Nul buffer.</p>
+    </div>
+
+    <div class="impact-card">
+      <h4>Michael — MED Simon (fra Sprint 6)</h4>
+      <div class="bar-container">
+        <div class="bar-label"><span>Michaels remaining (50-20 = 30)</span><span>Kapacitet: 42</span></div>
+        <div class="bar-track"><div class="bar-fill green" style="width:71%"></div></div>
+      </div>
+      <div class="bar-container">
+        <div class="bar-label"><span>Simons tickets (~30)</span><span>Kapacitet: ~30</span></div>
+        <div class="bar-track"><div class="bar-fill blue" style="width:100%"></div></div>
+      </div>
+      <p style="font-size:0.82rem; color:var(--green); margin-top:0.5rem;">✓ Michael får 12 tickets buffer. Simon overtager FMS, Webshop UI, B2B backend.</p>
+    </div>
+
+    <div class="impact-card">
+      <h4>Simons velocity-ramp</h4>
+      <div class="bar-container">
+        <div class="bar-label"><span>Sprint 5 (FMS ramp-up)</span><span>~3 tickets</span></div>
+        <div class="bar-track"><div class="bar-fill blue" style="width:43%"></div></div>
+      </div>
+      <div class="bar-container">
+        <div class="bar-label"><span>Sprint 6 (FMS + Webshop)</span><span>~5 tickets</span></div>
+        <div class="bar-track"><div class="bar-fill blue" style="width:71%"></div></div>
+      </div>
+      <div class="bar-container">
+        <div class="bar-label"><span>Sprint 7+ (Webshop + B2B)</span><span>~7 tickets</span></div>
+        <div class="bar-track"><div class="bar-fill blue" style="width:100%"></div></div>
+      </div>
+      <p style="font-size:0.82rem; color:var(--text-dim); margin-top:0.5rem;">Total: ~30 tickets (Sprint 5 → 10)</p>
+    </div>
+
+    <div class="impact-card">
+      <h4>Team total velocity</h4>
+      <div class="bar-container">
+        <div class="bar-label"><span>Nu (5 devs)</span><span>~26/sprint</span></div>
+        <div class="bar-track"><div class="bar-fill yellow" style="width:74%"></div></div>
+      </div>
+      <div class="bar-container">
+        <div class="bar-label"><span>Med Simon (6 devs, Sprint 7+)</span><span>~33/sprint</span></div>
+        <div class="bar-track"><div class="bar-fill green" style="width:94%"></div></div>
+      </div>
+      <p style="font-size:0.82rem; color:var(--green); margin-top:0.5rem;">+27% velocity boost. Buffer stiger fra +67 til +97 tickets. SPOF-risiko reduceret.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Mentor time cost -->
+<div class="section">
+  <div class="section-title"><span class="icon">⏱️</span> Mentor-tid (fordelt investering)</div>
+  <div class="profile-card">
+    <h3 style="margin-bottom:0.5rem;">Michael (ti + to + ½ fre = ~20 timer/uge på LC)</h3>
+    <div class="cost-row">
+      <span>Uge 1 — Arkitektur-walkthrough (ti)</span>
+      <span class="amount" style="color:var(--green)">~2 timer (10% af LC-tid)</span>
+    </div>
+    <div class="cost-row">
+      <span>Uge 2 — Beats/Credits deep-dive (ti)</span>
+      <span class="amount" style="color:var(--green)">~2 timer (10%)</span>
+    </div>
+    <div class="cost-row">
+      <span>Uge 3 — Arkitektur-sparring ved behov (ti/to)</span>
+      <span class="amount" style="color:var(--green)">~1 time (5%)</span>
+    </div>
+    <div class="cost-row">
+      <span>Uge 4+ — Async sparring ved behov</span>
+      <span class="amount" style="color:var(--green)">~0.5 time</span>
+    </div>
+    <div class="cost-row" style="border-top:1px solid var(--accent); padding-top:0.5rem; margin-top:0.2rem;">
+      <span><strong>Michael total</strong></span>
+      <span class="amount" style="color:var(--green)">~6 timer over 3 uger</span>
+    </div>
+  </div>
+
+  <div class="profile-card">
+    <h3 style="margin-bottom:0.5rem;">Jakob (alle dage)</h3>
+    <div class="cost-row">
+      <span>Uge 1 — Velkomst, vision, adgange, domæne-intro (man+ons)</span>
+      <span class="amount" style="color:var(--yellow)">~4 timer</span>
+    </div>
+    <div class="cost-row">
+      <span>Uge 2 — Jira-workflow, sparring man+ons, product context</span>
+      <span class="amount" style="color:var(--green)">~2 timer</span>
+    </div>
+    <div class="cost-row">
+      <span>Uge 3+ — Slack-sparring ved behov</span>
+      <span class="amount" style="color:var(--green)">~1 time/uge</span>
+    </div>
+    <div class="cost-row" style="border-top:1px solid var(--accent); padding-top:0.5rem; margin-top:0.2rem;">
+      <span><strong>Jakob total</strong></span>
+      <span class="amount" style="color:var(--green)">~7 timer over 3 uger</span>
+    </div>
+  </div>
+
+  <div class="profile-card">
+    <h3 style="margin-bottom:0.5rem;">Tony (alle dage) — primær mentor</h3>
+    <div class="cost-row">
+      <span>Uge 1 — Env-setup (ma), code-tours (ti+to), CI/CD (on), DB-walkthrough (fr)</span>
+      <span class="amount" style="color:var(--yellow)">~7 timer</span>
+    </div>
+    <div class="cost-row">
+      <span>Uge 2 — PR-reviews (ti+to), pair-programming (to), deployment (fr)</span>
+      <span class="amount" style="color:var(--yellow)">~5 timer</span>
+    </div>
+    <div class="cost-row">
+      <span>Uge 3 — PR-review + code-spørgsmål (daglig backup)</span>
+      <span class="amount" style="color:var(--green)">~2 timer</span>
+    </div>
+    <div class="cost-row" style="border-top:1px solid var(--accent); padding-top:0.5rem; margin-top:0.2rem;">
+      <span><strong>Tony total</strong></span>
+      <span class="amount" style="color:var(--yellow)">~14 timer over 3 uger</span>
+    </div>
+  </div>
+
+  <p style="font-size:0.85rem; color:var(--text-dim); margin-top:1rem; padding:0.8rem; background:var(--surface); border-radius:8px; border:1px solid var(--border);">
+    <strong>Nøglepunkt:</strong> Tony er primær mentor (~14 timer) — tilgængelig alle dage. Michael bidrager kun ~6 timer (arkitektur deep-dives ti).
+    Han mister ~1 ticket i Sprint 5 — ikke 4-5. Simon er <em>aldrig</em> blokeret på Michaels off-dage, fordi Tony og Jakob dækker alle 5 dage.
+  </p>
+</div>
+
+<!-- Risks -->
+<div class="section">
+  <div class="section-title"><span class="icon">⚠️</span> Risici & mitigering</div>
+
+  <div class="risk-item">
+    <div class="risk-title">Kan ikke finde kandidat inden 7. april</div>
+    <div class="risk-desc">Rekruttering tager tid. Hvis ansættelse trækker ud, forsvinder ramp-up-buffer.</div>
+    <div class="mitigation">→ Brug netværk + freelance-platforme parallelt. Overvej contract-to-hire. Selv med start medio april er der stadig 28+ tickets kapacitet.</div>
+  </div>
+
+  <div class="risk-item">
+    <div class="risk-title">Ramp-up tager længere end 3 uger</div>
+    <div class="risk-desc">Kompleks codebase, mange domæner. Ny dev kan have brug for mere tid.</div>
+    <div class="mitigation">→ Start med FMS (isoleret, lav risiko). Hold scope snævert de første 2 sprints. Selv med 4 ugers ramp-up er der +24 tickets kapacitet.</div>
+  </div>
+
+  <div class="risk-item">
+    <div class="risk-title">Ny dev sidder fast på Michaels off-dage (man+ons)</div>
+    <div class="risk-desc">Backend-spørgsmål kan kræve Michael-viden som Jakob/Tony ikke har.</div>
+    <div class="mitigation">→ Michael forbereder skriftlig onboarding-doc (arkitektur, API-map, domæne-glossar) inden dag 1. Ny dev samler spørgsmål til ti+to. Jakob kan svare produkt-spørgsmål, Tony kan svare infra-spørgsmål.</div>
+  </div>
+
+  <div class="risk-item">
+    <div class="risk-title">Dårligt kultur-/team-fit</div>
+    <div class="risk-desc">Lille team — én person kan påvirke dynamikken negativt.</div>
+    <div class="mitigation">→ Prøveperiode med klare milestones (uge 1: første PR, uge 3: selvstændige tickets). Evaluering efter 2 uger.</div>
+  </div>
+</div>
+
+<!-- Action items -->
+<div class="section">
+  <div class="section-title"><span class="icon">✅</span> Næste skridt</div>
+  <div class="profile-card">
+    <ul class="task-list">
+      <li><span class="bullet">1.</span> Skriv jobopslag / reach out til netværk (Node/TS backend, contract-to-hire) <span class="mentor">Jakob — denne uge</span></li>
+      <li><span class="bullet">2.</span> Forbered skriftlig onboarding-doc: arkitektur-diagram, API-oversigt, domæne-glossar <span class="mentor">Michael — Sprint 4 (ti/to)</span></li>
+      <li><span class="bullet">3.</span> Forbered env-setup guide: repo, Docker, DB-seed, env-vars <span class="mentor">Tony — Sprint 4</span></li>
+      <li><span class="bullet">4.</span> Identificér 5-8 "starter tickets" i FMS-backlog (veldefinerede, afgrænsede) <span class="mentor">Michael — Sprint 4 (ti/to)</span></li>
+      <li><span class="bullet">5.</span> Opsæt Jira-konto, GitHub-adgang, staging-adgang til ny dev <span class="mentor">Tony — dag 1</span></li>
+      <li><span class="bullet">6.</span> Planlæg uge 1 mentor-skema: Jakob man+ons, Michael ti+to, Tony man+ons+fre <span class="mentor">Jakob — Sprint 5 planning</span></li>
+    </ul>
+  </div>
+</div>
+
+<p style="font-size:0.75rem; color:var(--text-dim); text-align:center; margin-top:2rem; padding-top:1rem; border-top:1px solid var(--border);">
+  LiveCloud · Simon Onboarding Plan · Genereret 30. marts 2026
+</p>
+
 </div>
 </body>
 </html>
