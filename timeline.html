@@ -631,10 +631,6 @@
   }
 
   /* ===== MOBILE CARD VIEW ===== */
-  .mobile-task-list {
-    display: none;
-  }
-
   .mobile-task-card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -709,8 +705,7 @@
     .header-meta { font-size: 11px; }
 
     /* In detail/overview: hide gantt, show card list */
-    .timeline-container[data-mobile-cards="true"] .timeline { display: none !important; }
-    .timeline-container[data-mobile-cards="true"] .mobile-task-list { display: block !important; }
+    /* Timeline stays visible and scrollable on mobile */
 
     .timeline-container { padding: 12px !important; }
 
@@ -1010,7 +1005,7 @@ const capacityData = {
     avgVelocity: 0,
     activeTickets: 0,
     capacity: 30,
-    note: 'Starter 7. april — onboarding uge 1-2, produktiv fra Sprint 5. FMS → Webshop → B2B',
+    note: 'Starter 1. april — onboarding uge 1-2, produktiv fra Sprint 5. FMS → Webshop → B2B',
   }
 };
 
@@ -1477,7 +1472,7 @@ function renderCapacity() {
   // Risk section
   html += '<div class="risk-section">';
   html += '<h3>Risiko & Anbefalinger</h3>';
-  html += '<div class="risk-item">Michael arbejder ti+to+½fre (2,5 dage/uge). Simon starter 7. april og overtager FMS, Webshop og B2B backend fra Sprint 5, hvilket reducerer Michaels load fra 54 → ~30 tickets.</div>';
+  html += '<div class="risk-item">Michael arbejder ti+to+½fre (2,5 dage/uge). Simon starter 1. april og overtager FMS, Webshop og B2B backend fra Sprint 5, hvilket reducerer Michaels load fra 54 → ~30 tickets.</div>';
   html += '<div class="risk-item">Test-kø (82 tickets) overstiger Edwins kapacitet (19) markant — hele teamet (inkl. Simon fra Sprint 6) skal hjælpe med test</div>';
   html += '<div class="risk-item">Buffer ~89 tickets (efter 8 Festival Experience-stories er fordelt på Sprint 6-8). Fortsat god margin til backlog og uventede opgaver.</div>';
   html += '<div class="risk-item">Samlet vurdering: Aktiv pipeline (115) + nye app-features (~8) er realistisk med 6 devs. Swedbank færdig i Sprint 4 (Tony). Michael kan fokusere på arkitektur.</div>';
@@ -1521,7 +1516,7 @@ function renderCapacity() {
 
   // Simon Onboarding Status
   html += '<div style="background:rgba(34,197,94,0.08);border:1px solid var(--green);border-radius:8px;padding:20px;margin-top:8px">';
-  html += '<div style="font-weight:700;font-size:15px;margin-bottom:12px;color:var(--green)">✓ Simon — Backend-udvikler (starter 7. april)</div>';
+  html += '<div style="font-weight:700;font-size:15px;margin-bottom:12px;color:var(--green)">✓ Simon — Backend-udvikler (starter 1. april)</div>';
 
   html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px">';
 
@@ -1529,8 +1524,8 @@ function renderCapacity() {
   html += '<div style="background:var(--surface);border-radius:8px;padding:16px">';
   html += '<div style="font-weight:700;margin-bottom:8px;color:var(--accent-light)">Onboarding</div>';
   html += '<div style="font-size:12px;line-height:1.8">';
-  html += '<div><strong>Uge 1 (7-11. apr):</strong> Miljø, arkitektur, første PR</div>';
-  html += '<div><strong>Uge 2 (14-18. apr):</strong> FMS-tickets, PR-flow</div>';
+  html += '<div><strong>Uge 1 (1-4. apr):</strong> Miljø, arkitektur, første PR</div>';
+  html += '<div><strong>Uge 2 (7-11. apr):</strong> FMS-tickets, PR-flow</div>';
   html += '<div><strong>Primær mentor:</strong> Tony (~14 timer)</div>';
   html += '<div><strong>Sekundær:</strong> Michael (arkitektur, ~6 timer)</div>';
   html += '</div></div>';
@@ -1887,70 +1882,19 @@ window.addEventListener('resize', () => { if (state.view === 'detail') renderDep
     phaseSel.value = state.phase;
   }
 
-  function renderMobileCards() {
+  function scrollToNow() {
+    if (!isMobile()) return;
     const container = document.querySelector('.timeline-container');
-    const tc = container;
-    // Only show cards for detail/overview on mobile
-    if (!isMobile() || (state.view !== 'detail' && state.view !== 'overview')) {
-      tc.removeAttribute('data-mobile-cards');
-      const existing = tc.querySelector('.mobile-task-list');
-      if (existing) existing.remove();
-      return;
+    if (!container) return;
+    // Find the today-column indicator or current month header
+    const todayCol = container.querySelector('.bar-cell.today-col') || container.querySelector('.month-header.current');
+    if (todayCol) {
+      // Scroll so "today" is about 1/4 from left
+      const rect = todayCol.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+      const scrollTarget = container.scrollLeft + (rect.left - containerRect.left) - containerRect.width * 0.15;
+      container.scrollTo({ left: Math.max(0, scrollTarget), behavior: 'smooth' });
     }
-    tc.setAttribute('data-mobile-cards', 'true');
-    
-    // Filter tasks
-    const filtered = tasks.filter(t => {
-      if (state.ws !== 'all' && t.ws !== state.ws) return false;
-      if (state.person !== 'all' && !t.persons.includes(state.person)) return false;
-      if (state.phase !== 'all' && t.phase !== state.phase) return false;
-      return true;
-    });
-
-    // Group by workstream
-    const wsNames = {
-      '1':'Onboarding','2':'POS','3':'App','4':'Backend/FMS',
-      '5':'B2B','6':'Webshop','7':'Personal','8':'POS API',
-      '9':'NFC/Wallet','10':'Gates'
-    };
-    const groups = {};
-    filtered.forEach(t => {
-      const key = t.ws;
-      if (!groups[key]) groups[key] = [];
-      groups[key].push(t);
-    });
-
-    const phaseLabels = {build:'Build',test:'Test',live:'Live',critical:'Kritisk',scale:'Scale',polish:'Polish'};
-    const colNames = columns.map(c => c[1]);
-
-    let html = '';
-    Object.keys(groups).sort((a,b) => Number(a) - Number(b)).forEach(ws => {
-      html += '<div class="mobile-section-header">WS' + ws + ' ' + (wsNames[ws]||'') + '</div>';
-      groups[ws].forEach(t => {
-        const startCol = colNames[t.start] || '';
-        const endCol = colNames[Math.min(t.start + t.span - 1, colNames.length - 1)] || '';
-        const timing = startCol === endCol ? startCol : startCol + ' → ' + endCol;
-        html += '<div class="mobile-task-card">';
-        html += '<div class="mtc-header">';
-        html += '<div class="mtc-title">' + t.label + '</div>';
-        html += '<span class="mtc-phase ' + t.phase + '">' + (phaseLabels[t.phase]||t.phase) + '</span>';
-        html += '</div>';
-        html += '<div class="mtc-meta">';
-        html += '<span>' + t.persons.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(', ') + '</span>';
-        html += '<span>' + timing + '</span>';
-        if (t.jira) html += '<span>' + t.jira.split(',')[0] + '</span>';
-        html += '</div>';
-        html += '</div>';
-      });
-    });
-
-    let listEl = tc.querySelector('.mobile-task-list');
-    if (!listEl) {
-      listEl = document.createElement('div');
-      listEl.className = 'mobile-task-list';
-      tc.appendChild(listEl);
-    }
-    listEl.innerHTML = html;
   }
 
   // Patch the existing render to also handle mobile
@@ -1958,16 +1902,16 @@ window.addEventListener('resize', () => { if (state.view === 'detail') renderDep
   render = function() {
     syncMobileDropdowns();
     _origRender();
-    renderMobileCards();
+    scrollToNow();
   };
 
   setupMobileDropdowns();
   // Initial sync
   syncMobileDropdowns();
-  renderMobileCards();
+  scrollToNow();
 
   // Re-check on resize
-  window.addEventListener('resize', function() { renderMobileCards(); });
+  window.addEventListener('resize', function() { scrollToNow(); });
 
 </script>
 
