@@ -595,7 +595,130 @@
     .stats-bar { flex-direction: column; gap: 8px; padding: 8px 12px; }
     .tooltip { max-width: 260px; font-size: 11px; }
   }
-</style>
+
+  /* ===== MOBILE DROPDOWNS ===== */
+  .mobile-filters {
+    display: none;
+    padding: 8px 12px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .mobile-select {
+    flex: 1;
+    min-width: 0;
+    padding: 8px 10px;
+    background: var(--surface2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 13px;
+    font-family: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238b90a0'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 28px;
+    cursor: pointer;
+  }
+
+  .mobile-select:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  /* ===== MOBILE CARD VIEW ===== */
+  .mobile-task-list {
+    display: none;
+  }
+
+  .mobile-task-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 8px;
+  }
+
+  .mobile-task-card .mtc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 6px;
+    gap: 8px;
+  }
+
+  .mobile-task-card .mtc-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    flex: 1;
+  }
+
+  .mobile-task-card .mtc-phase {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+    color: white;
+    white-space: nowrap;
+  }
+
+  .mobile-task-card .mtc-phase.build { background: var(--blue); }
+  .mobile-task-card .mtc-phase.test { background: var(--yellow); color: #000; }
+  .mobile-task-card .mtc-phase.live { background: var(--green); }
+  .mobile-task-card .mtc-phase.critical { background: var(--red); }
+  .mobile-task-card .mtc-phase.scale { background: var(--purple); }
+  .mobile-task-card .mtc-phase.polish { background: var(--cyan); }
+
+  .mobile-task-card .mtc-meta {
+    display: flex;
+    gap: 12px;
+    font-size: 11px;
+    color: var(--text-muted);
+    flex-wrap: wrap;
+  }
+
+  .mobile-task-card .mtc-ws {
+    background: var(--surface2);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .mobile-section-header {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent-light);
+    padding: 12px 0 6px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .filters { display: none !important; }
+    .mobile-filters { display: flex !important; }
+    .legend { display: none !important; }
+
+    .header { padding: 12px; }
+    .header h1 { font-size: 16px; }
+    .header-meta { font-size: 11px; }
+
+    /* In detail/overview: hide gantt, show card list */
+    .timeline-container[data-mobile-cards="true"] .timeline { display: none !important; }
+    .timeline-container[data-mobile-cards="true"] .mobile-task-list { display: block !important; }
+
+    .timeline-container { padding: 12px !important; }
+
+    .stats-bar { padding: 8px 12px; gap: 12px; flex-wrap: wrap; }
+    .stat-value { font-size: 14px; }
+    .stat-label { font-size: 9px; }
+  }
+  </style>
 </head>
 <body>
 
@@ -649,6 +772,44 @@
   </div>
 </div>
 
+
+<div class="mobile-filters">
+  <select id="mobile-view" class="mobile-select">
+    <option value="detail">Detaljeret</option>
+    <option value="overview">Overordnet</option>
+    <option value="sprints">Sprints</option>
+    <option value="capacity">Kapacitet</option>
+  </select>
+  <select id="mobile-ws" class="mobile-select">
+    <option value="all">Alle spor</option>
+    <option value="1">WS1 Onboarding</option>
+    <option value="2">WS2 POS</option>
+    <option value="3">WS3 App</option>
+    <option value="4">WS4 Backend</option>
+    <option value="5">WS5 B2B</option>
+    <option value="6">WS6 Webshop</option>
+    <option value="7">WS7 Personal</option>
+    <option value="8">WS8 POS API</option>
+    <option value="9">WS9 NFC</option>
+    <option value="10">WS10 Gates</option>
+  </select>
+  <select id="mobile-person" class="mobile-select">
+    <option value="all">Alle personer</option>
+    <option value="jakob">Jakob</option>
+    <option value="tony">Tony</option>
+    <option value="michael">Michael</option>
+    <option value="mikkel">Mikkel</option>
+    <option value="edwin">Edwin</option>
+    <option value="simon">Simon</option>
+  </select>
+  <select id="mobile-phase" class="mobile-select">
+    <option value="all">Alle faser</option>
+    <option value="build">Build</option>
+    <option value="test">Test</option>
+    <option value="live">Live</option>
+    <option value="critical">Kritisk</option>
+  </select>
+</div>
 <div class="timeline-container">
   <div class="legend" id="legend">
     <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div> Build</div>
@@ -1669,6 +1830,145 @@ render();
 
 // Re-render dependencies on resize
 window.addEventListener('resize', () => { if (state.view === 'detail') renderDependencies(); });
+
+  // ===== MOBILE SUPPORT =====
+  function isMobile() { return window.innerWidth <= 768; }
+
+  function setupMobileDropdowns() {
+    const viewSel = document.getElementById('mobile-view');
+    const wsSel = document.getElementById('mobile-ws');
+    const personSel = document.getElementById('mobile-person');
+    const phaseSel = document.getElementById('mobile-phase');
+    if (!viewSel) return;
+
+    viewSel.addEventListener('change', function() {
+      state.view = this.value;
+      // Sync desktop buttons
+      document.querySelectorAll('.view-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.view === this.value);
+      });
+      render();
+    });
+
+    wsSel.addEventListener('change', function() {
+      state.ws = this.value;
+      document.querySelectorAll('.filter-btn[data-filter="ws"]').forEach(b => {
+        b.classList.toggle('active', b.dataset.value === this.value);
+      });
+      render();
+    });
+
+    personSel.addEventListener('change', function() {
+      state.person = this.value;
+      document.querySelectorAll('.filter-btn[data-filter="person"]').forEach(b => {
+        b.classList.toggle('active', b.dataset.value === this.value);
+      });
+      render();
+    });
+
+    phaseSel.addEventListener('change', function() {
+      state.phase = this.value;
+      document.querySelectorAll('.filter-btn[data-filter="phase"]').forEach(b => {
+        b.classList.toggle('active', b.dataset.value === this.value);
+      });
+      render();
+    });
+  }
+
+  function syncMobileDropdowns() {
+    const viewSel = document.getElementById('mobile-view');
+    const wsSel = document.getElementById('mobile-ws');
+    const personSel = document.getElementById('mobile-person');
+    const phaseSel = document.getElementById('mobile-phase');
+    if (!viewSel) return;
+    viewSel.value = state.view;
+    wsSel.value = state.ws;
+    personSel.value = state.person;
+    phaseSel.value = state.phase;
+  }
+
+  function renderMobileCards() {
+    const container = document.querySelector('.timeline-container');
+    const tc = container;
+    // Only show cards for detail/overview on mobile
+    if (!isMobile() || (state.view !== 'detail' && state.view !== 'overview')) {
+      tc.removeAttribute('data-mobile-cards');
+      const existing = tc.querySelector('.mobile-task-list');
+      if (existing) existing.remove();
+      return;
+    }
+    tc.setAttribute('data-mobile-cards', 'true');
+    
+    // Filter tasks
+    const filtered = tasks.filter(t => {
+      if (state.ws !== 'all' && t.ws !== state.ws) return false;
+      if (state.person !== 'all' && !t.persons.includes(state.person)) return false;
+      if (state.phase !== 'all' && t.phase !== state.phase) return false;
+      return true;
+    });
+
+    // Group by workstream
+    const wsNames = {
+      '1':'Onboarding','2':'POS','3':'App','4':'Backend/FMS',
+      '5':'B2B','6':'Webshop','7':'Personal','8':'POS API',
+      '9':'NFC/Wallet','10':'Gates'
+    };
+    const groups = {};
+    filtered.forEach(t => {
+      const key = t.ws;
+      if (!groups[key]) groups[key] = [];
+      groups[key].push(t);
+    });
+
+    const phaseLabels = {build:'Build',test:'Test',live:'Live',critical:'Kritisk',scale:'Scale',polish:'Polish'};
+    const colNames = columns.map(c => c[1]);
+
+    let html = '';
+    Object.keys(groups).sort((a,b) => Number(a) - Number(b)).forEach(ws => {
+      html += '<div class="mobile-section-header">WS' + ws + ' ' + (wsNames[ws]||'') + '</div>';
+      groups[ws].forEach(t => {
+        const startCol = colNames[t.start] || '';
+        const endCol = colNames[Math.min(t.start + t.span - 1, colNames.length - 1)] || '';
+        const timing = startCol === endCol ? startCol : startCol + ' → ' + endCol;
+        html += '<div class="mobile-task-card">';
+        html += '<div class="mtc-header">';
+        html += '<div class="mtc-title">' + t.label + '</div>';
+        html += '<span class="mtc-phase ' + t.phase + '">' + (phaseLabels[t.phase]||t.phase) + '</span>';
+        html += '</div>';
+        html += '<div class="mtc-meta">';
+        html += '<span>' + t.persons.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(', ') + '</span>';
+        html += '<span>' + timing + '</span>';
+        if (t.jira) html += '<span>' + t.jira.split(',')[0] + '</span>';
+        html += '</div>';
+        html += '</div>';
+      });
+    });
+
+    let listEl = tc.querySelector('.mobile-task-list');
+    if (!listEl) {
+      listEl = document.createElement('div');
+      listEl.className = 'mobile-task-list';
+      tc.appendChild(listEl);
+    }
+    listEl.innerHTML = html;
+  }
+
+  // Patch the existing render to also handle mobile
+  const _origRender = render;
+  render = function() {
+    syncMobileDropdowns();
+    _origRender();
+    renderMobileCards();
+  };
+
+  setupMobileDropdowns();
+  // Initial sync
+  syncMobileDropdowns();
+  renderMobileCards();
+
+  // Re-check on resize
+  window.addEventListener('resize', function() { renderMobileCards(); });
+
 </script>
 
 </body>
