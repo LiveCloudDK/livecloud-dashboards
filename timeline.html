@@ -627,20 +627,20 @@ const tasks = [
 
   // WS4 Backend Fixes
   { id:'ws4-fix', label:'Backend ticket findings + checkout', ws:'4', persons:['michael'], start:0, span:2, phase:'build', jira:'LCAP-765,671,979,992', deps:[] },
-  { id:'ws4-fmstest', label:'FMS UI-tests', ws:'4', persons:['michael'], start:1, span:2, phase:'test', jira:'', deps:[] },
+  { id:'ws4-fmstest', label:'FMS UI-tests', ws:'4', persons:['michael','simon'], start:1, span:2, phase:'test', jira:'', deps:[] },
 
   // Swedbank
   { id:'swedbank', label:'Swedbank API integration (færdig Sprint 4)', ws:'4', persons:['tony'], start:0, span:2, phase:'build', jira:'LCAP-1098', deps:[] },
 
   // === FASE 2: Sprint 5-6 (Apr 14 - Jun 30) — Alt færdigt inden feature freeze 1. jul ===
   // WS5 B2B
-  { id:'ws5-backend', label:'B2B backend — virksomhedsbilletter', ws:'5', persons:['michael'], start:3, span:2, phase:'build', jira:'LCAP-633,1080', deps:['ws1-backend'] },
+  { id:'ws5-backend', label:'B2B backend — virksomhedsbilletter', ws:'5', persons:['michael','simon'], start:3, span:2, phase:'build', jira:'LCAP-633,1080', deps:['ws1-backend'] },
   { id:'ws5-app', label:'B2B app', ws:'5', persons:['edwin'], start:4, span:2, phase:'build', jira:'', deps:['ws5-backend'] },
-  { id:'ws5-web', label:'B2B web UI', ws:'5', persons:['jakob'], start:4, span:2, phase:'build', jira:'', deps:['ws5-backend'] },
+  { id:'ws5-web', label:'B2B web UI', ws:'5', persons:['simon'], start:4, span:2, phase:'build', jira:'', deps:['ws5-backend'] },
   { id:'ws5-test', label:'B2B test', ws:'5', persons:['edwin'], start:6, span:1, phase:'test', jira:'', deps:['ws5-app','ws5-web'] },
 
   // WS6 Webshop
-  { id:'ws6-build', label:'Webshop — online salg', ws:'6', persons:['edwin','jakob'], start:3, span:3, phase:'build', jira:'LCAP-330,331,971-973', deps:['ws5-backend'] },
+  { id:'ws6-build', label:'Webshop — online salg', ws:'6', persons:['simon','edwin'], start:3, span:3, phase:'build', jira:'LCAP-330,331,971-973', deps:['ws5-backend'] },
   { id:'ws6-test', label:'Webshop test', ws:'6', persons:['edwin'], start:6, span:1, phase:'test', jira:'', deps:['ws6-build'] },
 
   // WS7 Medarbejder-portal
@@ -675,8 +675,8 @@ const tasks = [
   { id:'fxp-gamification', label:'Engagement-spil og gamification', ws:'3', persons:['edwin'], start:6, span:1, phase:'build', jira:'LCAP-1108', deps:[] },
 
   // Cross-cutting
-  { id:'dashboard', label:'FMS Dashboard mobil + real-time', ws:'4', persons:['michael'], start:3, span:2, phase:'build', jira:'LCAP-1081', deps:[] },
-  { id:'inventory', label:'Inventory management', ws:'4', persons:['michael'], start:4, span:2, phase:'build', jira:'LCAP-1082', deps:['dashboard'] },
+  { id:'dashboard', label:'FMS Dashboard mobil + real-time', ws:'4', persons:['simon'], start:3, span:2, phase:'build', jira:'LCAP-1081', deps:[] },
+  { id:'inventory', label:'Inventory management', ws:'4', persons:['simon'], start:4, span:2, phase:'build', jira:'LCAP-1082', deps:['dashboard'] },
   { id:'beats-mgr', label:'Manager Beats-tildeling med begrundelse', ws:'4', persons:['michael'], start:2, span:2, phase:'build', jira:'LCAP-1084', deps:[] },
 
   // Feature freeze 1. jul = Jul H1 (col 7)
