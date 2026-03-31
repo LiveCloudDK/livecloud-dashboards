@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LiveCloud — Roadmap Timeline</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #242836;
+    --border: #2e3345;
+    --text: #e4e7ef;
+    --text-muted: #8b90a0;
+    --accent: #6366f1;
+    --accent-light: #818cf8;
+    --green: #22c55e;
+    --yellow: #eab308;
+    --red: #ef4444;
+    --blue: #3b82f6;
+    --purple: #a855f7;
+    --orange: #f97316;
+    --cyan: #06b6d4;
+    --pink: #ec4899;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  .header {
+    padding: 24px 32px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .header h1 {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+  }
+
+  .header h1 span { color: var(--accent-light); }
+
+  .header-meta {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .filters {
+    padding: 16px 32px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .filter-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .filter-group label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+  }
+
+  .filter-btn {
+    padding: 5px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .filter-btn:hover { border-color: var(--accent); color: var(--text); }
+  .filter-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+
+  .timeline-container {
+    padding: 24px 32px;
+    overflow-x: auto;
+  }
+
+  .legend {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+  }
+
+  .timeline {
+    position: relative;
+    min-width: 1800px;
+  }
+
+  .timeline-header {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 4px;
+  }
+
+  .timeline-header-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+  }
+
+  .month-headers {
+    display: grid;
+    grid-template-columns: repeat(18, 1fr);
+  }
+
+  .month-header {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 4px 0;
+    border-left: 1px solid var(--border);
+  }
+
+  .month-header.current { color: var(--accent-light); background: rgba(99,102,241,0.08); }
+
+  .timeline-row {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 40px;
+    align-items: center;
+    border-bottom: 1px solid rgba(46,51,69,0.5);
+    transition: background 0.15s;
+  }
+
+  .timeline-row:hover { background: rgba(99,102,241,0.04); }
+  .timeline-row.section-header { background: var(--surface); border-bottom: 1px solid var(--border); min-height: 36px; }
+  .timeline-row.section-header .row-label { font-weight: 600; font-size: 13px; color: var(--accent-light); }
+
+  .row-label {
+    padding: 8px 12px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .row-label .tag {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  .tag-person { background: rgba(99,102,241,0.15); color: var(--accent-light); }
+  .tag-ws { background: rgba(34,197,94,0.15); color: var(--green); }
+
+  .bar-track {
+    display: grid;
+    grid-template-columns: repeat(18, 1fr);
+    height: 100%;
+    position: relative;
+  }
+
+  .bar-cell {
+    border-left: 1px solid rgba(46,51,69,0.3);
+    position: relative;
+  }
+
+  .bar-cell.today-col::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: var(--red);
+    opacity: 0.6;
+    z-index: 5;
+  }
+
+  .gantt-bar {
+    position: absolute;
+    height: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 4px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    transition: filter 0.15s;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 6px;
+  }
+
+  .gantt-bar:hover { filter: brightness(1.2); }
+
+  .gantt-bar.build { background: var(--blue); }
+  .gantt-bar.test { background: var(--yellow); color: #000; }
+  .gantt-bar.live { background: var(--green); }
+  .gantt-bar.scale { background: var(--purple); }
+  .gantt-bar.polish { background: var(--text-muted); }
+  .gantt-bar.critical { background: var(--red); }
+  .gantt-bar.meeting { background: var(--orange); }
+
+  .milestone-marker {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    z-index: 15;
+  }
+
+  .milestone-marker.bodega { background: var(--green); left: calc((1 / 18) * 100% + (14/31) * (100%/18)); }
+  .milestone-marker.ringsted { background: var(--red); left: calc((9 / 18) * 100% + (15/31) * (100%/18)); }
+
+  .dependency-line {
+    position: absolute;
+    z-index: 8;
+    pointer-events: none;
+  }
+
+  .stats-bar {
+    padding: 12px 32px;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .stat-value { font-size: 18px; font-weight: 700; }
+  .stat-label { font-size: 11px; color: var(--text-muted); }
+
+  .tooltip {
+    display: none;
+    position: fixed;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 12px;
+    z-index: 100;
+    max-width: 320px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+
+  .tooltip.show { display: block; }
+  .tooltip h4 { font-size: 13px; margin-bottom: 6px; }
+  .tooltip .tt-row { display: flex; justify-content: space-between; gap: 16px; padding: 2px 0; }
+  .tooltip .tt-label { color: var(--text-muted); }
+
+  .ws-tag { font-size:10px; padding:3px 8px; border-radius:4px; font-weight:600; }
+  .ws-1 { background:rgba(99,102,241,0.15); color:#818cf8; }
+  .ws-2 { background:rgba(249,115,22,0.15); color:#f97316; }
+  .ws-3 { background:rgba(6,182,212,0.15); color:#06b6d4; }
+  .ws-4 { background:rgba(59,130,246,0.15); color:#3b82f6; }
+  .ws-5 { background:rgba(34,197,94,0.15); color:#22c55e; }
+  .ws-6 { background:rgba(168,85,247,0.15); color:#a855f7; }
+  .ws-7 { background:rgba(236,72,153,0.15); color:#ec4899; }
+  .ws-8 { background:rgba(249,115,22,0.15); color:#f97316; }
+  .ws-9 { background:rgba(234,179,8,0.15); color:#eab308; }
+  .ws-10 { background:rgba(239,68,68,0.15); color:#ef4444; }
+  .ws-test { background:rgba(234,179,8,0.15); color:#eab308; }
+  .ws-ops { background:rgba(236,72,153,0.15); color:#ec4899; }
+
+  .hidden { display: none !important; }
+
+  /* Capacity View Styles */
+  .capacity-container {
+    padding-bottom: 100px;
+  }
+
+  .capacity-dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .capacity-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  .capacity-card h3 {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .capacity-card .metric {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 6px 0;
+    font-size: 14px;
+  }
+
+  .capacity-card .metric-value {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .capacity-card .metric-label {
+    color: var(--text-muted);
+    font-size: 12px;
+  }
+
+  .capacity-person-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 16px;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(46,51,69,0.5);
+  }
+
+  .capacity-person-row:last-child {
+    border-bottom: none;
+  }
+
+  .person-name {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .capacity-bars {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .bar-wrapper {
+    flex: 1;
+    height: 24px;
+    background: rgba(99,102,241,0.08);
+    border-radius: 4px;
+    position: relative;
+    border: 1px solid rgba(99,102,241,0.2);
+    overflow: hidden;
+  }
+
+  .capacity-bar-bg {
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 3px;
+    opacity: 0.3;
+  }
+
+  .capacity-bar-fill {
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 3px;
+    opacity: 0.8;
+  }
+
+  .bar-ok { background: var(--green); }
+  .bar-warning { background: var(--yellow); }
+  .bar-risk { background: var(--red); }
+
+  .bar-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    min-width: 100px;
+  }
+
+  .risk-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 32px;
+  }
+
+  .risk-section h3 {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .risk-item {
+    padding: 8px 0;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .risk-item:before {
+    content: '⚠ ';
+    color: var(--yellow);
+    font-weight: bold;
+    margin-right: 4px;
+  }
+
+  .velocity-chart {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 32px;
+  }
+
+  .velocity-chart h3 {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+
+  .velocity-row {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .velocity-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    min-width: 80px;
+  }
+
+  .velocity-bar-wrapper {
+    flex: 1;
+    height: 20px;
+    background: rgba(99,102,241,0.08);
+    border-radius: 4px;
+    position: relative;
+    border: 1px solid rgba(99,102,241,0.2);
+  }
+
+  .velocity-bar {
+    height: 100%;
+    background: var(--accent-light);
+    border-radius: 3px;
+    opacity: 0.7;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 6px;
+  }
+
+  .velocity-value {
+    font-size: 11px;
+    font-weight: 600;
+    color: white;
+  }
+
+  @media (max-width: 900px) {
+    .header, .filters, .timeline-container { padding-left: 16px; padding-right: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>LiveCloud <span>Roadmap</span></h1>
+    <div class="header-meta">LiveCloud 2026 — Marts til December</div>
+  </div>
+  <div class="header-meta">Sidst opdateret: 30. marts 2026</div>
+</div>
+
+<div class="filters">
+  <div class="filter-group">
+    <label>Spor</label>
+    <button class="filter-btn active" data-filter="ws" data-value="all">Alle</button>
+    <button class="filter-btn" data-filter="ws" data-value="1">WS1 Onboarding</button>
+    <button class="filter-btn" data-filter="ws" data-value="2">WS2 POS</button>
+    <button class="filter-btn" data-filter="ws" data-value="3">WS3 App</button>
+    <button class="filter-btn" data-filter="ws" data-value="4">WS4 Backend</button>
+    <button class="filter-btn" data-filter="ws" data-value="5">WS5 B2B</button>
+    <button class="filter-btn" data-filter="ws" data-value="6">WS6 Webshop</button>
+    <button class="filter-btn" data-filter="ws" data-value="7">WS7 Personal</button>
+    <button class="filter-btn" data-filter="ws" data-value="8">WS8 POS API</button>
+    <button class="filter-btn" data-filter="ws" data-value="9">WS9 NFC</button>
+    <button class="filter-btn" data-filter="ws" data-value="10">WS10 Gates</button>
+  </div>
+  <div class="filter-group">
+    <label>Person</label>
+    <button class="filter-btn active" data-filter="person" data-value="all">Alle</button>
+    <button class="filter-btn" data-filter="person" data-value="jakob">Jakob</button>
+    <button class="filter-btn" data-filter="person" data-value="tony">Tony</button>
+    <button class="filter-btn" data-filter="person" data-value="michael">Michael</button>
+    <button class="filter-btn" data-filter="person" data-value="mikkel">Mikkel</button>
+    <button class="filter-btn" data-filter="person" data-value="edwin">Edwin</button>
+    <button class="filter-btn" data-filter="person" data-value="simon" style="border-color:var(--green)">Simon (ny)</button>
+  </div>
+  <div class="filter-group">
+    <label>Fase</label>
+    <button class="filter-btn active" data-filter="phase" data-value="all">Alle</button>
+    <button class="filter-btn" data-filter="phase" data-value="build">Build</button>
+    <button class="filter-btn" data-filter="phase" data-value="test">Test</button>
+    <button class="filter-btn" data-filter="phase" data-value="live">Live</button>
+    <button class="filter-btn" data-filter="phase" data-value="critical">Kritisk</button>
+  </div>
+  <div class="filter-group" style="margin-left:auto">
+    <label>Visning</label>
+    <button class="filter-btn view-btn active" data-view="detail">Detaljeret</button>
+    <button class="filter-btn view-btn" data-view="overview">Overordnet</button>
+    <button class="filter-btn view-btn" data-view="sprints">Sprints</button>
+    <button class="filter-btn view-btn" data-view="capacity">Kapacitet</button>
+  </div>
+</div>
+
+<div class="timeline-container">
+  <div class="legend" id="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div> Build</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--yellow)"></div> Test</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div> Live</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div> Scale</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--text-muted)"></div> Polish</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div> Kritisk/Blocker</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--orange)"></div> Milestone/Møde</div>
+    <div class="legend-item" style="margin-left:16px"><div style="width:2px;height:14px;background:var(--red);border-radius:1px"></div> I dag</div>
+  </div>
+
+  <div class="timeline" id="timeline"></div>
+</div>
+
+<div class="stats-bar" id="stats">
+  <div class="stat"><div class="stat-value" id="stat-days">122</div><div class="stat-label">Dage til festival</div></div>
+  <div class="stat"><div class="stat-value" id="stat-ws">10</div><div class="stat-label">Workstreams</div></div>
+  <div class="stat"><div class="stat-value" id="stat-visible">0</div><div class="stat-label">Synlige opgaver</div></div>
+  <div class="stat"><div class="stat-value" id="stat-critical">3</div><div class="stat-label">Kritiske items</div></div>
+  <div class="stat" id="capacity-stat-container" style="display:none"><div class="stat-value" id="stat-capacity">0%</div><div class="stat-label">Kapacitetsudnyttelse</div></div>
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+// ===== DATA =====
+// Weeks: 18 half-month columns from Mar H2 2026 to Dec H1 2026
+// Col 0 = Mar 16-31, Col 1 = Apr 1-15, Col 2 = Apr 16-30, ...
+const columns = [
+  'Mar H2','Apr H1','Apr H2','Maj H1','Maj H2','Jun H1','Jun H2','Jul H1','Jul H2','Aug H1',
+  'Aug H2','Sep H1','Sep H2','Okt H1','Okt H2','Nov H1','Nov H2','Dec H1'
+];
+// All 18 columns visible (full 2026 roadmap)
+const visibleCols = 18;
+
+const tasks = [
+  // === FASE 1: Sprint 4 (Mar 30 - Apr 13) ===
+  // WS1 Onboarding
+  { id:'ws1-scan', label:'Billet-scanning & aktivering (løsningsdesign)', ws:'1', persons:['jakob','mikkel','michael'], start:0, span:2, phase:'critical', jira:'LCAP-1076', deps:[], desc:'Stor kritisk opgave — løsning ikke afklaret endnu' },
+  { id:'ws1-backend', label:'Onboarding backend (claim, delegate, transfer)', ws:'1', persons:['michael'], start:0, span:2, phase:'build', jira:'LCAP-1078,1079,989,990', deps:[] },
+  { id:'ws1-app', label:'Onboarding app flows', ws:'1', persons:['mikkel'], start:0, span:2, phase:'build', jira:'LCAP-1071,1072,1073', deps:[] },
+  { id:'ws1-ux', label:'Onboarding UX/UI (Jakob + Jay)', ws:'1', persons:['jakob'], start:0, span:1, phase:'build', jira:'', deps:[] },
+  { id:'ws1-edge', label:'EDGE cases (transfer/claim sikkerhed)', ws:'1', persons:['michael','tony'], start:0, span:2, phase:'build', jira:'LCAP-904-912', deps:[] },
+  { id:'ws1-test', label:'Test-runde Sprint 3 features (25 tickets)', ws:'1', persons:['edwin'], start:0, span:2, phase:'test', jira:'LCAP-1074', deps:[] },
+  { id:'ws1-billettyper', label:'Billettyper: camping, børne, ledsager', ws:'1', persons:['michael'], start:1, span:2, phase:'build', jira:'LCAP-1079', deps:['ws1-backend'] },
+
+  // WS2 POS Fixes
+  { id:'ws2-fix', label:'POS findings fra Bodegafesten', ws:'2', persons:['tony'], start:0, span:2, phase:'build', jira:'LCAP-1012-1045', deps:[] },
+  { id:'ws2-feedback', label:'POS feedback (ordrevisning, Beats, auto-logout)', ws:'2', persons:['tony'], start:1, span:2, phase:'build', jira:'LCAP-1059-1065', deps:[] },
+
+  // WS3 App Fixes
+  { id:'ws3-a11y', label:'Accessibility — font scaling fix', ws:'3', persons:['jakob'], start:0, span:1, phase:'critical', jira:'LCAP-1075', deps:[] },
+  { id:'ws3-fix', label:'App findings fra Bodegafesten', ws:'3', persons:['edwin','mikkel'], start:0, span:2, phase:'build', jira:'LCAP-597,998,980-981', deps:[] },
+
+  // WS4 Backend Fixes
+  { id:'ws4-fix', label:'Backend ticket findings + checkout', ws:'4', persons:['michael'], start:0, span:2, phase:'build', jira:'LCAP-765,671,979,992', deps:[] },
+  { id:'ws4-fmstest', label:'FMS UI-tests', ws:'4', persons:['michael'], start:1, span:2, phase:'test', jira:'', deps:[] },
+
+  // Swedbank
+  { id:'swedbank', label:'Swedbank API integration (færdig Sprint 4)', ws:'4', persons:['tony'], start:0, span:2, phase:'build', jira:'LCAP-1098', deps:[] },
+
+  // === FASE 2: Sprint 5-6 (Apr 14 - Jun 30) — Alt færdigt inden feature freeze 1. jul ===
+  // WS5 B2B
+  { id:'ws5-backend', label:'B2B backend — virksomhedsbilletter', ws:'5', persons:['michael'], start:3, span:2, phase:'build', jira:'LCAP-633,1080', deps:['ws1-backend'] },
+  { id:'ws5-app', label:'B2B app', ws:'5', persons:['edwin'], start:4, span:2, phase:'build', jira:'', deps:['ws5-backend'] },
+  { id:'ws5-web', label:'B2B web UI', ws:'5', persons:['jakob'], start:4, span:2, phase:'build', jira:'', deps:['ws5-backend'] },
+  { id:'ws5-test', label:'B2B test', ws:'5', persons:['edwin'], start:6, span:1, phase:'test', jira:'', deps:['ws5-app','ws5-web'] },
+
+  // WS6 Webshop
+  { id:'ws6-build', label:'Webshop — online salg', ws:'6', persons:['edwin','jakob'], start:3, span:3, phase:'build', jira:'LCAP-330,331,971-973', deps:['ws5-backend'] },
+  { id:'ws6-test', label:'Webshop test', ws:'6', persons:['edwin'], start:6, span:1, phase:'test', jira:'', deps:['ws6-build'] },
+
+  // WS7 Medarbejder-portal
+  { id:'ws7-build', label:'Medarbejder-portal', ws:'7', persons:['jakob'], start:4, span:2, phase:'build', jira:'LCAP-1091', deps:[] },
+  { id:'ws7-test', label:'Medarbejder-portal test', ws:'7', persons:['jakob'], start:6, span:1, phase:'test', jira:'', deps:['ws7-build'] },
+
+  // WS8 POS API
+  { id:'ws8-api', label:'POS API — tredjepart (Joe & Juice, Volt)', ws:'8', persons:['tony'], start:3, span:2, phase:'build', jira:'LCAP-1092', deps:['ws2-fix'] },
+  { id:'ws8-test', label:'POS API partner-test', ws:'8', persons:['tony'], start:5, span:2, phase:'test', jira:'', deps:['ws8-api'] },
+
+  // WS9 NFC/Wallet
+  { id:'ws9-vas', label:'Apple VAS certifikat + opsætning', ws:'9', persons:['tony'], start:2, span:1, phase:'build', jira:'LCAP-1094', deps:[] },
+  { id:'ws9-pass', label:'Wallet Pass generering', ws:'9', persons:['tony'], start:3, span:2, phase:'build', jira:'LCAP-1095', deps:['ws9-vas'] },
+  { id:'ws9-nfc', label:'POS NFC-læsning', ws:'9', persons:['tony'], start:3, span:3, phase:'build', jira:'LCAP-1096', deps:['ws9-vas'] },
+  { id:'ws9-armband', label:'NFC-armbånd kobling', ws:'9', persons:['jakob'], start:4, span:2, phase:'build', jira:'LCAP-1097', deps:['ws9-nfc'] },
+  { id:'ws9-test', label:'NFC/Wallet integrations-test', ws:'9', persons:['tony','jakob'], start:6, span:1, phase:'test', jira:'', deps:['ws9-pass','ws9-nfc','ws9-armband'] },
+
+  // WS10 Gates
+  { id:'ws10-design', label:'Gate design med sikkerhedsteam', ws:'10', persons:['jakob'], start:2, span:1, phase:'build', jira:'LCAP-1083', deps:[] },
+  { id:'ws10-hw', label:'Hardware anskaffelse + setup', ws:'10', persons:['tony'], start:3, span:2, phase:'build', jira:'', deps:['ws10-design'] },
+  { id:'ws10-sw', label:'Software kobling gate ↔ ecosystem', ws:'10', persons:['tony','michael'], start:4, span:2, phase:'build', jira:'LCAP-984', deps:['ws10-hw'] },
+  { id:'ws10-test', label:'Gate integrations-test', ws:'10', persons:['edwin'], start:6, span:1, phase:'test', jira:'', deps:['ws10-sw'] },
+
+  // Festival Experience & Community (Epic LCAP-1102) — under WS3 App
+  { id:'fxp-kort', label:'Campingområder på festival-kort', ws:'3', persons:['mikkel'], start:4, span:1, phase:'build', jira:'LCAP-1103', deps:[] },
+  { id:'fxp-boder', label:'Bod-præsentationer med menu & info', ws:'3', persons:['edwin'], start:4, span:1, phase:'build', jira:'LCAP-1104', deps:[] },
+  { id:'fxp-community', label:'Community — opret og join gruppe', ws:'3', persons:['mikkel'], start:5, span:1, phase:'build', jira:'LCAP-1105', deps:[] },
+  { id:'fxp-cdp', label:'Tredjeparts CDP-integration', ws:'4', persons:['michael'], start:5, span:1, phase:'build', jira:'LCAP-1109', deps:[] },
+  { id:'fxp-preorder', label:'Pre-order flow udvidelse (Beats)', ws:'3', persons:['edwin'], start:5, span:1, phase:'build', jira:'LCAP-1110', deps:[] },
+  { id:'fxp-chat', label:'Community — gruppechat', ws:'3', persons:['mikkel'], start:6, span:1, phase:'build', jira:'LCAP-1106', deps:['fxp-community'] },
+  { id:'fxp-lokation', label:'Community — del lokation på kort', ws:'3', persons:['edwin'], start:6, span:1, phase:'build', jira:'LCAP-1107', deps:['fxp-community'] },
+  { id:'fxp-gamification', label:'Engagement-spil og gamification', ws:'3', persons:['edwin'], start:6, span:1, phase:'build', jira:'LCAP-1108', deps:[] },
+
+  // Cross-cutting
+  { id:'dashboard', label:'FMS Dashboard mobil + real-time', ws:'4', persons:['michael'], start:3, span:2, phase:'build', jira:'LCAP-1081', deps:[] },
+  { id:'inventory', label:'Inventory management', ws:'4', persons:['michael'], start:4, span:2, phase:'build', jira:'LCAP-1082', deps:['dashboard'] },
+  { id:'beats-mgr', label:'Manager Beats-tildeling med begrundelse', ws:'4', persons:['michael'], start:2, span:2, phase:'build', jira:'LCAP-1084', deps:[] },
+
+  // Feature freeze 1. jul = Jul H1 (col 7)
+  { id:'freeze', label:'FEATURE FREEZE 1. JULI', ws:'all', persons:['jakob','tony','michael','mikkel','edwin'], start:7, span:0.3, phase:'critical', jira:'', deps:[], milestone: true },
+
+  // Fase 3 — Polish + Scale (Jul H1 = 1-15. jul, FØR festival)
+  { id:'scale', label:'Load testing 20K (1-15. jul)', ws:'4', persons:['tony','michael'], start:7, span:1, phase:'scale', jira:'', deps:[], desc:'Load test med 20.000 simulerede brugere. Skal bestås inden festival.' },
+  { id:'polish', label:'Polish, bugfix, rehearsal (1-15. jul)', ws:'1', persons:['jakob','tony','michael','mikkel','edwin'], start:7, span:1, phase:'polish', jira:'', deps:[], desc:'Sidste bugfix-runde og generalprøve. Alt skal være klar inden festival.' },
+  { id:'workshop', label:'Personale + vendor workshops (1-15. jul)', ws:'7', persons:['jakob'], start:7, span:1, phase:'meeting', jira:'', deps:['ws7-test'], desc:'Træning af barpersonale, frivillige og vendors inden festival.' },
+
+  // Festival Ops — personale, support, vagter (Jun-Jul)
+  { id:'ops-recruit', label:'Rekruttér supportere & frivillige', ws:'7', persons:['jakob'], start:4, span:3, phase:'build', jira:'LCAP-1099', deps:[], desc:'Find og rekruttér teknisk support, frivillige og barpersonale til festivalen.' },
+  { id:'ops-onboard', label:'Personale-onboarding (POS + App træning)', ws:'7', persons:['jakob','edwin'], start:6, span:2, phase:'meeting', jira:'LCAP-1100', deps:['ops-recruit'], desc:'Træn alt personale i POS, app-flows, Beats, og fejlhåndtering.' },
+  { id:'ops-vagtplan', label:'Vagtordning & supportplan under festival', ws:'7', persons:['jakob'], start:6, span:2, phase:'build', jira:'LCAP-1101', deps:['ops-recruit'], desc:'Vagtskema for dev-team (on-call), supportere, og frivillige under festivalen.' },
+
+  // Buffer (Jul H2 = 16-29. jul — 2 uger inden festival)
+  { id:'buffer', label:'BUFFER — uventede issues (16-29. jul)', ws:'all', persons:['jakob','tony','michael','mikkel','edwin'], start:8, span:1, phase:'critical', jira:'', deps:['freeze'], desc:'2 uger reserveret til uventede problemer, last-minute fixes og edge cases.' },
+
+  // Festival (30. jul – 1. aug = sidst i Jul H2 + Aug H1)
+  { id:'festival', label:'RINGSTED FESTIVAL (30. jul – 1. aug)', ws:'all', persons:['jakob','tony','michael','mikkel','edwin'], start:8.5, span:1.5, phase:'live', jira:'', deps:[], milestone: true, desc:'Alt skal være klar FØR denne dato. Kun live-support herefter.' },
+
+  // === POST-FESTIVAL (Aug H2 → Dec) ===
+  { id:'post-retro', label:'Festival retrospektiv & data-analyse', ws:'all', persons:['jakob'], start:10, span:1, phase:'meeting', jira:'', deps:['festival'], desc:'Gennemgang af hvad der virkede, fejl, performance-data, bruger-feedback.' },
+  { id:'post-bugfix', label:'Post-festival bugfixes', ws:'4', persons:['michael','tony'], start:10, span:2, phase:'build', jira:'', deps:['festival'], desc:'Ret bugs fundet under festivalen. Stabilisér platformen.' },
+  { id:'post-backlog', label:'Backlog-aktivering (213 resterende tickets)', ws:'all', persons:['jakob','tony','michael','mikkel'], start:11, span:4, phase:'build', jira:'', deps:['post-retro'], desc:'Genoptag backlog-arbejde: forbedringer, nye features, teknisk gæld.' },
+  { id:'post-scale', label:'Platform skalering & multi-event', ws:'4', persons:['michael','tony'], start:13, span:3, phase:'scale', jira:'', deps:['post-backlog'], desc:'Forbered platformen til flere events, multi-tenant, API v2.' },
+  { id:'post-partner', label:'Partner-integrationer & SDK', ws:'8', persons:['tony'], start:14, span:3, phase:'build', jira:'', deps:['post-scale'], desc:'Udvid POS API, partner SDK, nye leverandører.' },
+  { id:'post-q4', label:'Q4 roadmap & 2027 planlægning', ws:'all', persons:['jakob'], start:16, span:2, phase:'meeting', jira:'', deps:[], desc:'Evaluér 2026, sæt mål for 2027, nye events.' },
+];
+
+// Overview tasks — one bar per workstream showing full span
+const overviewTasks = [
+  { id:'ov-1', label:'WS1 — Onboarding / Billetter', ws:'1', persons:['jakob','michael','mikkel','edwin'], start:0, span:3, phases:[{start:0,span:2,phase:'build'},{start:2,span:1,phase:'test'}], desc:'Claim, delegate, transfer, billettyper. Kritisk: scanning-løsning ikke afklaret.', jira:'LCAP-1071-1079' },
+  { id:'ov-2', label:'WS2 — POS Fixes', ws:'2', persons:['tony'], start:0, span:3, phases:[{start:0,span:2,phase:'build'},{start:2,span:1,phase:'test'}], desc:'Ret alle POS findings fra Bodegafesten + feedback fra barpersonale.', jira:'LCAP-1012-1065' },
+  { id:'ov-3', label:'WS3 — App (fixes + Festival XP)', ws:'3', persons:['mikkel','edwin','jakob'], start:0, span:7, phases:[{start:0,span:1,phase:'critical'},{start:1,span:1,phase:'build'},{start:4,span:3,phase:'build'}], desc:'Sprint 4: Accessibility fix (Jakob), app findings. Sprint 6-8: Festival Experience — kort, boder, community, gamification, pre-order (8 stories).', jira:'LCAP-1075,597,1102-1110' },
+  { id:'ov-4', label:'WS4 — Backend / FMS', ws:'4', persons:['michael','tony'], start:0, span:7, phases:[{start:0,span:2,phase:'build'},{start:2,span:2,phase:'build'},{start:4,span:2,phase:'build'},{start:6,span:1,phase:'test'}], desc:'Backend fixes, Dashboard, Inventory, Beats mgr. Swedbank færdig Sprint 4 (Tony).', jira:'LCAP-765,1081,1082,1098' },
+  { id:'ov-5', label:'WS5 — B2B Flows', ws:'5', persons:['jakob','michael','edwin'], start:3, span:4, phases:[{start:3,span:3,phase:'build'},{start:6,span:1,phase:'test'}], desc:'Virksomheder administrerer egne billetter.', jira:'LCAP-633,1080' },
+  { id:'ov-6', label:'WS6 — Webshop', ws:'6', persons:['jakob','edwin'], start:3, span:4, phases:[{start:3,span:3,phase:'build'},{start:6,span:1,phase:'test'}], desc:'Online salg af billetter og produkter.', jira:'LCAP-330,971-973' },
+  { id:'ov-7', label:'WS7 — Medarbejder-portal', ws:'7', persons:['jakob'], start:4, span:3, phases:[{start:4,span:2,phase:'build'},{start:6,span:1,phase:'test'}], desc:'Personaleadministration, roller, adgangsstyring.', jira:'LCAP-1091' },
+  { id:'ov-8', label:'WS8 — POS API (tredjepart)', ws:'8', persons:['tony'], start:3, span:4, phases:[{start:3,span:2,phase:'build'},{start:5,span:2,phase:'test'}], desc:'API for Joe & Juice, Volt m.fl. — betalingsinitiering + webhook.', jira:'LCAP-1092' },
+  { id:'ov-9', label:'WS9 — NFC / Wallet', ws:'9', persons:['tony','jakob'], start:2, span:5, phases:[{start:2,span:1,phase:'build'},{start:3,span:3,phase:'build'},{start:6,span:1,phase:'test'}], desc:'Apple VAS, Google Wallet, NFC-armbånd, POS-læsning.', jira:'LCAP-1093-1097' },
+  { id:'ov-10', label:'WS10 — Check-in / Gates', ws:'10', persons:['jakob','tony','edwin','michael'], start:2, span:5, phases:[{start:2,span:1,phase:'build'},{start:3,span:3,phase:'build'},{start:6,span:1,phase:'test'}], desc:'Gate design, hardware, software, integrations-test.', jira:'LCAP-1083,984' },
+  { id:'ov-festxp', label:'App — Festival Experience & Community', ws:'3', persons:['mikkel','edwin','michael'], start:4, span:4, phases:[{start:4,span:1,phase:'build'},{start:5,span:1,phase:'build'},{start:6,span:1,phase:'build'},{start:7,span:1,phase:'test'}], desc:'Kort, boder, community, gamification, CDP, pre-order. Epic LCAP-1102 (8 stories).', jira:'LCAP-1102-1110' },
+  { id:'ov-ops', label:'Festival Ops — personale, support, vagter', ws:'7', persons:['jakob','edwin'], start:4, span:4, phases:[{start:4,span:3,phase:'build'},{start:6,span:2,phase:'meeting'}], desc:'Rekruttér supportere, onboard personale, planlæg vagtordning.', jira:'' },
+  { id:'ov-freeze', label:'FEATURE FREEZE 1. JULI', ws:'all', persons:['jakob','tony','michael','mikkel','edwin'], start:7, span:0.3, phases:[{start:7,span:0.3,phase:'critical'}], desc:'Alt build og test færdigt. Kun bugfix herefter.', jira:'', milestone:true },
+  { id:'ov-polish', label:'Polish + Load Test + Workshops (1-15. jul)', ws:'all', persons:['jakob','tony','michael','mikkel','edwin'], start:7, span:1, phases:[{start:7,span:1,phase:'scale'}], desc:'Load testing 20K, rehearsal, personale-workshops. Alt FØR festival.', jira:'' },
+  { id:'ov-buffer', label:'BUFFER — uventede issues (16-29. jul)', ws:'all', persons:['jakob','tony','michael','mikkel','edwin'], start:8, span:1, phases:[{start:8,span:1,phase:'critical'}], desc:'2 uger reserveret til uventede problemer og last-minute fixes.', jira:'' },
+  { id:'ov-festival', label:'RINGSTED FESTIVAL (30. jul – 1. aug)', ws:'all', persons:['jakob','tony','michael','mikkel','edwin'], start:8.5, span:1.5, phases:[{start:8.5,span:1.5,phase:'live'}], desc:'30. jul – 1. aug 2026. Alt er klar. Kun live-support.', jira:'', milestone:true },
+  { id:'ov-post-retro', label:'Retrospektiv & stabilisering', ws:'all', persons:['jakob','michael','tony'], start:10, span:2, phases:[{start:10,span:1,phase:'meeting'},{start:10,span:2,phase:'build'}], desc:'Festival-gennemgang, bugfixes, data-analyse.', jira:'' },
+  { id:'ov-post-backlog', label:'Backlog-aktivering & nye features', ws:'all', persons:['jakob','tony','michael','mikkel'], start:11, span:4, phases:[{start:11,span:4,phase:'build'}], desc:'213 resterende backlog-tickets. Forbedringer og teknisk gæld.', jira:'' },
+  { id:'ov-post-scale', label:'Platform skalering & multi-event', ws:'4', persons:['michael','tony'], start:13, span:3, phases:[{start:13,span:3,phase:'scale'}], desc:'Multi-tenant, API v2, partner SDK.', jira:'' },
+  { id:'ov-post-q4', label:'Q4 Roadmap & 2027 planlægning', ws:'all', persons:['jakob'], start:16, span:2, phases:[{start:16,span:2,phase:'meeting'}], desc:'Evaluér 2026, sæt mål for næste sæson.', jira:'' },
+];
+
+// Capacity data — team members and their metrics
+const capacityData = {
+  'michael': {
+    name: 'Michael Thuren',
+    avgVelocity: 13.5,
+    activeTickets: 54,
+    capacity: 42,
+    note: 'Ti+To+½Fre (2,5 dage/uge) — velocity allerede baseret på deltid',
+  },
+  'tony': {
+    name: 'Tony Dieu',
+    avgVelocity: 10.5,
+    activeTickets: 34,
+    capacity: 33,
+  },
+  'mikkel': {
+    name: 'Mikkel Kornval Christoffersen',
+    avgVelocity: 9.5,
+    activeTickets: 9,
+    capacity: 29,
+  },
+  'jakob': {
+    name: 'Jakob Højgård',
+    avgVelocity: 15,
+    activeTickets: 12,
+    capacity: 47,
+  },
+  'edwin': {
+    name: 'Edwin Maldonado',
+    avgVelocity: 6,
+    activeTickets: 4,
+    capacity: 19,
+  },
+  'simon': {
+    name: 'Simon',
+    avgVelocity: 0,
+    activeTickets: 0,
+    capacity: 30,
+    note: 'Starter 7. april — onboarding uge 1-2, produktiv fra Sprint 5. FMS → Webshop → B2B',
+  }
+};
+
+const wsNames = {
+  '1':'Onboarding','2':'POS','3':'App','4':'Backend/FMS','5':'B2B',
+  '6':'Webshop','7':'Personal','8':'POS API','9':'NFC/Wallet','10':'Gates','all':'Alle'
+};
+
+const wsColors = {
+  '1':'#6366f1','2':'#f97316','3':'#06b6d4','4':'#3b82f6','5':'#22c55e',
+  '6':'#a855f7','7':'#ec4899','8':'#f97316','9':'#eab308','10':'#ef4444','11':'#d946ef','all':'#fff'
+};
+
+const personColors = {
+  jakob:'#6366f1', tony:'#f97316', michael:'#3b82f6', mikkel:'#06b6d4', edwin:'#22c55e', simon:'#10b981'
+};
+
+// ===== RENDER =====
+const state = { ws: 'all', person: 'all', phase: 'all', view: 'detail' };
+
+function render() {
+  const tl = document.getElementById('timeline');
+  const legend = document.getElementById('legend');
+  let html = '';
+
+  if (state.view === 'capacity') {
+    legend.style.display = 'none';
+    html = renderCapacity();
+    tl.innerHTML = html;
+    updateCapacityStats();
+  } else if (state.view === 'sprints') {
+    legend.style.display = 'none';
+    html = renderSprints();
+    tl.innerHTML = html;
+  } else {
+    legend.style.display = 'flex';
+    // Timeline header
+    html += '<div class="timeline-header">';
+    html += '<div class="timeline-header-label">Opgave</div>';
+    html += '<div class="month-headers">';
+    for (let i = 0; i < visibleCols; i++) {
+      const isCurrent = i === 0;
+      html += `<div class="month-header${isCurrent ? ' current' : ''}">${columns[i]}</div>`;
+    }
+    html += '</div></div>';
+
+    if (state.view === 'overview') {
+      html += renderOverview();
+    } else {
+      html += renderDetail();
+    }
+
+    tl.innerHTML = html;
+
+    // Add tooltip listeners
+    document.querySelectorAll('.gantt-bar').forEach(bar => {
+      bar.addEventListener('mouseenter', showTooltip);
+      bar.addEventListener('mouseleave', hideTooltip);
+    });
+
+    // Render dependency lines only in detail view
+    if (state.view === 'detail') renderDependencies();
+  }
+
+  // Days to festival
+  const now = new Date(2026, 2, 30);
+  const fest = new Date(2026, 6, 30);
+  const days = Math.ceil((fest - now) / (1000*60*60*24));
+  document.getElementById('stat-days').textContent = days;
+}
+
+// ===== SPRINT DATA =====
+const sprintData = [
+  {
+    id: 4, name: 'Sprint 4', subtitle: 'Kritiske fixes + fundament',
+    dates: '30. mar – 12. apr', colStart: 0, colSpan: 2,
+    type: 'active', tickets: 25, capacity: 26,
+    goal: 'Ret kritiske Bodegafest-findings. Onboard Simon (7. apr). Påbegynd B2B flows. Start Swedbank API (Tony). Afklar billet-scanning. Test Sprint 3 features.',
+    persons: { 'Michael': { count: 7, focus: 'Backend onboarding, billettyper, B2B, dashboard, Beats' }, 'Tony': { count: 8, focus: 'POS findings + feedback, Swedbank integration' }, 'Mikkel': { count: 7, focus: 'Onboarding app, app findings' }, 'Jakob': { count: 3, focus: 'Accessibility fix, scanning-løsningsdesign, gate design, UX' } },
+    workstreams: ['WS1','WS2','WS3','WS4','Test']
+  },
+  {
+    id: 5, name: 'Sprint 5', subtitle: 'Nye features + test-push',
+    dates: '13. apr – 26. apr', colStart: 2, colSpan: 1,
+    type: 'planned', tickets: 26, capacity: 26,
+    goal: 'Start B2B, Webshop, NFC VAS. Stor test-push: hele teamet bruger 2 dage på test-køen (82 tickets). Start supporter-rekruttering.',
+    persons: { 'Michael': { count: 5, focus: 'B2B backend, arkitektur' }, 'Tony': { count: 5, focus: 'Apple VAS, POS API, NFC' }, 'Mikkel': { count: 5, focus: 'App onboarding + TEST-push' }, 'Jakob': { count: 7, focus: 'B2B web, Webshop, rekruttering' }, 'Edwin': { count: 5, focus: 'B2B app, Webshop + test-kø' }, 'Simon': { count: 3, focus: 'FMS dashboard (ramp-up, guided)' } },
+    workstreams: ['WS5','WS6','WS9','Test','Ops']
+  },
+  {
+    id: 6, name: 'Sprint 6', subtitle: 'Feature-build + integrationer',
+    dates: '27. apr – 10. maj', colStart: 3, colSpan: 1,
+    type: 'planned', tickets: 34, capacity: 33,
+    goal: 'B2B og Webshop færdigt. Wallet Pass, POS API, gate HW. Test-kø under 40. Festival XP: kort + boder.',
+    persons: { 'Michael': { count: 5, focus: 'B2B, inventory, arkitektur' }, 'Tony': { count: 6, focus: 'Wallet Pass, NFC, POS API, gate HW' }, 'Mikkel': { count: 6, focus: 'App polish + Festival-kort (camping)' }, 'Jakob': { count: 6, focus: 'Medarbejder-portal, NFC-armbånd' }, 'Edwin': { count: 6, focus: 'B2B test, Webshop test + Bod-præsentationer' }, 'Simon': { count: 5, focus: 'FMS dashboard + Webshop Web UI start' } },
+    workstreams: ['WS5','WS6','WS7','WS8','WS9','WS10','WS3']
+  },
+  {
+    id: 7, name: 'Sprint 7', subtitle: 'Integrationer + test-runder',
+    dates: '11. maj – 24. maj', colStart: 4, colSpan: 1,
+    type: 'planned', tickets: 36, capacity: 33,
+    goal: 'POS API partner-test. NFC-armbånd. Gate software. Festival XP: community, CDP, pre-order.',
+    persons: { 'Michael': { count: 5, focus: 'Gate SW, arkitektur + CDP-integration' }, 'Tony': { count: 5, focus: 'POS API partner-test, NFC test' }, 'Mikkel': { count: 6, focus: 'E2E test + Community: opret/join gruppe' }, 'Jakob': { count: 7, focus: 'Medarbejder-portal test, rekruttering' }, 'Edwin': { count: 6, focus: 'NFC/Wallet test + Pre-order udvidelse' }, 'Simon': { count: 7, focus: 'Webshop Web UI + B2B backend start' } },
+    workstreams: ['WS7','WS8','WS9','WS10','Test','Ops','WS3']
+  },
+  {
+    id: 8, name: 'Sprint 8', subtitle: 'Integration-test + Festival XP færdig',
+    dates: '25. maj – 7. jun', colStart: 5, colSpan: 1,
+    type: 'planned', tickets: 36, capacity: 33,
+    goal: 'Alle features bygget. Cross-system integrations-test. Festival XP: chat, lokation, gamification. Test-kø tom.',
+    persons: { 'Michael': { count: 4, focus: 'Cross-system integration, arkitektur' }, 'Tony': { count: 5, focus: 'POS↔NFC↔Gate E2E, backlog' }, 'Mikkel': { count: 7, focus: 'App E2E + Community: chat + del lokation' }, 'Jakob': { count: 7, focus: 'Vagtordning, onboarding-plan' }, 'Edwin': { count: 6, focus: 'E2E regression + Gamification' }, 'Simon': { count: 7, focus: 'B2B backend, backlog-tickets' } },
+    workstreams: ['Test','Ops','WS3']
+  },
+  {
+    id: 9, name: 'Sprint 9', subtitle: 'Hardening + regression',
+    dates: '8. jun – 21. jun', colStart: 6, colSpan: 1,
+    type: 'planned', tickets: 26, capacity: 33,
+    goal: 'Hardening — ret alle kendte bugs. Regression-test. Personale-onboarding workshops. Ingen nye features.',
+    persons: { 'Michael': { count: 4, focus: 'Bugfix, performance, hardening' }, 'Tony': { count: 4, focus: 'POS hardening, NFC edge cases' }, 'Mikkel': { count: 4, focus: 'App regression, UI bugfix' }, 'Jakob': { count: 7, focus: 'Workshops, træningsmateriale' }, 'Edwin': { count: 4, focus: 'Full regression suite, UAT' }, 'Simon': { count: 5, focus: 'Backend bugfix, FMS/Webshop hardening' } },
+    workstreams: ['Test','Ops','Hardening']
+  },
+  {
+    id: 10, name: 'Sprint 10', subtitle: 'FEATURE FREEZE + Polish',
+    dates: '22. jun – 5. jul', colStart: 7, colSpan: 1,
+    type: 'freeze', tickets: 18, capacity: 33,
+    goal: 'Feature freeze 1. juli. Kun critical bugfixes. Load test 20K. Generalprøve med personale.',
+    persons: { 'Michael': { count: 3, focus: 'Load test, critical bugfix' }, 'Tony': { count: 3, focus: 'Load test, infra scaling' }, 'Mikkel': { count: 3, focus: 'App final polish' }, 'Jakob': { count: 6, focus: 'Generalprøve, workshops' }, 'Edwin': { count: 3, focus: 'Smoke test, UAT sign-off' }, 'Simon': { count: 3, focus: 'Critical bugfix, backend monitoring' } },
+    workstreams: ['Load Test','Freeze','Ops']
+  },
+  {
+    id: 11, name: 'Sprint 11', subtitle: 'BUFFER — Uventede issues',
+    dates: '6. jul – 19. jul', colStart: 8, colSpan: 1,
+    type: 'buffer', tickets: 0, capacity: 26,
+    goal: 'Reserveret til uventede problemer. Ingen planlagte opgaver. Hvis stabilt: ekstra test, docs, ops-prep.',
+    persons: { 'Hele teamet': { count: 0, focus: 'On-call. Ellers: ekstra test, docs, ops-prep' } },
+    workstreams: ['Buffer','Critical Only']
+  },
+  {
+    id: 12, name: 'Sprint 12', subtitle: 'RINGSTED FESTIVAL',
+    dates: '20. jul – 2. aug', colStart: 8.5, colSpan: 1.5,
+    type: 'festival', tickets: 0, capacity: 0,
+    goal: 'Live support under festivalen. Dev-team på vagtordning 24/7. Monitoring, incident response, hotfixes.',
+    persons: { 'Hele teamet': { count: 0, focus: 'On-site / on-call rotation. Live monitoring, incident response' } },
+    workstreams: ['LIVE','Incident Response','Ops']
+  }
+];
+
+const sprintColors = {
+  active: 'var(--accent)', planned: 'var(--blue)', freeze: 'var(--red)', buffer: 'var(--yellow)', festival: 'var(--green)'
+};
+const sprintBgColors = {
+  active: 'rgba(99,102,241,0.12)', planned: 'rgba(59,130,246,0.06)', freeze: 'rgba(239,68,68,0.08)', buffer: 'rgba(234,179,8,0.06)', festival: 'rgba(34,197,94,0.08)'
+};
+
+// Helper: find all tasks that overlap with a sprint, grouped by person
+function getSprintTasks(sprint) {
+  const result = {};
+  const sStart = sprint.colStart;
+  const sEnd = sStart + sprint.colSpan;
+
+  for (const t of tasks) {
+    // Skip overview tasks and milestones
+    if (t.id && t.id.startsWith('ov-')) continue;
+    if (t.milestone) continue;
+    if (!t.persons || t.persons.length === 0) continue;
+
+    const tStart = t.start;
+    const tEnd = tStart + (t.span || 1);
+
+    // Check overlap
+    if (tStart < sEnd && tEnd > sStart) {
+      for (const person of t.persons) {
+        if (!result[person]) result[person] = [];
+        // Avoid duplicates
+        if (!result[person].some(existing => existing.id === t.id)) {
+          result[person].push(t);
+        }
+      }
+    }
+  }
+
+  // Sort each person's tasks: those with jira IDs first, then by label
+  for (const person of Object.keys(result)) {
+    result[person].sort((a, b) => {
+      const aHasJira = a.jira && a.jira.length > 0 ? 0 : 1;
+      const bHasJira = b.jira && b.jira.length > 0 ? 0 : 1;
+      if (aHasJira !== bHasJira) return aHasJira - bHasJira;
+      return (a.label || '').localeCompare(b.label || '');
+    });
+  }
+
+  return result;
+}
+
+function renderSprints() {
+  let html = '<div style="margin-bottom:24px">';
+
+  // Summary row
+  html += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:24px">';
+  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700;color:var(--accent)">9</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Sprints til festival</div></div>';
+  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700;color:var(--blue)">7</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Dev-sprints</div></div>';
+  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700">212</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Ticket-kapacitet (m/ Simon)</div></div>';
+  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700;color:var(--orange)">115</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Aktiv pipeline</div></div>';
+  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700;color:var(--green)">+89</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Buffer</div></div>';
+  html += '</div>';
+
+  // Timeline bar showing sprints as gantt bars
+  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:24px">';
+  html += '<div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:12px">Sprint-tidslinje</div>';
+  html += '<div style="display:grid;grid-template-columns:repeat(18,1fr);gap:0;margin-bottom:6px">';
+  for (let i = 0; i < 18; i++) {
+    html += `<div style="font-size:9px;color:var(--text-muted);text-align:center;padding:2px 0;border-left:1px solid var(--border)">${columns[i]}</div>`;
+  }
+  html += '</div>';
+  html += '<div style="position:relative;height:40px;background:var(--surface2);border-radius:6px;overflow:hidden">';
+  for (const s of sprintData) {
+    const left = (s.colStart / 18 * 100);
+    const width = (s.colSpan / 18 * 100);
+    const color = sprintColors[s.type];
+    html += `<div style="position:absolute;left:${left}%;width:${width}%;height:100%;background:${sprintBgColors[s.type]};border-left:3px solid ${color};display:flex;align-items:center;padding-left:6px;font-size:10px;font-weight:700;color:${color};overflow:hidden;white-space:nowrap">${s.name}</div>`;
+  }
+  // Feature freeze marker
+  html += `<div style="position:absolute;left:${7/18*100}%;top:0;bottom:0;width:2px;background:var(--red);opacity:0.7;z-index:5"></div>`;
+  // Today marker
+  html += `<div style="position:absolute;left:${0.5/18*100}%;top:0;bottom:0;width:2px;background:var(--accent);opacity:0.7;z-index:5"></div>`;
+  html += '</div>';
+  html += '<div style="display:flex;gap:16px;margin-top:8px">';
+  html += '<div style="font-size:10px;color:var(--text-muted);display:flex;align-items:center;gap:4px"><div style="width:2px;height:10px;background:var(--accent);border-radius:1px"></div> I dag</div>';
+  html += '<div style="font-size:10px;color:var(--text-muted);display:flex;align-items:center;gap:4px"><div style="width:2px;height:10px;background:var(--red);border-radius:1px"></div> Feature freeze (1. jul)</div>';
+  html += '</div>';
+  html += '</div>';
+
+  // Sprint cards
+  let visibleCount = 0;
+  for (const s of sprintData) {
+    // Filter by person if set
+    if (state.person !== 'all') {
+      const personName = state.person.charAt(0).toUpperCase() + state.person.slice(1);
+      const hasP = Object.keys(s.persons).some(p => p.toLowerCase().includes(state.person));
+      if (!hasP) continue;
+    }
+    visibleCount++;
+    const color = sprintColors[s.type];
+    const bg = sprintBgColors[s.type];
+
+    html += `<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden;border-left:4px solid ${color}">`;
+
+    // Header
+    html += `<div style="padding:14px 20px;display:flex;align-items:center;justify-content:space-between;background:${bg}">`;
+    html += `<div>`;
+    html += `<div style="font-weight:700;font-size:15px">${s.name} — ${s.subtitle}</div>`;
+    html += `<div style="font-size:12px;color:var(--text-muted);margin-top:2px">${s.dates}</div>`;
+    html += `</div>`;
+    const badgeColors = { active: 'var(--accent)', planned: 'var(--surface2)', freeze: 'var(--red)', buffer: 'var(--yellow)', festival: 'var(--green)' };
+    const badgeText = { active: 'AKTIV', planned: 'PLANLAGT', freeze: 'FREEZE', buffer: 'BUFFER', festival: 'FESTIVAL' };
+    const badgeFg = s.type === 'buffer' || s.type === 'festival' ? '#000' : s.type === 'planned' ? 'var(--text-muted)' : '#fff';
+    html += `<span style="padding:3px 12px;border-radius:12px;font-size:11px;font-weight:700;background:${badgeColors[s.type]};color:${badgeFg};${s.type==='planned'?'border:1px solid var(--border)':''}">${badgeText[s.type]}</span>`;
+    html += `</div>`;
+
+    // Body
+    html += `<div style="padding:16px 20px">`;
+
+    // Goal
+    html += `<div style="font-size:13px;color:var(--text-muted);margin-bottom:14px;line-height:1.5"><strong style="color:var(--text)">Mål:</strong> ${s.goal}</div>`;
+
+    // Person rows
+    for (const [name, data] of Object.entries(s.persons)) {
+      const pColors = { 'Michael': 'var(--blue)', 'Tony': 'var(--orange)', 'Mikkel': 'var(--cyan)', 'Jakob': 'var(--accent)', 'Edwin': 'var(--green)', 'Simon': '#10b981', 'Hele teamet': 'var(--text-muted)' };
+      html += `<div style="display:flex;align-items:center;gap:12px;padding:5px 0;border-bottom:1px solid rgba(46,51,69,0.3)">`;
+      html += `<div style="font-size:12px;font-weight:600;min-width:90px;color:${pColors[name] || 'var(--text)'}">${name}</div>`;
+      html += `<div style="font-size:12px;color:var(--text-muted);flex:1">${data.focus}</div>`;
+      html += `<div style="font-size:13px;font-weight:700;min-width:30px;text-align:right">${data.count || '—'}</div>`;
+      html += `</div>`;
+    }
+
+    // Workstream tags
+    html += `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:12px">`;
+    const wsTagColors = { 'WS1':'ws-1','WS2':'ws-2','WS3':'ws-3','WS4':'ws-4','WS5':'ws-5','WS6':'ws-6','WS7':'ws-7','WS8':'ws-8','WS9':'ws-9','WS10':'ws-10','Test':'ws-test','Ops':'ws-ops','Hardening':'','Freeze':'','Buffer':'','LIVE':'','Load Test':'','Critical Only':'','Incident Response':'' };
+    for (const ws of s.workstreams) {
+      const cls = wsTagColors[ws];
+      if (cls) {
+        html += `<span class="ws-tag ${cls}">${ws}</span>`;
+      } else {
+        let tagBg = 'rgba(255,255,255,0.05)'; let tagC = 'var(--text-muted)';
+        if (ws === 'Freeze' || ws === 'Critical Only') { tagBg = 'rgba(239,68,68,0.12)'; tagC = 'var(--red)'; }
+        if (ws === 'Buffer') { tagBg = 'rgba(234,179,8,0.12)'; tagC = 'var(--yellow)'; }
+        if (ws === 'LIVE') { tagBg = 'rgba(34,197,94,0.15)'; tagC = 'var(--green)'; }
+        if (ws === 'Load Test') { tagBg = 'rgba(168,85,247,0.15)'; tagC = 'var(--purple)'; }
+        if (ws === 'Hardening') { tagBg = 'rgba(239,68,68,0.12)'; tagC = 'var(--red)'; }
+        if (ws === 'Incident Response') { tagBg = 'rgba(239,68,68,0.12)'; tagC = 'var(--red)'; }
+        if (ws === 'WS3') { tagBg = 'rgba(217,70,239,0.15)'; tagC = '#d946ef'; }
+        html += `<span style="font-size:10px;padding:3px 8px;border-radius:4px;font-weight:600;background:${tagBg};color:${tagC}">${ws === 'WS3' ? 'App Festival XP' : ws}</span>`;
+      }
+    }
+    html += `</div>`;
+
+    // Capacity bar (if applicable)
+    if (s.capacity > 0) {
+      const pct = Math.min(s.tickets / s.capacity * 100, 100);
+      let barColor = 'var(--green)';
+      if (pct > 90) barColor = 'var(--yellow)';
+      if (pct > 100) barColor = 'var(--red)';
+      html += `<div style="display:flex;align-items:center;gap:8px;margin-top:10px">`;
+      html += `<div style="font-size:11px;color:var(--text-muted);min-width:100px">${s.tickets} / ${s.capacity} kapacitet</div>`;
+      html += `<div style="flex:1;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden"><div style="height:100%;width:${pct}%;background:${barColor};border-radius:3px"></div></div>`;
+      html += `</div>`;
+    }
+
+    // Expandable ticket detail per person
+    const sprintTasks = getSprintTasks(s);
+    if (Object.keys(sprintTasks).length > 0) {
+      const detailId = 'sprint-detail-' + s.id;
+      html += `<div style="margin-top:12px;border-top:1px solid var(--border);padding-top:8px">`;
+      html += `<button onclick="document.getElementById('${detailId}').style.display = document.getElementById('${detailId}').style.display === 'none' ? 'block' : 'none'; this.querySelector('.chevron').textContent = document.getElementById('${detailId}').style.display === 'none' ? '▸' : '▾'" style="background:none;border:1px solid var(--border);border-radius:6px;color:var(--text-muted);cursor:pointer;font-size:11px;padding:4px 10px;display:flex;align-items:center;gap:4px;transition:all 0.15s"><span class="chevron">▸</span> Vis ticket-detaljer</button>`;
+      html += `<div id="${detailId}" style="display:none;margin-top:10px">`;
+
+      const pColors = { 'michael':'var(--blue)', 'tony':'var(--orange)', 'mikkel':'var(--cyan)', 'jakob':'var(--accent)', 'edwin':'var(--green)', 'simon':'#10b981' };
+      const pNames = { 'michael':'Michael', 'tony':'Tony', 'mikkel':'Mikkel', 'jakob':'Jakob', 'edwin':'Edwin', 'simon':'Simon' };
+      const jiraBase = 'https://livecloud-platform.atlassian.net/browse/';
+
+      for (const [person, ptasks] of Object.entries(sprintTasks)) {
+        if (ptasks.length === 0) continue;
+        html += `<div style="margin-bottom:10px">`;
+        html += `<div style="font-size:11px;font-weight:700;color:${pColors[person] || 'var(--text)'};margin-bottom:4px;text-transform:uppercase;letter-spacing:0.3px">${pNames[person] || person}</div>`;
+        for (const t of ptasks) {
+          const jiraIds = t.jira ? t.jira.split(',').map(j => j.trim()).filter(j => j) : [];
+          html += `<div style="display:flex;align-items:baseline;gap:8px;padding:2px 0;font-size:12px">`;
+          html += `<span style="color:var(--text-muted);flex-shrink:0">•</span>`;
+          html += `<span style="color:var(--text);flex:1">${t.label}</span>`;
+          if (jiraIds.length > 0) {
+            const links = jiraIds.map(j => {
+              const clean = j.replace(/\s/g,'');
+              // Check if it's a proper single ticket (e.g., LCAP-1103)
+              const singleMatch = clean.match(/^(LCAP-\d+)$/);
+              if (singleMatch) {
+                return '<a href="' + jiraBase + singleMatch[1] + '" target="_blank" style="color:var(--accent-light);text-decoration:none;font-size:10px;font-family:monospace;opacity:0.8;padding:1px 4px;background:rgba(99,102,241,0.1);border-radius:3px">' + singleMatch[1] + '</a>';
+              }
+              // Range like LCAP-1012-1045 or comma-separated — show as label, link to first
+              const rangeMatch = clean.match(/^(LCAP-(\d+))-(\d+)$/);
+              if (rangeMatch) {
+                return '<a href="' + jiraBase + rangeMatch[1] + '" target="_blank" style="color:var(--text-muted);text-decoration:none;font-size:10px;font-family:monospace;opacity:0.7;padding:1px 4px;background:rgba(255,255,255,0.04);border-radius:3px" title="Range: LCAP-' + rangeMatch[2] + ' til LCAP-' + rangeMatch[3] + '">' + clean + '</a>';
+              }
+              return '<span style="font-size:10px;color:var(--text-muted);font-family:monospace">' + clean + '</span>';
+            });
+            html += `<span style="flex-shrink:0;display:flex;gap:3px;flex-wrap:wrap">${links.join('')}</span>`;
+          }
+          html += `</div>`;
+        }
+        html += `</div>`;
+      }
+
+      html += `</div></div>`;
+    }
+
+    html += `</div></div>`;
+  }
+
+  html += '</div>';
+  document.getElementById('stat-visible').textContent = visibleCount;
+  return html;
+}
+
+function renderCapacity() {
+  let html = '<div class="capacity-container">';
+
+  // Summary dashboard
+  html += '<div class="capacity-dashboard">';
+
+  // Team total
+  html += '<div class="capacity-card">';
+  html += '<h3>Team Kapacitet</h3>';
+  html += '<div class="metric">';
+  html += '<span class="metric-label">Samlet kapacitet:</span>';
+  html += '<span class="metric-value" style="color:var(--green)">212 tickets</span>';
+  html += '</div>';
+  html += '<div class="metric">';
+  html += '<span class="metric-label">Aktiv pipeline:</span>';
+  html += '<span class="metric-value" style="color:var(--accent-light)">115 tickets</span>';
+  html += '</div>';
+  html += '<div class="metric">';
+  html += '<span class="metric-label">Buffer:</span>';
+  html += '<span class="metric-value" style="color:var(--green)">+89 tickets</span>';
+  html += '</div>';
+  html += '</div>';
+
+  // Time remaining
+  html += '<div class="capacity-card">';
+  html += '<h3>Tidsramme</h3>';
+  html += '<div class="metric">';
+  html += '<span class="metric-label">Til feature freeze:</span>';
+  html += '<span class="metric-value">13.3 uger</span>';
+  html += '</div>';
+  html += '<div class="metric">';
+  html += '<span class="metric-label">Eller:</span>';
+  html += '<span class="metric-value">3.1 måneder</span>';
+  html += '</div>';
+  html += '<div class="metric">';
+  html += '<span class="metric-label">Dato:</span>';
+  html += '<span class="metric-value" style="font-size:14px">1. juli</span>';
+  html += '</div>';
+  html += '</div>';
+
+  // Test queue
+  html += '<div class="capacity-card">';
+  html += '<h3>Test Kø</h3>';
+  html += '<div class="metric">';
+  html += '<span class="metric-label">Backlog tickets:</span>';
+  html += '<span class="metric-value" style="color:var(--red)">82</span>';
+  html += '</div>';
+  html += '<div class="metric" style="color:var(--red); font-weight:600">';
+  html += '<span class="metric-label">Status:</span>';
+  html += '<span>Kritisk flaskehals</span>';
+  html += '</div>';
+  html += '</div>';
+
+  // Backlog
+  html += '<div class="capacity-card">';
+  html += '<h3>Backlog</h3>';
+  html += '<div class="metric">';
+  html += '<span class="metric-label">Tickets:</span>';
+  html += '<span class="metric-value" style="color:var(--yellow)">213</span>';
+  html += '</div>';
+  html += '<div class="metric">';
+  html += '<span class="metric-label">Status:</span>';
+  html += '<span style="color:var(--text-muted)">Afventer aktivering</span>';
+  html += '</div>';
+  html += '</div>';
+
+  html += '</div>';
+
+  // Per-person capacity
+  html += '<div class="capacity-card" style="margin-bottom:32px">';
+  html += '<h3 style="margin-bottom:16px">Individuel Kapacitet</h3>';
+
+  const persons = ['michael', 'tony', 'mikkel', 'jakob', 'edwin', 'simon'];
+  for (const person of persons) {
+    const cap = capacityData[person];
+    const utilization = (cap.activeTickets / cap.capacity * 100).toFixed(0);
+    const buffer = cap.capacity - cap.activeTickets;
+    const status = cap.activeTickets > cap.capacity ? 'RISK' : 'OK';
+    const barColor = cap.activeTickets > cap.capacity ? 'bar-risk' : (buffer < 10 ? 'bar-warning' : 'bar-ok');
+    const statusColor = cap.activeTickets > cap.capacity ? 'var(--red)' : (buffer < 10 ? 'var(--yellow)' : 'var(--green)');
+
+    html += '<div class="capacity-person-row">';
+    html += `<div class="person-name">${cap.name}${cap.note ? '<div style="font-size:10px;color:var(--yellow);font-weight:400;margin-top:2px">' + cap.note + '</div>' : ''}</div>`;
+    html += '<div class="capacity-bars">';
+
+    // Capacity bar with active overlay
+    html += '<div class="bar-wrapper">';
+    html += `<div class="capacity-bar-fill bar-ok" style="width:100%"></div>`;
+    html += `<div class="capacity-bar-fill ${barColor}" style="width:${Math.min(utilization, 100)}%"></div>`;
+    html += '</div>';
+
+    // Label with metrics
+    html += `<div class="bar-label">${cap.activeTickets}/${cap.capacity} (${utilization}%)</div>`;
+    html += `<div class="bar-label" style="color:${statusColor};font-weight:700;min-width:70px">${buffer > 0 ? '+' : ''}${buffer} ${status}</div>`;
+
+    html += '</div>';
+    html += '</div>';
+  }
+
+  html += '</div>';
+
+  // Risk section
+  html += '<div class="risk-section">';
+  html += '<h3>Risiko & Anbefalinger</h3>';
+  html += '<div class="risk-item">Michael arbejder ti+to+½fre (2,5 dage/uge). Simon starter 7. april og overtager FMS, Webshop og B2B backend fra Sprint 5, hvilket reducerer Michaels load fra 54 → ~30 tickets.</div>';
+  html += '<div class="risk-item">Test-kø (82 tickets) overstiger Edwins kapacitet (19) markant — hele teamet (inkl. Simon fra Sprint 6) skal hjælpe med test</div>';
+  html += '<div class="risk-item">Buffer ~89 tickets (efter 8 Festival Experience-stories er fordelt på Sprint 6-8). Fortsat god margin til backlog og uventede opgaver.</div>';
+  html += '<div class="risk-item">Samlet vurdering: Aktiv pipeline (115) + nye app-features (~8) er realistisk med 6 devs. Swedbank færdig i Sprint 4 (Tony). Michael kan fokusere på arkitektur.</div>';
+  html += '</div>';
+
+  // Capacity Gap Analysis & Onboarding Recommendation
+  html += '<div class="risk-section" style="border-color:var(--accent);margin-bottom:32px">';
+  html += '<h3 style="color:var(--accent-light)">Kapacitets-gaps & Simon-onboarding</h3>';
+
+  html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:20px">';
+
+  // Gap 1: Backend/API (Michael)
+  html += '<div style="background:var(--surface2);border-radius:8px;padding:16px;border-left:3px solid var(--red)">';
+  html += '<div style="font-weight:700;margin-bottom:8px;color:var(--red)">Gap 1: Backend / API (Michael)</div>';
+  html += '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">Deficit: <span style="color:var(--red);font-weight:700">-12 tickets</span> → <span style="color:var(--green);font-weight:700">mitigeret med Simon</span></div>';
+  html += '<div style="font-size:12px;line-height:1.6">Michael arbejder ti+to+½fre (2,5 dage/uge). Simon overtager FMS, Webshop Web UI og B2B backend fra Sprint 5, hvilket reducerer Michaels load til ~30 tickets (vs. 42 kapacitet). Swedbank færdig i Sprint 4 (Tony). Michael kan fokusere på arkitektur og cross-system integration.</div>';
+  html += '</div>';
+
+  // Gap 2: POS / Infra (Tony)
+  html += '<div style="background:var(--surface2);border-radius:8px;padding:16px;border-left:3px solid var(--orange)">';
+  html += '<div style="font-weight:700;margin-bottom:8px;color:var(--orange)">Gap 2: POS / Infrastruktur (Tony)</div>';
+  html += '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">Deficit: <span style="color:var(--orange);font-weight:700">-1 ticket</span> (men mange store opgaver)</div>';
+  html += '<div style="font-size:12px;line-height:1.6">Tony ejer POS-koden, NFC/Wallet, POS API for tredjepart og gate-hardware. Median cycle time er 17.5 dage — de fleste opgaver er komplekse integrations-arbejde. WS8, WS9 og WS10 er alle afhængige af Tony.</div>';
+  html += '</div>';
+
+  // Gap 3: QA / Test
+  html += '<div style="background:var(--surface2);border-radius:8px;padding:16px;border-left:3px solid var(--red)">';
+  html += '<div style="font-weight:700;margin-bottom:8px;color:var(--red)">Gap 3: QA / Test (Edwin)</div>';
+  html += '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">Test-kø: <span style="color:var(--red);font-weight:700">82 tickets</span> vs kapacitet: 19</div>';
+  html += '<div style="font-size:12px;line-height:1.6">82 tickets venter på test allerede nu, og flere kommer fra dev. Edwin alene kan klare ~19 inden freeze. Der er brug for en dedikeret QA-ressource eller systematisk test-deling på tværs af teamet.</div>';
+  html += '</div>';
+
+  // Gap 4: Unassigned backlog
+  html += '<div style="background:var(--surface2);border-radius:8px;padding:16px;border-left:3px solid var(--yellow)">';
+  html += '<div style="font-weight:700;margin-bottom:8px;color:var(--yellow)">Gap 4: Ufordelt Backlog</div>';
+  html += '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">61 ufordelte + 213 i backlog</div>';
+  html += '<div style="font-size:12px;line-height:1.6">Festival Experience & Community (LCAP-1102, 8 stories) er nu fordelt: Sprint 6 (kort + boder), Sprint 7 (community + CDP + pre-order), Sprint 8 (chat + lokation + gamification). Buffer reduceret fra 97→89 — fortsat god margin.</div>';
+  html += '</div>';
+
+  html += '</div>';
+
+  // Simon Onboarding Status
+  html += '<div style="background:rgba(34,197,94,0.08);border:1px solid var(--green);border-radius:8px;padding:20px;margin-top:8px">';
+  html += '<div style="font-weight:700;font-size:15px;margin-bottom:12px;color:var(--green)">✓ Simon — Backend-udvikler (starter 7. april)</div>';
+
+  html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px">';
+
+  // Onboarding
+  html += '<div style="background:var(--surface);border-radius:8px;padding:16px">';
+  html += '<div style="font-weight:700;margin-bottom:8px;color:var(--accent-light)">Onboarding</div>';
+  html += '<div style="font-size:12px;line-height:1.8">';
+  html += '<div><strong>Uge 1 (7-11. apr):</strong> Miljø, arkitektur, første PR</div>';
+  html += '<div><strong>Uge 2 (14-18. apr):</strong> FMS-tickets, PR-flow</div>';
+  html += '<div><strong>Primær mentor:</strong> Tony (~14 timer)</div>';
+  html += '<div><strong>Sekundær:</strong> Michael (arkitektur, ~6 timer)</div>';
+  html += '</div></div>';
+
+  // Progression
+  html += '<div style="background:var(--surface);border-radius:8px;padding:16px">';
+  html += '<div style="font-weight:700;margin-bottom:8px;color:var(--accent-light)">Ansvarsområder</div>';
+  html += '<div style="font-size:12px;line-height:1.8">';
+  html += '<div><strong>Sprint 5:</strong> FMS Dashboard (~3 tickets)</div>';
+  html += '<div><strong>Sprint 6:</strong> FMS + Webshop Web UI (~5)</div>';
+  html += '<div><strong>Sprint 7-8:</strong> Webshop + B2B backend (~7/spr)</div>';
+  html += '<div><strong>Sprint 9-10:</strong> Hardening + bugfix (~5+3)</div>';
+  html += '</div></div>';
+
+  // Impact
+  html += '<div style="background:var(--surface);border-radius:8px;padding:16px">';
+  html += '<div style="font-weight:700;margin-bottom:8px;color:var(--green)">Impact</div>';
+  html += '<div style="font-size:12px;line-height:1.8">';
+  html += '<div><strong>+30 tickets</strong> kapacitet (Sprint 5-10)</div>';
+  html += '<div><strong>+27%</strong> team velocity (fra ~26 til ~33/sprint)</div>';
+  html += '<div><strong>Fjerner SPOF</strong> på backend (Michael)</div>';
+  html += '<div><strong>Buffer:</strong> +89 tickets til backlog</div>';
+  html += '</div></div>';
+
+  html += '</div>';
+  html += '</div>';
+
+  // Historical velocity
+  html += '<div class="velocity-chart">';
+  html += '<h3>Historisk Velocity</h3>';
+
+  const velocityData = [
+    { month: 'Jan 2026', tickets: 18 },
+    { month: 'Feb 2026', tickets: 24 },
+    { month: 'Mar 2026', tickets: 119 }
+  ];
+
+  const maxVelocity = Math.max(...velocityData.map(v => v.tickets));
+
+  for (const vel of velocityData) {
+    const pct = (vel.tickets / maxVelocity * 100);
+    html += '<div class="velocity-row">';
+    html += `<div class="velocity-label">${vel.month}</div>`;
+    html += '<div class="velocity-bar-wrapper">';
+    html += `<div class="velocity-bar" style="width:${pct}%">`;
+    html += `<span class="velocity-value">${vel.tickets}</span>`;
+    html += '</div>';
+    html += '</div>';
+    html += '</div>';
+  }
+
+  html += '</div>';
+
+  html += '</div>';
+  return html;
+}
+
+function updateCapacityStats() {
+  // Calculate total team capacity utilization
+  const totalCapacity = Object.values(capacityData).reduce((sum, p) => sum + p.capacity, 0);
+  const totalActive = Object.values(capacityData).reduce((sum, p) => sum + p.activeTickets, 0);
+  const utilization = Math.round(totalActive / totalCapacity * 100);
+
+  const container = document.getElementById('capacity-stat-container');
+  container.style.display = 'flex';
+  document.getElementById('stat-capacity').textContent = utilization + '%';
+  document.getElementById('stat-visible').textContent = Object.keys(capacityData).length;
+}
+
+function renderOverview() {
+  let html = '';
+  let visibleCount = 0;
+
+  const filtered = overviewTasks.filter(t => {
+    if (state.ws !== 'all' && t.ws !== state.ws && t.ws !== 'all') return false;
+    if (state.person !== 'all' && !t.persons.includes(state.person)) return false;
+    return true;
+  });
+
+  for (const task of filtered) {
+    visibleCount++;
+    const persons = task.persons.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(', ');
+    const isMilestone = task.milestone;
+
+    html += `<div class="timeline-row${isMilestone ? ' section-header' : ''}" data-id="${task.id}" style="min-height:48px">`;
+    html += `<div class="row-label" style="font-size:13px">`;
+    html += `<span style="width:10px;height:10px;border-radius:3px;background:${wsColors[task.ws] || '#fff'};flex-shrink:0"></span>`;
+    html += `<span style="font-weight:600">${task.label}</span>`;
+    html += `</div>`;
+
+    html += `<div class="bar-track" style="position:relative">`;
+    for (let i = 0; i < visibleCols; i++) {
+      html += `<div class="bar-cell${i===0?' today-col':''}"></div>`;
+    }
+
+    // Render multi-phase bars
+    for (const seg of task.phases) {
+      const leftPct = (seg.start / visibleCols * 100);
+      const widthPct = (seg.span / visibleCols * 100);
+      html += `<div class="gantt-bar ${seg.phase}" style="left:${leftPct}%;width:${widthPct}%;height:26px;border-radius:${seg === task.phases[0] ? '5px 0 0 5px' : seg === task.phases[task.phases.length-1] ? '0 5px 5px 0' : '0'}"
+        data-task='${JSON.stringify({label:task.label,persons,jira:task.jira||'',phase:seg.phase,deps:[],desc:task.desc||''})}'></div>`;
+    }
+
+    // Single background bar to show full span
+    const fullLeft = (task.start / visibleCols * 100);
+    const fullWidth = (task.span / visibleCols * 100);
+    html += `<div style="position:absolute;left:${fullLeft}%;width:${fullWidth}%;height:26px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.03);border-radius:5px;z-index:1;pointer-events:none"></div>`;
+
+    html += '</div></div>';
+  }
+
+  document.getElementById('stat-visible').textContent = visibleCount;
+  return html;
+}
+
+function renderDetail() {
+  let html = '';
+  const wsOrder = ['1','2','3','4','5','6','7','8','9','10'];
+  let visibleCount = 0;
+
+  for (const ws of wsOrder) {
+    const wsTasks = tasks.filter(t => t.ws === ws || t.ws === 'all');
+    const filtered = wsTasks.filter(t => matchFilters(t));
+    if (filtered.length === 0) continue;
+
+    html += `<div class="timeline-row section-header" data-ws="${ws}">`;
+    html += `<div class="row-label"><span class="tag tag-ws">WS${ws}</span> ${wsNames[ws]}</div>`;
+    html += `<div class="bar-track">`;
+    for (let i = 0; i < visibleCols; i++) {
+      html += `<div class="bar-cell${i===0?' today-col':''}"></div>`;
+    }
+    html += '</div></div>';
+
+    for (const task of filtered) {
+      if (task.ws === 'all') continue;
+      visibleCount++;
+      html += renderRow(task);
+    }
+  }
+
+  const milestones = tasks.filter(t => t.milestone && matchFilters(t));
+  if (milestones.length > 0) {
+    html += `<div class="timeline-row section-header"><div class="row-label">Milestones</div>`;
+    html += `<div class="bar-track">`;
+    for (let i = 0; i < visibleCols; i++) html += `<div class="bar-cell${i===0?' today-col':''}"></div>`;
+    html += '</div></div>';
+    for (const t of milestones) {
+      visibleCount++;
+      html += renderRow(t);
+    }
+  }
+
+  document.getElementById('stat-visible').textContent = visibleCount;
+  return html;
+}
+
+function matchFilters(task) {
+  if (state.ws !== 'all' && task.ws !== state.ws && task.ws !== 'all') return false;
+  if (state.person !== 'all' && !task.persons.includes(state.person)) return false;
+  if (state.phase !== 'all' && task.phase !== state.phase) return false;
+  return true;
+}
+
+function renderRow(task) {
+  const persons = task.persons.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(', ');
+  let html = `<div class="timeline-row" data-ws="${task.ws}" data-persons="${task.persons.join(',')}" data-phase="${task.phase}" data-id="${task.id}">`;
+  html += `<div class="row-label">`;
+  html += `<span style="width:8px;height:8px;border-radius:2px;background:${wsColors[task.ws] || '#666'};flex-shrink:0"></span>`;
+  html += `${task.label}`;
+  if (task.persons.length <= 2) {
+    html += ` <span class="tag tag-person">${persons}</span>`;
+  }
+  html += `</div>`;
+
+  html += `<div class="bar-track" style="position:relative">`;
+  for (let i = 0; i < visibleCols; i++) {
+    html += `<div class="bar-cell${i===0?' today-col':''}"></div>`;
+  }
+
+  // Bar
+  const leftPct = (task.start / visibleCols * 100);
+  const widthPct = (task.span / visibleCols * 100);
+  const phaseClass = task.phase;
+  html += `<div class="gantt-bar ${phaseClass}" style="left:${leftPct}%;width:${widthPct}%"
+    data-task='${JSON.stringify({label:task.label,persons,jira:task.jira,phase:task.phase,deps:task.deps,desc:task.desc||''})}'>${task.jira ? '●' : ''}</div>`;
+
+  html += '</div></div>';
+  return html;
+}
+
+function renderDependencies() {
+  // Remove old SVG
+  const old = document.getElementById('dep-svg');
+  if (old) old.remove();
+
+  const tl = document.getElementById('timeline');
+  const rect = tl.getBoundingClientRect();
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.id = 'dep-svg';
+  svg.style.cssText = `position:absolute;top:0;left:0;width:100%;height:${tl.scrollHeight}px;pointer-events:none;z-index:6`;
+  tl.style.position = 'relative';
+  tl.appendChild(svg);
+
+  tasks.forEach(task => {
+    if (!matchFilters(task)) return;
+    const targetRow = tl.querySelector(`[data-id="${task.id}"]`);
+    if (!targetRow) return;
+
+    task.deps.forEach(depId => {
+      const sourceTask = tasks.find(t => t.id === depId);
+      if (!sourceTask || !matchFilters(sourceTask)) return;
+      const sourceRow = tl.querySelector(`[data-id="${depId}"]`);
+      if (!sourceRow) return;
+
+      const sBar = sourceRow.querySelector('.gantt-bar');
+      const tBar = targetRow.querySelector('.gantt-bar');
+      if (!sBar || !tBar) return;
+
+      const sRect = sBar.getBoundingClientRect();
+      const tRect = tBar.getBoundingClientRect();
+      const tlRect = tl.getBoundingClientRect();
+
+      const x1 = sRect.right - tlRect.left;
+      const y1 = sRect.top + sRect.height/2 - tlRect.top;
+      const x2 = tRect.left - tlRect.left;
+      const y2 = tRect.top + tRect.height/2 - tlRect.top;
+
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      const midX = x1 + (x2 - x1) * 0.5;
+      path.setAttribute('d', `M${x1},${y1} C${midX},${y1} ${midX},${y2} ${x2},${y2}`);
+      path.setAttribute('stroke', 'rgba(99,102,241,0.3)');
+      path.setAttribute('stroke-width', '1.5');
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke-dasharray', '4,3');
+      svg.appendChild(path);
+
+      // Arrow
+      const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      arrow.setAttribute('cx', x2);
+      arrow.setAttribute('cy', y2);
+      arrow.setAttribute('r', '3');
+      arrow.setAttribute('fill', 'rgba(99,102,241,0.5)');
+      svg.appendChild(arrow);
+    });
+  });
+}
+
+// ===== TOOLTIP =====
+function showTooltip(e) {
+  const data = JSON.parse(e.target.dataset.task);
+  const tt = document.getElementById('tooltip');
+  let html = `<h4>${data.label}</h4>`;
+  html += `<div class="tt-row"><span class="tt-label">Team</span><span>${data.persons}</span></div>`;
+  html += `<div class="tt-row"><span class="tt-label">Fase</span><span>${data.phase}</span></div>`;
+  if (data.jira) html += `<div class="tt-row"><span class="tt-label">Jira</span><span>${data.jira}</span></div>`;
+  if (data.deps.length) html += `<div class="tt-row"><span class="tt-label">Afhænger af</span><span>${data.deps.join(', ')}</span></div>`;
+  if (data.desc) html += `<div style="margin-top:6px;color:var(--yellow);font-size:11px">${data.desc}</div>`;
+  tt.innerHTML = html;
+  tt.classList.add('show');
+
+  const r = e.target.getBoundingClientRect();
+  tt.style.left = Math.min(r.left, window.innerWidth - 340) + 'px';
+  tt.style.top = (r.bottom + 8) + 'px';
+}
+
+function hideTooltip() {
+  document.getElementById('tooltip').classList.remove('show');
+}
+
+// ===== FILTERS =====
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const filterType = btn.dataset.filter;
+    const value = btn.dataset.value;
+
+    // Toggle in group
+    document.querySelectorAll(`.filter-btn[data-filter="${filterType}"]`).forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    state[filterType] = value;
+    render();
+  });
+});
+
+// View toggle
+document.querySelectorAll('.view-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state.view = btn.dataset.view;
+    render();
+  });
+});
+
+// Initial render
+render();
+
+// Re-render dependencies on resize
+window.addEventListener('resize', () => { if (state.view === 'detail') renderDependencies(); });
+</script>
+
+</body>
+</html>
