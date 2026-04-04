@@ -1065,7 +1065,7 @@ const sprintData = [
     id: 6, name: 'Sprint 6', subtitle: 'Feature-build + integrationer',
     dates: '27. apr – 10. maj', colStart: 3, colSpan: 1,
     type: 'planned', tickets: 34, capacity: 33,
-    goal: 'B2B og Webshop færdigt. Wallet Pass, POS API, gate HW. Test-kø under 40. Festival XP: kort + boder.',
+    goal: 'B2B og Webshop færdigt. Wallet Pass, POS API, gate HW. Test-kø under 25 (Jakob+Edwin+Simon). Festival XP: kort + boder.',
     persons: { 'Michael': { count: 5, focus: 'B2B, inventory, arkitektur' }, 'Tony': { count: 6, focus: 'Wallet Pass, NFC, POS API, gate HW' }, 'Mikkel': { count: 6, focus: 'App polish + Festival-kort (camping)' }, 'Jakob': { count: 6, focus: 'Medarbejder-portal, NFC-armbånd' }, 'Edwin': { count: 6, focus: 'B2B test, Webshop test + Bod-præsentationer' }, 'Simon': { count: 5, focus: 'FMS dashboard + Webshop Web UI start' } },
     workstreams: ['WS5','WS6','WS7','WS8','WS9','WS10','WS3']
   },
@@ -1383,7 +1383,7 @@ function renderCapacity() {
   html += '</div>';
   html += '<div class="metric" style="color:var(--red); font-weight:600">';
   html += '<span class="metric-label">Status:</span>';
-  html += '<span>Kritisk flaskehals</span>';
+  html += '<span>Delt QA: Jakob + Edwin + Simon (Mikkel overdrager)</span>';
   html += '</div>';
   html += '</div>';
 
@@ -1439,7 +1439,7 @@ function renderCapacity() {
   html += '<div class="risk-section">';
   html += '<h3>Risiko & Anbefalinger</h3>';
   html += '<div class="risk-item">Michael arbejder ti+to+½fre (2,5 dage/uge). Simon starter 1. april og overtager FMS, Webshop og B2B backend fra Sprint 5, hvilket reducerer Michaels load fra 54 → ~30 tickets.</div>';
-  html += '<div class="risk-item">Test-kø (82 tickets) overstiger Edwins kapacitet (19) markant — hele teamet (inkl. Simon fra Sprint 6) skal hjælpe med test</div>';
+  html += '<div class="risk-item">Test-kø (50 tickets) fordeles på Jakob, Edwin og Simon. Mikkel overdrager tests til dem. Samlet kapacitet ~50+ (fra Sprint 6) skal hjælpe med test</div>';
   html += '<div class="risk-item">Buffer ~89 tickets (efter 8 Festival Experience-stories er fordelt på Sprint 6-8). Fortsat god margin til backlog og uventede opgaver.</div>';
   html += '<div class="risk-item">Samlet vurdering: Aktiv pipeline (115) + nye app-features (~8) er realistisk med 6 devs. Swedbank færdig i Sprint 4 (Tony). Michael kan fokusere på arkitektur.</div>';
   html += '</div>';
@@ -1468,7 +1468,7 @@ function renderCapacity() {
   html += '<div style="background:var(--surface2);border-radius:8px;padding:16px;border-left:3px solid var(--red)">';
   html += '<div style="font-weight:700;margin-bottom:8px;color:var(--red)">Gap 3: QA / Test (Edwin)</div>';
   html += '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">Test-kø: <span style="color:var(--red);font-weight:700">82 tickets</span> vs kapacitet: 19</div>';
-  html += '<div style="font-size:12px;line-height:1.6">82 tickets venter på test allerede nu, og flere kommer fra dev. Edwin alene kan klare ~19 inden freeze. Der er brug for en dedikeret QA-ressource eller systematisk test-deling på tværs af teamet.</div>';
+  html += '<div style="font-size:12px;line-height:1.6">82 tickets venter på test allerede nu, og flere kommer fra dev. Test deles mellem Jakob, Edwin og Simon. Mikkel overdrager sine test-opgaver til de tre. Samlet QA-kapacitet ~50+ tickets inden freeze i stedet for Edwins 19 alene.</div>';
   html += '</div>';
 
   // Gap 4: Unassigned backlog
