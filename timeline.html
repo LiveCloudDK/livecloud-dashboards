@@ -634,7 +634,7 @@
 
   .mobile-tab {
     flex: 1;
-    padding: 10px 4px;
+    padding: 6px 4px;
     background: var(--surface);
     color: var(--text-muted);
     border: none;
@@ -688,7 +688,7 @@
   @media (max-width: 768px) {
     /* Hide desktop button filters, show dropdowns */
     .filters { display: none !important; }
-    .mobile-filters { display: flex !important; }
+    .mobile-filters { display: flex !important; position: fixed; bottom: 44px; left: 0; right: 0; z-index: 100; background: var(--surface); border-top: 1px solid var(--border); }
     .legend { display: none !important; }
 
     /* Compact header */
