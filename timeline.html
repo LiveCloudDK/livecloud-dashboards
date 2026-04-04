@@ -839,6 +839,8 @@ const tasks = [
   // === FASE 1: Sprint 4 (Mar 30 - Apr 13) ===
   // WS1 Onboarding
   { id:'ws1-scan', label:'Billet-scanning & aktivering (løsningsdesign)', ws:'1', persons:['jakob','mikkel','michael'], start:0, span:2, phase:'critical', jira:'LCAP-1076', deps:[], desc:'Stor kritisk opgave  -  løsning ikke afklaret endnu' },
+    { id:'ws4-simon-p1', label:'Simon onboarding: Quick wins (vendor API)', ws:'4', persons:['simon'], start:0, span:1, phase:'test', jira:'LCAP-1118', deps:[] },
+    { id:'ws4-simon-p2', label:'Simon: CRUD, exports, bulk ops', ws:'4', persons:['simon'], start:1, span:2, phase:'build', jira:'LCAP-1129', deps:['ws4-simon-p1'] },
   { id:'ws1-backend', label:'Onboarding backend (claim, delegate, transfer)', ws:'1', persons:['michael'], start:0, span:2, phase:'build', jira:'LCAP-1078,1079,989,990', deps:[] },
   { id:'ws1-app', label:'Onboarding app flows', ws:'1', persons:['mikkel'], start:0, span:2, phase:'build', jira:'LCAP-1071,1072,1073', deps:[] },
   { id:'ws1-ux', label:'Onboarding UX/UI (Jakob + Jay)', ws:'1', persons:['jakob'], start:0, span:1, phase:'build', jira:'', deps:[] },
