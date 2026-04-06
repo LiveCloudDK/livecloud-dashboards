@@ -1074,7 +1074,7 @@ function renderCurrentSprint() {
   const statusLabel = (cat) => cat === 'done' ? 'Done' : cat === 'indeterminate' ? 'I gang' : 'To do';
   const statusIcon = (cat) => cat === 'done' ? '\u2714' : cat === 'indeterminate' ? '\u25D4' : '\u25CB';
   const priSort = { 'Highest': 0, 'High': 1, 'Medium': 2, 'Low': 3, 'Lowest': 4 };
-  const catSort = { 'indeterminate': 0, 'new': 1, 'done': 2 };
+  const catSort = { 'indeterminate': 0, 'new': 1, 'done': 9 }; // done always last
   const priorityBadge = (p) => {
     if (p === 'Highest') return '<span style="color:#dc2626;font-weight:700" title="Highest">\u2191\u2191</span>';
     if (p === 'High') return '<span style="color:#ef4444" title="High">\u2191</span>';
@@ -1198,11 +1198,14 @@ function renderCurrentSprint() {
   for (const personName of sortedPeople) {
     const issues = byPerson[personName];
     const m = getMember(personName);
-    // Sort: in progress first, then by priority
+    // Sort: done last, then highest priority first, then in-progress before to-do
     issues.sort((a, b) => {
-      const cs = (catSort[a.statusCategory] || 9) - (catSort[b.statusCategory] || 9);
-      if (cs !== 0) return cs;
-      return (priSort[a.priority] || 9) - (priSort[b.priority] || 9);
+      const aDone = a.statusCategory === 'done' ? 1 : 0;
+      const bDone = b.statusCategory === 'done' ? 1 : 0;
+      if (aDone !== bDone) return aDone - bDone;
+      const ps = (priSort[a.priority] || 9) - (priSort[b.priority] || 9);
+      if (ps !== 0) return ps;
+      return (catSort[a.statusCategory] || 5) - (catSort[b.statusCategory] || 5);
     });
     const personDone = issues.filter(i => i.statusCategory === 'done').length;
     const personInProg = issues.filter(i => i.statusCategory === 'indeterminate').length;
@@ -1230,27 +1233,28 @@ function renderCurrentSprint() {
     h += '</div></div>';
 
     // Tasks list for this person
-    h += '<div style="padding:8px 12px">';
+    h += '<div style="padding:6px 10px">';
     for (const issue of issues) {
       const sc = statusColor(issue.statusCategory);
       const isDone = issue.statusCategory === 'done';
-      h += '<a href="' + jiraBase + issue.key + '" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:6px;text-decoration:none;transition:background 0.1s' + (isDone ? ';opacity:0.55' : '') + '" onmouseover="this.style.background=\'var(--bg)\'" onmouseout="this.style.background=\'transparent\'">';
-      // Status dot
-      h += '<span style="color:' + sc + ';font-size:14px;flex-shrink:0" title="' + statusLabel(issue.statusCategory) + '">' + statusIcon(issue.statusCategory) + '</span>';
+      const isHighPri = issue.priority === 'Highest' || issue.priority === 'High';
+      const priBg = issue.priority === 'Highest' ? '#dc262608' : issue.priority === 'High' ? '#ef444405' : 'transparent';
+      const priBorder = issue.priority === 'Highest' ? 'border-left:3px solid #dc2626' : issue.priority === 'High' ? 'border-left:3px solid #ef4444' : 'border-left:3px solid transparent';
+      h += '<a href="' + jiraBase + issue.key + '" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;padding:7px 10px;margin:2px 0;border-radius:6px;text-decoration:none;transition:background 0.1s;background:' + priBg + ';' + priBorder + (isDone ? ';opacity:0.45' : '') + '" onmouseover="this.style.background=\'var(--bg)\'" onmouseout="this.style.background=\'' + priBg + '\'">';
+      // Priority indicator
+      h += '<span style="min-width:20px;text-align:center;flex-shrink:0;font-size:13px">' + priorityBadge(issue.priority) + '</span>';
       // Key
-      h += '<span style="font-size:11px;color:var(--text-muted);min-width:75px;flex-shrink:0">' + issue.key + '</span>';
-      // Priority
-      h += '<span style="min-width:16px;text-align:center;flex-shrink:0">' + priorityBadge(issue.priority) + '</span>';
+      h += '<span style="font-size:11px;color:var(--text-muted);min-width:78px;flex-shrink:0;font-family:monospace">' + issue.key + '</span>';
       // Summary
-      h += '<span style="flex:1;font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis' + (isDone ? ';text-decoration:line-through' : '') + '">' + issue.summary + '</span>';
+      h += '<span style="flex:1;font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:' + (isHighPri && !isDone ? '500' : '400') + (isDone ? ';text-decoration:line-through' : '') + '">' + issue.summary + '</span>';
       // Labels
       if (issue.labels && issue.labels.length > 0) {
-        h += '<span style="display:flex;gap:4px;flex-shrink:0">';
+        h += '<span style="display:flex;gap:3px;flex-shrink:0">';
         for (const lbl of issue.labels) h += labelBadge(lbl);
         h += '</span>';
       }
-      // Status badge
-      h += '<span style="font-size:10px;padding:2px 8px;border-radius:4px;background:' + sc + '15;color:' + sc + ';white-space:nowrap;flex-shrink:0">' + (issue.status || statusLabel(issue.statusCategory)) + '</span>';
+      // Status badge — prominent
+      h += '<span style="font-size:10px;padding:2px 10px;border-radius:4px;background:' + sc + '18;color:' + sc + ';white-space:nowrap;flex-shrink:0;font-weight:600;min-width:60px;text-align:center">' + (issue.status || statusLabel(issue.statusCategory)) + '</span>';
       h += '</a>';
     }
     h += '</div></div>';
