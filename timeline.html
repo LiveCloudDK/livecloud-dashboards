@@ -1021,7 +1021,7 @@ let wsNames = {
         tasks = data.tasks || tasks;
         columns = data.columns || columns;
         wsNames = data.wsNames || wsNames;
-      if (data.sprint) window._sprintData = data.sprint;
+        if (data.sprint) window._sprintData = data.sprint;
         const genDate = new Date(data.generated);
         const dateStr = genDate.toLocaleDateString('da-DK', { day:'numeric', month:'long', year:'numeric' });
         const el = document.querySelector('.subtitle');
@@ -1972,8 +1972,8 @@ document.querySelectorAll('.view-btn').forEach(btn => {
   });
 });
 
-// Initial render
-render();
+// Initial data load + render
+loadTimelineData().then(() => { render(); });
 
 // Re-render dependencies on resize
 window.addEventListener('resize', () => { if (state.view === 'detail') renderDependencies(); });
