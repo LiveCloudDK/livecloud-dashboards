@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: '0 5-17 * * 1-5'
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['timeline.html', 'sync-jira-timeline.mjs', '.github/workflows/sync-timeline.yml']
 
 permissions:
   contents: write
