@@ -741,7 +741,7 @@
     <h1>LiveCloud <span>Roadmap</span></h1>
     <div class="header-meta">LiveCloud 2026  -  Marts til December</div>
   </div>
-  <div class="header-meta">Sidst opdateret: 4. april 2026</div>
+  <div class="header-meta" id="last-updated">Indlæser...</div>
 </div>
 
 <div class="filters">
@@ -1026,6 +1026,8 @@ let wsNames = {
         const dateStr = genDate.toLocaleDateString('da-DK', { day:'numeric', month:'long', year:'numeric' });
         const el = document.querySelector('.subtitle');
         if (el) el.textContent = 'Synkroniseret fra Jira: ' + dateStr;
+        const metaEl = document.getElementById('last-updated');
+        if (metaEl) metaEl.textContent = 'Sidst opdateret: ' + dateStr;
         console.log('Loaded ' + tasks.length + ' tasks from data.json (' + data.generated + ')');
       } catch (err) {
         console.warn('data.json not available, using fallback tasks:', err.message);
