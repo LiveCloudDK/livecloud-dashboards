@@ -828,14 +828,14 @@
 // ===== DATA =====
 // Weeks: 18 half-month columns from Mar H2 2026 to Dec H1 2026
 // Col 0 = Mar 16-31, Col 1 = Apr 1-15, Col 2 = Apr 16-30, ...
-const columns = [
+let columns = [
   'Mar H2','Apr H1','Apr H2','Maj H1','Maj H2','Jun H1','Jun H2','Jul H1','Jul H2','Aug H1',
   'Aug H2','Sep H1','Sep H2','Okt H1','Okt H2','Nov H1','Nov H2','Dec H1'
 ];
 // All 18 columns visible (full 2026 roadmap)
 const visibleCols = 18;
 
-const tasks = [
+let tasks = [
   // === FASE 1: Sprint 4 (Mar 30 - Apr 13) ===
   // WS1 Onboarding
   { id:'ws1-scan', label:'Billet-scanning & aktivering (løsningsdesign)', ws:'1', persons:['jakob','mikkel','michael'], start:0, span:2, phase:'critical', jira:'LCAP-1076', deps:[], desc:'Stor kritisk opgave  -  løsning ikke afklaret endnu' },
@@ -1005,10 +1005,31 @@ const capacityData = {
   }
 };
 
-const wsNames = {
+let wsNames = {
   '1':'Onboarding','2':'POS','3':'App','4':'Backend/FMS','5':'B2B',
   '6':'Webshop','7':'Personal','8':'POS API','9':'NFC/Wallet','10':'Gates','all':'Alle'
 };
+
+    // ── Jira Sync Data Loader ────────────────────────────────
+    async function loadTimelineData() {
+      try {
+        const cacheBust = Date.now();
+        const resp = await fetch('data.json?v=' + cacheBust);
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        const data = await resp.json();
+        tasks = data.tasks || tasks;
+        columns = data.columns || columns;
+        wsNames = data.wsNames || wsNames;
+        const genDate = new Date(data.generated);
+        const dateStr = genDate.toLocaleDateString('da-DK', { day:'numeric', month:'long', year:'numeric' });
+        const el = document.querySelector('.subtitle');
+        if (el) el.textContent = 'Synkroniseret fra Jira: ' + dateStr;
+        console.log('Loaded ' + tasks.length + ' tasks from data.json (' + data.generated + ')');
+      } catch (err) {
+        console.warn('data.json not available, using fallback tasks:', err.message);
+      }
+    }
+
 
 const wsColors = {
   '1':'#6366f1','2':'#f97316','3':'#06b6d4','4':'#3b82f6','5':'#22c55e',
@@ -1846,7 +1867,7 @@ window.addEventListener('resize', () => { if (state.view === 'detail') renderDep
     document.querySelectorAll(".desktop-select").forEach(sel => {
       sel.addEventListener("change", () => {
         state[sel.dataset.filter] = sel.value;
-        render();
+        loadTimelineData().then(() => { render(); });
       });
     });
   }
