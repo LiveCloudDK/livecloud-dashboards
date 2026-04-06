@@ -1056,210 +1056,157 @@ function renderCurrentSprint() {
   if (!sprint) {
     return '<div style="text-align:center;padding:60px 20px;color:var(--text-muted)">' +
       '<h2 style="color:var(--text);margin-bottom:12px">Ingen aktiv sprint</h2>' +
-      '<p>Sprint-data indlæses automatisk fra Jira når der er en aktiv sprint.</p>' +
-      '<p style="margin-top:8px;font-size:13px">Data synkroniseres hver time på hverdage (07-19 CET).</p></div>';
+      '<p>Sprint-data indl\u00e6ses automatisk fra Jira n\u00e5r der er en aktiv sprint.</p>' +
+      '<p style="margin-top:8px;font-size:13px">Data synkroniseres hver time p\u00e5 hverdage (07-19 CET).</p></div>';
   }
 
-  // ── Helpers ──
-  const teamMembers = {
-    'Jakob Højgård': { short: 'Jakob', color: '#f472b6', role: 'Product Owner' },
-    'Tony Dieu': { short: 'Tony', color: '#60a5fa', role: 'CTO / POS' },
-    'Michael Thuren': { short: 'Michael', color: '#34d399', role: 'Backend / Commerce' },
-    'Mikkel Kornval Christoffersen': { short: 'Mikkel', color: '#a78bfa', role: 'App UI' },
-    'Edwin Maldonado': { short: 'Edwin', color: '#fbbf24', role: 'App + Integration' },
-    'Simon Jensen': { short: 'Simon', color: '#fb923c', role: 'FMS / QA' }
+  // ── Team config ──
+  const team = {
+    'Tony Dieu':                      { n:'Tony',    c:'#60a5fa', r:'CTO / POS' },
+    'Michael Thuren':                 { n:'Michael', c:'#34d399', r:'Backend / Commerce' },
+    'Mikkel Kornval Christoffersen':  { n:'Mikkel',  c:'#a78bfa', r:'App UI' },
+    'Edwin Maldonado':                { n:'Edwin',   c:'#fbbf24', r:'App + Integration' },
+    'Simon Jensen':                   { n:'Simon',   c:'#fb923c', r:'FMS / QA' },
+    'Jakob H\u00f8jg\u00e5rd':       { n:'Jakob',   c:'#f472b6', r:'Product Owner' }
   };
-  const getMember = (name) => teamMembers[name] || { short: (name || 'Ukendt').split(' ')[0], color: '#6b7280', role: '' };
-  const statusColor = (cat) => cat === 'done' ? '#22c55e' : cat === 'indeterminate' ? '#3b82f6' : '#6b7280';
-  const statusLabel = (cat) => cat === 'done' ? 'Done' : cat === 'indeterminate' ? 'I gang' : 'To do';
-  const statusIcon = (cat) => cat === 'done' ? '\u2714' : cat === 'indeterminate' ? '\u25D4' : '\u25CB';
-  const priSort = { 'Highest': 0, 'High': 1, 'Medium': 2, 'Low': 3, 'Lowest': 4 };
-  const catSort = { 'indeterminate': 0, 'new': 1, 'done': 9 }; // done always last
-  const priorityBadge = (p) => {
-    if (p === 'Highest') return '<span style="color:#dc2626;font-weight:700" title="Highest">\u2191\u2191</span>';
-    if (p === 'High') return '<span style="color:#ef4444" title="High">\u2191</span>';
-    if (p === 'Low') return '<span style="color:#6b7280" title="Low">\u2193</span>';
-    if (p === 'Lowest') return '<span style="color:#9ca3af" title="Lowest">\u2193\u2193</span>';
-    return '';
-  };
-  const labelBadge = (lbl) => {
-    const lc = { app: '#a78bfa', pos: '#60a5fa', fms: '#34d399', commerce: '#fbbf24' };
-    const c = lc[lbl] || '#6b7280';
-    return '<span style="display:inline-block;padding:1px 7px;border-radius:4px;font-size:10px;font-weight:600;background:' + c + '20;color:' + c + ';border:1px solid ' + c + '33">' + lbl + '</span>';
-  };
+  const tm = (name) => team[name] || { n:(name||'?').split(' ')[0], c:'#6b7280', r:'' };
+  const pri = { Highest:0, High:1, Medium:2, Low:3, Lowest:4 };
+  const sCol = (c) => c==='done'?'#22c55e':c==='indeterminate'?'#3b82f6':'#6b7280';
 
-  // ── Group by status category ──
-  const groups = { 'new': [], 'indeterminate': [], 'done': [] };
-  for (const issue of sprint.issues) {
-    const cat = issue.statusCategory || 'new';
-    if (!groups[cat]) groups[cat] = [];
-    groups[cat].push(issue);
+  // ── Counts ──
+  let nDone=0, nProg=0, nTodo=0;
+  for (const i of sprint.issues) {
+    if (i.statusCategory==='done') nDone++; else if (i.statusCategory==='indeterminate') nProg++; else nTodo++;
   }
   const total = sprint.issues.length;
-  const done = groups.done.length;
-  const inProg = groups.indeterminate.length;
-  const toDo = groups.new.length;
-  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+  const pct = total>0 ? Math.round(nDone/total*100) : 0;
 
-  // ── Group by person ──
-  const byPerson = {};
-  for (const issue of sprint.issues) {
-    const name = issue.assignee || 'Unassigned';
-    if (!byPerson[name]) byPerson[name] = [];
-    byPerson[name].push(issue);
+  // ── Group by person, sort within ──
+  const byP = {};
+  for (const i of sprint.issues) { const k=i.assignee||'Unassigned'; (byP[k]=byP[k]||[]).push(i); }
+  const order = ['Tony Dieu','Michael Thuren','Mikkel Kornval Christoffersen','Edwin Maldonado','Simon Jensen','Jakob H\u00f8jg\u00e5rd'];
+  const people = order.filter(n=>byP[n]).concat(Object.keys(byP).filter(n=>!order.includes(n)));
+
+  // Sort each person: Highest first, done last
+  for (const p of people) {
+    byP[p].sort((a,b) => {
+      if ((a.statusCategory==='done')!==(b.statusCategory==='done')) return a.statusCategory==='done'?1:-1;
+      return (pri[a.priority]??9)-(pri[b.priority]??9);
+    });
   }
-  // Sort people: team order, then others
-  const teamOrder = ['Tony Dieu', 'Michael Thuren', 'Mikkel Kornval Christoffersen', 'Edwin Maldonado', 'Simon Jensen', 'Jakob Højgård'];
-  const sortedPeople = teamOrder.filter(n => byPerson[n]).concat(
-    Object.keys(byPerson).filter(n => !teamOrder.includes(n)).sort()
-  );
-
-  // ── Find key deliverables (Highest/High priority items not done) ──
-  const keyDeliverables = sprint.issues
-    .filter(i => (i.priority === 'Highest' || i.priority === 'High') && i.statusCategory !== 'done')
-    .sort((a, b) => (priSort[a.priority] || 9) - (priSort[b.priority] || 9));
 
   let h = '';
 
-  // ===== SPRINT HEADER =====
-  h += '<div style="margin-bottom:28px">';
-  h += '<div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:16px">';
+  // ===== COMPACT HEADER =====
+  h += '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:8px">';
   h += '<div>';
-  h += '<h2 style="color:var(--text);margin:0;font-size:22px;font-weight:700">' + sprint.name + '</h2>';
-  if (sprint.startDate || sprint.endDate) {
-    const fmt = (d) => d ? new Date(d).toLocaleDateString('da-DK', {day:'numeric',month:'short',year:'numeric'}) : '?';
-    h += '<p style="color:var(--text-muted);margin:4px 0 0;font-size:13px">' + fmt(sprint.startDate) + ' \u2013 ' + fmt(sprint.endDate) + '</p>';
-  }
+  h += '<h2 style="color:var(--text);margin:0;font-size:20px;font-weight:700">' + sprint.name + '</h2>';
+  const fmt = (d) => d ? new Date(d).toLocaleDateString('da-DK',{day:'numeric',month:'short'}) : '?';
+  h += '<span style="color:var(--text-muted);font-size:12px">' + fmt(sprint.startDate) + ' \u2013 ' + fmt(sprint.endDate) + '</span>';
   h += '</div>';
-  // Stats row
-  h += '<div style="display:flex;gap:12px;align-items:center">';
-  h += '<div style="text-align:center;padding:8px 14px;background:var(--surface);border-radius:8px;border:1px solid var(--border)"><div style="font-size:22px;font-weight:700;color:var(--text)">' + total + '</div><div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Total</div></div>';
-  h += '<div style="text-align:center;padding:8px 14px;background:#3b82f610;border-radius:8px;border:1px solid #3b82f633"><div style="font-size:22px;font-weight:700;color:#3b82f6">' + inProg + '</div><div style="font-size:10px;color:#3b82f6;text-transform:uppercase;letter-spacing:0.5px">I gang</div></div>';
-  h += '<div style="text-align:center;padding:8px 14px;background:#22c55e10;border-radius:8px;border:1px solid #22c55e33"><div style="font-size:22px;font-weight:700;color:#22c55e">' + done + '</div><div style="font-size:10px;color:#22c55e;text-transform:uppercase;letter-spacing:0.5px">F\u00e6rdig</div></div>';
-  h += '<div style="text-align:center;padding:8px 14px;background:var(--surface);border-radius:8px;border:1px solid var(--border)"><div style="font-size:22px;font-weight:700;color:var(--accent)">' + pct + '%</div><div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Done</div></div>';
-  h += '</div></div>';
-  // Progress bar
-  const donePct = total > 0 ? (done/total*100) : 0;
-  const progPct = total > 0 ? (inProg/total*100) : 0;
-  h += '<div style="height:8px;background:var(--surface);border-radius:4px;overflow:hidden;display:flex">';
-  h += '<div style="width:' + donePct + '%;background:#22c55e;transition:width 0.3s"></div>';
-  h += '<div style="width:' + progPct + '%;background:#3b82f6;transition:width 0.3s"></div>';
-  h += '</div>';
-  // Sprint goal
-  if (sprint.goal) {
-    h += '<div style="margin-top:12px;padding:10px 14px;background:var(--accent)08;border-left:3px solid var(--accent);border-radius:0 6px 6px 0;font-size:13px;color:var(--text-muted);line-height:1.5">';
-    h += '<strong style="color:var(--text)">Sprint m\u00e5l:</strong> ' + sprint.goal + '</div>';
-  }
-  h += '</div>';
+  h += '<div style="display:flex;gap:8px;font-size:12px;align-items:center">';
+  h += '<span style="color:var(--text)">' + total + ' opgaver</span>';
+  h += '<span style="color:#3b82f6;font-weight:600">' + nProg + ' i gang</span>';
+  h += '<span style="color:#22c55e;font-weight:600">' + nDone + ' done</span>';
+  h += '<span style="color:var(--text-muted)">' + pct + '%</span>';
+  h += '<div style="width:80px;height:5px;background:var(--surface);border-radius:3px;overflow:hidden;display:flex">';
+  h += '<div style="width:' + (total>0?nDone/total*100:0) + '%;background:#22c55e"></div>';
+  h += '<div style="width:' + (total>0?nProg/total*100:0) + '%;background:#3b82f6"></div>';
+  h += '</div></div></div>';
 
-  // ===== BOARD QUICK-LINKS =====
-  h += '<div style="display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap">';
-  h += '<span style="color:var(--text-muted);font-size:13px;line-height:32px;margin-right:4px">Boards:</span>';
+  // Sprint goal — one line
+  if (sprint.goal) {
+    h += '<div style="padding:6px 12px;margin-bottom:12px;background:var(--surface);border-radius:6px;font-size:12px;color:var(--text-muted);line-height:1.4;border:1px solid var(--border)">';
+    h += '<strong style="color:var(--text)">M\u00e5l:</strong> ' + sprint.goal + '</div>';
+  }
+
+  // Board links — inline
+  h += '<div style="display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;align-items:center">';
   const boards = [
-    { name: 'APP', url: 'https://u-ii-u.atlassian.net/jira/software/c/projects/LCAP/boards/202', color: '#a78bfa' },
-    { name: 'POS', url: 'https://u-ii-u.atlassian.net/jira/software/c/projects/LCAP/boards/203', color: '#60a5fa' },
-    { name: 'FMS + Commerce', url: 'https://u-ii-u.atlassian.net/jira/software/c/projects/LCAP/boards/204', color: '#34d399' },
-    { name: 'QA & Test', url: 'https://u-ii-u.atlassian.net/jira/software/c/projects/LCAP/boards/205', color: '#fbbf24' },
+    {n:'APP',u:'https://u-ii-u.atlassian.net/jira/software/c/projects/LCAP/boards/202',c:'#a78bfa'},
+    {n:'POS',u:'https://u-ii-u.atlassian.net/jira/software/c/projects/LCAP/boards/203',c:'#60a5fa'},
+    {n:'FMS+Commerce',u:'https://u-ii-u.atlassian.net/jira/software/c/projects/LCAP/boards/204',c:'#34d399'},
+    {n:'QA&Test',u:'https://u-ii-u.atlassian.net/jira/software/c/projects/LCAP/boards/205',c:'#fbbf24'}
   ];
   for (const b of boards) {
-    h += '<a href="' + b.url + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:4px 14px;border-radius:6px;background:' + b.color + '18;border:1px solid ' + b.color + '44;color:' + b.color + ';font-size:13px;font-weight:600;text-decoration:none;transition:all 0.15s" onmouseover="this.style.background=\'' + b.color + '30\'" onmouseout="this.style.background=\'' + b.color + '18\'">' + b.name + ' \u2197</a>';
+    h += '<a href="'+b.u+'" target="_blank" style="padding:2px 10px;border-radius:4px;font-size:11px;font-weight:600;background:'+b.c+'15;color:'+b.c+';text-decoration:none;border:1px solid '+b.c+'30">'+b.n+'</a>';
   }
   h += '</div>';
 
-  // ===== KEY DELIVERABLES =====
-  if (keyDeliverables.length > 0) {
-    h += '<div style="margin-bottom:28px">';
-    h += '<h3 style="color:var(--text);font-size:15px;font-weight:600;margin:0 0 12px;display:flex;align-items:center;gap:8px">';
-    h += '<span style="color:#ef4444">\u25CF</span> Vigtige leverancer denne sprint</h3>';
-    h += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px">';
-    for (const issue of keyDeliverables) {
-      const m = getMember(issue.assignee);
-      const sc = statusColor(issue.statusCategory);
-      h += '<a href="' + jiraBase + issue.key + '" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-left:3px solid ' + sc + ';border-radius:6px;text-decoration:none;transition:border-color 0.15s" onmouseover="this.style.borderColor=\'' + sc + '\'" onmouseout="this.style.borderLeftColor=\'' + sc + '\';this.style.borderRightColor=\'var(--border)\';this.style.borderTopColor=\'var(--border)\';this.style.borderBottomColor=\'var(--border)\'">';
-      h += '<div style="flex:1;min-width:0">';
-      h += '<div style="display:flex;align-items:center;gap:6px;margin-bottom:2px">';
-      h += '<span style="font-size:11px;color:var(--text-muted)">' + issue.key + '</span>';
-      h += priorityBadge(issue.priority);
-      h += '<span style="font-size:10px;padding:1px 6px;border-radius:3px;background:' + sc + '18;color:' + sc + '">' + statusLabel(issue.statusCategory) + '</span>';
-      h += '</div>';
-      h += '<div style="color:var(--text);font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + issue.summary + '</div>';
-      h += '</div>';
-      h += '<div style="width:26px;height:26px;border-radius:50%;background:' + m.color + ';display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0" title="' + (issue.assignee || 'Unassigned') + '">' + m.short.charAt(0) + '</div>';
-      h += '</a>';
-    }
-    h += '</div></div>';
-  }
+  // ===== PER-PERSON SECTIONS =====
+  for (const personName of people) {
+    const issues = byP[personName];
+    const m = tm(personName);
+    const pDone = issues.filter(i=>i.statusCategory==='done').length;
+    const pProg = issues.filter(i=>i.statusCategory==='indeterminate').length;
+    const active = issues.filter(i=>i.statusCategory!=='done');
+    const done = issues.filter(i=>i.statusCategory==='done');
 
-  // ===== TEAM SCHEDULE — rows per person =====
-  h += '<div style="margin-bottom:16px">';
-  h += '<h3 style="color:var(--text);font-size:15px;font-weight:600;margin:0 0 16px;display:flex;align-items:center;gap:8px">';
-  h += '<span style="color:var(--accent)">\u25A0</span> Team oversigt</h3>';
+    // Person row header
+    h += '<div style="margin-bottom:14px">';
+    h += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">';
+    h += '<div style="width:28px;height:28px;border-radius:50%;background:'+m.c+';display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff">'+m.n.charAt(0)+'</div>';
+    h += '<span style="font-weight:600;font-size:14px;color:var(--text)">'+m.n+'</span>';
+    h += '<span style="font-size:11px;color:var(--text-muted)">'+m.r+'</span>';
+    h += '<span style="margin-left:auto;font-size:11px;color:var(--text-muted)">';
+    if (pProg>0) h += '<span style="color:#3b82f6;font-weight:600">'+pProg+' i gang</span> ';
+    h += (active.length-pProg)+' to do';
+    if (pDone>0) h += ' · <span style="color:#22c55e">'+pDone+' done</span>';
+    h += '</span></div>';
 
-  for (const personName of sortedPeople) {
-    const issues = byPerson[personName];
-    const m = getMember(personName);
-    // Sort: done last, then highest priority first, then in-progress before to-do
-    issues.sort((a, b) => {
-      const aDone = a.statusCategory === 'done' ? 1 : 0;
-      const bDone = b.statusCategory === 'done' ? 1 : 0;
-      if (aDone !== bDone) return aDone - bDone;
-      const ps = (priSort[a.priority] || 9) - (priSort[b.priority] || 9);
-      if (ps !== 0) return ps;
-      return (catSort[a.statusCategory] || 5) - (catSort[b.statusCategory] || 5);
-    });
-    const personDone = issues.filter(i => i.statusCategory === 'done').length;
-    const personInProg = issues.filter(i => i.statusCategory === 'indeterminate').length;
-    const personTodo = issues.filter(i => i.statusCategory === 'new').length;
-    const personPct = issues.length > 0 ? Math.round((personDone / issues.length) * 100) : 0;
+    // ── Task table ──
+    h += '<div style="border:1px solid var(--border);border-radius:8px;overflow:hidden">';
 
-    h += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden">';
-    // Person header
-    h += '<div style="display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border);background:' + m.color + '06">';
-    h += '<div style="width:36px;height:36px;border-radius:50%;background:' + m.color + ';display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff">' + m.short.charAt(0) + '</div>';
-    h += '<div style="flex:1">';
-    h += '<div style="color:var(--text);font-weight:600;font-size:14px">' + m.short + '</div>';
-    if (m.role) h += '<div style="color:var(--text-muted);font-size:11px">' + m.role + '</div>';
-    h += '</div>';
-    // Mini progress for this person
-    h += '<div style="display:flex;gap:10px;align-items:center;font-size:12px">';
-    if (personInProg > 0) h += '<span style="color:#3b82f6;font-weight:600">' + personInProg + ' i gang</span>';
-    if (personTodo > 0) h += '<span style="color:#6b7280">' + personTodo + ' to do</span>';
-    if (personDone > 0) h += '<span style="color:#22c55e">' + personDone + ' done</span>';
-    // Mini bar
-    h += '<div style="width:60px;height:4px;background:var(--border);border-radius:2px;overflow:hidden;display:flex">';
-    h += '<div style="width:' + (issues.length > 0 ? (personDone/issues.length*100) : 0) + '%;background:#22c55e"></div>';
-    h += '<div style="width:' + (issues.length > 0 ? (personInProg/issues.length*100) : 0) + '%;background:#3b82f6"></div>';
-    h += '</div>';
-    h += '</div></div>';
+    // Active tasks first (sorted by priority)
+    for (let idx=0; idx<active.length; idx++) {
+      const i = active[idx];
+      const isTop = i.priority==='Highest'||i.priority==='High';
+      const sc = sCol(i.statusCategory);
+      const bg = i.priority==='Highest'?'#dc262606':i.priority==='High'?'#ef444404':'transparent';
+      const border = idx<active.length-1||done.length>0 ? 'border-bottom:1px solid var(--border);':'';
 
-    // Tasks list for this person
-    h += '<div style="padding:6px 10px">';
-    for (const issue of issues) {
-      const sc = statusColor(issue.statusCategory);
-      const isDone = issue.statusCategory === 'done';
-      const isHighPri = issue.priority === 'Highest' || issue.priority === 'High';
-      const priBg = issue.priority === 'Highest' ? '#dc262608' : issue.priority === 'High' ? '#ef444405' : 'transparent';
-      const priBorder = issue.priority === 'Highest' ? 'border-left:3px solid #dc2626' : issue.priority === 'High' ? 'border-left:3px solid #ef4444' : 'border-left:3px solid transparent';
-      h += '<a href="' + jiraBase + issue.key + '" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;padding:7px 10px;margin:2px 0;border-radius:6px;text-decoration:none;transition:background 0.1s;background:' + priBg + ';' + priBorder + (isDone ? ';opacity:0.45' : '') + '" onmouseover="this.style.background=\'var(--bg)\'" onmouseout="this.style.background=\'' + priBg + '\'">';
-      // Priority indicator
-      h += '<span style="min-width:20px;text-align:center;flex-shrink:0;font-size:13px">' + priorityBadge(issue.priority) + '</span>';
-      // Key
-      h += '<span style="font-size:11px;color:var(--text-muted);min-width:78px;flex-shrink:0;font-family:monospace">' + issue.key + '</span>';
-      // Summary
-      h += '<span style="flex:1;font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:' + (isHighPri && !isDone ? '500' : '400') + (isDone ? ';text-decoration:line-through' : '') + '">' + issue.summary + '</span>';
-      // Labels
-      if (issue.labels && issue.labels.length > 0) {
-        h += '<span style="display:flex;gap:3px;flex-shrink:0">';
-        for (const lbl of issue.labels) h += labelBadge(lbl);
-        h += '</span>';
+      h += '<a href="'+jiraBase+i.key+'" target="_blank" style="display:grid;grid-template-columns:22px 80px 1fr auto auto;align-items:center;gap:8px;padding:6px 12px;text-decoration:none;background:'+bg+';'+border+'transition:background 0.1s" onmouseover="this.style.background=\'var(--surface)\'" onmouseout="this.style.background=\''+bg+'\'">';
+
+      // Col 1: Priority arrow
+      if (i.priority==='Highest') h += '<span style="color:#dc2626;font-weight:700;font-size:13px;text-align:center">\u2191\u2191</span>';
+      else if (i.priority==='High') h += '<span style="color:#ef4444;font-size:13px;text-align:center">\u2191</span>';
+      else h += '<span style="color:#9ca3af;font-size:11px;text-align:center">\u2013</span>';
+
+      // Col 2: Jira key
+      h += '<span style="font-size:11px;color:var(--text-muted);font-family:monospace">'+i.key+'</span>';
+
+      // Col 3: Summary
+      h += '<span style="font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:'+(isTop?'600':'400')+'">'+i.summary+'</span>';
+
+      // Col 4: Labels
+      h += '<span style="display:flex;gap:3px">';
+      if (i.labels) for (const l of i.labels) {
+        const lc={app:'#a78bfa',pos:'#60a5fa',fms:'#34d399',commerce:'#fbbf24'}[l]||'#6b7280';
+        h += '<span style="font-size:9px;padding:1px 5px;border-radius:3px;background:'+lc+'18;color:'+lc+';font-weight:600">'+l+'</span>';
       }
-      // Status badge — prominent
-      h += '<span style="font-size:10px;padding:2px 10px;border-radius:4px;background:' + sc + '18;color:' + sc + ';white-space:nowrap;flex-shrink:0;font-weight:600;min-width:60px;text-align:center">' + (issue.status || statusLabel(issue.statusCategory)) + '</span>';
+      h += '</span>';
+
+      // Col 5: Status
+      h += '<span style="font-size:10px;padding:2px 8px;border-radius:4px;background:'+sc+'18;color:'+sc+';font-weight:600;min-width:55px;text-align:center;white-space:nowrap">'+(i.status||'To do')+'</span>';
+
       h += '</a>';
     }
+
+    // Done tasks — collapsed, dimmed
+    for (let idx=0; idx<done.length; idx++) {
+      const i = done[idx];
+      const border = idx<done.length-1?'border-bottom:1px solid var(--border);':'';
+      h += '<a href="'+jiraBase+i.key+'" target="_blank" style="display:grid;grid-template-columns:22px 80px 1fr auto auto;align-items:center;gap:8px;padding:4px 12px;text-decoration:none;opacity:0.4;'+border+'transition:opacity 0.1s" onmouseover="this.style.opacity=\'0.7\'" onmouseout="this.style.opacity=\'0.4\'">';
+      h += '<span style="color:#22c55e;font-size:12px;text-align:center">\u2714</span>';
+      h += '<span style="font-size:10px;color:var(--text-muted);font-family:monospace">'+i.key+'</span>';
+      h += '<span style="font-size:12px;color:var(--text-muted);text-decoration:line-through;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+i.summary+'</span>';
+      h += '<span></span>';
+      h += '<span style="font-size:9px;padding:1px 6px;border-radius:3px;background:#22c55e18;color:#22c55e;font-weight:600">Done</span>';
+      h += '</a>';
+    }
+
     h += '</div></div>';
   }
-  h += '</div>';
 
   return h;
 }
