@@ -787,6 +787,7 @@
     <button class="filter-btn view-btn" data-view="overview">Overordnet</button>
     <button class="filter-btn view-btn" data-view="sprints">Sprints</button>
     <button class="filter-btn view-btn" data-view="capacity">Kapacitet</button>
+    <button class="filter-btn view-btn" data-view="current-sprint">Current Sprint</button>
   </div>
 </div>
 
@@ -1020,6 +1021,7 @@ let wsNames = {
         tasks = data.tasks || tasks;
         columns = data.columns || columns;
         wsNames = data.wsNames || wsNames;
+      if (data.sprint) window._sprintData = data.sprint;
         const genDate = new Date(data.generated);
         const dateStr = genDate.toLocaleDateString('da-DK', { day:'numeric', month:'long', year:'numeric' });
         const el = document.querySelector('.subtitle');
@@ -1043,6 +1045,131 @@ const personColors = {
 // ===== RENDER =====
 const state = { ws: 'all', person: 'all', phase: 'all', view: 'detail' };
 
+
+// ── Current Sprint View ────────────────────────────────────────
+function renderCurrentSprint() {
+  const sprint = window._sprintData;
+  const jiraBase = 'https://u-ii-u.atlassian.net/browse/';
+  
+  if (!sprint) {
+    return '<div style="text-align:center;padding:60px 20px;color:var(--text-muted)">' +
+      '<h2 style="color:var(--text);margin-bottom:12px">Ingen aktiv sprint</h2>' +
+      '<p>Sprint-data indlæses automatisk fra Jira når der er en aktiv sprint.</p>' +
+      '<p style="margin-top:8px;font-size:13px">Data synkroniseres hver time på hverdage (07-19 CET).</p></div>';
+  }
+
+  // Group issues by statusCategory
+  const groups = { 'new': [], 'indeterminate': [], 'done': [] };
+  for (const issue of sprint.issues) {
+    const cat = issue.statusCategory || 'new';
+    if (!groups[cat]) groups[cat] = [];
+    groups[cat].push(issue);
+  }
+
+  const columnConfig = [
+    { key: 'new', label: 'To Do', color: '#6b7280', icon: '○' },
+    { key: 'indeterminate', label: 'In Progress', color: '#3b82f6', icon: '◔' },
+    { key: 'done', label: 'Done', color: '#22c55e', icon: '✔' }
+  ];
+
+  const personColors = {
+    'jakob': '#f472b6', 'tony': '#60a5fa', 'michael': '#34d399',
+    'mikkel': '#a78bfa', 'edwin': '#fbbf24', 'simon': '#fb923c'
+  };
+
+  const priorityIcon = (p) => {
+    if (!p) return '';
+    if (p === 'Highest' || p === 'High') return '<span style="color:#ef4444">↑</span>';
+    if (p === 'Low' || p === 'Lowest') return '<span style="color:#6b7280">↓</span>';
+    return '';
+  };
+
+  // Sprint header
+  let h = '<div style="margin-bottom:24px">';
+  h += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:12px">';
+  h += '<div>';
+  h += '<h2 style="color:var(--text);margin:0;font-size:20px">' + sprint.name + '</h2>';
+  if (sprint.startDate || sprint.endDate) {
+    const fmt = (d) => d ? new Date(d).toLocaleDateString('da-DK', {day:'numeric',month:'short'}) : '?';
+    h += '<p style="color:var(--text-muted);margin:4px 0 0;font-size:13px">' + fmt(sprint.startDate) + ' \u2013 ' + fmt(sprint.endDate) + '</p>';
+  }
+  h += '</div>';
+  // Stats
+  const total = sprint.issues.length;
+  const done = groups.done.length;
+  const inProg = groups.indeterminate.length;
+  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+  h += '<div style="display:flex;gap:16px;align-items:center">';
+  h += '<div style="text-align:center"><div style="font-size:24px;font-weight:700;color:var(--text)">' + total + '</div><div style="font-size:11px;color:var(--text-muted)">Total</div></div>';
+  h += '<div style="text-align:center"><div style="font-size:24px;font-weight:700;color:#3b82f6">' + inProg + '</div><div style="font-size:11px;color:var(--text-muted)">I gang</div></div>';
+  h += '<div style="text-align:center"><div style="font-size:24px;font-weight:700;color:#22c55e">' + done + '</div><div style="font-size:11px;color:var(--text-muted)">F\u00e6rdig</div></div>';
+  h += '<div style="text-align:center"><div style="font-size:24px;font-weight:700;color:var(--text)">' + pct + '%</div><div style="font-size:11px;color:var(--text-muted)">Completed</div></div>';
+  h += '</div></div>';
+  // Progress bar
+  const donePct = total > 0 ? (done/total*100) : 0;
+  const progPct = total > 0 ? (inProg/total*100) : 0;
+  h += '<div style="height:6px;background:var(--surface);border-radius:3px;overflow:hidden;display:flex">';
+  h += '<div style="width:' + donePct + '%;background:#22c55e"></div>';
+  h += '<div style="width:' + progPct + '%;background:#3b82f6"></div>';
+  h += '</div></div>';
+
+  
+  // Domain board quick-links
+  h += '<div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap">';
+  h += '<span style="color:var(--text-muted);font-size:13px;line-height:32px;margin-right:4px">Boards:</span>';
+  const boards = [
+    { name: 'APP', url: 'https://u-ii-u.atlassian.net/jira/software/c/projects/LCAP/boards/202', color: '#a78bfa' },
+    { name: 'POS', url: 'https://u-ii-u.atlassian.net/jira/software/c/projects/LCAP/boards/203', color: '#60a5fa' },
+    { name: 'FMS + Commerce', url: 'https://u-ii-u.atlassian.net/jira/software/c/projects/LCAP/boards/204', color: '#34d399' },
+    { name: 'QA & Test', url: 'https://u-ii-u.atlassian.net/jira/software/c/projects/LCAP/boards/205', color: '#fbbf24' },
+  ];
+  for (const b of boards) {
+    h += '<a href="' + b.url + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:4px 14px;border-radius:6px;background:' + b.color + '18;border:1px solid ' + b.color + '44;color:' + b.color + ';font-size:13px;font-weight:600;text-decoration:none;transition:all 0.15s" onmouseover="this.style.background=\'' + b.color + '30\'" onmouseout="this.style.background=\'' + b.color + '18\'">' + b.name + ' \u2197</a>';
+  }
+  h += '</div>';
+
+  // Kanban columns
+  h += '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;min-height:400px">';
+  for (const col of columnConfig) {
+    const issues = groups[col.key] || [];
+    h += '<div style="background:var(--surface);border-radius:12px;padding:16px;border:1px solid var(--border)">';
+    h += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)">';
+    h += '<span style="font-size:16px">' + col.icon + '</span>';
+    h += '<span style="font-weight:600;color:var(--text)">' + col.label + '</span>';
+    h += '<span style="background:' + col.color + '22;color:' + col.color + ';font-size:12px;font-weight:600;padding:2px 8px;border-radius:10px">' + issues.length + '</span>';
+    h += '</div>';
+    
+    for (const issue of issues) {
+      const pc = issue.assignee ? (personColors[issue.assignee] || '#888') : '#555';
+      h += '<a href="' + jiraBase + issue.key + '" target="_blank" rel="noopener" style="display:block;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:8px;text-decoration:none;transition:border-color 0.15s;cursor:pointer" onmouseover="this.style.borderColor=\'' + col.color + '\'" onmouseout="this.style.borderColor=\'var(--border)\'">';
+      h += '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">';
+      h += '<div style="flex:1;min-width:0">';
+      h += '<div style="font-size:11px;color:var(--text-muted);margin-bottom:4px">' + issue.key + ' ' + priorityIcon(issue.priority) + '</div>';
+      h += '<div style="color:var(--text);font-size:13px;line-height:1.4;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">' + issue.summary + '</div>';
+      h += '</div>';
+      if (issue.assignee) {
+        h += '<div style="width:28px;height:28px;border-radius:50%;background:' + pc + ';display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff;flex-shrink:0" title="' + issue.assignee + '">' + issue.assignee.charAt(0).toUpperCase() + '</div>';
+      }
+      h += '</div>';
+      if (issue.status && issue.status !== col.label) {
+        h += '<div style="margin-top:6px;font-size:11px;color:var(--text-muted)">' + issue.status + '</div>';
+      }
+      if (issue.type) {
+        const typeIcon = issue.type === 'Bug' ? '🐛' : issue.type === 'Story' ? '📖' : issue.type === 'Task' ? '☑' : '🔹';
+        h += '<div style="margin-top:4px;font-size:11px;color:var(--text-muted)">' + typeIcon + ' ' + issue.type + '</div>';
+      }
+      h += '</a>';
+    }
+    
+    if (issues.length === 0) {
+      h += '<div style="text-align:center;padding:24px;color:var(--text-muted);font-size:13px">Ingen opgaver</div>';
+    }
+    h += '</div>';
+  }
+  h += '</div>';
+  return h;
+}
+
 function render() {
   const tl = document.getElementById('timeline');
   const legend = document.getElementById('legend');
@@ -1056,6 +1183,10 @@ function render() {
   } else if (state.view === 'sprints') {
     legend.style.display = 'none';
     html = renderSprints();
+    tl.innerHTML = html;
+  } else if (state.view === 'current-sprint') {
+    legend.style.display = 'none';
+    html = renderCurrentSprint();
     tl.innerHTML = html;
   } else {
     legend.style.display = 'flex';
@@ -1341,7 +1472,7 @@ function renderSprints() {
 
       const pColors = { 'michael':'var(--blue)', 'tony':'var(--orange)', 'mikkel':'var(--cyan)', 'jakob':'var(--accent)', 'edwin':'var(--green)', 'simon':'#10b981' };
       const pNames = { 'michael':'Michael', 'tony':'Tony', 'mikkel':'Mikkel', 'jakob':'Jakob', 'edwin':'Edwin', 'simon':'Simon' };
-      const jiraBase = 'https://livecloud-platform.atlassian.net/browse/';
+      const jiraBase = 'https://u-ii-u.atlassian.net/browse/';
 
       for (const [person, ptasks] of Object.entries(sprintTasks)) {
         if (ptasks.length === 0) continue;
