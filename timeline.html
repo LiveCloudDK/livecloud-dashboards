@@ -1052,7 +1052,7 @@ const state = { ws: 'all', person: 'all', phase: 'all', view: 'detail' };
 function renderCurrentSprint() {
   const sprint = window._sprintData;
   const jiraBase = 'https://u-ii-u.atlassian.net/browse/';
-  
+
   if (!sprint) {
     return '<div style="text-align:center;padding:60px 20px;color:var(--text-muted)">' +
       '<h2 style="color:var(--text);margin-bottom:12px">Ingen aktiv sprint</h2>' +
@@ -1060,64 +1060,100 @@ function renderCurrentSprint() {
       '<p style="margin-top:8px;font-size:13px">Data synkroniseres hver time på hverdage (07-19 CET).</p></div>';
   }
 
-  // Group issues by statusCategory
+  // ── Helpers ──
+  const teamMembers = {
+    'Jakob Højgård': { short: 'Jakob', color: '#f472b6', role: 'Product Owner' },
+    'Tony Dieu': { short: 'Tony', color: '#60a5fa', role: 'CTO / POS' },
+    'Michael Thuren': { short: 'Michael', color: '#34d399', role: 'Backend / Commerce' },
+    'Mikkel Kornval Christoffersen': { short: 'Mikkel', color: '#a78bfa', role: 'App UI' },
+    'Edwin Maldonado': { short: 'Edwin', color: '#fbbf24', role: 'App + Integration' },
+    'Simon Jensen': { short: 'Simon', color: '#fb923c', role: 'FMS / QA' }
+  };
+  const getMember = (name) => teamMembers[name] || { short: (name || 'Ukendt').split(' ')[0], color: '#6b7280', role: '' };
+  const statusColor = (cat) => cat === 'done' ? '#22c55e' : cat === 'indeterminate' ? '#3b82f6' : '#6b7280';
+  const statusLabel = (cat) => cat === 'done' ? 'Done' : cat === 'indeterminate' ? 'I gang' : 'To do';
+  const statusIcon = (cat) => cat === 'done' ? '\u2714' : cat === 'indeterminate' ? '\u25D4' : '\u25CB';
+  const priSort = { 'Highest': 0, 'High': 1, 'Medium': 2, 'Low': 3, 'Lowest': 4 };
+  const catSort = { 'indeterminate': 0, 'new': 1, 'done': 2 };
+  const priorityBadge = (p) => {
+    if (p === 'Highest') return '<span style="color:#dc2626;font-weight:700" title="Highest">\u2191\u2191</span>';
+    if (p === 'High') return '<span style="color:#ef4444" title="High">\u2191</span>';
+    if (p === 'Low') return '<span style="color:#6b7280" title="Low">\u2193</span>';
+    if (p === 'Lowest') return '<span style="color:#9ca3af" title="Lowest">\u2193\u2193</span>';
+    return '';
+  };
+  const labelBadge = (lbl) => {
+    const lc = { app: '#a78bfa', pos: '#60a5fa', fms: '#34d399', commerce: '#fbbf24' };
+    const c = lc[lbl] || '#6b7280';
+    return '<span style="display:inline-block;padding:1px 7px;border-radius:4px;font-size:10px;font-weight:600;background:' + c + '20;color:' + c + ';border:1px solid ' + c + '33">' + lbl + '</span>';
+  };
+
+  // ── Group by status category ──
   const groups = { 'new': [], 'indeterminate': [], 'done': [] };
   for (const issue of sprint.issues) {
     const cat = issue.statusCategory || 'new';
     if (!groups[cat]) groups[cat] = [];
     groups[cat].push(issue);
   }
-
-  const columnConfig = [
-    { key: 'new', label: 'To Do', color: '#6b7280', icon: '○' },
-    { key: 'indeterminate', label: 'In Progress', color: '#3b82f6', icon: '◔' },
-    { key: 'done', label: 'Done', color: '#22c55e', icon: '✔' }
-  ];
-
-  const personColors = {
-    'jakob': '#f472b6', 'tony': '#60a5fa', 'michael': '#34d399',
-    'mikkel': '#a78bfa', 'edwin': '#fbbf24', 'simon': '#fb923c'
-  };
-
-  const priorityIcon = (p) => {
-    if (!p) return '';
-    if (p === 'Highest' || p === 'High') return '<span style="color:#ef4444">↑</span>';
-    if (p === 'Low' || p === 'Lowest') return '<span style="color:#6b7280">↓</span>';
-    return '';
-  };
-
-  // Sprint header
-  let h = '<div style="margin-bottom:24px">';
-  h += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:12px">';
-  h += '<div>';
-  h += '<h2 style="color:var(--text);margin:0;font-size:20px">' + sprint.name + '</h2>';
-  if (sprint.startDate || sprint.endDate) {
-    const fmt = (d) => d ? new Date(d).toLocaleDateString('da-DK', {day:'numeric',month:'short'}) : '?';
-    h += '<p style="color:var(--text-muted);margin:4px 0 0;font-size:13px">' + fmt(sprint.startDate) + ' \u2013 ' + fmt(sprint.endDate) + '</p>';
-  }
-  h += '</div>';
-  // Stats
   const total = sprint.issues.length;
   const done = groups.done.length;
   const inProg = groups.indeterminate.length;
+  const toDo = groups.new.length;
   const pct = total > 0 ? Math.round((done / total) * 100) : 0;
-  h += '<div style="display:flex;gap:16px;align-items:center">';
-  h += '<div style="text-align:center"><div style="font-size:24px;font-weight:700;color:var(--text)">' + total + '</div><div style="font-size:11px;color:var(--text-muted)">Total</div></div>';
-  h += '<div style="text-align:center"><div style="font-size:24px;font-weight:700;color:#3b82f6">' + inProg + '</div><div style="font-size:11px;color:var(--text-muted)">I gang</div></div>';
-  h += '<div style="text-align:center"><div style="font-size:24px;font-weight:700;color:#22c55e">' + done + '</div><div style="font-size:11px;color:var(--text-muted)">F\u00e6rdig</div></div>';
-  h += '<div style="text-align:center"><div style="font-size:24px;font-weight:700;color:var(--text)">' + pct + '%</div><div style="font-size:11px;color:var(--text-muted)">Completed</div></div>';
+
+  // ── Group by person ──
+  const byPerson = {};
+  for (const issue of sprint.issues) {
+    const name = issue.assignee || 'Unassigned';
+    if (!byPerson[name]) byPerson[name] = [];
+    byPerson[name].push(issue);
+  }
+  // Sort people: team order, then others
+  const teamOrder = ['Tony Dieu', 'Michael Thuren', 'Mikkel Kornval Christoffersen', 'Edwin Maldonado', 'Simon Jensen', 'Jakob Højgård'];
+  const sortedPeople = teamOrder.filter(n => byPerson[n]).concat(
+    Object.keys(byPerson).filter(n => !teamOrder.includes(n)).sort()
+  );
+
+  // ── Find key deliverables (Highest/High priority items not done) ──
+  const keyDeliverables = sprint.issues
+    .filter(i => (i.priority === 'Highest' || i.priority === 'High') && i.statusCategory !== 'done')
+    .sort((a, b) => (priSort[a.priority] || 9) - (priSort[b.priority] || 9));
+
+  let h = '';
+
+  // ===== SPRINT HEADER =====
+  h += '<div style="margin-bottom:28px">';
+  h += '<div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:16px">';
+  h += '<div>';
+  h += '<h2 style="color:var(--text);margin:0;font-size:22px;font-weight:700">' + sprint.name + '</h2>';
+  if (sprint.startDate || sprint.endDate) {
+    const fmt = (d) => d ? new Date(d).toLocaleDateString('da-DK', {day:'numeric',month:'short',year:'numeric'}) : '?';
+    h += '<p style="color:var(--text-muted);margin:4px 0 0;font-size:13px">' + fmt(sprint.startDate) + ' \u2013 ' + fmt(sprint.endDate) + '</p>';
+  }
+  h += '</div>';
+  // Stats row
+  h += '<div style="display:flex;gap:12px;align-items:center">';
+  h += '<div style="text-align:center;padding:8px 14px;background:var(--surface);border-radius:8px;border:1px solid var(--border)"><div style="font-size:22px;font-weight:700;color:var(--text)">' + total + '</div><div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Total</div></div>';
+  h += '<div style="text-align:center;padding:8px 14px;background:#3b82f610;border-radius:8px;border:1px solid #3b82f633"><div style="font-size:22px;font-weight:700;color:#3b82f6">' + inProg + '</div><div style="font-size:10px;color:#3b82f6;text-transform:uppercase;letter-spacing:0.5px">I gang</div></div>';
+  h += '<div style="text-align:center;padding:8px 14px;background:#22c55e10;border-radius:8px;border:1px solid #22c55e33"><div style="font-size:22px;font-weight:700;color:#22c55e">' + done + '</div><div style="font-size:10px;color:#22c55e;text-transform:uppercase;letter-spacing:0.5px">F\u00e6rdig</div></div>';
+  h += '<div style="text-align:center;padding:8px 14px;background:var(--surface);border-radius:8px;border:1px solid var(--border)"><div style="font-size:22px;font-weight:700;color:var(--accent)">' + pct + '%</div><div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Done</div></div>';
   h += '</div></div>';
   // Progress bar
   const donePct = total > 0 ? (done/total*100) : 0;
   const progPct = total > 0 ? (inProg/total*100) : 0;
-  h += '<div style="height:6px;background:var(--surface);border-radius:3px;overflow:hidden;display:flex">';
-  h += '<div style="width:' + donePct + '%;background:#22c55e"></div>';
-  h += '<div style="width:' + progPct + '%;background:#3b82f6"></div>';
-  h += '</div></div>';
+  h += '<div style="height:8px;background:var(--surface);border-radius:4px;overflow:hidden;display:flex">';
+  h += '<div style="width:' + donePct + '%;background:#22c55e;transition:width 0.3s"></div>';
+  h += '<div style="width:' + progPct + '%;background:#3b82f6;transition:width 0.3s"></div>';
+  h += '</div>';
+  // Sprint goal
+  if (sprint.goal) {
+    h += '<div style="margin-top:12px;padding:10px 14px;background:var(--accent)08;border-left:3px solid var(--accent);border-radius:0 6px 6px 0;font-size:13px;color:var(--text-muted);line-height:1.5">';
+    h += '<strong style="color:var(--text)">Sprint m\u00e5l:</strong> ' + sprint.goal + '</div>';
+  }
+  h += '</div>';
 
-  
-  // Domain board quick-links
-  h += '<div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap">';
+  // ===== BOARD QUICK-LINKS =====
+  h += '<div style="display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap">';
   h += '<span style="color:var(--text-muted);font-size:13px;line-height:32px;margin-right:4px">Boards:</span>';
   const boards = [
     { name: 'APP', url: 'https://u-ii-u.atlassian.net/jira/software/c/projects/LCAP/boards/202', color: '#a78bfa' },
@@ -1130,45 +1166,97 @@ function renderCurrentSprint() {
   }
   h += '</div>';
 
-  // Kanban columns
-  h += '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;min-height:400px">';
-  for (const col of columnConfig) {
-    const issues = groups[col.key] || [];
-    h += '<div style="background:var(--surface);border-radius:12px;padding:16px;border:1px solid var(--border)">';
-    h += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)">';
-    h += '<span style="font-size:16px">' + col.icon + '</span>';
-    h += '<span style="font-weight:600;color:var(--text)">' + col.label + '</span>';
-    h += '<span style="background:' + col.color + '22;color:' + col.color + ';font-size:12px;font-weight:600;padding:2px 8px;border-radius:10px">' + issues.length + '</span>';
-    h += '</div>';
-    
-    for (const issue of issues) {
-      const pc = issue.assignee ? (personColors[issue.assignee] || '#888') : '#555';
-      h += '<a href="' + jiraBase + issue.key + '" target="_blank" rel="noopener" style="display:block;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:8px;text-decoration:none;transition:border-color 0.15s;cursor:pointer" onmouseover="this.style.borderColor=\'' + col.color + '\'" onmouseout="this.style.borderColor=\'var(--border)\'">';
-      h += '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">';
+  // ===== KEY DELIVERABLES =====
+  if (keyDeliverables.length > 0) {
+    h += '<div style="margin-bottom:28px">';
+    h += '<h3 style="color:var(--text);font-size:15px;font-weight:600;margin:0 0 12px;display:flex;align-items:center;gap:8px">';
+    h += '<span style="color:#ef4444">\u25CF</span> Vigtige leverancer denne sprint</h3>';
+    h += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px">';
+    for (const issue of keyDeliverables) {
+      const m = getMember(issue.assignee);
+      const sc = statusColor(issue.statusCategory);
+      h += '<a href="' + jiraBase + issue.key + '" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-left:3px solid ' + sc + ';border-radius:6px;text-decoration:none;transition:border-color 0.15s" onmouseover="this.style.borderColor=\'' + sc + '\'" onmouseout="this.style.borderLeftColor=\'' + sc + '\';this.style.borderRightColor=\'var(--border)\';this.style.borderTopColor=\'var(--border)\';this.style.borderBottomColor=\'var(--border)\'">';
       h += '<div style="flex:1;min-width:0">';
-      h += '<div style="font-size:11px;color:var(--text-muted);margin-bottom:4px">' + issue.key + ' ' + priorityIcon(issue.priority) + '</div>';
-      h += '<div style="color:var(--text);font-size:13px;line-height:1.4;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">' + issue.summary + '</div>';
+      h += '<div style="display:flex;align-items:center;gap:6px;margin-bottom:2px">';
+      h += '<span style="font-size:11px;color:var(--text-muted)">' + issue.key + '</span>';
+      h += priorityBadge(issue.priority);
+      h += '<span style="font-size:10px;padding:1px 6px;border-radius:3px;background:' + sc + '18;color:' + sc + '">' + statusLabel(issue.statusCategory) + '</span>';
       h += '</div>';
-      if (issue.assignee) {
-        h += '<div style="width:28px;height:28px;border-radius:50%;background:' + pc + ';display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff;flex-shrink:0" title="' + issue.assignee + '">' + issue.assignee.charAt(0).toUpperCase() + '</div>';
-      }
+      h += '<div style="color:var(--text);font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + issue.summary + '</div>';
       h += '</div>';
-      if (issue.status && issue.status !== col.label) {
-        h += '<div style="margin-top:6px;font-size:11px;color:var(--text-muted)">' + issue.status + '</div>';
-      }
-      if (issue.type) {
-        const typeIcon = issue.type === 'Bug' ? '🐛' : issue.type === 'Story' ? '📖' : issue.type === 'Task' ? '☑' : '🔹';
-        h += '<div style="margin-top:4px;font-size:11px;color:var(--text-muted)">' + typeIcon + ' ' + issue.type + '</div>';
-      }
+      h += '<div style="width:26px;height:26px;border-radius:50%;background:' + m.color + ';display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0" title="' + (issue.assignee || 'Unassigned') + '">' + m.short.charAt(0) + '</div>';
       h += '</a>';
     }
-    
-    if (issues.length === 0) {
-      h += '<div style="text-align:center;padding:24px;color:var(--text-muted);font-size:13px">Ingen opgaver</div>';
-    }
+    h += '</div></div>';
+  }
+
+  // ===== TEAM SCHEDULE — rows per person =====
+  h += '<div style="margin-bottom:16px">';
+  h += '<h3 style="color:var(--text);font-size:15px;font-weight:600;margin:0 0 16px;display:flex;align-items:center;gap:8px">';
+  h += '<span style="color:var(--accent)">\u25A0</span> Team oversigt</h3>';
+
+  for (const personName of sortedPeople) {
+    const issues = byPerson[personName];
+    const m = getMember(personName);
+    // Sort: in progress first, then by priority
+    issues.sort((a, b) => {
+      const cs = (catSort[a.statusCategory] || 9) - (catSort[b.statusCategory] || 9);
+      if (cs !== 0) return cs;
+      return (priSort[a.priority] || 9) - (priSort[b.priority] || 9);
+    });
+    const personDone = issues.filter(i => i.statusCategory === 'done').length;
+    const personInProg = issues.filter(i => i.statusCategory === 'indeterminate').length;
+    const personTodo = issues.filter(i => i.statusCategory === 'new').length;
+    const personPct = issues.length > 0 ? Math.round((personDone / issues.length) * 100) : 0;
+
+    h += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden">';
+    // Person header
+    h += '<div style="display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border);background:' + m.color + '06">';
+    h += '<div style="width:36px;height:36px;border-radius:50%;background:' + m.color + ';display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff">' + m.short.charAt(0) + '</div>';
+    h += '<div style="flex:1">';
+    h += '<div style="color:var(--text);font-weight:600;font-size:14px">' + m.short + '</div>';
+    if (m.role) h += '<div style="color:var(--text-muted);font-size:11px">' + m.role + '</div>';
     h += '</div>';
+    // Mini progress for this person
+    h += '<div style="display:flex;gap:10px;align-items:center;font-size:12px">';
+    if (personInProg > 0) h += '<span style="color:#3b82f6;font-weight:600">' + personInProg + ' i gang</span>';
+    if (personTodo > 0) h += '<span style="color:#6b7280">' + personTodo + ' to do</span>';
+    if (personDone > 0) h += '<span style="color:#22c55e">' + personDone + ' done</span>';
+    // Mini bar
+    h += '<div style="width:60px;height:4px;background:var(--border);border-radius:2px;overflow:hidden;display:flex">';
+    h += '<div style="width:' + (issues.length > 0 ? (personDone/issues.length*100) : 0) + '%;background:#22c55e"></div>';
+    h += '<div style="width:' + (issues.length > 0 ? (personInProg/issues.length*100) : 0) + '%;background:#3b82f6"></div>';
+    h += '</div>';
+    h += '</div></div>';
+
+    // Tasks list for this person
+    h += '<div style="padding:8px 12px">';
+    for (const issue of issues) {
+      const sc = statusColor(issue.statusCategory);
+      const isDone = issue.statusCategory === 'done';
+      h += '<a href="' + jiraBase + issue.key + '" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:6px;text-decoration:none;transition:background 0.1s' + (isDone ? ';opacity:0.55' : '') + '" onmouseover="this.style.background=\'var(--bg)\'" onmouseout="this.style.background=\'transparent\'">';
+      // Status dot
+      h += '<span style="color:' + sc + ';font-size:14px;flex-shrink:0" title="' + statusLabel(issue.statusCategory) + '">' + statusIcon(issue.statusCategory) + '</span>';
+      // Key
+      h += '<span style="font-size:11px;color:var(--text-muted);min-width:75px;flex-shrink:0">' + issue.key + '</span>';
+      // Priority
+      h += '<span style="min-width:16px;text-align:center;flex-shrink:0">' + priorityBadge(issue.priority) + '</span>';
+      // Summary
+      h += '<span style="flex:1;font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis' + (isDone ? ';text-decoration:line-through' : '') + '">' + issue.summary + '</span>';
+      // Labels
+      if (issue.labels && issue.labels.length > 0) {
+        h += '<span style="display:flex;gap:4px;flex-shrink:0">';
+        for (const lbl of issue.labels) h += labelBadge(lbl);
+        h += '</span>';
+      }
+      // Status badge
+      h += '<span style="font-size:10px;padding:2px 8px;border-radius:4px;background:' + sc + '15;color:' + sc + ';white-space:nowrap;flex-shrink:0">' + (issue.status || statusLabel(issue.statusCategory)) + '</span>';
+      h += '</a>';
+    }
+    h += '</div></div>';
   }
   h += '</div>';
+
   return h;
 }
 
