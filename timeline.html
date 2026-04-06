@@ -1018,9 +1018,9 @@ let wsNames = {
         const resp = await fetch('data.json?v=' + cacheBust);
         if (!resp.ok) throw new Error('HTTP ' + resp.status);
         const data = await resp.json();
-        tasks = data.tasks || tasks;
-        columns = data.columns || columns;
-        wsNames = data.wsNames || wsNames;
+        if (data.tasks && data.tasks.length > 0) tasks = data.tasks;
+        if (data.columns && data.columns.length > 0) columns = data.columns;
+        if (data.wsNames && Object.keys(data.wsNames).length > 0) wsNames = data.wsNames;
         if (data.sprint) window._sprintData = data.sprint;
         const genDate = new Date(data.generated);
         const dateStr = genDate.toLocaleDateString('da-DK', { day:'numeric', month:'long', year:'numeric' });
