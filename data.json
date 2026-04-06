@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-06T16:23:04.867Z",
+  "tasks": [],
   "columns": [
     "Mar H2",
     "Apr H1",
@@ -33,346 +33,380 @@
     "10": "Gates",
     "all": "Alle"
   },
-  "tasks": [
-    {
-      "id": "LCAP-109",
-      "label": "Scanner app admin interface",
-      "ws": "3",
-      "persons": [
-        "michael"
-      ],
-      "start": 0,
-      "span": 1,
-      "phase": "build",
-      "jira": "LCAP-109",
-      "deps": []
-    },
-    {
-      "id": "LCAP-310",
-      "label": "Content Delivery - Festival Management System",
-      "ws": "4",
-      "persons": [
-        "tony"
-      ],
-      "start": 0,
-      "span": 1,
-      "phase": "build",
-      "jira": "LCAP-310",
-      "deps": []
-    },
-    {
-      "id": "LCAP-100",
-      "label": "Scanner app",
-      "ws": "3",
-      "persons": [
-        "mikkel"
-      ],
-      "start": 0,
-      "span": 1,
-      "phase": "build",
-      "jira": "LCAP-100",
-      "deps": [
-        "LCAP-112"
-      ]
-    },
-    {
-      "id": "LCAP-249",
-      "label": "Billethåndterings dashboard",
-      "ws": "3",
-      "persons": [
-        "tony"
-      ],
-      "start": 0,
-      "span": 1,
-      "phase": "live",
-      "jira": "LCAP-249",
-      "deps": []
-    },
-    {
-      "id": "LCAP-321",
-      "label": "Festival support",
-      "ws": "3",
-      "persons": [],
-      "start": 0,
-      "span": 1,
-      "phase": "build",
-      "jira": "LCAP-321",
-      "deps": []
-    },
-    {
-      "id": "LCAP-150",
-      "label": "Ticket Magento Verifier",
-      "ws": "3",
-      "persons": [],
-      "start": 0,
-      "span": 1,
-      "phase": "live",
-      "jira": "LCAP-150",
-      "deps": []
-    },
-    {
-      "id": "LCAP-230",
-      "label": "Genudsendelse af billetter",
-      "ws": "3",
-      "persons": [
-        "tony"
-      ],
-      "start": 0,
-      "span": 1,
-      "phase": "live",
-      "jira": "LCAP-230",
-      "deps": []
-    },
-    {
-      "id": "LCAP-101",
-      "label": "Scanner app POC",
-      "ws": "3",
-      "persons": [],
-      "start": 0,
-      "span": 1,
-      "phase": "live",
-      "jira": "LCAP-101",
-      "deps": []
-    },
-    {
-      "id": "LCAP-566",
-      "label": "Festhallen app v1.0.0",
-      "ws": "3",
-      "persons": [
-        "edwin"
-      ],
-      "start": 0,
-      "span": 1,
-      "phase": "build",
-      "jira": "LCAP-566",
-      "deps": [
-        "LCAP-574"
-      ]
-    },
-    {
-      "id": "LCAP-497",
-      "label": "Web Tickets",
-      "ws": "3",
-      "persons": [
-        "tony"
-      ],
-      "start": 0,
-      "span": 1,
-      "phase": "build",
-      "jira": "LCAP-497",
-      "deps": []
-    },
-    {
-      "id": "LCAP-319",
-      "label": "POS-system",
-      "ws": "2",
-      "persons": [
-        "tony"
-      ],
-      "start": 0,
-      "span": 1,
-      "phase": "build",
-      "jira": "LCAP-319",
-      "deps": []
-    },
-    {
-      "id": "LCAP-596",
-      "label": "This Epic collects all relevant work related to devops",
-      "ws": "3",
-      "persons": [
-        "tony"
-      ],
-      "start": 0,
-      "span": 1,
-      "phase": "build",
-      "jira": "LCAP-596",
-      "deps": []
-    },
-    {
-      "id": "LCAP-708",
-      "label": "Festhallen/Bodegafesten Board Audit Placeholder",
-      "ws": "3",
-      "persons": [],
-      "start": 0,
-      "span": 1,
-      "phase": "build",
-      "jira": "LCAP-708",
-      "deps": []
-    },
-    {
-      "id": "LCAP-716",
-      "label": "[Festhallen] POS Backend & Payments",
-      "ws": "3",
-      "persons": [
-        "tony"
-      ],
-      "start": 0,
-      "span": 1,
-      "phase": "live",
-      "jira": "LCAP-716",
-      "deps": []
-    },
-    {
-      "id": "LCAP-719",
-      "label": "[Festhallen] Commerce API",
-      "ws": "3",
-      "persons": [
-        "michael"
-      ],
-      "start": 0,
-      "span": 1,
-      "phase": "build",
-      "jira": "LCAP-719",
-      "deps": []
-    },
-    {
-      "id": "LCAP-720",
-      "label": "[Festhallen] Beats System",
-      "ws": "3",
-      "persons": [
-        "michael"
-      ],
-      "start": 0,
-      "span": 1,
-      "phase": "test",
-      "jira": "LCAP-720",
-      "deps": []
-    },
-    {
-      "id": "LCAP-721",
-      "label": "[Festhallen] POS Vendor Bar App",
-      "ws": "3",
-      "persons": [
-        "jakob"
-      ],
-      "start": 0,
-      "span": 1,
-      "phase": "build",
-      "jira": "LCAP-721",
-      "deps": []
-    },
-    {
-      "id": "LCAP-723",
-      "label": "[Festhallen] Wallet & NFC",
-      "ws": "3",
-      "persons": [
-        "jakob"
-      ],
-      "start": 0,
-      "span": 1,
-      "phase": "build",
-      "jira": "LCAP-723",
-      "deps": []
-    },
-    {
-      "id": "LCAP-802",
-      "label": "[Festhallen] Admin Dashboard & B2B Portal",
-      "ws": "3",
-      "persons": [],
-      "start": 0,
-      "span": 1,
-      "phase": "build",
-      "jira": "LCAP-802",
-      "deps": []
-    },
-    {
-      "id": "LCAP-845",
-      "label": "Festival Venue Map — Interactive vendor map with location pins",
-      "ws": "3",
-      "persons": [
-        "mikkel"
-      ],
-      "start": 0,
-      "span": 1,
-      "phase": "build",
-      "jira": "LCAP-845",
-      "deps": []
-    },
-    {
-      "id": "LCAP-857",
-      "label": "Consumer Pre-Order Flow (Food & Beverages)",
-      "ws": "3",
-      "persons": [],
-      "start": 0,
-      "span": 1,
-      "phase": "build",
-      "jira": "LCAP-857",
-      "deps": []
-    },
-    {
-      "id": "LCAP-955",
-      "label": "Lagerstyring — vendor inventory management",
-      "ws": "4",
-      "persons": [
-        "michael"
-      ],
-      "start": 0,
-      "span": 1,
-      "phase": "build",
-      "jira": "LCAP-955",
-      "deps": []
-    },
-    {
-      "id": "LCAP-970",
-      "label": "Pre-Order Backend — bestil i app, betal ved bar",
-      "ws": "3",
-      "persons": [
-        "tony"
-      ],
-      "start": 0,
-      "span": 1,
-      "phase": "build",
-      "jira": "LCAP-970",
-      "deps": []
-    },
-    {
-      "id": "LCAP-1055",
-      "label": "Post Bodega Festen 2026 - bugs, reports & feedback",
-      "ws": "3",
-      "persons": [],
-      "start": 0,
-      "span": 1,
-      "phase": "build",
-      "jira": "LCAP-1055",
-      "deps": []
-    },
-    {
-      "id": "LCAP-1074",
-      "label": "Test-runde: Verificér alle Ready for test features efter Bodegafesten",
-      "ws": "3",
-      "persons": [
-        "edwin"
-      ],
-      "start": 0,
-      "span": 1,
-      "phase": "build",
-      "jira": "LCAP-1074",
-      "deps": []
-    },
-    {
-      "id": "LCAP-1093",
-      "label": "NFC / Wallet — Apple VAS, Google Wallet og NFC-armbånd",
-      "ws": "3",
-      "persons": [
-        "tony"
-      ],
-      "start": 0,
-      "span": 1,
-      "phase": "build",
-      "jira": "LCAP-1093",
-      "deps": []
-    },
-    {
-      "id": "LCAP-1102",
-      "label": "App: Festival Experience & Community",
-      "ws": "3",
-      "persons": [],
-      "start": 0,
-      "span": 1,
-      "phase": "build",
-      "jira": "LCAP-1102",
-      "deps": []
-    }
-  ],
-  "sprint": null
+  "sprint": {
+    "name": "Ringsted Festival Sprint 4",
+    "state": "future",
+    "startDate": "2026-03-30T06:00:00.000Z",
+    "endDate": "2026-04-12T16:00:00.000Z",
+    "goal": "Ringsted Festival prep — accessibility, billettyper, delegate access, dashboards, POS-forbedringer, test-runde af Sprint 3 features, gate design og onboarding-plan.",
+    "issues": [
+      {
+        "key": "LCAP-1070",
+        "summary": "FMS/POS: Konfigurerbar indstilling — kun Beats-betaling tilladt ved event",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "commerce",
+          "fms"
+        ],
+        "updated": "2026-04-06T11:15:02.701+0200"
+      },
+      {
+        "key": "LCAP-1082",
+        "summary": "Inventory management — komplet lagerstyring i FMS",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-06T09:49:38.680+0200"
+      },
+      {
+        "key": "LCAP-1071",
+        "summary": "Billet-flow: Deeplink i billetmail til automatisk aktivering i app",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Highest",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-04T09:17:38.627+0200"
+      },
+      {
+        "key": "LCAP-1072",
+        "summary": "App: Scan alle billetter i signup-flow og videresend til andre — claim kun én selv",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Highest",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-04T09:17:37.717+0200"
+      },
+      {
+        "key": "LCAP-1079",
+        "summary": "Billettyper: Camping (2/4 adgang), børnebilletter og ledsagerbilletter",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Highest",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-04T09:17:21.356+0200"
+      },
+      {
+        "key": "LCAP-1116",
+        "summary": "POS App: terminal picker from FMS + send X-Terminal-Id header",
+        "status": "Done",
+        "statusCategory": "done",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Sub-task",
+        "labels": [
+          "app",
+          "pos"
+        ],
+        "updated": "2026-04-02T08:24:22.912+0200"
+      },
+      {
+        "key": "LCAP-1060",
+        "summary": "POS: Transaktioner per terminal med manager-overblik per bar",
+        "status": "Ready for testing",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-04-02T08:17:17.168+0200"
+      },
+      {
+        "key": "LCAP-1115",
+        "summary": "POS Backend: store terminal_id from FMS on transactions + filter history",
+        "status": "Closed",
+        "statusCategory": "done",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Sub-task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-04-01T15:46:29.362+0200"
+      },
+      {
+        "key": "LCAP-1080",
+        "summary": "B2B portal — virksomheder administrerer egne billetter",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-03-31T18:35:29.197+0200"
+      },
+      {
+        "key": "LCAP-1081",
+        "summary": "FMS Dashboard — mobil-responsive og real-time sync med Swedbank/SoftPOS",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-03-31T18:33:50.980+0200"
+      },
+      {
+        "key": "LCAP-1074",
+        "summary": "Test-runde: Verificér alle Ready for test features efter Bodegafesten",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Epic",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-31T14:20:56.785+0200"
+      },
+      {
+        "key": "LCAP-1083",
+        "summary": "Gate design — fysisk check-in setup med festivalsikkerhed",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-03-31T14:03:21.249+0200"
+      },
+      {
+        "key": "LCAP-1076",
+        "summary": "Ringsted Festival — summit/event setup og onboarding-plan",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-31T14:02:54.697+0200"
+      },
+      {
+        "key": "LCAP-1061",
+        "summary": "POS: Split payment — brug Beats først, betal resten med kort",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-03-30T21:13:06.430+0200"
+      },
+      {
+        "key": "LCAP-1059",
+        "summary": "POS: Transaktioner opdateres for langsomt — hurtigere refresh/websockets",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-03-30T21:13:04.950+0200"
+      },
+      {
+        "key": "LCAP-1064",
+        "summary": "POS: Auto-logout af gæst efter gennemført betaling (kritisk)",
+        "status": "READY FOR TEST AT DEV",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "Highest",
+        "type": "Bug",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-03-30T15:46:39.807+0200"
+      },
+      {
+        "key": "LCAP-1084",
+        "summary": "Manager Beats-tildeling — påkrævet begrundelse ved allokering",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-03-30T13:27:42.830+0200"
+      },
+      {
+        "key": "LCAP-1078",
+        "summary": "Delegate access — end-to-end færdiggørelse og test",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-03-30T13:27:41.181+0200"
+      },
+      {
+        "key": "LCAP-1067",
+        "summary": "POS/App: Initier betaling fra POS på kundens app efter identifikation",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-03-30T13:26:58.181+0200"
+      },
+      {
+        "key": "LCAP-1065",
+        "summary": "POS/FMS: Konfigurerbare Beats-påfyldningsbeløb (mere end 100)",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-03-30T13:26:57.668+0200"
+      },
+      {
+        "key": "LCAP-1063",
+        "summary": "Hardware: Undersøg om terminal-cover påvirker kortlæsning",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-03-30T13:26:56.592+0200"
+      },
+      {
+        "key": "LCAP-1062",
+        "summary": "POS/Backend: Refund Beats til kreditkort",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-03-30T13:26:56.107+0200"
+      },
+      {
+        "key": "LCAP-1077",
+        "summary": "App: Interaktivt festival-kort (map feature)",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-30T13:26:40.038+0200"
+      },
+      {
+        "key": "LCAP-1075",
+        "summary": "App: Accessibility — font size scaling bryder layout",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Bug",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-30T13:26:39.523+0200"
+      },
+      {
+        "key": "LCAP-1073",
+        "summary": "App: Fjern QR-kode fra billet-skærmen i appen",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-30T13:26:39.035+0200"
+      },
+      {
+        "key": "LCAP-1069",
+        "summary": "App: Beats auto-refill — automatisk påfyldning når saldo er lav",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-30T13:26:37.425+0200"
+      },
+      {
+        "key": "LCAP-1068",
+        "summary": "App: Kreditkort påkrævet i app for Beats top-up",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-30T13:26:36.902+0200"
+      },
+      {
+        "key": "LCAP-1066",
+        "summary": "Koncept: App-first — alt starter i kundens app (scan, betaling, identifikation)",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "High",
+        "type": "Story",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-30T13:26:36.237+0200"
+      }
+    ]
+  },
+  "generated": "2026-04-06T16:37:42.831Z"
 }
