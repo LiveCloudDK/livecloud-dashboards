@@ -1,0 +1,377 @@
+{
+  "generated": "2026-04-06T12:27:02.390Z",
+  "columns": [
+    "Mar H2",
+    "Apr H1",
+    "Apr H2",
+    "Maj H1",
+    "Maj H2",
+    "Jun H1",
+    "Jun H2",
+    "Jul H1",
+    "Jul H2",
+    "Aug H1",
+    "Aug H2",
+    "Sep H1",
+    "Sep H2",
+    "Okt H1",
+    "Okt H2",
+    "Nov H1",
+    "Nov H2",
+    "Dec H1"
+  ],
+  "wsNames": {
+    "1": "Onboarding",
+    "2": "POS",
+    "3": "App",
+    "4": "Backend/FMS",
+    "5": "B2B",
+    "6": "Webshop",
+    "7": "Personal",
+    "8": "POS API",
+    "9": "NFC/Wallet",
+    "10": "Gates",
+    "all": "Alle"
+  },
+  "tasks": [
+    {
+      "id": "LCAP-109",
+      "label": "Scanner app admin interface",
+      "ws": "3",
+      "persons": [
+        "michael"
+      ],
+      "start": 0,
+      "span": 1,
+      "phase": "build",
+      "jira": "LCAP-109",
+      "deps": []
+    },
+    {
+      "id": "LCAP-310",
+      "label": "Content Delivery - Festival Management System",
+      "ws": "4",
+      "persons": [
+        "tony"
+      ],
+      "start": 0,
+      "span": 1,
+      "phase": "build",
+      "jira": "LCAP-310",
+      "deps": []
+    },
+    {
+      "id": "LCAP-100",
+      "label": "Scanner app",
+      "ws": "3",
+      "persons": [
+        "mikkel"
+      ],
+      "start": 0,
+      "span": 1,
+      "phase": "build",
+      "jira": "LCAP-100",
+      "deps": [
+        "LCAP-112"
+      ]
+    },
+    {
+      "id": "LCAP-249",
+      "label": "Billethåndterings dashboard",
+      "ws": "3",
+      "persons": [
+        "tony"
+      ],
+      "start": 0,
+      "span": 1,
+      "phase": "live",
+      "jira": "LCAP-249",
+      "deps": []
+    },
+    {
+      "id": "LCAP-321",
+      "label": "Festival support",
+      "ws": "3",
+      "persons": [],
+      "start": 0,
+      "span": 1,
+      "phase": "build",
+      "jira": "LCAP-321",
+      "deps": []
+    },
+    {
+      "id": "LCAP-150",
+      "label": "Ticket Magento Verifier",
+      "ws": "3",
+      "persons": [],
+      "start": 0,
+      "span": 1,
+      "phase": "live",
+      "jira": "LCAP-150",
+      "deps": []
+    },
+    {
+      "id": "LCAP-230",
+      "label": "Genudsendelse af billetter",
+      "ws": "3",
+      "persons": [
+        "tony"
+      ],
+      "start": 0,
+      "span": 1,
+      "phase": "live",
+      "jira": "LCAP-230",
+      "deps": []
+    },
+    {
+      "id": "LCAP-101",
+      "label": "Scanner app POC",
+      "ws": "3",
+      "persons": [],
+      "start": 0,
+      "span": 1,
+      "phase": "live",
+      "jira": "LCAP-101",
+      "deps": []
+    },
+    {
+      "id": "LCAP-566",
+      "label": "Festhallen app v1.0.0",
+      "ws": "3",
+      "persons": [
+        "edwin"
+      ],
+      "start": 0,
+      "span": 1,
+      "phase": "build",
+      "jira": "LCAP-566",
+      "deps": [
+        "LCAP-574"
+      ]
+    },
+    {
+      "id": "LCAP-497",
+      "label": "Web Tickets",
+      "ws": "3",
+      "persons": [
+        "tony"
+      ],
+      "start": 0,
+      "span": 1,
+      "phase": "build",
+      "jira": "LCAP-497",
+      "deps": []
+    },
+    {
+      "id": "LCAP-319",
+      "label": "POS-system",
+      "ws": "2",
+      "persons": [
+        "tony"
+      ],
+      "start": 0,
+      "span": 1,
+      "phase": "build",
+      "jira": "LCAP-319",
+      "deps": []
+    },
+    {
+      "id": "LCAP-596",
+      "label": "This Epic collects all relevant work related to devops",
+      "ws": "3",
+      "persons": [
+        "tony"
+      ],
+      "start": 0,
+      "span": 1,
+      "phase": "build",
+      "jira": "LCAP-596",
+      "deps": []
+    },
+    {
+      "id": "LCAP-708",
+      "label": "Festhallen/Bodegafesten Board Audit Placeholder",
+      "ws": "3",
+      "persons": [],
+      "start": 0,
+      "span": 1,
+      "phase": "build",
+      "jira": "LCAP-708",
+      "deps": []
+    },
+    {
+      "id": "LCAP-716",
+      "label": "[Festhallen] POS Backend & Payments",
+      "ws": "3",
+      "persons": [
+        "tony"
+      ],
+      "start": 0,
+      "span": 1,
+      "phase": "live",
+      "jira": "LCAP-716",
+      "deps": []
+    },
+    {
+      "id": "LCAP-719",
+      "label": "[Festhallen] Commerce API",
+      "ws": "3",
+      "persons": [
+        "michael"
+      ],
+      "start": 0,
+      "span": 1,
+      "phase": "build",
+      "jira": "LCAP-719",
+      "deps": []
+    },
+    {
+      "id": "LCAP-720",
+      "label": "[Festhallen] Beats System",
+      "ws": "3",
+      "persons": [
+        "michael"
+      ],
+      "start": 0,
+      "span": 1,
+      "phase": "test",
+      "jira": "LCAP-720",
+      "deps": []
+    },
+    {
+      "id": "LCAP-721",
+      "label": "[Festhallen] POS Vendor Bar App",
+      "ws": "3",
+      "persons": [
+        "jakob"
+      ],
+      "start": 0,
+      "span": 1,
+      "phase": "build",
+      "jira": "LCAP-721",
+      "deps": []
+    },
+    {
+      "id": "LCAP-723",
+      "label": "[Festhallen] Wallet & NFC",
+      "ws": "3",
+      "persons": [
+        "jakob"
+      ],
+      "start": 0,
+      "span": 1,
+      "phase": "build",
+      "jira": "LCAP-723",
+      "deps": []
+    },
+    {
+      "id": "LCAP-802",
+      "label": "[Festhallen] Admin Dashboard & B2B Portal",
+      "ws": "3",
+      "persons": [],
+      "start": 0,
+      "span": 1,
+      "phase": "build",
+      "jira": "LCAP-802",
+      "deps": []
+    },
+    {
+      "id": "LCAP-845",
+      "label": "Festival Venue Map — Interactive vendor map with location pins",
+      "ws": "3",
+      "persons": [
+        "mikkel"
+      ],
+      "start": 0,
+      "span": 1,
+      "phase": "build",
+      "jira": "LCAP-845",
+      "deps": []
+    },
+    {
+      "id": "LCAP-857",
+      "label": "Consumer Pre-Order Flow (Food & Beverages)",
+      "ws": "3",
+      "persons": [],
+      "start": 0,
+      "span": 1,
+      "phase": "build",
+      "jira": "LCAP-857",
+      "deps": []
+    },
+    {
+      "id": "LCAP-955",
+      "label": "Lagerstyring — vendor inventory management",
+      "ws": "4",
+      "persons": [
+        "michael"
+      ],
+      "start": 0,
+      "span": 1,
+      "phase": "build",
+      "jira": "LCAP-955",
+      "deps": []
+    },
+    {
+      "id": "LCAP-970",
+      "label": "Pre-Order Backend — bestil i app, betal ved bar",
+      "ws": "3",
+      "persons": [
+        "tony"
+      ],
+      "start": 0,
+      "span": 1,
+      "phase": "build",
+      "jira": "LCAP-970",
+      "deps": []
+    },
+    {
+      "id": "LCAP-1055",
+      "label": "Post Bodega Festen 2026 - bugs, reports & feedback",
+      "ws": "3",
+      "persons": [],
+      "start": 0,
+      "span": 1,
+      "phase": "build",
+      "jira": "LCAP-1055",
+      "deps": []
+    },
+    {
+      "id": "LCAP-1074",
+      "label": "Test-runde: Verificér alle Ready for test features efter Bodegafesten",
+      "ws": "3",
+      "persons": [
+        "edwin"
+      ],
+      "start": 0,
+      "span": 1,
+      "phase": "build",
+      "jira": "LCAP-1074",
+      "deps": []
+    },
+    {
+      "id": "LCAP-1093",
+      "label": "NFC / Wallet — Apple VAS, Google Wallet og NFC-armbånd",
+      "ws": "3",
+      "persons": [
+        "tony"
+      ],
+      "start": 0,
+      "span": 1,
+      "phase": "build",
+      "jira": "LCAP-1093",
+      "deps": []
+    },
+    {
+      "id": "LCAP-1102",
+      "label": "App: Festival Experience & Community",
+      "ws": "3",
+      "persons": [],
+      "start": 0,
+      "span": 1,
+      "phase": "build",
+      "jira": "LCAP-1102",
+      "deps": []
+    }
+  ]
+}
