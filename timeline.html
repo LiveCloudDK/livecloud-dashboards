@@ -1087,10 +1087,11 @@ function renderCurrentSprint() {
   const order = ['Tony Dieu','Michael Thuren','Mikkel Kornval Christoffersen','Edwin Maldonado','Simon Jensen','Jakob H\u00f8jg\u00e5rd'];
   const people = order.filter(n=>byP[n]).concat(Object.keys(byP).filter(n=>!order.includes(n)));
 
-  // Sort each person: Highest first, done last
+  // Sort each person: in-progress first, then highest priority, done last
   for (const p of people) {
     byP[p].sort((a,b) => {
       if ((a.statusCategory==='done')!==(b.statusCategory==='done')) return a.statusCategory==='done'?1:-1;
+      if ((a.statusCategory==='indeterminate')!==(b.statusCategory==='indeterminate')) return a.statusCategory==='indeterminate'?-1:1;
       return (pri[a.priority]??9)-(pri[b.priority]??9);
     });
   }
@@ -1114,14 +1115,14 @@ function renderCurrentSprint() {
   h += '<div style="width:' + (total>0?nProg/total*100:0) + '%;background:#3b82f6"></div>';
   h += '</div></div></div>';
 
-  // Sprint goal — one line
+  // Sprint goal
   if (sprint.goal) {
     h += '<div style="padding:6px 12px;margin-bottom:12px;background:var(--surface);border-radius:6px;font-size:12px;color:var(--text-muted);line-height:1.4;border:1px solid var(--border)">';
     h += '<strong style="color:var(--text)">M\u00e5l:</strong> ' + sprint.goal + '</div>';
   }
 
-  // Board links — inline
-  h += '<div style="display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;align-items:center">';
+  // Board links
+  h += '<div style="display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap;align-items:center">';
   const boards = [
     {n:'APP',u:'https://u-ii-u.atlassian.net/jira/software/c/projects/LCAP/boards/202',c:'#a78bfa'},
     {n:'POS',u:'https://u-ii-u.atlassian.net/jira/software/c/projects/LCAP/boards/203',c:'#60a5fa'},
@@ -1137,75 +1138,120 @@ function renderCurrentSprint() {
   for (const personName of people) {
     const issues = byP[personName];
     const m = tm(personName);
-    const pDone = issues.filter(i=>i.statusCategory==='done').length;
-    const pProg = issues.filter(i=>i.statusCategory==='indeterminate').length;
-    const active = issues.filter(i=>i.statusCategory!=='done');
+    const inProgress = issues.filter(i=>i.statusCategory==='indeterminate');
+    const todo = issues.filter(i=>i.statusCategory==='new');
     const done = issues.filter(i=>i.statusCategory==='done');
+    // Sort todo by priority (highest first)
+    todo.sort((a,b) => (pri[a.priority]??9)-(pri[b.priority]??9));
 
-    // Person row header
-    h += '<div style="margin-bottom:14px">';
-    h += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">';
-    h += '<div style="width:28px;height:28px;border-radius:50%;background:'+m.c+';display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff">'+m.n.charAt(0)+'</div>';
-    h += '<span style="font-weight:600;font-size:14px;color:var(--text)">'+m.n+'</span>';
-    h += '<span style="font-size:11px;color:var(--text-muted)">'+m.r+'</span>';
-    h += '<span style="margin-left:auto;font-size:11px;color:var(--text-muted)">';
-    if (pProg>0) h += '<span style="color:#3b82f6;font-weight:600">'+pProg+' i gang</span> ';
-    h += (active.length-pProg)+' to do';
-    if (pDone>0) h += ' · <span style="color:#22c55e">'+pDone+' done</span>';
-    h += '</span></div>';
+    // The focus task = first in-progress, or highest-priority todo
+    const focus = inProgress[0] || todo[0] || null;
+    // Next up = second in-progress, or first todo if focus was in-progress, or second todo
+    let next = null;
+    if (inProgress.length > 1) next = inProgress[1];
+    else if (inProgress.length === 1 && todo.length > 0) next = todo[0];
+    else if (inProgress.length === 0 && todo.length > 1) next = todo[1];
 
-    // ── Task table ──
-    h += '<div style="border:1px solid var(--border);border-radius:8px;overflow:hidden">';
+    // Remaining = everything that isn't focus or next (and not done)
+    const focusKey = focus ? focus.key : null;
+    const nextKey = next ? next.key : null;
+    const remaining = issues.filter(i => i.statusCategory !== 'done' && i.key !== focusKey && i.key !== nextKey);
 
-    // Active tasks first (sorted by priority)
-    for (let idx=0; idx<active.length; idx++) {
-      const i = active[idx];
-      const isTop = i.priority==='Highest'||i.priority==='High';
-      const sc = sCol(i.statusCategory);
-      const bg = i.priority==='Highest'?'#dc262606':i.priority==='High'?'#ef444404':'transparent';
-      const border = idx<active.length-1||done.length>0 ? 'border-bottom:1px solid var(--border);':'';
+    h += '<div style="margin-bottom:18px;background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden">';
 
-      h += '<a href="'+jiraBase+i.key+'" target="_blank" style="display:grid;grid-template-columns:22px 80px 1fr auto auto;align-items:center;gap:8px;padding:6px 12px;text-decoration:none;background:'+bg+';'+border+'transition:background 0.1s" onmouseover="this.style.background=\'var(--surface)\'" onmouseout="this.style.background=\''+bg+'\'">';
-
-      // Col 1: Priority arrow
-      if (i.priority==='Highest') h += '<span style="color:#dc2626;font-weight:700;font-size:13px;text-align:center">\u2191\u2191</span>';
-      else if (i.priority==='High') h += '<span style="color:#ef4444;font-size:13px;text-align:center">\u2191</span>';
-      else h += '<span style="color:#9ca3af;font-size:11px;text-align:center">\u2013</span>';
-
-      // Col 2: Jira key
-      h += '<span style="font-size:11px;color:var(--text-muted);font-family:monospace">'+i.key+'</span>';
-
-      // Col 3: Summary
-      h += '<span style="font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:'+(isTop?'600':'400')+'">'+i.summary+'</span>';
-
-      // Col 4: Labels
-      h += '<span style="display:flex;gap:3px">';
-      if (i.labels) for (const l of i.labels) {
-        const lc={app:'#a78bfa',pos:'#60a5fa',fms:'#34d399',commerce:'#fbbf24'}[l]||'#6b7280';
-        h += '<span style="font-size:9px;padding:1px 5px;border-radius:3px;background:'+lc+'18;color:'+lc+';font-weight:600">'+l+'</span>';
-      }
-      h += '</span>';
-
-      // Col 5: Status
-      h += '<span style="font-size:10px;padding:2px 8px;border-radius:4px;background:'+sc+'18;color:'+sc+';font-weight:600;min-width:55px;text-align:center;white-space:nowrap">'+(i.status||'To do')+'</span>';
-
-      h += '</a>';
-    }
-
-    // Done tasks — collapsed, dimmed
-    for (let idx=0; idx<done.length; idx++) {
-      const i = done[idx];
-      const border = idx<done.length-1?'border-bottom:1px solid var(--border);':'';
-      h += '<a href="'+jiraBase+i.key+'" target="_blank" style="display:grid;grid-template-columns:22px 80px 1fr auto auto;align-items:center;gap:8px;padding:4px 12px;text-decoration:none;opacity:0.4;'+border+'transition:opacity 0.1s" onmouseover="this.style.opacity=\'0.7\'" onmouseout="this.style.opacity=\'0.4\'">';
-      h += '<span style="color:#22c55e;font-size:12px;text-align:center">\u2714</span>';
-      h += '<span style="font-size:10px;color:var(--text-muted);font-family:monospace">'+i.key+'</span>';
-      h += '<span style="font-size:12px;color:var(--text-muted);text-decoration:line-through;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+i.summary+'</span>';
-      h += '<span></span>';
-      h += '<span style="font-size:9px;padding:1px 6px;border-radius:3px;background:#22c55e18;color:#22c55e;font-weight:600">Done</span>';
-      h += '</a>';
-    }
-
+    // ── Person header ──
+    h += '<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--border)">';
+    h += '<div style="width:30px;height:30px;border-radius:50%;background:'+m.c+';display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff">'+m.n.charAt(0)+'</div>';
+    h += '<div style="flex:1"><span style="font-weight:700;font-size:14px;color:var(--text)">'+m.n+'</span> <span style="font-size:11px;color:var(--text-muted)">'+m.r+'</span></div>';
+    h += '<div style="display:flex;gap:6px;font-size:11px">';
+    if (inProgress.length>0) h += '<span style="color:#3b82f6;font-weight:600">'+inProgress.length+' i gang</span>';
+    h += '<span style="color:var(--text-muted)">'+todo.length+' to do</span>';
+    if (done.length>0) h += '<span style="color:#22c55e">'+done.length+' done</span>';
     h += '</div></div>';
+
+    // ── FOKUS card — what this person should work on RIGHT NOW ──
+    if (focus) {
+      const sc = sCol(focus.statusCategory);
+      const isFocusActive = focus.statusCategory === 'indeterminate';
+      h += '<a href="'+jiraBase+focus.key+'" target="_blank" style="display:block;padding:10px 14px;background:'+(isFocusActive?'#3b82f608':'#f59e0b06')+';border-bottom:1px solid var(--border);text-decoration:none;transition:background 0.1s" onmouseover="this.style.background=\'var(--bg)\'" onmouseout="this.style.background=\''+(isFocusActive?'#3b82f608':'#f59e0b06')+'\'">';
+      h += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">';
+      h += '<span style="font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:1px 6px;border-radius:3px;'+(isFocusActive?'background:#3b82f620;color:#3b82f6':'background:#f59e0b20;color:#f59e0b')+'">FOKUS</span>';
+      h += '<span style="font-size:11px;color:var(--text-muted);font-family:monospace">'+focus.key+'</span>';
+      h += '<span style="font-size:10px;padding:1px 6px;border-radius:3px;background:'+sc+'18;color:'+sc+';font-weight:600">'+focus.status+'</span>';
+      if (focus.priority==='Highest'||focus.priority==='High') {
+        h += '<span style="color:#ef4444;font-size:11px">'+(focus.priority==='Highest'?'\u2191\u2191':'\u2191')+'</span>';
+      }
+      h += '</div>';
+      h += '<div style="font-size:14px;color:var(--text);font-weight:600;line-height:1.3">'+focus.summary+'</div>';
+      if (focus.labels&&focus.labels.length>0) {
+        h += '<div style="display:flex;gap:3px;margin-top:4px">';
+        for (const l of focus.labels) {
+          const lc={app:'#a78bfa',pos:'#60a5fa',fms:'#34d399',commerce:'#fbbf24'}[l]||'#6b7280';
+          h += '<span style="font-size:9px;padding:1px 5px;border-radius:3px;background:'+lc+'18;color:'+lc+';font-weight:600">'+l+'</span>';
+        }
+        h += '</div>';
+      }
+      h += '</a>';
+    }
+
+    // ── N\u00c6STE card — what's coming after focus ──
+    if (next) {
+      const sc = sCol(next.statusCategory);
+      const isNextActive = next.statusCategory === 'indeterminate';
+      h += '<a href="'+jiraBase+next.key+'" target="_blank" style="display:block;padding:8px 14px;border-bottom:1px solid var(--border);text-decoration:none;transition:background 0.1s;background:'+(isNextActive?'#3b82f604':'transparent')+'" onmouseover="this.style.background=\'var(--bg)\'" onmouseout="this.style.background=\''+(isNextActive?'#3b82f604':'transparent')+'\'">';
+      h += '<div style="display:flex;align-items:center;gap:8px">';
+      h += '<span style="font-size:9px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;padding:1px 6px;border-radius:3px;background:var(--border);color:var(--text-muted)">N\u00c6STE</span>';
+      h += '<span style="font-size:11px;color:var(--text-muted);font-family:monospace">'+next.key+'</span>';
+      if (next.priority==='Highest'||next.priority==='High') {
+        h += '<span style="color:#ef4444;font-size:11px">'+(next.priority==='Highest'?'\u2191\u2191':'\u2191')+'</span>';
+      }
+      h += '<span style="flex:1;font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500">'+next.summary+'</span>';
+      h += '<span style="font-size:10px;padding:1px 6px;border-radius:3px;background:'+sc+'18;color:'+sc+';font-weight:600;flex-shrink:0">'+next.status+'</span>';
+      h += '</div></a>';
+    }
+
+    // ── Remaining backlog ──
+    for (let idx=0; idx<remaining.length; idx++) {
+      const i = remaining[idx];
+      const sc = sCol(i.statusCategory);
+      const isActive = i.statusCategory === 'indeterminate';
+      const border = idx<remaining.length-1||done.length>0 ? 'border-bottom:1px solid var(--border);' : '';
+      h += '<a href="'+jiraBase+i.key+'" target="_blank" style="display:flex;align-items:center;gap:8px;padding:5px 14px;text-decoration:none;'+border+'transition:background 0.1s;background:'+(isActive?'#3b82f604':'transparent')+'" onmouseover="this.style.background=\'var(--bg)\'" onmouseout="this.style.background=\''+(isActive?'#3b82f604':'transparent')+'\'">';
+      // Priority
+      if (i.priority==='Highest') h += '<span style="color:#dc2626;font-weight:700;font-size:12px;min-width:16px;text-align:center">\u2191\u2191</span>';
+      else if (i.priority==='High') h += '<span style="color:#ef4444;font-size:12px;min-width:16px;text-align:center">\u2191</span>';
+      else h += '<span style="color:#9ca3af;font-size:10px;min-width:16px;text-align:center">\u2013</span>';
+      // Key
+      h += '<span style="font-size:10px;color:var(--text-muted);font-family:monospace;min-width:72px">'+i.key+'</span>';
+      // Summary
+      h += '<span style="flex:1;font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0.8">'+i.summary+'</span>';
+      // Labels
+      if (i.labels&&i.labels.length>0) {
+        h += '<span style="display:flex;gap:2px">';
+        for (const l of i.labels) {
+          const lc={app:'#a78bfa',pos:'#60a5fa',fms:'#34d399',commerce:'#fbbf24'}[l]||'#6b7280';
+          h += '<span style="font-size:8px;padding:0px 4px;border-radius:2px;background:'+lc+'15;color:'+lc+';font-weight:600">'+l+'</span>';
+        }
+        h += '</span>';
+      }
+      // Status
+      h += '<span style="font-size:9px;padding:1px 6px;border-radius:3px;background:'+sc+'15;color:'+sc+';font-weight:600;white-space:nowrap">'+(i.status||'To do')+'</span>';
+      h += '</a>';
+    }
+
+    // ── Done — collapsed, dimmed ──
+    if (done.length > 0) {
+      for (const i of done) {
+        h += '<a href="'+jiraBase+i.key+'" target="_blank" style="display:flex;align-items:center;gap:8px;padding:3px 14px;text-decoration:none;opacity:0.35;transition:opacity 0.1s" onmouseover="this.style.opacity=\'0.6\'" onmouseout="this.style.opacity=\'0.35\'">';
+        h += '<span style="color:#22c55e;font-size:11px;min-width:16px;text-align:center">\u2714</span>';
+        h += '<span style="font-size:10px;color:var(--text-muted);font-family:monospace;min-width:72px">'+i.key+'</span>';
+        h += '<span style="flex:1;font-size:11px;color:var(--text-muted);text-decoration:line-through;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+i.summary+'</span>';
+        h += '<span style="font-size:8px;padding:1px 5px;border-radius:2px;background:#22c55e15;color:#22c55e;font-weight:600">Done</span>';
+        h += '</a>';
+      }
+    }
+
+    h += '</div>';
   }
 
   return h;
