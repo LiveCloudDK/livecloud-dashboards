@@ -2,7 +2,7 @@
 /**
  * sync-jira-timeline.mjs
  * Fetches epics from Jira LCAP project and generates data.json for timeline.html.
- * Uses Jira REST API v2 (v3 search is deprecated).
+ * Uses POST /rest/api/3/search/jql with nextPageToken pagination.
  */
 
 const JIRA_BASE = process.env.JIRA_BASE_URL || 'https://u-ii-u.atlassian.net';
@@ -88,39 +88,48 @@ function computeSpan(startDate, endDate) {
   return Math.max(1, e - s + 1);
 }
 
-async function jiraFetch(path) {
-  const url = `${JIRA_BASE}${path}`;
+async function jiraSearchPost(body) {
+  const url = `${JIRA_BASE}/rest/api/3/search/jql`;
   const resp = await fetch(url, {
+    method: 'POST',
     headers: {
       'Authorization': `Basic ${AUTH}`,
       'Accept': 'application/json',
-    }
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
   });
   if (!resp.ok) {
     const text = await resp.text();
-    throw new Error(`Jira API ${resp.status} for ${path} - ${text}`);
+    throw new Error(`Jira API ${resp.status} for /rest/api/3/search/jql - ${text}`);
   }
   return resp.json();
 }
 
 async function fetchAllIssues() {
-  const jql = encodeURIComponent(
-    'project = LCAP AND issuetype = Epic AND status not in (Closed) ORDER BY rank ASC'
-  );
-  const fields = 'summary,status,assignee,labels,priority,issuetype,' +
-    'customfield_10015,customfield_10022,customfield_10023,duedate,issuelinks';
+  const jql = 'project = LCAP AND issuetype = Epic AND status not in (Closed) ORDER BY rank ASC';
+  const fields = [
+    'summary','status','assignee','labels','priority','issuetype',
+    'customfield_10015','customfield_10022','customfield_10023',
+    'duedate','issuelinks'
+  ];
 
   let allIssues = [];
-  let startAt = 0;
-  const maxResults = 100;
+  let nextPageToken = null;
 
   while (true) {
-    const data = await jiraFetch(
-      `/rest/api/2/search?jql=${jql}&fields=${fields}&maxResults=${maxResults}&startAt=${startAt}`
-    );
-    allIssues = allIssues.concat(data.issues);
-    if (startAt + data.issues.length >= data.total) break;
-    startAt += maxResults;
+    const body = { jql, fields, maxResults: 100 };
+    if (nextPageToken) body.nextPageToken = nextPageToken;
+
+    const data = await jiraSearchPost(body);
+    allIssues = allIssues.concat(data.issues || []);
+
+    // Check for next page
+    if (data.nextPageToken) {
+      nextPageToken = data.nextPageToken;
+    } else {
+      break;
+    }
   }
 
   console.log(`Fetched ${allIssues.length} epics from Jira`);
