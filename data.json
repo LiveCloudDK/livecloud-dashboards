@@ -41,6 +41,32 @@
     "goal": "Ringsted Festival prep — accessibility, billettyper, delegate access, dashboards, POS-forbedringer, test-runde af Sprint 3 features, gate design og onboarding-plan.",
     "issues": [
       {
+        "key": "LCAP-1084",
+        "summary": "Manager Beats-tildeling — påkrævet begrundelse ved allokering",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-06T19:48:51.091+0200"
+      },
+      {
+        "key": "LCAP-1071",
+        "summary": "Billet-flow: Deeplink i billetmail til automatisk aktivering i app",
+        "status": "Ready for release",
+        "statusCategory": "indeterminate",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Highest",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-06T19:43:51.476+0200"
+      },
+      {
         "key": "LCAP-1070",
         "summary": "FMS/POS: Konfigurerbar indstilling — kun Beats-betaling tilladt ved event",
         "status": "Ready for test",
@@ -66,19 +92,6 @@
           "fms"
         ],
         "updated": "2026-04-06T09:49:38.680+0200"
-      },
-      {
-        "key": "LCAP-1071",
-        "summary": "Billet-flow: Deeplink i billetmail til automatisk aktivering i app",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Mikkel Kornval Christoffersen",
-        "priority": "Highest",
-        "type": "Task",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-04-04T09:17:38.627+0200"
       },
       {
         "key": "LCAP-1072",
@@ -251,19 +264,6 @@
         "updated": "2026-03-30T15:46:39.807+0200"
       },
       {
-        "key": "LCAP-1084",
-        "summary": "Manager Beats-tildeling — påkrævet begrundelse ved allokering",
-        "status": "Backlog",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-03-30T13:27:42.830+0200"
-      },
-      {
         "key": "LCAP-1078",
         "summary": "Delegate access — end-to-end færdiggørelse og test",
         "status": "Backlog",
@@ -408,5 +408,5 @@
       }
     ]
   },
-  "generated": "2026-04-06T17:22:51.359Z"
+  "generated": "2026-04-06T17:59:57.582Z"
 }
