@@ -1,17 +1,8 @@
 #!/usr/bin/env node
 /**
  * sync-jira-timeline.mjs
- *
- * Fetches epics and issues from Jira LCAP project and generates
- * a data.json file compatible with timeline.html's task format.
- *
- * Required env vars:
- *   JIRA_BASE_URL  - e.g. https://u-ii-u.atlassian.net
- *   JIRA_EMAIL     - Atlassian account email
- *   JIRA_API_TOKEN - Atlassian API token
- *
- * Usage: node sync-jira-timeline.mjs
- * Output: data.json (written to current directory)
+ * Fetches epics from Jira LCAP project and generates data.json for timeline.html.
+ * Uses Jira REST API v2 (v3 search is deprecated).
  */
 
 const JIRA_BASE = process.env.JIRA_BASE_URL || 'https://u-ii-u.atlassian.net';
@@ -25,26 +16,13 @@ if (!JIRA_EMAIL || !JIRA_TOKEN) {
 
 const AUTH = Buffer.from(`${JIRA_EMAIL}:${JIRA_TOKEN}`).toString('base64');
 
-// -- Timeline column config --
 const PERIOD_STARTS = [
-  new Date('2026-03-16'),
-  new Date('2026-04-01'),
-  new Date('2026-04-16'),
-  new Date('2026-05-01'),
-  new Date('2026-05-16'),
-  new Date('2026-06-01'),
-  new Date('2026-06-16'),
-  new Date('2026-07-01'),
-  new Date('2026-07-16'),
-  new Date('2026-08-01'),
-  new Date('2026-08-16'),
-  new Date('2026-09-01'),
-  new Date('2026-09-16'),
-  new Date('2026-10-01'),
-  new Date('2026-10-16'),
-  new Date('2026-11-01'),
-  new Date('2026-11-16'),
-  new Date('2026-12-01'),
+  new Date('2026-03-16'), new Date('2026-04-01'), new Date('2026-04-16'),
+  new Date('2026-05-01'), new Date('2026-05-16'), new Date('2026-06-01'),
+  new Date('2026-06-16'), new Date('2026-07-01'), new Date('2026-07-16'),
+  new Date('2026-08-01'), new Date('2026-08-16'), new Date('2026-09-01'),
+  new Date('2026-09-16'), new Date('2026-10-01'), new Date('2026-10-16'),
+  new Date('2026-11-01'), new Date('2026-11-16'), new Date('2026-12-01'),
 ];
 const PERIOD_END = new Date('2026-12-16');
 
@@ -54,7 +32,6 @@ const COLUMNS = [
   'Okt H1','Okt H2','Nov H1','Nov H2','Dec H1'
 ];
 
-// -- Workstream mapping --
 const LABEL_TO_WS = {
   'onboarding':'1','pos':'2','app':'3','fms':'4','commerce':'4',
   'b2b':'5','webshop':'6','operations':'7','pos-integration':'8',
@@ -66,7 +43,6 @@ const WS_NAMES = {
   '6':'Webshop','7':'Personal','8':'POS API','9':'NFC/Wallet','10':'Gates','all':'Alle'
 };
 
-// -- Phase mapping --
 const LABEL_TO_PHASE = {
   'phase-build':'build','phase-test':'test','phase-live':'live',
   'phase-scale':'scale','phase-polish':'polish','phase-critical':'critical',
@@ -79,7 +55,6 @@ const STATUS_TO_PHASE = {
   'Closed':'live','Ready for release':'test',
 };
 
-// -- Person mapping --
 const PERSON_MAP = {
   'jakob':'jakob','tony':'tony','michael':'michael',
   'mikkel':'mikkel','edwin':'edwin','simon':'simon',
@@ -94,7 +69,6 @@ function normalizePerson(displayName) {
   return lower.split(' ')[0].toLowerCase();
 }
 
-// -- Date to period mapping --
 function dateToPeriod(dateStr) {
   if (!dateStr) return null;
   const d = new Date(dateStr);
@@ -114,17 +88,13 @@ function computeSpan(startDate, endDate) {
   return Math.max(1, e - s + 1);
 }
 
-// -- Jira API helpers --
-async function jiraPost(path, body) {
+async function jiraFetch(path) {
   const url = `${JIRA_BASE}${path}`;
   const resp = await fetch(url, {
-    method: 'POST',
     headers: {
       'Authorization': `Basic ${AUTH}`,
       'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
+    }
   });
   if (!resp.ok) {
     const text = await resp.text();
@@ -134,21 +104,20 @@ async function jiraPost(path, body) {
 }
 
 async function fetchAllIssues() {
-  const jql = 'project = LCAP AND issuetype = Epic AND status not in (Closed) ORDER BY rank ASC';
-  const fields = [
-    'summary','status','assignee','labels','priority','issuetype',
-    'customfield_10015','customfield_10022','customfield_10023',
-    'duedate','issuelinks'
-  ];
+  const jql = encodeURIComponent(
+    'project = LCAP AND issuetype = Epic AND status not in (Closed) ORDER BY rank ASC'
+  );
+  const fields = 'summary,status,assignee,labels,priority,issuetype,' +
+    'customfield_10015,customfield_10022,customfield_10023,duedate,issuelinks';
 
   let allIssues = [];
   let startAt = 0;
   const maxResults = 100;
 
   while (true) {
-    const data = await jiraPost('/rest/api/3/search/jql', {
-      jql, fields, maxResults, startAt,
-    });
+    const data = await jiraFetch(
+      `/rest/api/2/search?jql=${jql}&fields=${fields}&maxResults=${maxResults}&startAt=${startAt}`
+    );
     allIssues = allIssues.concat(data.issues);
     if (startAt + data.issues.length >= data.total) break;
     startAt += maxResults;
@@ -158,7 +127,6 @@ async function fetchAllIssues() {
   return allIssues;
 }
 
-// -- Transform Jira issue to timeline task --
 function issueToTask(issue) {
   const f = issue.fields;
   let ws = '3';
@@ -172,12 +140,14 @@ function issueToTask(issue) {
     if (mapped) { phase = mapped; break; }
   }
   if (phase === 'build' && f.status) {
-    const statusPhase = STATUS_TO_PHASE[f.status.name];
+    const statusName = typeof f.status === 'object' ? f.status.name : f.status;
+    const statusPhase = STATUS_TO_PHASE[statusName];
     if (statusPhase) phase = statusPhase;
   }
   const persons = [];
   if (f.assignee) {
-    const p = normalizePerson(f.assignee.displayName);
+    const name = typeof f.assignee === 'object' ? f.assignee.displayName : f.assignee;
+    const p = normalizePerson(name);
     if (p) persons.push(p);
   }
   const startDate = f.customfield_10022 || f.customfield_10015 || null;
@@ -186,7 +156,7 @@ function issueToTask(issue) {
   const span = (startDate && endDate) ? computeSpan(startDate, endDate) : 1;
   const deps = [];
   for (const link of (f.issuelinks || [])) {
-    if (link.type.name === 'Blocks' && link.inwardIssue) {
+    if (link.type && link.type.name === 'Blocks' && link.inwardIssue) {
       deps.push(link.inwardIssue.key);
     }
   }
@@ -197,7 +167,6 @@ function issueToTask(issue) {
   };
 }
 
-// -- Main --
 async function main() {
   console.log('Syncing Jira LCAP -> data.json ...');
   const issues = await fetchAllIssues();
