@@ -41,6 +41,32 @@
     "goal": "Ringsted Festival prep — accessibility, billettyper, delegate access, dashboards, POS-forbedringer, test-runde af Sprint 3 features, gate design og onboarding-plan.",
     "issues": [
       {
+        "key": "LCAP-1065",
+        "summary": "POS/FMS: Konfigurerbare Beats-påfyldningsbeløb (mere end 100)",
+        "status": "Ready for testing",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-04-07T11:58:17.154+0200"
+      },
+      {
+        "key": "LCAP-1059",
+        "summary": "POS: Transaktioner opdateres for langsomt — hurtigere refresh/websockets",
+        "status": "Ready for testing",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-04-07T11:49:45.738+0200"
+      },
+      {
         "key": "LCAP-1084",
         "summary": "Manager Beats-tildeling — påkrævet begrundelse ved allokering",
         "status": "Ready for test",
@@ -290,19 +316,6 @@
         "updated": "2026-03-30T21:13:06.430+0200"
       },
       {
-        "key": "LCAP-1059",
-        "summary": "POS: Transaktioner opdateres for langsomt — hurtigere refresh/websockets",
-        "status": "Backlog",
-        "statusCategory": "new",
-        "assignee": "Tony Dieu",
-        "priority": "High",
-        "type": "Task",
-        "labels": [
-          "pos"
-        ],
-        "updated": "2026-03-30T21:13:04.950+0200"
-      },
-      {
         "key": "LCAP-1064",
         "summary": "POS: Auto-logout af gæst efter gennemført betaling (kritisk)",
         "status": "READY FOR TEST AT DEV",
@@ -340,19 +353,6 @@
           "pos"
         ],
         "updated": "2026-03-30T13:26:58.181+0200"
-      },
-      {
-        "key": "LCAP-1065",
-        "summary": "POS/FMS: Konfigurerbare Beats-påfyldningsbeløb (mere end 100)",
-        "status": "Backlog",
-        "statusCategory": "new",
-        "assignee": "Tony Dieu",
-        "priority": "High",
-        "type": "Task",
-        "labels": [
-          "pos"
-        ],
-        "updated": "2026-03-30T13:26:57.668+0200"
       },
       {
         "key": "LCAP-1063",
@@ -408,5 +408,5 @@
       }
     ]
   },
-  "generated": "2026-04-07T09:40:41.643Z"
+  "generated": "2026-04-07T10:09:20.138Z"
 }
