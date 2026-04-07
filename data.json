@@ -41,6 +41,32 @@
     "goal": "Ringsted Festival prep — accessibility, billettyper, delegate access, dashboards, POS-forbedringer, test-runde af Sprint 3 features, gate design og onboarding-plan.",
     "issues": [
       {
+        "key": "LCAP-1073",
+        "summary": "App: Fjern QR-kode fra billet-skærmen i appen",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-07T08:45:30.592+0200"
+      },
+      {
+        "key": "LCAP-1068",
+        "summary": "App: Kreditkort påkrævet i app for Beats top-up",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-07T08:45:20.724+0200"
+      },
+      {
         "key": "LCAP-1069",
         "summary": "App: Beats auto-refill — automatisk påfyldning når saldo er lav",
         "status": "Backlog",
@@ -368,32 +394,6 @@
         "updated": "2026-03-30T13:26:40.038+0200"
       },
       {
-        "key": "LCAP-1073",
-        "summary": "App: Fjern QR-kode fra billet-skærmen i appen",
-        "status": "Backlog",
-        "statusCategory": "new",
-        "assignee": "Mikkel Kornval Christoffersen",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-03-30T13:26:39.035+0200"
-      },
-      {
-        "key": "LCAP-1068",
-        "summary": "App: Kreditkort påkrævet i app for Beats top-up",
-        "status": "Backlog",
-        "statusCategory": "new",
-        "assignee": "Mikkel Kornval Christoffersen",
-        "priority": "High",
-        "type": "Task",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-03-30T13:26:36.902+0200"
-      },
-      {
         "key": "LCAP-1066",
         "summary": "Koncept: App-first — alt starter i kundens app (scan, betaling, identifikation)",
         "status": "Backlog",
@@ -408,5 +408,5 @@
       }
     ]
   },
-  "generated": "2026-04-07T06:37:57.274Z"
+  "generated": "2026-04-07T06:47:26.354Z"
 }
