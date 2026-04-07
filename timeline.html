@@ -1062,12 +1062,12 @@ let tasks = [
 
 // Overview tasks  -  one bar per workstream showing full span
 const overviewTasks = [
-  { id:'ov-1', label:'WS1  -  Onboarding / Billetter', ws:'1', persons:['jakob','michael','mikkel','edwin'], start:0, span:3, phases:[{start:0,span:2,phase:'build'},{start:2,span:1,phase:'test'}], desc:'Claim, delegate, transfer, billettyper. Kritisk: scanning-løsning ikke afklaret.', jira:'LCAP-1071-1079' },
+  { id:'ov-1', label:'WS1  -  Onboarding / Billetter', ws:'1', persons:['jakob','michael','edwin'], start:0, span:3, phases:[{start:0,span:2,phase:'build'},{start:2,span:1,phase:'test'}], desc:'Claim, delegate, transfer, billettyper. Jakob overtager hele billet-flowet.', jira:'LCAP-1071-1079' },
   { id:'ov-2', label:'WS2  -  POS Fixes', ws:'2', persons:['tony'], start:0, span:3, phases:[{start:0,span:2,phase:'build'},{start:2,span:1,phase:'test'}], desc:'Ret alle POS findings fra Bodegafesten + feedback fra barpersonale.', jira:'LCAP-1012-1065' },
-  { id:'ov-3', label:'WS3  -  App (fixes + Festival XP)', ws:'3', persons:['mikkel','edwin','jakob'], start:0, span:7, phases:[{start:0,span:1,phase:'critical'},{start:1,span:1,phase:'build'},{start:2,span:2,phase:'test'},{start:4,span:3,phase:'build'}], desc:'Sprint 4: Accessibility fix (Jakob), app findings. Test-runde Apr H2–Maj H1. Sprint 6-8: Festival Experience  -  kort, boder, community, gamification, pre-order (8 stories).', jira:'LCAP-1075,597,1102-1110' },
+  { id:'ov-3', label:'WS3  -  App (fixes + Festival XP)', ws:'3', persons:['mikkel','edwin'], start:0, span:7, phases:[{start:0,span:1,phase:'critical'},{start:1,span:1,phase:'build'},{start:2,span:2,phase:'test'},{start:4,span:3,phase:'build'}], desc:'Sprint 4: Mikkel overtager app UI (a11y, QR, profil). Test-runde Apr H2–Maj H1. Sprint 6-8: Festival Experience  -  kort, boder, community, gamification, pre-order (8 stories).', jira:'LCAP-1075,597,1102-1110' },
   { id:'ov-4', label:'WS4  -  Backend / FMS', ws:'4', persons:['michael','tony'], start:0, span:7, phases:[{start:0,span:2,phase:'build'},{start:2,span:2,phase:'build'},{start:4,span:2,phase:'build'},{start:6,span:1,phase:'test'}], desc:'Backend fixes, Dashboard, Inventory, Beats mgr. Swedbank færdig Sprint 4 (Tony).', jira:'LCAP-765,1081,1082,1098' },
-  { id:'ov-5', label:'WS5  -  B2B Flows', ws:'5', persons:['jakob','michael','edwin'], start:3, span:4, phases:[{start:3,span:3,phase:'build'},{start:6,span:1,phase:'test'}], desc:'Virksomheder administrerer egne billetter.', jira:'LCAP-633,1080' },
-  { id:'ov-6', label:'WS6  -  Webshop', ws:'6', persons:['jakob','edwin'], start:3, span:4, phases:[{start:3,span:3,phase:'build'},{start:6,span:1,phase:'test'}], desc:'Online salg af billetter og produkter.', jira:'LCAP-330,971-973' },
+  { id:'ov-5', label:'WS5  -  B2B Flows', ws:'5', persons:['michael','simon','edwin'], start:3, span:4, phases:[{start:3,span:3,phase:'build'},{start:6,span:1,phase:'test'}], desc:'B2B portal, akkreditering, virksomhedsbilletter. Simon overtager portal fra Tony.', jira:'LCAP-633,810,1080' },
+  { id:'ov-6', label:'WS6  -  Webshop', ws:'6', persons:['simon','edwin'], start:3, span:4, phases:[{start:3,span:3,phase:'build'},{start:6,span:1,phase:'test'}], desc:'Online salg af billetter og produkter.', jira:'LCAP-330,971-973' },
   { id:'ov-7', label:'WS7  -  Medarbejder-portal', ws:'7', persons:['jakob'], start:4, span:3, phases:[{start:4,span:2,phase:'build'},{start:6,span:1,phase:'test'}], desc:'Personaleadministration, roller, adgangsstyring.', jira:'LCAP-1091' },
   { id:'ov-8', label:'WS8  -  POS API (tredjepart)', ws:'8', persons:['tony'], start:3, span:4, phases:[{start:3,span:2,phase:'build'},{start:5,span:2,phase:'test'}], desc:'API for Joe & Juice, Volt m.fl.  -  betalingsinitiering + webhook.', jira:'LCAP-1092' },
   { id:'ov-9', label:'WS9  -  NFC / Wallet', ws:'9', persons:['tony','jakob'], start:2, span:5, phases:[{start:2,span:1,phase:'build'},{start:3,span:3,phase:'build'},{start:6,span:1,phase:'test'}], desc:'Apple VAS, Google Wallet, NFC-armbånd, POS-læsning.', jira:'LCAP-1093-1097' },
@@ -1089,40 +1089,44 @@ const capacityData = {
   'michael': {
     name: 'Michael Thuren',
     avgVelocity: 13.5,
-    activeTickets: 54,
+    activeTickets: 57,
     capacity: 42,
-    note: 'Ti+To+½Fre (2,5 dage/uge)  -  velocity allerede baseret på deltid',
+    note: 'Ti+To+½Fre (2,5 dage/uge)  -  velocity allerede baseret på deltid. 126 total tickets.',
   },
   'tony': {
     name: 'Tony Dieu',
     avgVelocity: 10.5,
-    activeTickets: 34,
+    activeTickets: 46,
     capacity: 33,
+    note: 'POS, Swedbank, NFC/Wallet, vendor API. 112 total tickets.',
   },
   'mikkel': {
     name: 'Mikkel Kornval Christoffersen',
     avgVelocity: 9.5,
-    activeTickets: 9,
+    activeTickets: 12,
     capacity: 29,
+    note: 'App UI: accessibility, QR, profil-screens, map app-views. 36 total tickets.',
   },
   'jakob': {
     name: 'Jakob Højgård',
     avgVelocity: 15,
-    activeTickets: 12,
+    activeTickets: 23,
     capacity: 47,
+    note: 'Billet-flow (scanning, deeplink, aktivering), gate design, UX. 46 total tickets.',
   },
   'edwin': {
     name: 'Edwin Maldonado',
     avgVelocity: 6,
-    activeTickets: 4,
+    activeTickets: 7,
     capacity: 19,
+    note: 'FMS/integration: staging, ETag, endpoints, map API + FMS editor. 22 total tickets.',
   },
   'simon': {
-    name: 'Simon',
-    avgVelocity: 0,
-    activeTickets: 0,
+    name: 'Simon Jensen',
+    avgVelocity: 4,
+    activeTickets: 12,
     capacity: 30,
-    note: 'Starter 1. april  -  onboarding uge 1-2, produktiv fra Sprint 5. FMS → Webshop → B2B',
+    note: 'FMS, vendor CRUD, B2B portal, ticket allocation. 22 total tickets. Ramp-up.',
   }
 };
 
@@ -1503,7 +1507,7 @@ const sprintData = [
     dates: '27. apr – 10. maj', colStart: 3, colSpan: 1,
     type: 'planned', tickets: 34, capacity: 33,
     goal: 'B2B og Webshop færdigt. Wallet Pass, POS API, gate HW. Test-kø under 25 (Jakob+Edwin+Simon). Festival XP: kort + boder.',
-    persons: { 'Michael': { count: 5, focus: 'B2B, inventory, arkitektur' }, 'Tony': { count: 6, focus: 'Wallet Pass, NFC, POS API, gate HW' }, 'Mikkel': { count: 6, focus: 'App polish + Festival-kort (camping)' }, 'Jakob': { count: 6, focus: 'Medarbejder-portal, NFC-armbånd' }, 'Edwin': { count: 6, focus: 'B2B test, Webshop test + Bod-præsentationer' }, 'Simon': { count: 5, focus: 'FMS dashboard + Webshop Web UI start' } },
+    persons: { 'Michael': { count: 5, focus: 'B2B, inventory, arkitektur' }, 'Tony': { count: 6, focus: 'Wallet Pass, NFC, POS API, gate HW' }, 'Mikkel': { count: 6, focus: 'App polish + Festival-kort (camping), map app-views' }, 'Jakob': { count: 6, focus: 'Medarbejder-portal, NFC-armbånd' }, 'Edwin': { count: 6, focus: 'Map API + FMS editor, Bod-præsentationer, test' }, 'Simon': { count: 5, focus: 'B2B portal, FMS dashboard + Webshop Web UI' } },
     workstreams: ['WS5','WS6','WS7','WS8','WS9','WS10','WS3']
   },
   {
@@ -1511,7 +1515,7 @@ const sprintData = [
     dates: '11. maj – 24. maj', colStart: 4, colSpan: 1,
     type: 'planned', tickets: 36, capacity: 33,
     goal: 'POS API partner-test. NFC-armbånd. Gate software. Festival XP: community, CDP, pre-order.',
-    persons: { 'Michael': { count: 5, focus: 'Gate SW, arkitektur + CDP-integration' }, 'Tony': { count: 5, focus: 'POS API partner-test, NFC test' }, 'Mikkel': { count: 6, focus: 'E2E test + Community: opret/join gruppe' }, 'Jakob': { count: 7, focus: 'Medarbejder-portal test, rekruttering' }, 'Edwin': { count: 6, focus: 'NFC/Wallet test + Pre-order udvidelse' }, 'Simon': { count: 7, focus: 'Webshop Web UI + B2B backend start' } },
+    persons: { 'Michael': { count: 5, focus: 'Gate SW, arkitektur + CDP-integration' }, 'Tony': { count: 5, focus: 'POS API partner-test, NFC test' }, 'Mikkel': { count: 6, focus: 'E2E test + Community: opret/join gruppe, map app-views' }, 'Jakob': { count: 7, focus: 'Medarbejder-portal test, rekruttering' }, 'Edwin': { count: 6, focus: 'Map FMS, NFC/Wallet test + Pre-order udvidelse' }, 'Simon': { count: 7, focus: 'B2B portal, Webshop Web UI' } },
     workstreams: ['WS7','WS8','WS9','WS10','Test','Ops','WS3']
   },
   {
