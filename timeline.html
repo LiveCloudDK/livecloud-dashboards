@@ -1089,6 +1089,16 @@ function renderCurrentSprint() {
       '<p style="margin-top:8px;font-size:13px">Data synkroniseres hver time p\u00e5 hverdage (07-19 CET).</p></div>';
   }
 
+  // ── Ensure manually-tracked issues are present (survives Jira sync) ──
+  const manualIssues = [
+    { key:'LCAP-1153', summary:'Align app, endpoints, environments og FMS på staging for fuld E2E test',
+      status:'In Progress', statusCategory:'indeterminate', assignee:'Edwin Maldonado',
+      assignees:['Edwin Maldonado','Mikkel Kornval Christoffersen'], priority:'Highest', type:'Task', labels:[], updated:'2026-04-07T15:30:00.000+0200' }
+  ];
+  for (const mi of manualIssues) {
+    if (!sprint.issues.some(i => i.key === mi.key)) sprint.issues.unshift(mi);
+  }
+
   // ── Team config ──
   const team = {
     'Tony Dieu':                      { n:'Tony',    c:'#60a5fa', r:'CTO / POS' },
@@ -1355,9 +1365,9 @@ const sprintData = [
   {
     id: 4, name: 'Sprint 4', subtitle: 'Kritiske fixes + fundament',
     dates: '30. mar – 12. apr', colStart: 0, colSpan: 2,
-    type: 'active', tickets: 25, capacity: 26,
-    goal: '⚠️ Billettyper klar EOD tir 7. apr (camping m/ flere adgange, ledsager/børn). Onboard Simon (1. apr). Ret kritiske Bodegafest-findings. App onboarding-flow for nye billettyper. Start Swedbank API (Tony). Test Sprint 3 features.',
-    persons: { 'Michael': { count: 7, focus: '⚠️ BILLETTYPER EOD TIR 7/4 (camping, ledsager, børn), backend onboarding, B2B' }, 'Tony': { count: 8, focus: 'POS findings + feedback, Swedbank integration' }, 'Mikkel': { count: 7, focus: 'Onboarding app (inkl. nye billettyper), app findings' }, 'Jakob': { count: 3, focus: 'Accessibility fix, scanning-løsningsdesign, gate design, UX' } },
+    type: 'active', tickets: 31, capacity: 26,
+    goal: '⚠️ Billettyper klar EOD tir 7. apr (camping m/ flere adgange, ledsager/børn). Onboard Simon (1. apr). Ret kritiske Bodegafest-findings. App onboarding-flow for nye billettyper. Start Swedbank API (Tony). Test Sprint 3 features. Edwin+Mikkel: align staging E2E.',
+    persons: { 'Michael': { count: 7, focus: '⚠️ BILLETTYPER EOD TIR 7/4 (camping, ledsager, børn), backend onboarding, B2B' }, 'Tony': { count: 8, focus: 'POS findings + feedback, Swedbank integration' }, 'Mikkel': { count: 7, focus: 'Onboarding app (inkl. nye billettyper), app findings, staging alignment' }, 'Edwin': { count: 5, focus: 'App findings, staging E2E alignment m/ Mikkel' }, 'Jakob': { count: 3, focus: 'Accessibility fix, scanning-løsningsdesign, gate design, UX' }, 'Simon': { count: 2, focus: 'FMS QA, test-runde (ramp-up)' } },
     workstreams: ['WS1','WS2','WS3','WS4','Test']
   },
   {
