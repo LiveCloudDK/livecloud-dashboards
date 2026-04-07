@@ -41,6 +41,32 @@
     "goal": "Ringsted Festival prep — accessibility, billettyper, delegate access, dashboards, POS-forbedringer, test-runde af Sprint 3 features, gate design og onboarding-plan.",
     "issues": [
       {
+        "key": "LCAP-1069",
+        "summary": "App: Beats auto-refill — automatisk påfyldning når saldo er lav",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-07T08:32:29.025+0200"
+      },
+      {
+        "key": "LCAP-1075",
+        "summary": "App: Accessibility — font size scaling bryder layout",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Bug",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-07T08:32:15.940+0200"
+      },
+      {
         "key": "LCAP-1084",
         "summary": "Manager Beats-tildeling — påkrævet begrundelse ved allokering",
         "status": "Backlog",
@@ -342,19 +368,6 @@
         "updated": "2026-03-30T13:26:40.038+0200"
       },
       {
-        "key": "LCAP-1075",
-        "summary": "App: Accessibility — font size scaling bryder layout",
-        "status": "Backlog",
-        "statusCategory": "new",
-        "assignee": "Mikkel Kornval Christoffersen",
-        "priority": "Medium",
-        "type": "Bug",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-03-30T13:26:39.523+0200"
-      },
-      {
         "key": "LCAP-1073",
         "summary": "App: Fjern QR-kode fra billet-skærmen i appen",
         "status": "Backlog",
@@ -366,19 +379,6 @@
           "app"
         ],
         "updated": "2026-03-30T13:26:39.035+0200"
-      },
-      {
-        "key": "LCAP-1069",
-        "summary": "App: Beats auto-refill — automatisk påfyldning når saldo er lav",
-        "status": "Backlog",
-        "statusCategory": "new",
-        "assignee": "Mikkel Kornval Christoffersen",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-03-30T13:26:37.425+0200"
       },
       {
         "key": "LCAP-1068",
@@ -408,5 +408,5 @@
       }
     ]
   },
-  "generated": "2026-04-07T06:11:21.585Z"
+  "generated": "2026-04-07T06:37:57.274Z"
 }
