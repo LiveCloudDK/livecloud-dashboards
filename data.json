@@ -41,6 +41,19 @@
     "goal": "Ringsted Festival prep — accessibility, billettyper, delegate access, dashboards, POS-forbedringer, test-runde af Sprint 3 features, gate design og onboarding-plan.",
     "issues": [
       {
+        "key": "LCAP-1084",
+        "summary": "Manager Beats-tildeling — påkrævet begrundelse ved allokering",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-07T11:31:26.796+0200"
+      },
+      {
         "key": "LCAP-1073",
         "summary": "App: Fjern QR-kode fra billet-skærmen i appen",
         "status": "Backlog",
@@ -91,19 +104,6 @@
           "app"
         ],
         "updated": "2026-04-07T08:32:15.940+0200"
-      },
-      {
-        "key": "LCAP-1084",
-        "summary": "Manager Beats-tildeling — påkrævet begrundelse ved allokering",
-        "status": "Backlog",
-        "statusCategory": "new",
-        "assignee": "Tony Dieu",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-06T19:48:51.091+0200"
       },
       {
         "key": "LCAP-1071",
@@ -408,5 +408,5 @@
       }
     ]
   },
-  "generated": "2026-04-07T09:09:29.425Z"
+  "generated": "2026-04-07T09:32:07.725Z"
 }
