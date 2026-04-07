@@ -41,18 +41,6 @@
     "goal": "Ringsted Festival prep — accessibility, billettyper, delegate access, dashboards, POS-forbedringer, test-runde af Sprint 3 features, gate design og onboarding-plan.",
     "issues": [
       {
-        "key": "LCAP-1153",
-        "summary": "Align app, endpoints, environments og FMS på staging for fuld E2E test",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Edwin Maldonado",
-        "assignees": ["Edwin Maldonado", "Mikkel Kornval Christoffersen"],
-        "priority": "Highest",
-        "type": "Task",
-        "labels": [],
-        "updated": "2026-04-07T15:30:00.000+0200"
-      },
-      {
         "key": "LCAP-1156",
         "summary": "E2E: expand Swedbank sandbox tests for cashout reversal flow",
         "status": "Backlog",
@@ -446,5 +434,5 @@
       }
     ]
   },
-  "generated": "2026-04-07T15:30:47.383Z"
+  "generated": "2026-04-07T15:39:43.538Z"
 }
