@@ -959,11 +959,11 @@ const visibleCols = 18;
 let tasks = [
   // === FASE 1: Sprint 4 (Mar 30 - Apr 13) ===
   // WS1 Onboarding
-  { id:'ws1-scan', label:'Billet-scanning & aktivering (løsningsdesign)', ws:'1', persons:['jakob','mikkel','michael'], start:0, span:2, phase:'critical', jira:'LCAP-1076', deps:[], desc:'Stor kritisk opgave  -  løsning ikke afklaret endnu' },
+  { id:'ws1-scan', label:'Billet-scanning & aktivering (løsningsdesign)', ws:'1', persons:['jakob','michael'], start:0, span:2, phase:'critical', jira:'LCAP-1076', deps:[], desc:'Jakob overtager billet-flow. Michael på backend.' },
     { id:'ws4-simon-p1', label:'Simon onboarding: Quick wins (vendor API)', ws:'4', persons:['simon'], start:0, span:1, phase:'test', jira:'LCAP-1118', deps:[] },
     { id:'ws4-simon-p2', label:'Simon: CRUD, exports, bulk ops', ws:'4', persons:['simon'], start:1, span:2, phase:'build', jira:'LCAP-1129', deps:['ws4-simon-p1'] },
   { id:'ws1-backend', label:'Onboarding backend (claim, delegate, transfer)', ws:'1', persons:['michael'], start:0, span:2, phase:'build', jira:'LCAP-1078,1079,989,990', deps:[] },
-  { id:'ws1-app', label:'Onboarding app flows', ws:'1', persons:['mikkel'], start:0, span:2, phase:'build', jira:'LCAP-1071,1072,1073', deps:[] },
+  { id:'ws1-app', label:'Onboarding app flows (billet-scanning + deeplink)', ws:'1', persons:['jakob'], start:0, span:2, phase:'build', jira:'LCAP-1071,1072', deps:[], desc:'Jakob overtager hele billet-flowet fra Mikkel' },
   { id:'ws1-ux', label:'Onboarding UX/UI (Jakob + Jay)', ws:'1', persons:['jakob'], start:0, span:1, phase:'build', jira:'', deps:[] },
   { id:'ws1-edge', label:'EDGE cases (transfer/claim sikkerhed)', ws:'1', persons:['michael','tony'], start:0, span:2, phase:'build', jira:'LCAP-904-912', deps:[] },
   { id:'ws1-test', label:'Test-runde Sprint 3 features (25 tickets)', ws:'1', persons:['edwin'], start:0, span:2, phase:'test', jira:'LCAP-1074', deps:[] },
@@ -974,9 +974,9 @@ let tasks = [
   { id:'ws2-feedback', label:'POS feedback (ordrevisning, Beats, auto-logout)', ws:'2', persons:['tony'], start:1, span:2, phase:'build', jira:'LCAP-1059-1065', deps:[] },
 
   // WS3 App Fixes
-  { id:'ws3-a11y', label:'Accessibility  -  font scaling fix', ws:'3', persons:['jakob'], start:0, span:1, phase:'critical', jira:'LCAP-1075', deps:[] },
-  { id:'ws3-fix', label:'App findings fra Bodegafesten', ws:'3', persons:['edwin','mikkel'], start:0, span:2, phase:'build', jira:'LCAP-597,998,980-981', deps:[] },
-  { id:'ws3-test', label:'App test-runde (Sprint 4 fixes + a11y)', ws:'3', persons:['edwin'], start:2, span:2, phase:'test', jira:'', deps:['ws3-fix','ws3-a11y'] },
+  { id:'ws3-a11y', label:'Accessibility  -  font scaling fix', ws:'3', persons:['mikkel'], start:0, span:1, phase:'critical', jira:'LCAP-1075', deps:[], desc:'Mikkel overtager fra Edwin — app UI domæne' },
+  { id:'ws3-fix', label:'App findings fra Bodegafesten', ws:'3', persons:['mikkel'], start:0, span:2, phase:'build', jira:'LCAP-597,998,980-981,1073', deps:[], desc:'Mikkel overtager primært — inkl. QR-kode fjernelse og profil-screens' },
+  { id:'ws3-test', label:'App test-runde (Sprint 4 fixes + a11y)', ws:'3', persons:['edwin','simon'], start:2, span:2, phase:'test', jira:'', deps:['ws3-fix','ws3-a11y'], desc:'Edwin + Simon deler test-runden' },
 
   // WS4 Backend Fixes
   { id:'ws4-fix', label:'Backend ticket findings + checkout', ws:'4', persons:['michael'], start:0, span:2, phase:'build', jira:'LCAP-765,671,979,992', deps:[] },
@@ -1486,16 +1486,16 @@ const sprintData = [
     id: 4, name: 'Sprint 4', subtitle: 'Kritiske fixes + fundament',
     dates: '30. mar – 12. apr', colStart: 0, colSpan: 2,
     type: 'active', tickets: 31, capacity: 26,
-    goal: '⚠️ Billettyper klar EOD tir 7. apr (camping m/ flere adgange, ledsager/børn). Onboard Simon (1. apr). Ret kritiske Bodegafest-findings. App onboarding-flow for nye billettyper. Start Swedbank API (Tony). Test Sprint 3 features. Edwin+Mikkel: align staging E2E.',
-    persons: { 'Michael': { count: 7, focus: '⚠️ BILLETTYPER EOD TIR 7/4 (camping, ledsager, børn), backend onboarding, B2B' }, 'Tony': { count: 8, focus: 'POS findings + feedback, Swedbank integration' }, 'Mikkel': { count: 7, focus: 'Onboarding app (inkl. nye billettyper), app findings, staging alignment' }, 'Edwin': { count: 5, focus: 'App findings, staging E2E alignment m/ Mikkel' }, 'Jakob': { count: 3, focus: 'Accessibility fix, scanning-løsningsdesign, gate design, UX' }, 'Simon': { count: 2, focus: 'FMS QA, test-runde (ramp-up)' } },
+    goal: '⚠️ Billettyper klar EOD tir 7. apr (camping m/ flere adgange, ledsager/børn). Onboard Simon (1. apr). Ret kritiske Bodegafest-findings. Jakob overtager hele billet-flowet. Mikkel fokuserer på app UI (a11y, QR, profil). Edwin fokuserer på staging + FMS. Start Swedbank API (Tony).',
+    persons: { 'Michael': { count: 7, focus: '⚠️ BILLETTYPER EOD TIR 7/4 (camping, ledsager, børn), backend onboarding, B2B' }, 'Tony': { count: 8, focus: 'POS findings + feedback, Swedbank integration' }, 'Jakob': { count: 6, focus: 'Billet-flow (scanning, deeplink, aktivering), løsningsdesign, UX' }, 'Mikkel': { count: 6, focus: 'App UI: accessibility fix, QR-fjernelse, profil-screens, app findings' }, 'Edwin': { count: 4, focus: 'Staging E2E alignment, FMS ETag caching' }, 'Simon': { count: 2, focus: 'FMS QA, test-runde (ramp-up)' } },
     workstreams: ['WS1','WS2','WS3','WS4','Test']
   },
   {
     id: 5, name: 'Sprint 5', subtitle: 'Nye features + test-push',
     dates: '13. apr – 26. apr', colStart: 2, colSpan: 1,
     type: 'planned', tickets: 26, capacity: 26,
-    goal: 'Start B2B, Webshop, NFC VAS. Test-prioritering: Jakob + Edwin + Simon kører QA (Mikkel overdrager). Mål: halvere test-kø (50 tickets). Start supporter-rekruttering.',
-    persons: { 'Michael': { count: 5, focus: 'B2B backend, arkitektur' }, 'Tony': { count: 5, focus: 'Apple VAS, POS API, NFC' }, 'Mikkel': { count: 5, focus: 'Onboarding app, overdrager tests til Jakob+Edwin+Simon' }, 'Jakob': { count: 7, focus: 'B2B web, Webshop, rekruttering' }, 'Edwin': { count: 5, focus: 'B2B app, Webshop + test-kø' }, 'Simon': { count: 3, focus: 'FMS dashboard (ramp-up, guided)' } },
+    goal: 'Start B2B, Webshop, NFC VAS. Mikkel fortsætter app UI polish + in-event layout. Edwin + Simon kører QA. Mål: halvere test-kø (50 tickets). Start supporter-rekruttering.',
+    persons: { 'Michael': { count: 5, focus: 'B2B backend, arkitektur' }, 'Tony': { count: 5, focus: 'Apple VAS, POS API, NFC' }, 'Jakob': { count: 7, focus: 'Billet-flow afslutning, B2B web, rekruttering' }, 'Mikkel': { count: 6, focus: 'App UI polish, in-event layout, profil-screens' }, 'Edwin': { count: 4, focus: 'B2B app integration + test-kø' }, 'Simon': { count: 3, focus: 'FMS dashboard (ramp-up, guided)' } },
     workstreams: ['WS5','WS6','WS9','Test','Ops']
   },
   {
