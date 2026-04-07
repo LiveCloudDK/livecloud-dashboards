@@ -121,7 +121,8 @@
 
   .timeline-container {
     padding: 24px 32px 80px 32px;
-    overflow-x: auto;
+    overflow-x: clip;
+    overflow-y: visible;
   }
 
   .legend {
@@ -1117,7 +1118,12 @@ function renderCurrentSprint() {
     for (const k of names) (byP[k]=byP[k]||[]).push(i);
   }
   const order = ['Tony Dieu','Michael Thuren','Mikkel Kornval Christoffersen','Edwin Maldonado','Simon Jensen','Jakob H\u00f8jg\u00e5rd'];
-  const people = order.filter(n=>byP[n]).concat(Object.keys(byP).filter(n=>!order.includes(n)));
+  let people = order.filter(n=>byP[n]).concat(Object.keys(byP).filter(n=>!order.includes(n)));
+
+  // Filter by selected person
+  if (state.person !== 'all') {
+    people = people.filter(n => n.toLowerCase().includes(state.person));
+  }
 
   // Sort each person: in-progress first, then highest priority, done last
   for (const p of people) {
