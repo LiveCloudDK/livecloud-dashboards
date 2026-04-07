@@ -41,6 +41,32 @@
     "goal": "Ringsted Festival prep — accessibility, billettyper, delegate access, dashboards, POS-forbedringer, test-runde af Sprint 3 features, gate design og onboarding-plan.",
     "issues": [
       {
+        "key": "LCAP-1156",
+        "summary": "E2E: expand Swedbank sandbox tests for cashout reversal flow",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": null,
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-04-07T14:17:21.048+0200"
+      },
+      {
+        "key": "LCAP-1155",
+        "summary": "FMS: dedicated cashout endpoint for beats-to-card refund",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Sub-task",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-07T14:13:40.619+0200"
+      },
+      {
         "key": "LCAP-1071",
         "summary": "Billet-flow: Deeplink i billetmail til automatisk aktivering i app",
         "status": "Ready for release",
@@ -408,5 +434,5 @@
       }
     ]
   },
-  "generated": "2026-04-07T12:01:57.877Z"
+  "generated": "2026-04-07T12:36:59.852Z"
 }
