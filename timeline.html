@@ -1034,6 +1034,16 @@ let wsNames = {
       }
     }
 
+    // Manual sync button handler
+    window._syncJira = async function() {
+      const btn = document.getElementById('sync-btn');
+      if (btn) { btn.textContent = '\u21BB Synkroniserer...'; btn.disabled = true; btn.style.opacity = '0.6'; }
+      await loadTimelineData();
+      render();
+      if (btn) { btn.innerHTML = '\u2714 Opdateret!'; btn.style.opacity = '1'; }
+      setTimeout(() => { if (btn) { btn.innerHTML = '\u21BB Sync fra Jira'; btn.disabled = false; } }, 2000);
+    };
+
 
 const wsColors = {
   '1':'#6366f1','2':'#f97316','3':'#06b6d4','4':'#3b82f6','5':'#22c55e',
@@ -1045,7 +1055,10 @@ const personColors = {
 };
 
 // ===== RENDER =====
-const state = { ws: 'all', person: 'all', phase: 'all', view: 'detail' };
+// Restore view from URL hash (e.g. #current-sprint)
+const validViews = ['detail','overview','sprints','capacity','current-sprint'];
+const hashView = location.hash.replace('#','');
+const state = { ws: 'all', person: 'all', phase: 'all', view: validViews.includes(hashView) ? hashView : 'detail' };
 
 
 // ── Current Sprint View ────────────────────────────────────────
@@ -1121,7 +1134,7 @@ function renderCurrentSprint() {
     h += '<strong style="color:var(--text)">M\u00e5l:</strong> ' + sprint.goal + '</div>';
   }
 
-  // Board links
+  // Board links + Sync button
   h += '<div style="display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap;align-items:center">';
   const boards = [
     {n:'APP',u:'https://u-ii-u.atlassian.net/jira/software/c/projects/LCAP/boards/202',c:'#a78bfa'},
@@ -1132,6 +1145,8 @@ function renderCurrentSprint() {
   for (const b of boards) {
     h += '<a href="'+b.u+'" target="_blank" style="padding:2px 10px;border-radius:4px;font-size:11px;font-weight:600;background:'+b.c+'15;color:'+b.c+';text-decoration:none;border:1px solid '+b.c+'30">'+b.n+'</a>';
   }
+  h += '<span style="flex:1"></span>';
+  h += '<button onclick="window._syncJira()" id="sync-btn" style="padding:3px 12px;border-radius:5px;font-size:11px;font-weight:600;background:var(--accent)12;color:var(--accent);border:1px solid var(--accent)33;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all 0.15s" onmouseover="this.style.background=\'var(--accent)\';this.style.color=\'#fff\'" onmouseout="this.style.background=\'var(--accent)12\';this.style.color=\'var(--accent)\'">\u21BB Sync fra Jira</button>';
   h += '</div>';
 
   // ===== PER-PERSON SECTIONS =====
@@ -2047,18 +2062,27 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
   });
 });
 
-// View toggle
+// View toggle — persist in URL hash
 document.querySelectorAll('.view-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     state.view = btn.dataset.view;
+    history.replaceState(null, '', '#' + state.view);
     render();
   });
 });
 
 // Initial data load + render
-loadTimelineData().then(() => { render(); });
+loadTimelineData().then(() => {
+  // Activate the correct view button from URL hash
+  if (state.view !== 'detail') {
+    document.querySelectorAll('.view-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.view === state.view);
+    });
+  }
+  render();
+});
 
 // Re-render dependencies on resize
 window.addEventListener('resize', () => { if (state.view === 'detail') renderDependencies(); });
@@ -2073,6 +2097,7 @@ window.addEventListener('resize', () => { if (state.view === 'detail') renderDep
         document.querySelectorAll(".mobile-tab").forEach(t => t.classList.remove("active"));
         tab.classList.add("active");
         state.view = tab.dataset.view;
+        history.replaceState(null, '', '#' + state.view);
         // Sync desktop view buttons
         document.querySelectorAll(".view-btn").forEach(b => {
           b.classList.toggle("active", b.dataset.view === state.view);
