@@ -685,6 +685,67 @@
     border-color: var(--accent);
   }
 
+  /* ===== MOBILE SUB BAR (person filter + sync) ===== */
+  .mobile-sub-bar {
+    display: none;
+    flex-direction: column;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+  }
+
+  .mobile-person-filter {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 0;
+    padding: 0 8px;
+    scrollbar-width: none;
+  }
+  .mobile-person-filter::-webkit-scrollbar { display: none; }
+
+  .mobile-person-btn {
+    flex-shrink: 0;
+    padding: 6px 12px;
+    background: transparent;
+    color: var(--text-muted);
+    border: none;
+    border-bottom: 2px solid transparent;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .mobile-person-btn.active {
+    color: var(--accent-light);
+    border-bottom-color: var(--accent-light);
+  }
+
+  .mobile-sync-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 12px 6px;
+    border-top: 1px solid var(--border);
+  }
+  .mobile-updated {
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+  .mobile-sync-btn {
+    padding: 3px 10px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--surface2);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    font-family: inherit;
+  }
+
   /* ===== MOBILE CARD VIEW ===== */
 
 
@@ -692,16 +753,39 @@
     /* Hide desktop button filters, show dropdowns */
     .filters { display: none !important; }
     .mobile-filters { display: flex !important; position: fixed; bottom: 44px; left: 0; right: 0; z-index: 100; background: var(--surface); border-top: 1px solid var(--border); }
+    .mobile-sub-bar { display: flex !important; }
     .legend { display: none !important; }
 
     /* Compact header */
-    .header { padding: 12px; }
+    .header { padding: 10px 12px; }
     .header h1 { font-size: 16px; }
     .header-meta { font-size: 11px; }
 
     /* Timeline: scrollable, min-width for readability, auto-scroll to today */
-    .timeline-container { padding: 8px !important; overflow-x: auto !important; -webkit-overflow-scrolling: touch; }
+    .timeline-container { padding: 8px 8px 120px 8px !important; overflow-x: auto !important; -webkit-overflow-scrolling: touch; }
     .timeline { min-width: 900px !important; }
+
+    /* When in current-sprint view, disable horizontal scroll / min-width */
+    body.view-current-sprint .timeline-container { overflow-x: clip !important; }
+    body.view-current-sprint .timeline { min-width: 0 !important; }
+
+    /* Mobile Aktivt Sprint: tighter spacing */
+    body.view-current-sprint .timeline > div[style*="margin-bottom"] {
+      margin-bottom: 10px !important;
+      border-radius: 8px !important;
+    }
+    body.view-current-sprint .timeline a[style*="padding:10px 14px"] {
+      padding: 8px 10px !important;
+    }
+    body.view-current-sprint .timeline a[style*="padding:8px 14px"] {
+      padding: 6px 10px !important;
+    }
+    body.view-current-sprint .timeline a[style*="padding:5px 14px"] {
+      padding: 4px 10px !important;
+    }
+    body.view-current-sprint .timeline a[style*="padding:3px 14px"] {
+      padding: 2px 10px !important;
+    }
 
     /* Compact gantt rows */
     .timeline-header,
@@ -799,10 +883,26 @@
 
 <div class="mobile-filters">
   <div class="mobile-tabs">
+    <button class="mobile-tab" data-view="current-sprint">Sprint</button>
     <button class="mobile-tab active" data-view="sprints">Sprints</button>
-    <button class="mobile-tab" data-view="overview">Overordnet</button>
-    <button class="mobile-tab" data-view="detail">Detaljeret</button>
+    <button class="mobile-tab" data-view="overview">Overblik</button>
+    <button class="mobile-tab" data-view="detail">Gantt</button>
     <button class="mobile-tab" data-view="capacity">Kapacitet</button>
+  </div>
+</div>
+<div class="mobile-sub-bar">
+  <div class="mobile-person-filter">
+    <button class="mobile-person-btn active" data-person="all">Alle</button>
+    <button class="mobile-person-btn" data-person="jakob">Jakob</button>
+    <button class="mobile-person-btn" data-person="tony">Tony</button>
+    <button class="mobile-person-btn" data-person="michael">Michael</button>
+    <button class="mobile-person-btn" data-person="mikkel">Mikkel</button>
+    <button class="mobile-person-btn" data-person="edwin">Edwin</button>
+    <button class="mobile-person-btn" data-person="simon">Simon</button>
+  </div>
+  <div class="mobile-sync-row">
+    <span class="mobile-updated" id="mobile-last-updated"></span>
+    <button onclick="window._syncJira()" class="mobile-sync-btn">&#x21BB; Sync</button>
   </div>
 </div>
 <div class="timeline-container">
@@ -1034,6 +1134,8 @@ let wsNames = {
         if (el) el.textContent = 'Synkroniseret fra Jira: ' + dateStr;
         const metaEl = document.getElementById('last-updated');
         if (metaEl) metaEl.textContent = 'Opdateret: ' + dateStr + ' kl. ' + timeStr;
+        const mobileMetaEl = document.getElementById('mobile-last-updated');
+        if (mobileMetaEl) mobileMetaEl.textContent = dateStr + ' kl. ' + timeStr;
         console.log('Loaded ' + tasks.length + ' tasks from data.json (' + data.generated + ')');
       } catch (err) {
         console.warn('data.json not available, using fallback tasks:', err.message);
@@ -1309,6 +1411,9 @@ function render() {
   const tl = document.getElementById('timeline');
   const legend = document.getElementById('legend');
   let html = '';
+
+  // Toggle body class for view-specific mobile CSS
+  document.body.className = 'view-' + state.view;
 
   if (state.view === 'capacity') {
     legend.style.display = 'none';
@@ -2139,6 +2244,20 @@ window.addEventListener('resize', () => { if (state.view === 'detail') renderDep
       });
     });
 
+    // Mobile person filter handlers
+    document.querySelectorAll(".mobile-person-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".mobile-person-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        state.person = btn.dataset.person;
+        // Sync desktop person buttons
+        document.querySelectorAll('.filter-btn[data-filter="person"]').forEach(b => {
+          b.classList.toggle("active", b.dataset.value === state.person);
+        });
+        render();
+      });
+    });
+
     // Desktop select handlers (Spor & Faser)
     document.querySelectorAll(".desktop-select").forEach(sel => {
       sel.addEventListener("change", () => {
@@ -2153,6 +2272,10 @@ window.addEventListener('resize', () => { if (state.view === 'detail') renderDep
     // Sync mobile tabs with current state.view
     document.querySelectorAll(".mobile-tab").forEach(t => {
       t.classList.toggle("active", t.dataset.view === state.view);
+    });
+    // Sync mobile person filter
+    document.querySelectorAll(".mobile-person-btn").forEach(b => {
+      b.classList.toggle("active", b.dataset.person === state.person);
     });
     // Sync desktop selects with state
     document.querySelectorAll(".desktop-select").forEach(sel => {
