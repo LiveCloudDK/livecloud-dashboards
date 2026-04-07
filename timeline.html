@@ -637,17 +637,18 @@
 
   .mobile-tab {
     flex: 1;
-    padding: 6px 4px;
+    padding: 8px 2px 6px;
     background: var(--surface);
     color: var(--text-muted);
     border: none;
-    border-bottom: 2px solid transparent;
-    font-size: 12px;
+    border-top: 2px solid transparent;
+    font-size: 10px;
     font-weight: 600;
     font-family: inherit;
     cursor: pointer;
     transition: all 0.2s;
     text-align: center;
+    letter-spacing: 0.3px;
   }
 
   .mobile-tab:hover {
@@ -657,7 +658,7 @@
 
   .mobile-tab.active {
     color: var(--accent);
-    border-bottom-color: var(--accent);
+    border-top-color: var(--accent);
     background: var(--surface);
   }
 
@@ -688,10 +689,12 @@
   /* ===== MOBILE SUB BAR (person filter + sync) ===== */
   .mobile-sub-bar {
     display: none;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
     background: var(--surface);
     border-bottom: 1px solid var(--border);
     padding: 0;
+    gap: 0;
   }
 
   .mobile-person-filter {
@@ -699,19 +702,21 @@
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     gap: 0;
-    padding: 0 8px;
+    padding: 0 4px;
     scrollbar-width: none;
+    flex: 1;
+    min-width: 0;
   }
   .mobile-person-filter::-webkit-scrollbar { display: none; }
 
   .mobile-person-btn {
     flex-shrink: 0;
-    padding: 6px 12px;
+    padding: 6px 10px;
     background: transparent;
     color: var(--text-muted);
     border: none;
     border-bottom: 2px solid transparent;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     font-family: inherit;
     cursor: pointer;
@@ -726,66 +731,79 @@
   .mobile-sync-row {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 4px 12px 6px;
-    border-top: 1px solid var(--border);
+    gap: 6px;
+    padding: 0 8px 0 4px;
+    flex-shrink: 0;
+    border-left: 1px solid var(--border);
   }
   .mobile-updated {
-    font-size: 10px;
+    font-size: 9px;
     color: var(--text-muted);
+    white-space: nowrap;
+    max-width: 50px;
+    overflow: hidden;
   }
   .mobile-sync-btn {
-    padding: 3px 10px;
+    padding: 3px 8px;
     border-radius: 5px;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 600;
     background: var(--surface2);
     color: var(--text-muted);
     border: 1px solid var(--border);
     cursor: pointer;
     font-family: inherit;
+    white-space: nowrap;
   }
 
   /* ===== MOBILE CARD VIEW ===== */
 
 
   @media (max-width: 768px) {
-    /* Hide desktop button filters, show dropdowns */
+    /* Hide desktop filters, show mobile nav */
     .filters { display: none !important; }
-    .mobile-filters { display: flex !important; position: fixed; bottom: 44px; left: 0; right: 0; z-index: 100; background: var(--surface); border-top: 1px solid var(--border); }
+    .mobile-filters { display: flex !important; position: fixed; bottom: 0; left: 0; right: 0; z-index: 100; background: var(--surface); border-top: 1px solid var(--border); }
     .mobile-sub-bar { display: flex !important; }
     .legend { display: none !important; }
 
-    /* Compact header */
-    .header { padding: 10px 12px; }
-    .header h1 { font-size: 16px; }
-    .header-meta { font-size: 11px; }
+    /* Compact header — hide desktop sync (redundant with mobile-sub-bar) */
+    .header { padding: 8px 12px; }
+    .header h1 { font-size: 15px; }
+    .header-meta { font-size: 10px; }
+    .header > div:last-child { display: none !important; }
 
-    /* Timeline: scrollable, min-width for readability, auto-scroll to today */
-    .timeline-container { padding: 8px 8px 120px 8px !important; overflow-x: auto !important; -webkit-overflow-scrolling: touch; }
+    /* Stats bar: sits above bottom nav */
+    .stats-bar { position: fixed; bottom: 38px; left: 0; right: 0; z-index: 99; padding: 4px 8px; gap: 6px; flex-wrap: nowrap; font-size: 10px; border-top: 1px solid var(--border); }
+    .stat-value { font-size: 12px; }
+    .stat-label { font-size: 8px; }
+
+    /* Content area: enough bottom padding to clear fixed bars */
+    .timeline-container { padding: 6px 6px 110px 6px !important; overflow-x: auto !important; -webkit-overflow-scrolling: touch; }
     .timeline { min-width: 900px !important; }
 
-    /* When in current-sprint view, disable horizontal scroll / min-width */
+    /* Current-sprint view: no horizontal scroll needed */
     body.view-current-sprint .timeline-container { overflow-x: clip !important; }
     body.view-current-sprint .timeline { min-width: 0 !important; }
 
-    /* Mobile Aktivt Sprint: tighter spacing */
+    /* Mobile Aktivt Sprint: tighter card spacing */
     body.view-current-sprint .timeline > div[style*="margin-bottom"] {
-      margin-bottom: 10px !important;
+      margin-bottom: 8px !important;
       border-radius: 8px !important;
     }
     body.view-current-sprint .timeline a[style*="padding:10px 14px"] {
-      padding: 8px 10px !important;
+      padding: 7px 8px !important;
     }
     body.view-current-sprint .timeline a[style*="padding:8px 14px"] {
-      padding: 6px 10px !important;
+      padding: 5px 8px !important;
     }
     body.view-current-sprint .timeline a[style*="padding:5px 14px"] {
-      padding: 4px 10px !important;
+      padding: 3px 8px !important;
     }
     body.view-current-sprint .timeline a[style*="padding:3px 14px"] {
-      padding: 2px 10px !important;
+      padding: 2px 8px !important;
     }
+    /* Smaller font for issue summaries on mobile */
+    body.view-current-sprint .timeline a { font-size: 12px !important; }
 
     /* Compact gantt rows */
     .timeline-header,
@@ -796,7 +814,7 @@
     .gantt-bar { font-size: 8px; height: 16px; padding: 0 2px; }
     .month-header { font-size: 9px; padding: 2px 0; }
 
-    /* Capacity: 2-col grid for cards */
+    /* Capacity: single column on very narrow, 2-col on wider */
     .capacity-dashboard { grid-template-columns: repeat(2, 1fr) !important; gap: 8px; }
     .capacity-card { padding: 10px; }
     .capacity-card h3 { font-size: 11px; margin-bottom: 8px; }
@@ -813,10 +831,8 @@
     /* Risk section */
     .risk-section { padding: 12px; margin-bottom: 12px; }
 
-    /* Stats bar */
-    .stats-bar { padding: 6px 8px; gap: 8px; flex-wrap: nowrap; font-size: 10px; }
-    .stat-value { font-size: 13px; }
-    .stat-label { font-size: 9px; }
+    /* Sprints overview: tighter cards */
+    body.view-sprints .timeline > div { margin-bottom: 12px !important; }
   }
   </style>
 </head>
@@ -901,8 +917,7 @@
     <button class="mobile-person-btn" data-person="simon">Simon</button>
   </div>
   <div class="mobile-sync-row">
-    <span class="mobile-updated" id="mobile-last-updated"></span>
-    <button onclick="window._syncJira()" class="mobile-sync-btn">&#x21BB; Sync</button>
+    <button onclick="window._syncJira()" class="mobile-sync-btn" title="Sidst opdateret" id="mobile-sync-trigger">&#x21BB;</button>
   </div>
 </div>
 <div class="timeline-container">
@@ -1134,8 +1149,8 @@ let wsNames = {
         if (el) el.textContent = 'Synkroniseret fra Jira: ' + dateStr;
         const metaEl = document.getElementById('last-updated');
         if (metaEl) metaEl.textContent = 'Opdateret: ' + dateStr + ' kl. ' + timeStr;
-        const mobileMetaEl = document.getElementById('mobile-last-updated');
-        if (mobileMetaEl) mobileMetaEl.textContent = dateStr + ' kl. ' + timeStr;
+        const mobileSyncBtn = document.getElementById('mobile-sync-trigger');
+        if (mobileSyncBtn) mobileSyncBtn.title = 'Opdateret: ' + dateStr + ' kl. ' + timeStr;
         console.log('Loaded ' + tasks.length + ' tasks from data.json (' + data.generated + ')');
       } catch (err) {
         console.warn('data.json not available, using fallback tasks:', err.message);
