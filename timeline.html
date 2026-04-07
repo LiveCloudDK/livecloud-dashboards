@@ -1109,9 +1109,13 @@ function renderCurrentSprint() {
   const total = sprint.issues.length;
   const pct = total>0 ? Math.round(nDone/total*100) : 0;
 
-  // ── Group by person, sort within ──
+  // ── Group by person, sort within (supports co-assignees via assignees array) ──
   const byP = {};
-  for (const i of sprint.issues) { const k=i.assignee||'Unassigned'; (byP[k]=byP[k]||[]).push(i); }
+  for (const i of sprint.issues) {
+    const names = Array.isArray(i.assignees) && i.assignees.length > 0
+      ? i.assignees : (i.assignee ? [i.assignee] : ['Unassigned']);
+    for (const k of names) (byP[k]=byP[k]||[]).push(i);
+  }
   const order = ['Tony Dieu','Michael Thuren','Mikkel Kornval Christoffersen','Edwin Maldonado','Simon Jensen','Jakob H\u00f8jg\u00e5rd'];
   const people = order.filter(n=>byP[n]).concat(Object.keys(byP).filter(n=>!order.includes(n)));
 
