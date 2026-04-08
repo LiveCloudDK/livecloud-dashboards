@@ -1275,11 +1275,21 @@ function renderCurrentSprint() {
     people = people.filter(n => n.toLowerCase().includes(state.person));
   }
 
-  // Sort each person: in-progress first, then highest priority, done last
+  // Sort each person: In Progress → Selected for Development → Backlog → Done, then by priority
+  const statusOrder = (s) => {
+    const sl = (s||'').toLowerCase();
+    if (sl === 'in progress') return 0;
+    if (sl === 'selected for development') return 1;
+    if (sl === 'backlog') return 3;
+    return 2; // other active statuses
+  };
+  const catOrder = (c) => c === 'done' ? 9 : 0;
   for (const p of people) {
     byP[p].sort((a,b) => {
-      if ((a.statusCategory==='done')!==(b.statusCategory==='done')) return a.statusCategory==='done'?1:-1;
-      if ((a.statusCategory==='indeterminate')!==(b.statusCategory==='indeterminate')) return a.statusCategory==='indeterminate'?-1:1;
+      const ca = catOrder(a.statusCategory), cb = catOrder(b.statusCategory);
+      if (ca !== cb) return ca - cb;
+      const sa = statusOrder(a.status), sb = statusOrder(b.status);
+      if (sa !== sb) return sa - sb;
       return (pri[a.priority]??9)-(pri[b.priority]??9);
     });
   }
@@ -1851,9 +1861,18 @@ function renderSprints() {
         const issues = jiraPersonIssues[pName];
         if (!issues || issues.length === 0) continue;
         shown.add(pName);
+        const statusOrd = (s) => {
+          const sl = (s||'').toLowerCase();
+          if (sl === 'in progress') return 0;
+          if (sl === 'selected for development') return 1;
+          if (sl === 'backlog') return 3;
+          return 2;
+        };
         issues.sort((a,b) => {
-          if ((a.statusCategory==='done')!==(b.statusCategory==='done')) return a.statusCategory==='done'?1:-1;
-          if ((a.statusCategory==='indeterminate')!==(b.statusCategory==='indeterminate')) return a.statusCategory==='indeterminate'?-1:1;
+          const ca = a.statusCategory==='done'?9:0, cb = b.statusCategory==='done'?9:0;
+          if (ca !== cb) return ca - cb;
+          const sa = statusOrd(a.status), sb = statusOrd(b.status);
+          if (sa !== sb) return sa - sb;
           return (pri[a.priority]??9)-(pri[b.priority]??9);
         });
         html += `<div style="margin-bottom:10px">`;
