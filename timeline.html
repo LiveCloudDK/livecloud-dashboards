@@ -53,6 +53,24 @@
 
   .header h1 span { color: var(--accent-light); }
 
+  .sync-button {
+    padding: 2px 10px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--surface);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .sync-button:hover { border-color: var(--accent); color: var(--accent); }
+  .sync-button:disabled { cursor: wait; opacity: 0.7; }
+
   .header-meta {
     font-size: 13px;
     color: var(--text-muted);
@@ -391,10 +409,6 @@
   }
 
   .capacity-person-row {
-    display: grid;
-    grid-template-columns: minmax(80px, 180px) 1fr;
-    gap: 16px;
-    align-items: center;
     padding: 12px 0;
     border-bottom: 1px solid rgba(46,51,69,0.5);
   }
@@ -403,9 +417,25 @@
     border-bottom: none;
   }
 
+  .capacity-person-top {
+    display: grid;
+    grid-template-columns: minmax(80px, 140px) 1fr;
+    gap: 16px;
+    align-items: center;
+  }
+
   .person-name {
     font-size: 13px;
     font-weight: 600;
+  }
+
+  .person-note {
+    font-size: 10px;
+    color: var(--yellow);
+    font-weight: 400;
+    margin-top: 4px;
+    line-height: 1.4;
+    padding-left: 2px;
   }
 
   .capacity-bars {
@@ -568,7 +598,7 @@
     .month-header { font-size: 9px; }
     .row-label { font-size: 10px; padding: 0 6px; }
     .gantt-bar { font-size: 8px; height: 18px; }
-    .capacity-person-row {
+    .capacity-person-top {
       grid-template-columns: minmax(60px, 120px) 1fr;
       gap: 8px;
     }
@@ -609,10 +639,11 @@
     .capacity-card h3 { font-size: 11px; }
     .capacity-card .metric { font-size: 12px; }
     .capacity-card .metric-value { font-size: 15px; }
-    .capacity-person-row {
+    .capacity-person-top {
       grid-template-columns: 1fr;
       gap: 4px;
     }
+    .person-note { font-size: 9px; }
     .person-name { font-size: 12px; }
     .bar-label { font-size: 10px; min-width: 50px; }
     .velocity-row { flex-direction: column; gap: 4px; }
@@ -820,7 +851,8 @@
     .capacity-card h3 { font-size: 11px; margin-bottom: 8px; }
     .capacity-card .metric { font-size: 12px; }
     .capacity-card .metric-value { font-size: 15px; }
-    .capacity-person-row { grid-template-columns: minmax(50px, 110px) 1fr !important; gap: 8px; padding: 8px 0; }
+    .capacity-person-top { grid-template-columns: minmax(50px, 110px) 1fr !important; gap: 8px; }
+    .capacity-person-row { padding: 8px 0; }
     .person-name { font-size: 11px; }
     .bar-label { font-size: 10px; min-width: 45px; }
 
@@ -845,7 +877,7 @@
   </div>
   <div style="display:flex;align-items:center;gap:8px">
     <div class="header-meta" id="last-updated">Indl&aelig;ser...</div>
-    <button onclick="window._syncJira()" id="sync-btn" style="padding:2px 10px;border-radius:5px;font-size:11px;font-weight:600;background:var(--surface);color:var(--text-muted);border:1px solid var(--border);cursor:pointer;display:inline-flex;align-items:center;gap:4px;transition:all 0.15s;white-space:nowrap" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-muted)'"><span id="sync-icon" style="display:inline-block">&#x21BB;</span> Sync</button>
+    <button onclick="window._syncJira()" id="sync-btn" class="sync-button"><span id="sync-icon" style="display:inline-block">&#x21BB;</span> Sync</button>
   </div>
 </div>
 
@@ -1164,21 +1196,29 @@ let wsNames = {
     // Manual sync button handler
     window._syncJira = async function() {
       const btn = document.getElementById('sync-btn');
+      const mobileBtn = document.getElementById('mobile-sync-trigger');
       const icon = document.getElementById('sync-icon');
       if (!btn) return;
       btn.disabled = true;
-      btn.style.opacity = '0.7';
-      if (icon) { icon.style.animation = 'spin 0.8s linear infinite'; }
-      await loadTimelineData();
-      render();
-      if (icon) { icon.style.animation = 'none'; icon.innerHTML = '\u2714'; }
-      btn.style.opacity = '1';
-      btn.style.color = 'var(--green, #22c55e)';
+      if (icon) icon.style.animation = 'spin 0.8s linear infinite';
+      if (mobileBtn) { mobileBtn.style.animation = 'spin 0.8s linear infinite'; mobileBtn.disabled = true; }
+      try {
+        await loadTimelineData();
+        render();
+        if (icon) { icon.style.animation = 'none'; icon.textContent = '\u2714'; }
+        if (mobileBtn) { mobileBtn.style.animation = 'none'; mobileBtn.textContent = '\u2714'; }
+        btn.style.cssText = 'color:var(--green);border-color:var(--green)';
+      } catch (e) {
+        console.error('Sync failed:', e);
+        if (icon) { icon.style.animation = 'none'; icon.textContent = '\u2717'; }
+        btn.style.cssText = 'color:var(--red);border-color:var(--red)';
+      }
       setTimeout(() => {
-        if (icon) icon.innerHTML = '\u21BB';
+        if (icon) icon.textContent = '\u21BB';
+        if (mobileBtn) { mobileBtn.textContent = '\u21BB'; mobileBtn.disabled = false; }
         btn.disabled = false;
-        btn.style.color = '';
-      }, 1500);
+        btn.style.cssText = '';
+      }, 2000);
     };
 
 
@@ -2102,7 +2142,8 @@ function renderCapacity() {
     const statusColor = cap.activeTickets > cap.capacity ? 'var(--red)' : (buffer < 10 ? 'var(--yellow)' : 'var(--green)');
 
     html += '<div class="capacity-person-row">';
-    html += `<div class="person-name">${cap.name}${cap.note ? '<div style="font-size:10px;color:var(--yellow);font-weight:400;margin-top:2px">' + cap.note + '</div>' : ''}</div>`;
+    html += '<div class="capacity-person-top">';
+    html += `<div class="person-name">${cap.name}</div>`;
     html += '<div class="capacity-bars">';
 
     // Capacity bar with active overlay
@@ -2115,7 +2156,8 @@ function renderCapacity() {
     html += `<div class="bar-label">${cap.activeTickets}/${cap.capacity} (${utilization}%)</div>`;
     html += `<div class="bar-label" style="color:${statusColor};font-weight:700;min-width:70px">${buffer > 0 ? '+' : ''}${buffer} ${status}</div>`;
 
-    html += '</div>';
+    html += '</div></div>';
+    if (cap.note) html += `<div class="person-note">${cap.note}</div>`;
     html += '</div>';
   }
 
