@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-08T11:39:22.310Z",
+    "startDate": "2026-04-08T12:02:12.473Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -61,19 +61,6 @@
         "type": "Sub-task",
         "labels": [],
         "updated": "2026-04-08T13:25:39.288+0200"
-      },
-      {
-        "key": "LCAP-1073",
-        "summary": "App: Fjern QR-kode fra billet-skærmen i appen",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Mikkel Kornval Christoffersen",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-04-08T12:48:39.353+0200"
       },
       {
         "key": "LCAP-1097",
@@ -911,6 +898,19 @@
         "type": "Bug",
         "labels": [],
         "updated": "2026-03-31T14:20:59.086+0200"
+      },
+      {
+        "key": "LCAP-1073",
+        "summary": "App: Fjern QR-kode fra billet-skærmen i appen",
+        "status": "READY FOR TEST AT DEV",
+        "statusCategory": "indeterminate",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-08T14:01:33.282+0200"
       },
       {
         "key": "LCAP-1123",
@@ -2530,5 +2530,5 @@
       }
     ]
   },
-  "generated": "2026-04-08T11:39:22.310Z"
+  "generated": "2026-04-08T12:02:12.474Z"
 }
