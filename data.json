@@ -41,6 +41,17 @@
     "goal": "Ringsted Festival prep — accessibility, billettyper, delegate access, dashboards, POS-forbedringer, test-runde af Sprint 3 features, gate design og onboarding-plan.",
     "issues": [
       {
+        "key": "LCAP-1162",
+        "summary": "BUG: antal på ticket gemmes ikke",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-08T11:31:54.448+0200"
+      },
+      {
         "key": "LCAP-1155",
         "summary": "FMS: dedicated cashout endpoint for beats-to-card refund",
         "status": "In Progress",
@@ -434,5 +445,5 @@
       }
     ]
   },
-  "generated": "2026-04-08T09:08:17.908Z"
+  "generated": "2026-04-08T09:41:22.499Z"
 }
