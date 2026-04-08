@@ -36,20 +36,138 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-08T17:52:49.454Z",
+    "startDate": "2026-04-08T19:28:04.129Z",
     "endDate": null,
     "goal": "",
     "issues": [
       {
-        "key": "LCAP-619",
-        "summary": "Featured artist on artist overview",
+        "key": "LCAP-1163",
+        "summary": "FMS: B2B kundeoprettelse (ordreholder-konto)",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [],
+        "updated": "2026-04-08T21:27:22.624+0200"
+      },
+      {
+        "key": "LCAP-1157",
+        "summary": "Shopify → Ticket Engine: nye billetter med deeplink til app (Mædlfest, Oktoberfest, Julefester)",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [],
+        "updated": "2026-04-08T21:27:20.706+0200"
+      },
+      {
+        "key": "LCAP-1164",
+        "summary": "B2B ordrehåndtering + fakturastatus-tracking",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [],
+        "updated": "2026-04-08T21:27:15.251+0200"
+      },
+      {
+        "key": "LCAP-1078",
+        "summary": "Delegate access — end-to-end færdiggørelse og test",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-08T21:27:12.379+0200"
+      },
+      {
+        "key": "LCAP-1097",
+        "summary": "NFC-armbånd — kobling til brugerprofil og wallet",
         "status": "Selected for Development",
         "statusCategory": "new",
-        "assignee": "Mikkel Kornval Christoffersen",
-        "priority": "Lowest",
-        "type": "Sub-task",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-08T21:25:47.952+0200"
+      },
+      {
+        "key": "LCAP-674",
+        "summary": "B2B ticket handling",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
         "labels": [],
-        "updated": "2026-03-20T09:09:56.180+0100"
+        "updated": "2026-04-08T21:25:33.386+0200"
+      },
+      {
+        "key": "LCAP-492",
+        "summary": "B2B Ticket Purchase & Invitation Workflows",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": null,
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-08T21:25:29.412+0200"
+      },
+      {
+        "key": "LCAP-1080",
+        "summary": "B2B portal — virksomheder administrerer egne billetter",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-08T21:25:26.830+0200"
+      },
+      {
+        "key": "LCAP-810",
+        "summary": "[B2B Portal] Ticket allocation + distribution resources",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "Festhallen"
+        ],
+        "updated": "2026-04-08T21:25:24.652+0200"
+      },
+      {
+        "key": "LCAP-1166",
+        "summary": "Profil-løs billet: QR-kode → service desk → armbånd",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [],
+        "updated": "2026-04-08T21:25:18.074+0200"
+      },
+      {
+        "key": "LCAP-1165",
+        "summary": "Ordreholder: fordel Beats frit på tildelte billetter",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [],
+        "updated": "2026-04-08T21:25:15.961+0200"
       },
       {
         "key": "LCAP-1124",
@@ -107,135 +225,6 @@
         "type": "Sub-task",
         "labels": [],
         "updated": "2026-04-08T13:25:39.288+0200"
-      },
-      {
-        "key": "LCAP-1097",
-        "summary": "NFC-armbånd — kobling til brugerprofil og wallet",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Jakob Højgård",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-04-08T12:39:14.479+0200"
-      },
-      {
-        "key": "LCAP-1078",
-        "summary": "Delegate access — end-to-end færdiggørelse og test",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-08T12:39:11.182+0200"
-      },
-      {
-        "key": "LCAP-674",
-        "summary": "B2B ticket handling",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [],
-        "updated": "2026-04-08T12:39:10.458+0200"
-      },
-      {
-        "key": "LCAP-492",
-        "summary": "B2B Ticket Purchase & Invitation Workflows",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": null,
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [],
-        "updated": "2026-04-08T12:39:08.884+0200"
-      },
-      {
-        "key": "LCAP-1080",
-        "summary": "B2B portal — virksomheder administrerer egne billetter",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-08T12:39:08.110+0200"
-      },
-      {
-        "key": "LCAP-810",
-        "summary": "[B2B Portal] Ticket allocation + distribution resources",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "Festhallen"
-        ],
-        "updated": "2026-04-08T12:39:07.321+0200"
-      },
-      {
-        "key": "LCAP-1166",
-        "summary": "Profil-løs billet: QR-kode → service desk → armbånd",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Jakob Højgård",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [],
-        "updated": "2026-04-08T12:39:06.599+0200"
-      },
-      {
-        "key": "LCAP-1165",
-        "summary": "Ordreholder: fordel Beats frit på tildelte billetter",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Jakob Højgård",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [],
-        "updated": "2026-04-08T12:39:05.913+0200"
-      },
-      {
-        "key": "LCAP-1164",
-        "summary": "B2B ordrehåndtering + fakturastatus-tracking",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Jakob Højgård",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [],
-        "updated": "2026-04-08T12:39:05.214+0200"
-      },
-      {
-        "key": "LCAP-1163",
-        "summary": "FMS: B2B kundeoprettelse (ordreholder-konto)",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [],
-        "updated": "2026-04-08T12:39:04.438+0200"
-      },
-      {
-        "key": "LCAP-1157",
-        "summary": "Shopify → Ticket Engine: nye billetter med deeplink til app (Mædlfest, Oktoberfest, Julefester)",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Tony Dieu",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [],
-        "updated": "2026-04-08T12:39:03.607+0200"
       },
       {
         "key": "LCAP-1082",
@@ -442,17 +431,6 @@
         "updated": "2026-03-17T16:03:03.809+0100"
       },
       {
-        "key": "LCAP-853",
-        "summary": "man skal kunne oprette en artist og inden man trykke gem skal man kunne vælge om den bliver publiceret med det samme eller ej",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Edwin Maldonado",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-03-17T11:55:23.580+0100"
-      },
-      {
         "key": "LCAP-914",
         "summary": "EDGE-12: Token proliferation on repeated exchange",
         "status": "Selected for Development",
@@ -585,6 +563,76 @@
         "updated": "2026-01-21T17:07:54.880+0100"
       },
       {
+        "key": "LCAP-1167",
+        "summary": "Deeplink erstatter PDF-billetter: køb → app → fordel billetter via navn/email",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Jakob Højgård",
+        "priority": "High",
+        "type": "Task",
+        "labels": [],
+        "updated": "2026-04-08T21:27:25.056+0200"
+      },
+      {
+        "key": "LCAP-633",
+        "summary": "B2B: Virksomhedsbilletter",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-08T21:27:18.439+0200"
+      },
+      {
+        "key": "LCAP-332",
+        "summary": "Spend Beats On-Site",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-08T21:25:43.119+0200"
+      },
+      {
+        "key": "LCAP-331",
+        "summary": "Purchase Beats Packages",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-08T21:25:40.763+0200"
+      },
+      {
+        "key": "LCAP-334",
+        "summary": "Refund & Transfer Beats",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-08T21:25:38.810+0200"
+      },
+      {
+        "key": "LCAP-573",
+        "summary": "Favorite Artist preview component",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Edwin Maldonado",
+        "priority": "High",
+        "type": "Task",
+        "labels": [],
+        "updated": "2026-04-08T21:16:53.210+0200"
+      },
+      {
         "key": "LCAP-1169",
         "summary": "Bug: ticket type valid-from time does not match local time in scanner",
         "status": "In Progress",
@@ -610,65 +658,6 @@
           "pos"
         ],
         "updated": "2026-04-08T14:38:55.652+0200"
-      },
-      {
-        "key": "LCAP-332",
-        "summary": "Spend Beats On-Site",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "High",
-        "type": "Story",
-        "labels": [],
-        "updated": "2026-04-08T12:39:13.752+0200"
-      },
-      {
-        "key": "LCAP-331",
-        "summary": "Purchase Beats Packages",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "High",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-08T12:39:12.971+0200"
-      },
-      {
-        "key": "LCAP-334",
-        "summary": "Refund & Transfer Beats",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "High",
-        "type": "Story",
-        "labels": [],
-        "updated": "2026-04-08T12:39:12.080+0200"
-      },
-      {
-        "key": "LCAP-633",
-        "summary": "B2B: Virksomhedsbilletter",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "High",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-08T12:39:09.681+0200"
-      },
-      {
-        "key": "LCAP-1167",
-        "summary": "Deeplink erstatter PDF-billetter: køb → app → fordel billetter via navn/email",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Jakob Højgård",
-        "priority": "High",
-        "type": "Task",
-        "labels": [],
-        "updated": "2026-04-08T12:39:01.844+0200"
       },
       {
         "key": "LCAP-1155",
@@ -786,17 +775,6 @@
         "updated": "2026-03-30T13:27:15.443+0200"
       },
       {
-        "key": "LCAP-573",
-        "summary": "Favorite Artist preview component",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Tony Dieu",
-        "priority": "High",
-        "type": "Task",
-        "labels": [],
-        "updated": "2026-03-17T11:14:07.784+0100"
-      },
-      {
         "key": "LCAP-608",
         "summary": "Revoked ticket - maby not status but a trace if a ticket delegate or transfere is revoked",
         "status": "In Progress",
@@ -807,7 +785,7 @@
         "labels": [
           "commerce"
         ],
-        "updated": "2026-04-08T12:22:37.611+0200"
+        "updated": "2026-04-08T21:25:37.286+0200"
       },
       {
         "key": "LCAP-1072",
@@ -820,7 +798,7 @@
         "labels": [
           "app"
         ],
-        "updated": "2026-04-08T12:22:00.122+0200"
+        "updated": "2026-04-08T21:25:03.764+0200"
       },
       {
         "key": "LCAP-963",
@@ -938,6 +916,17 @@
         "updated": "2026-03-04T13:42:08.071+0100"
       },
       {
+        "key": "LCAP-619",
+        "summary": "Featured artist on artist overview",
+        "status": "Ready for release",
+        "statusCategory": "indeterminate",
+        "assignee": "Edwin Maldonado",
+        "priority": "Lowest",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-08T20:36:30.870+0200"
+      },
+      {
         "key": "LCAP-1151",
         "summary": "POS: Remove provider abstraction - go FMS-only",
         "status": "Ready for testing",
@@ -960,6 +949,30 @@
         "type": "Bug",
         "labels": [],
         "updated": "2026-03-31T14:20:59.086+0200"
+      },
+      {
+        "key": "LCAP-1084",
+        "summary": "Manager Beats-tildeling — påkrævet begrundelse ved allokering",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-08T21:25:45.751+0200"
+      },
+      {
+        "key": "LCAP-853",
+        "summary": "man skal kunne oprette en artist og inden man trykke gem skal man kunne vælge om den bliver publiceret med det samme eller ej",
+        "status": "READY FOR TEST AT DEV",
+        "statusCategory": "indeterminate",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-08T20:32:40.360+0200"
       },
       {
         "key": "LCAP-1117",
@@ -995,19 +1008,6 @@
         "type": "Sub-task",
         "labels": [],
         "updated": "2026-04-08T13:34:04.092+0200"
-      },
-      {
-        "key": "LCAP-1084",
-        "summary": "Manager Beats-tildeling — påkrævet begrundelse ved allokering",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Tony Dieu",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-08T12:22:23.767+0200"
       },
       {
         "key": "LCAP-1129",
@@ -2274,15 +2274,28 @@
         "updated": "2026-03-13T10:55:19.426+0100"
       },
       {
-        "key": "LCAP-1153",
-        "summary": "Align app, endpoints, environments og FMS på staging for fuld E2E test",
-        "status": "Ready for test",
+        "key": "LCAP-833",
+        "summary": "Transfer ticket — receiver notification and claim flow (app)",
+        "status": "Ready for release",
         "statusCategory": "indeterminate",
         "assignee": "Jakob Højgård",
         "priority": "Highest",
-        "type": "Task",
+        "type": "Story",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-08T21:25:07.195+0200"
+      },
+      {
+        "key": "LCAP-790",
+        "summary": "Claim ticket via email (deeplink / magic-link)",
+        "status": "Ready for release",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "Highest",
+        "type": "Story",
         "labels": [],
-        "updated": "2026-04-08T13:12:41.651+0200"
+        "updated": "2026-04-08T21:25:05.255+0200"
       },
       {
         "key": "LCAP-1071",
@@ -2295,31 +2308,18 @@
         "labels": [
           "app"
         ],
-        "updated": "2026-04-08T12:22:45.749+0200"
+        "updated": "2026-04-08T21:25:01.457+0200"
       },
       {
-        "key": "LCAP-833",
-        "summary": "Transfer ticket — receiver notification and claim flow (app)",
-        "status": "Ready for release",
+        "key": "LCAP-1153",
+        "summary": "Align app, endpoints, environments og FMS på staging for fuld E2E test",
+        "status": "Ready for test",
         "statusCategory": "indeterminate",
         "assignee": "Jakob Højgård",
         "priority": "Highest",
-        "type": "Story",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-04-08T12:22:02.933+0200"
-      },
-      {
-        "key": "LCAP-790",
-        "summary": "Claim ticket via email (deeplink / magic-link)",
-        "status": "Ready for release",
-        "statusCategory": "indeterminate",
-        "assignee": "Tony Dieu",
-        "priority": "Highest",
-        "type": "Story",
+        "type": "Task",
         "labels": [],
-        "updated": "2026-04-08T12:22:01.466+0200"
+        "updated": "2026-04-08T13:12:41.651+0200"
       },
       {
         "key": "LCAP-1087",
@@ -2570,5 +2570,5 @@
       }
     ]
   },
-  "generated": "2026-04-08T17:52:49.455Z"
+  "generated": "2026-04-08T19:28:04.129Z"
 }
