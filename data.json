@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-08T17:25:42.099Z",
+    "startDate": "2026-04-08T17:52:49.454Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -249,17 +249,6 @@
           "fms"
         ],
         "updated": "2026-04-06T09:49:38.680+0200"
-      },
-      {
-        "key": "LCAP-1117",
-        "summary": "FMS: Investigate ETag caching is working correctly",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Edwin Maldonado",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [],
-        "updated": "2026-04-05T17:04:25.396+0200"
       },
       {
         "key": "LCAP-946",
@@ -971,6 +960,17 @@
         "type": "Bug",
         "labels": [],
         "updated": "2026-03-31T14:20:59.086+0200"
+      },
+      {
+        "key": "LCAP-1117",
+        "summary": "FMS: Investigate ETag caching is working correctly",
+        "status": "Ready for release",
+        "statusCategory": "indeterminate",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [],
+        "updated": "2026-04-08T19:52:16.033+0200"
       },
       {
         "key": "LCAP-1073",
@@ -2570,5 +2570,5 @@
       }
     ]
   },
-  "generated": "2026-04-08T17:25:42.099Z"
+  "generated": "2026-04-08T17:52:49.455Z"
 }
