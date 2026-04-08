@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-08T11:07:39.381Z",
+    "startDate": "2026-04-08T11:32:57.178Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -50,6 +50,17 @@
         "type": "Sub-task",
         "labels": [],
         "updated": "2026-03-20T09:09:56.180+0100"
+      },
+      {
+        "key": "LCAP-1125",
+        "summary": "Feat: Add vendor product bulk update endpoint (price, availability, sort_order)",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-08T13:25:39.288+0200"
       },
       {
         "key": "LCAP-1073",
@@ -902,6 +913,17 @@
         "updated": "2026-03-31T14:20:59.086+0200"
       },
       {
+        "key": "LCAP-1123",
+        "summary": "Feat: Vendor profile CRUD endpoint for FMS dashboard settings",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-08T13:32:27.661+0200"
+      },
+      {
         "key": "LCAP-1084",
         "summary": "Manager Beats-tildeling — påkrævet begrundelse ved allokering",
         "status": "Ready for test",
@@ -913,17 +935,6 @@
           "commerce"
         ],
         "updated": "2026-04-08T12:22:23.767+0200"
-      },
-      {
-        "key": "LCAP-1125",
-        "summary": "Feat: Add vendor product bulk update endpoint (price, availability, sort_order)",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-08T07:21:24.392+0200"
       },
       {
         "key": "LCAP-1124",
@@ -1280,17 +1291,6 @@
           "fms"
         ],
         "updated": "2026-04-05T16:47:31.333+0200"
-      },
-      {
-        "key": "LCAP-1123",
-        "summary": "Feat: Vendor profile CRUD endpoint for FMS dashboard settings",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-03T11:27:00.674+0200"
       },
       {
         "key": "LCAP-1122",
@@ -2234,6 +2234,17 @@
         "updated": "2026-03-13T10:55:19.426+0100"
       },
       {
+        "key": "LCAP-1153",
+        "summary": "Align app, endpoints, environments og FMS på staging for fuld E2E test",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Jakob Højgård",
+        "priority": "Highest",
+        "type": "Task",
+        "labels": [],
+        "updated": "2026-04-08T13:12:41.651+0200"
+      },
+      {
         "key": "LCAP-1071",
         "summary": "Billet-flow: Deeplink i billetmail til automatisk aktivering i app",
         "status": "Ready for release",
@@ -2282,17 +2293,6 @@
           "app"
         ],
         "updated": "2026-04-08T09:03:26.447+0200"
-      },
-      {
-        "key": "LCAP-1153",
-        "summary": "Align app, endpoints, environments og FMS på staging for fuld E2E test",
-        "status": "READY FOR TEST AT DEV",
-        "statusCategory": "indeterminate",
-        "assignee": "Edwin Maldonado",
-        "priority": "Highest",
-        "type": "Task",
-        "labels": [],
-        "updated": "2026-04-08T08:58:48.283+0200"
       },
       {
         "key": "LCAP-1079",
@@ -2530,5 +2530,5 @@
       }
     ]
   },
-  "generated": "2026-04-08T11:07:39.381Z"
+  "generated": "2026-04-08T11:32:57.179Z"
 }
