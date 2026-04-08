@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-08T12:36:46.849Z",
+    "startDate": "2026-04-08T13:10:07.690Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -550,6 +550,19 @@
         "updated": "2026-01-21T17:07:54.880+0100"
       },
       {
+        "key": "LCAP-1169",
+        "summary": "Bug: ticket type valid-from time does not match local time in scanner",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Bug",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-08T14:48:49.727+0200"
+      },
+      {
         "key": "LCAP-1168",
         "summary": "FMS: build own Swedbank Pay integration, migrate online flows from POS",
         "status": "In Progress",
@@ -561,7 +574,7 @@
           "commerce",
           "pos"
         ],
-        "updated": "2026-04-08T14:36:04.469+0200"
+        "updated": "2026-04-08T14:38:55.652+0200"
       },
       {
         "key": "LCAP-332",
@@ -2544,5 +2557,5 @@
       }
     ]
   },
-  "generated": "2026-04-08T12:36:46.849Z"
+  "generated": "2026-04-08T13:10:07.690Z"
 }
