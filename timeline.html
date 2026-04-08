@@ -1233,6 +1233,25 @@ function renderCurrentSprint() {
   const pri = { Highest:0, High:1, Medium:2, Low:3, Lowest:4 };
   const sCol = (c) => c==='done'?'#22c55e':c==='indeterminate'?'#3b82f6':'#6b7280';
 
+  // ── Derive sprint end date from sprintData definitions ──
+  const sprintDates = [
+    { name: 'Sprint 4', start: '2026-03-30', end: '2026-04-12' },
+    { name: 'Sprint 5', start: '2026-04-13', end: '2026-04-26' },
+    { name: 'Sprint 6', start: '2026-04-27', end: '2026-05-10' },
+    { name: 'Sprint 7', start: '2026-05-11', end: '2026-05-24' },
+    { name: 'Sprint 8', start: '2026-05-25', end: '2026-06-07' },
+    { name: 'Sprint 9', start: '2026-06-08', end: '2026-06-21' },
+    { name: 'Sprint 10', start: '2026-06-22', end: '2026-07-05' },
+    { name: 'Sprint 11', start: '2026-07-06', end: '2026-07-19' },
+    { name: 'Sprint 12', start: '2026-07-20', end: '2026-08-02' },
+  ];
+  const now = new Date();
+  const activeSprint = sprintDates.find(s => now >= new Date(s.start) && now <= new Date(s.end))
+    || sprintDates.find(s => now < new Date(s.end))
+    || sprintDates[0];
+  const sprintEndDate = new Date(activeSprint.end);
+  const daysLeft = Math.max(0, Math.ceil((sprintEndDate - now) / (1000*60*60*24)));
+
   // ── Counts ──
   let nDone=0, nProg=0, nTodo=0;
   for (const i of sprint.issues) {
@@ -1268,21 +1287,30 @@ function renderCurrentSprint() {
   let h = '';
 
   // ===== COMPACT HEADER =====
+  const fmt = (d) => d ? new Date(d).toLocaleDateString('da-DK',{day:'numeric',month:'short'}) : '?';
   h += '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:8px">';
   h += '<div>';
-  h += '<h2 style="color:var(--text);margin:0;font-size:20px;font-weight:700">' + sprint.name + '</h2>';
-  const fmt = (d) => d ? new Date(d).toLocaleDateString('da-DK',{day:'numeric',month:'short'}) : '?';
-  h += '<span style="color:var(--text-muted);font-size:12px">' + fmt(sprint.startDate) + ' \u2013 ' + fmt(sprint.endDate) + '</span>';
+  h += '<h2 style="color:var(--text);margin:0;font-size:20px;font-weight:700">' + activeSprint.name + '</h2>';
+  h += '<span style="color:var(--text-muted);font-size:12px">' + fmt(activeSprint.start) + ' \u2013 ' + fmt(activeSprint.end) + '</span>';
   h += '</div>';
-  h += '<div style="display:flex;gap:8px;font-size:12px;align-items:center">';
+  // Countdown badge
+  const countdownColor = daysLeft <= 3 ? '#ef4444' : daysLeft <= 7 ? '#eab308' : '#3b82f6';
+  h += '<div style="display:flex;align-items:center;gap:6px;padding:6px 14px;background:' + countdownColor + '12;border:1px solid ' + countdownColor + '30;border-radius:8px">';
+  h += '<span style="font-size:22px;font-weight:800;color:' + countdownColor + '">' + daysLeft + '</span>';
+  h += '<span style="font-size:11px;color:' + countdownColor + ';line-height:1.2">dage<br>tilbage</span>';
+  h += '</div>';
+  h += '</div>';
+  // Stats row
+  h += '<div style="display:flex;gap:8px;font-size:12px;align-items:center;margin-bottom:8px">';
   h += '<span style="color:var(--text)">' + total + ' opgaver</span>';
   h += '<span style="color:#3b82f6;font-weight:600">' + nProg + ' i gang</span>';
   h += '<span style="color:#22c55e;font-weight:600">' + nDone + ' done</span>';
+  h += '<span style="color:var(--text-muted)">' + nTodo + ' to do</span>';
   h += '<span style="color:var(--text-muted)">' + pct + '%</span>';
-  h += '<div style="width:80px;height:5px;background:var(--surface);border-radius:3px;overflow:hidden;display:flex">';
+  h += '<div style="width:100px;height:5px;background:var(--surface);border-radius:3px;overflow:hidden;display:flex">';
   h += '<div style="width:' + (total>0?nDone/total*100:0) + '%;background:#22c55e"></div>';
   h += '<div style="width:' + (total>0?nProg/total*100:0) + '%;background:#3b82f6"></div>';
-  h += '</div></div></div>';
+  h += '</div></div>';
 
   // Sprint goal
   if (sprint.goal) {
@@ -1646,13 +1674,32 @@ function getSprintTasks(sprint) {
 function renderSprints() {
   let html = '<div style="margin-bottom:24px">';
 
-  // Summary row
+  // ── Compute live stats from Jira data ──
+  const jiraSprint = window._sprintData;
+  const liveTotal = jiraSprint ? jiraSprint.issues.length : 0;
+  const liveDone = jiraSprint ? jiraSprint.issues.filter(i=>i.statusCategory==='done').length : 0;
+  const liveInProgress = jiraSprint ? jiraSprint.issues.filter(i=>i.statusCategory==='indeterminate').length : 0;
+
+  // Compute remaining sprints to festival
+  const sprintEndDates = [
+    { id: 4, end: '2026-04-12' }, { id: 5, end: '2026-04-26' }, { id: 6, end: '2026-05-10' },
+    { id: 7, end: '2026-05-24' }, { id: 8, end: '2026-06-07' }, { id: 9, end: '2026-06-21' },
+    { id: 10, end: '2026-07-05' }, { id: 11, end: '2026-07-19' }, { id: 12, end: '2026-08-02' },
+  ];
+  const today = new Date();
+  const sprintsLeft = sprintEndDates.filter(s => new Date(s.end) >= today).length;
+  const devSprintsLeft = sprintEndDates.filter(s => s.id <= 10 && new Date(s.end) >= today).length;
+  const totalCapacity = Object.values(capacityData).reduce((sum,p) => sum + p.capacity, 0);
+  const totalActive = Object.values(capacityData).reduce((sum,p) => sum + p.activeTickets, 0);
+  const buffer = totalCapacity - totalActive;
+
+  // Summary row — live data
   html += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:24px">';
-  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700;color:var(--accent)">9</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Sprints til festival</div></div>';
-  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700;color:var(--blue)">7</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Dev-sprints</div></div>';
-  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700">212</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Ticket-kapacitet (m/ Simon)</div></div>';
-  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700;color:var(--orange)">115</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Aktiv pipeline</div></div>';
-  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700;color:var(--green)">+89</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Buffer</div></div>';
+  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700;color:var(--accent)">' + sprintsLeft + '</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Sprints til festival</div></div>';
+  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700;color:var(--blue)">' + devSprintsLeft + '</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Dev-sprints</div></div>';
+  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700">' + totalCapacity + '</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Ticket-kapacitet (m/ Simon)</div></div>';
+  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700;color:var(--orange)">' + liveTotal + '</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Aktiv pipeline (Jira)</div></div>';
+  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700;color:' + (buffer >= 0 ? 'var(--green)' : 'var(--red)') + '">' + (buffer >= 0 ? '+' : '') + buffer + '</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Buffer</div></div>';
   html += '</div>';
 
   // Timeline bar showing sprints as gantt bars
@@ -1681,6 +1728,23 @@ function renderSprints() {
   html += '</div>';
   html += '</div>';
 
+  // ── Build Jira ticket counts per person for active sprint ──
+  const jiraPersonCounts = {};
+  const jiraPersonIssues = {};
+  const nameToShort = { 'Tony Dieu':'Tony', 'Michael Thuren':'Michael', 'Mikkel Kornval Christoffersen':'Mikkel', 'Edwin Maldonado':'Edwin', 'Simon Jensen':'Simon', 'Jakob H\u00f8jg\u00e5rd':'Jakob' };
+  if (jiraSprint && jiraSprint.issues) {
+    for (const issue of jiraSprint.issues) {
+      const names = Array.isArray(issue.assignees) && issue.assignees.length > 0
+        ? issue.assignees : (issue.assignee ? [issue.assignee] : []);
+      for (const fullName of names) {
+        const short = nameToShort[fullName] || fullName;
+        jiraPersonCounts[short] = (jiraPersonCounts[short] || 0) + 1;
+        if (!jiraPersonIssues[short]) jiraPersonIssues[short] = [];
+        jiraPersonIssues[short].push(issue);
+      }
+    }
+  }
+
   // Sprint cards
   let visibleCount = 0;
   for (const s of sprintData) {
@@ -1693,6 +1757,7 @@ function renderSprints() {
     visibleCount++;
     const color = sprintColors[s.type];
     const bg = sprintBgColors[s.type];
+    const isActive = s.type === 'active';
 
     html += `<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden;border-left:4px solid ${color}">`;
 
@@ -1702,11 +1767,15 @@ function renderSprints() {
     html += `<div style="font-weight:700;font-size:15px">${s.name}  -  ${s.subtitle}</div>`;
     html += `<div style="font-size:12px;color:var(--text-muted);margin-top:2px">${s.dates}</div>`;
     html += `</div>`;
+    html += `<div style="display:flex;align-items:center;gap:8px">`;
+    if (isActive && jiraSprint) {
+      html += `<span style="font-size:11px;color:var(--text-muted);padding:3px 8px;border-radius:6px;background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.2)">${liveTotal} tickets i Jira</span>`;
+    }
     const badgeColors = { active: 'var(--accent)', planned: 'var(--surface2)', freeze: 'var(--red)', buffer: 'var(--yellow)', festival: 'var(--green)' };
     const badgeText = { active: 'AKTIV', planned: 'PLANLAGT', freeze: 'FREEZE', buffer: 'BUFFER', festival: 'FESTIVAL' };
     const badgeFg = s.type === 'buffer' || s.type === 'festival' ? '#000' : s.type === 'planned' ? 'var(--text-muted)' : '#fff';
     html += `<span style="padding:3px 12px;border-radius:12px;font-size:11px;font-weight:700;background:${badgeColors[s.type]};color:${badgeFg};${s.type==='planned'?'border:1px solid var(--border)':''}">${badgeText[s.type]}</span>`;
-    html += `</div>`;
+    html += `</div></div>`;
 
     // Body
     html += `<div style="padding:16px 20px">`;
@@ -1714,14 +1783,19 @@ function renderSprints() {
     // Goal
     html += `<div style="font-size:13px;color:var(--text-muted);margin-bottom:14px;line-height:1.5"><strong style="color:var(--text)">Mål:</strong> ${s.goal}</div>`;
 
-    // Person rows
+    // Person rows — use live Jira counts for active sprint
     for (const [name, data] of Object.entries(s.persons)) {
       const pColors = { 'Michael': 'var(--blue)', 'Tony': 'var(--orange)', 'Mikkel': 'var(--cyan)', 'Jakob': 'var(--accent)', 'Edwin': 'var(--green)', 'Simon': '#10b981', 'Hele teamet': 'var(--text-muted)' };
+      const liveCount = isActive && jiraPersonCounts[name] !== undefined ? jiraPersonCounts[name] : null;
+      const displayCount = liveCount !== null ? liveCount : (data.count || ' - ');
+      const countDiff = liveCount !== null && data.count ? liveCount - data.count : 0;
       html += `<div style="display:flex;align-items:center;gap:12px;padding:5px 0;border-bottom:1px solid rgba(46,51,69,0.3)">`;
       html += `<div style="font-size:12px;font-weight:600;min-width:90px;color:${pColors[name] || 'var(--text)'}">${name}</div>`;
       html += `<div style="font-size:12px;color:var(--text-muted);flex:1">${data.focus}</div>`;
-      html += `<div style="font-size:13px;font-weight:700;min-width:30px;text-align:right">${data.count || ' - '}</div>`;
-      html += `</div>`;
+      html += `<div style="font-size:13px;font-weight:700;min-width:30px;text-align:right">${displayCount}`;
+      if (countDiff > 0) html += ` <span style="font-size:10px;color:var(--red);font-weight:600">(+${countDiff})</span>`;
+      else if (countDiff < 0) html += ` <span style="font-size:10px;color:var(--green);font-weight:600">(${countDiff})</span>`;
+      html += `</div></div>`;
     }
 
     // Workstream tags
@@ -1745,62 +1819,122 @@ function renderSprints() {
     }
     html += `</div>`;
 
-    // Capacity bar (if applicable)
+    // Capacity bar (if applicable) — use live Jira count for active sprint
+    const liveTicketCount = isActive && jiraSprint ? liveTotal : s.tickets;
     if (s.capacity > 0) {
-      const pct = Math.min(s.tickets / s.capacity * 100, 100);
+      const pct = Math.min(liveTicketCount / s.capacity * 100, 100);
       let barColor = 'var(--green)';
       if (pct > 90) barColor = 'var(--yellow)';
       if (pct > 100) barColor = 'var(--red)';
       html += `<div style="display:flex;align-items:center;gap:8px;margin-top:10px">`;
-      html += `<div style="font-size:11px;color:var(--text-muted);min-width:100px">${s.tickets} / ${s.capacity} kapacitet</div>`;
+      html += `<div style="font-size:11px;color:var(--text-muted);min-width:100px">${liveTicketCount} / ${s.capacity} kapacitet</div>`;
       html += `<div style="flex:1;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden"><div style="height:100%;width:${pct}%;background:${barColor};border-radius:3px"></div></div>`;
       html += `</div>`;
     }
 
     // Expandable ticket detail per person
-    const sprintTasks = getSprintTasks(s);
-    if (Object.keys(sprintTasks).length > 0) {
+    // For active sprint: show LIVE Jira tickets; for others: show roadmap tasks
+    const jiraBase = 'https://u-ii-u.atlassian.net/browse/';
+    if (isActive && jiraSprint && jiraSprint.issues.length > 0) {
       const detailId = 'sprint-detail-' + s.id;
+      const pri = { Highest:0, High:1, Medium:2, Low:3, Lowest:4 };
+      const sCol = (c) => c==='done'?'#22c55e':c==='indeterminate'?'#3b82f6':'#6b7280';
       html += `<div style="margin-top:12px;border-top:1px solid var(--border);padding-top:8px">`;
-      html += `<button onclick="document.getElementById('${detailId}').style.display = document.getElementById('${detailId}').style.display === 'none' ? 'block' : 'none'; this.querySelector('.chevron').textContent = document.getElementById('${detailId}').style.display === 'none' ? '▸' : '▾'" style="background:none;border:1px solid var(--border);border-radius:6px;color:var(--text-muted);cursor:pointer;font-size:11px;padding:4px 10px;display:flex;align-items:center;gap:4px;transition:all 0.15s"><span class="chevron">▸</span> Vis ticket-detaljer</button>`;
+      html += `<button onclick="document.getElementById('${detailId}').style.display = document.getElementById('${detailId}').style.display === 'none' ? 'block' : 'none'; this.querySelector('.chevron').textContent = document.getElementById('${detailId}').style.display === 'none' ? '▸' : '▾'" style="background:none;border:1px solid var(--border);border-radius:6px;color:var(--text-muted);cursor:pointer;font-size:11px;padding:4px 10px;display:flex;align-items:center;gap:4px;transition:all 0.15s"><span class="chevron">▸</span> Vis ${liveTotal} Jira-tickets</button>`;
       html += `<div id="${detailId}" style="display:none;margin-top:10px">`;
 
-      const pColors = { 'michael':'var(--blue)', 'tony':'var(--orange)', 'mikkel':'var(--cyan)', 'jakob':'var(--accent)', 'edwin':'var(--green)', 'simon':'#10b981' };
-      const pNames = { 'michael':'Michael', 'tony':'Tony', 'mikkel':'Mikkel', 'jakob':'Jakob', 'edwin':'Edwin', 'simon':'Simon' };
-      const jiraBase = 'https://u-ii-u.atlassian.net/browse/';
+      const pColors2 = { 'Tony':'var(--orange)', 'Michael':'var(--blue)', 'Mikkel':'var(--cyan)', 'Jakob':'var(--accent)', 'Edwin':'var(--green)', 'Simon':'#10b981' };
+      const personOrder = ['Tony','Michael','Mikkel','Edwin','Simon','Jakob'];
+      const shown = new Set();
 
-      for (const [person, ptasks] of Object.entries(sprintTasks)) {
-        if (ptasks.length === 0) continue;
+      for (const pName of personOrder) {
+        const issues = jiraPersonIssues[pName];
+        if (!issues || issues.length === 0) continue;
+        shown.add(pName);
+        issues.sort((a,b) => {
+          if ((a.statusCategory==='done')!==(b.statusCategory==='done')) return a.statusCategory==='done'?1:-1;
+          if ((a.statusCategory==='indeterminate')!==(b.statusCategory==='indeterminate')) return a.statusCategory==='indeterminate'?-1:1;
+          return (pri[a.priority]??9)-(pri[b.priority]??9);
+        });
         html += `<div style="margin-bottom:10px">`;
-        html += `<div style="font-size:11px;font-weight:700;color:${pColors[person] || 'var(--text)'};margin-bottom:4px;text-transform:uppercase;letter-spacing:0.3px">${pNames[person] || person}</div>`;
-        for (const t of ptasks) {
-          const jiraIds = t.jira ? t.jira.split(',').map(j => j.trim()).filter(j => j) : [];
-          html += `<div style="display:flex;align-items:baseline;gap:8px;padding:2px 0;font-size:12px">`;
-          html += `<span style="color:var(--text-muted);flex-shrink:0">•</span>`;
-          html += `<span style="color:var(--text);flex:1">${t.label}</span>`;
-          if (jiraIds.length > 0) {
-            const links = jiraIds.map(j => {
-              const clean = j.replace(/\s/g,'');
-              // Check if it's a proper single ticket (e.g., LCAP-1103)
-              const singleMatch = clean.match(/^(LCAP-\d+)$/);
-              if (singleMatch) {
-                return '<a href="' + jiraBase + singleMatch[1] + '" target="_blank" style="color:var(--accent-light);text-decoration:none;font-size:10px;font-family:monospace;opacity:0.8;padding:1px 4px;background:rgba(99,102,241,0.1);border-radius:3px">' + singleMatch[1] + '</a>';
-              }
-              // Range like LCAP-1012-1045 or comma-separated  -  show as label, link to first
-              const rangeMatch = clean.match(/^(LCAP-(\d+))-(\d+)$/);
-              if (rangeMatch) {
-                return '<a href="' + jiraBase + rangeMatch[1] + '" target="_blank" style="color:var(--text-muted);text-decoration:none;font-size:10px;font-family:monospace;opacity:0.7;padding:1px 4px;background:rgba(255,255,255,0.04);border-radius:3px" title="Range: LCAP-' + rangeMatch[2] + ' til LCAP-' + rangeMatch[3] + '">' + clean + '</a>';
-              }
-              return '<span style="font-size:10px;color:var(--text-muted);font-family:monospace">' + clean + '</span>';
-            });
-            html += `<span style="flex-shrink:0;display:flex;gap:3px;flex-wrap:wrap">${links.join('')}</span>`;
-          }
+        html += `<div style="font-size:11px;font-weight:700;color:${pColors2[pName] || 'var(--text)'};margin-bottom:4px;text-transform:uppercase;letter-spacing:0.3px">${pName} <span style="font-weight:400;color:var(--text-muted)">(${issues.length})</span></div>`;
+        for (const i of issues) {
+          const sc = sCol(i.statusCategory);
+          const isDone = i.statusCategory === 'done';
+          html += `<div style="display:flex;align-items:center;gap:6px;padding:2px 0;font-size:12px;${isDone?'opacity:0.4;':''}">`;
+          if (isDone) html += `<span style="color:#22c55e;font-size:10px">\u2714</span>`;
+          else if (i.priority==='Highest') html += `<span style="color:#dc2626;font-size:10px">\u2191\u2191</span>`;
+          else if (i.priority==='High') html += `<span style="color:#ef4444;font-size:10px">\u2191</span>`;
+          else html += `<span style="color:#9ca3af;font-size:9px">\u2013</span>`;
+          html += `<a href="${jiraBase}${i.key}" target="_blank" style="color:var(--accent-light);text-decoration:none;font-size:10px;font-family:monospace;min-width:68px">${i.key}</a>`;
+          html += `<span style="flex:1;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;${isDone?'text-decoration:line-through;':''}">${i.summary}</span>`;
+          html += `<span style="font-size:9px;padding:1px 5px;border-radius:3px;background:${sc}15;color:${sc};font-weight:600;flex-shrink:0;white-space:nowrap">${i.status}</span>`;
+          html += `</div>`;
+        }
+        html += `</div>`;
+      }
+
+      // Unassigned
+      const unassigned = jiraSprint.issues.filter(i => !i.assignee && !(Array.isArray(i.assignees) && i.assignees.length > 0));
+      if (unassigned.length > 0) {
+        html += `<div style="margin-bottom:10px">`;
+        html += `<div style="font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.3px">Ikke tildelt <span style="font-weight:400">(${unassigned.length})</span></div>`;
+        for (const i of unassigned) {
+          const sc = sCol(i.statusCategory);
+          html += `<div style="display:flex;align-items:center;gap:6px;padding:2px 0;font-size:12px">`;
+          html += `<span style="color:#9ca3af;font-size:9px">\u2013</span>`;
+          html += `<a href="${jiraBase}${i.key}" target="_blank" style="color:var(--accent-light);text-decoration:none;font-size:10px;font-family:monospace;min-width:68px">${i.key}</a>`;
+          html += `<span style="flex:1;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${i.summary}</span>`;
+          html += `<span style="font-size:9px;padding:1px 5px;border-radius:3px;background:${sc}15;color:${sc};font-weight:600;flex-shrink:0;white-space:nowrap">${i.status}</span>`;
           html += `</div>`;
         }
         html += `</div>`;
       }
 
       html += `</div></div>`;
+    } else {
+      // Non-active sprints: show roadmap tasks
+      const sprintTasks = getSprintTasks(s);
+      if (Object.keys(sprintTasks).length > 0) {
+        const detailId = 'sprint-detail-' + s.id;
+        html += `<div style="margin-top:12px;border-top:1px solid var(--border);padding-top:8px">`;
+        html += `<button onclick="document.getElementById('${detailId}').style.display = document.getElementById('${detailId}').style.display === 'none' ? 'block' : 'none'; this.querySelector('.chevron').textContent = document.getElementById('${detailId}').style.display === 'none' ? '▸' : '▾'" style="background:none;border:1px solid var(--border);border-radius:6px;color:var(--text-muted);cursor:pointer;font-size:11px;padding:4px 10px;display:flex;align-items:center;gap:4px;transition:all 0.15s"><span class="chevron">▸</span> Vis ticket-detaljer</button>`;
+        html += `<div id="${detailId}" style="display:none;margin-top:10px">`;
+
+        const pColors3 = { 'michael':'var(--blue)', 'tony':'var(--orange)', 'mikkel':'var(--cyan)', 'jakob':'var(--accent)', 'edwin':'var(--green)', 'simon':'#10b981' };
+        const pNames = { 'michael':'Michael', 'tony':'Tony', 'mikkel':'Mikkel', 'jakob':'Jakob', 'edwin':'Edwin', 'simon':'Simon' };
+
+        for (const [person, ptasks] of Object.entries(sprintTasks)) {
+          if (ptasks.length === 0) continue;
+          html += `<div style="margin-bottom:10px">`;
+          html += `<div style="font-size:11px;font-weight:700;color:${pColors3[person] || 'var(--text)'};margin-bottom:4px;text-transform:uppercase;letter-spacing:0.3px">${pNames[person] || person}</div>`;
+          for (const t of ptasks) {
+            const jiraIds = t.jira ? t.jira.split(',').map(j => j.trim()).filter(j => j) : [];
+            html += `<div style="display:flex;align-items:baseline;gap:8px;padding:2px 0;font-size:12px">`;
+            html += `<span style="color:var(--text-muted);flex-shrink:0">\u2022</span>`;
+            html += `<span style="color:var(--text);flex:1">${t.label}</span>`;
+            if (jiraIds.length > 0) {
+              const links = jiraIds.map(j => {
+                const clean = j.replace(/\s/g,'');
+                const singleMatch = clean.match(/^(LCAP-\d+)$/);
+                if (singleMatch) {
+                  return '<a href="' + jiraBase + singleMatch[1] + '" target="_blank" style="color:var(--accent-light);text-decoration:none;font-size:10px;font-family:monospace;opacity:0.8;padding:1px 4px;background:rgba(99,102,241,0.1);border-radius:3px">' + singleMatch[1] + '</a>';
+                }
+                const rangeMatch = clean.match(/^(LCAP-(\d+))-(\d+)$/);
+                if (rangeMatch) {
+                  return '<a href="' + jiraBase + rangeMatch[1] + '" target="_blank" style="color:var(--text-muted);text-decoration:none;font-size:10px;font-family:monospace;opacity:0.7;padding:1px 4px;background:rgba(255,255,255,0.04);border-radius:3px" title="Range: LCAP-' + rangeMatch[2] + ' til LCAP-' + rangeMatch[3] + '">' + clean + '</a>';
+                }
+                return '<span style="font-size:10px;color:var(--text-muted);font-family:monospace">' + clean + '</span>';
+              });
+              html += `<span style="flex-shrink:0;display:flex;gap:3px;flex-wrap:wrap">${links.join('')}</span>`;
+            }
+            html += `</div>`;
+          }
+          html += `</div>`;
+        }
+
+        html += `</div></div>`;
+      }
     }
 
     html += `</div></div>`;
