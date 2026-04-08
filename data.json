@@ -41,6 +41,32 @@
     "goal": "Ringsted Festival prep — accessibility, billettyper, delegate access, dashboards, POS-forbedringer, test-runde af Sprint 3 features, gate design og onboarding-plan.",
     "issues": [
       {
+        "key": "LCAP-1080",
+        "summary": "B2B portal — virksomheder administrerer egne billetter",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-08T12:06:12.099+0200"
+      },
+      {
+        "key": "LCAP-1078",
+        "summary": "Delegate access — end-to-end færdiggørelse og test",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-08T12:06:10.523+0200"
+      },
+      {
         "key": "LCAP-1162",
         "summary": "BUG: antal på ticket gemmes ikke",
         "status": "Backlog",
@@ -103,32 +129,6 @@
           "pos"
         ],
         "updated": "2026-04-08T07:14:04.890+0200"
-      },
-      {
-        "key": "LCAP-1078",
-        "summary": "Delegate access — end-to-end færdiggørelse og test",
-        "status": "Backlog",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-07T20:28:13.151+0200"
-      },
-      {
-        "key": "LCAP-1080",
-        "summary": "B2B portal — virksomheder administrerer egne billetter",
-        "status": "Backlog",
-        "statusCategory": "new",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-07T20:28:12.642+0200"
       },
       {
         "key": "LCAP-1073",
@@ -445,5 +445,5 @@
       }
     ]
   },
-  "generated": "2026-04-08T09:41:22.499Z"
+  "generated": "2026-04-08T10:10:24.354Z"
 }
