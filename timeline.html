@@ -1379,37 +1379,73 @@ function renderCurrentSprint() {
       h += '</div></a>';
     }
 
-    // ── Remaining backlog ──
-    for (let idx=0; idx<remaining.length; idx++) {
-      const i = remaining[idx];
+    // ── Remaining backlog + Done — collapsible after first 2 remaining ──
+    // FOKUS + NÆSTE already shown = 2 visible. Show 2 more remaining before fold.
+    const VISIBLE_REMAINING = 2;
+    const hiddenRemaining = remaining.slice(VISIBLE_REMAINING);
+    const hasHidden = hiddenRemaining.length > 0 || done.length > 0;
+    const collapseId = 'collapse-' + personName.replace(/[^a-zA-Z0-9]/g,'');
+
+    function renderBacklogRow(i, isLast) {
       const sc = sCol(i.statusCategory);
       const isActive = i.statusCategory === 'indeterminate';
-      const border = idx<remaining.length-1||done.length>0 ? 'border-bottom:1px solid var(--border);' : '';
-      h += '<a href="'+jiraBase+i.key+'" target="_blank" style="display:flex;align-items:center;gap:8px;padding:5px 14px;text-decoration:none;'+border+'transition:background 0.1s;background:'+(isActive?'#3b82f604':'transparent')+'" onmouseover="this.style.background=\'var(--bg)\'" onmouseout="this.style.background=\''+(isActive?'#3b82f604':'transparent')+'\'">';
-      // Priority
-      if (i.priority==='Highest') h += '<span style="color:#dc2626;font-weight:700;font-size:12px;min-width:16px;text-align:center">\u2191\u2191</span>';
-      else if (i.priority==='High') h += '<span style="color:#ef4444;font-size:12px;min-width:16px;text-align:center">\u2191</span>';
-      else h += '<span style="color:#9ca3af;font-size:10px;min-width:16px;text-align:center">\u2013</span>';
-      // Key
-      h += '<span style="font-size:10px;color:var(--text-muted);font-family:monospace;min-width:72px">'+i.key+'</span>';
-      // Summary
-      h += '<span style="flex:1;font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0.8">'+i.summary+'</span>';
-      // Labels
+      const border = isLast ? '' : 'border-bottom:1px solid var(--border);';
+      let r = '<a href="'+jiraBase+i.key+'" target="_blank" style="display:flex;align-items:center;gap:8px;padding:5px 14px;text-decoration:none;'+border+'transition:background 0.1s;background:'+(isActive?'#3b82f604':'transparent')+'" onmouseover="this.style.background=\'var(--bg)\'" onmouseout="this.style.background=\''+(isActive?'#3b82f604':'transparent')+'\'">';
+      if (i.priority==='Highest') r += '<span style="color:#dc2626;font-weight:700;font-size:12px;min-width:16px;text-align:center">\u2191\u2191</span>';
+      else if (i.priority==='High') r += '<span style="color:#ef4444;font-size:12px;min-width:16px;text-align:center">\u2191</span>';
+      else r += '<span style="color:#9ca3af;font-size:10px;min-width:16px;text-align:center">\u2013</span>';
+      r += '<span style="font-size:10px;color:var(--text-muted);font-family:monospace;min-width:72px">'+i.key+'</span>';
+      r += '<span style="flex:1;font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0.8">'+i.summary+'</span>';
       if (i.labels&&i.labels.length>0) {
-        h += '<span style="display:flex;gap:2px">';
+        r += '<span style="display:flex;gap:2px">';
         for (const l of i.labels) {
           const lc={app:'#a78bfa',pos:'#60a5fa',fms:'#34d399',commerce:'#fbbf24'}[l]||'#6b7280';
-          h += '<span style="font-size:8px;padding:0px 4px;border-radius:2px;background:'+lc+'15;color:'+lc+';font-weight:600">'+l+'</span>';
+          r += '<span style="font-size:8px;padding:0px 4px;border-radius:2px;background:'+lc+'15;color:'+lc+';font-weight:600">'+l+'</span>';
         }
-        h += '</span>';
+        r += '</span>';
       }
-      // Status
-      h += '<span style="font-size:9px;padding:1px 6px;border-radius:3px;background:'+sc+'15;color:'+sc+';font-weight:600;white-space:nowrap">'+(i.status||'To do')+'</span>';
-      h += '</a>';
+      r += '<span style="font-size:9px;padding:1px 6px;border-radius:3px;background:'+sc+'15;color:'+sc+';font-weight:600;white-space:nowrap">'+(i.status||'To do')+'</span>';
+      r += '</a>';
+      return r;
     }
 
-    // ── Done — collapsed, dimmed ──
-    if (done.length > 0) {
+    // Show first VISIBLE_REMAINING items
+    for (let idx=0; idx<Math.min(remaining.length, VISIBLE_REMAINING); idx++) {
+      const isLast = idx===Math.min(remaining.length, VISIBLE_REMAINING)-1 && !hasHidden;
+      h += renderBacklogRow(remaining[idx], isLast);
+    }
+
+    // Expand/collapse button + hidden section
+    if (hasHidden) {
+      const hiddenCount = hiddenRemaining.length + done.length;
+      h += '<div style="border-bottom:1px solid var(--border)">';
+      h += '<button onclick="(function(btn){var sec=document.getElementById(\''+collapseId+'\');var isOpen=sec.style.display!==\'none\';sec.style.display=isOpen?\'none\':\'block\';btn.querySelector(\'.expand-label\').textContent=isOpen?\'Vis '+hiddenCount+' flere\':\'Skjul\';btn.querySelector(\'.expand-icon\').textContent=isOpen?\'\u25B6\':\'\u25BC\';})(this)" style="width:100%;padding:6px 14px;background:transparent;border:none;cursor:pointer;display:flex;align-items:center;gap:6px;color:var(--text-muted);font-size:11px;font-weight:600;transition:color 0.15s" onmouseover="this.style.color=\'var(--accent-light)\'" onmouseout="this.style.color=\'var(--text-muted)\'">';
+      h += '<span class="expand-icon" style="font-size:8px;transition:transform 0.15s">\u25B6</span>';
+      h += '<span class="expand-label">Vis '+hiddenCount+' flere</span>';
+      h += '</button></div>';
+
+      h += '<div id="'+collapseId+'" style="display:none">';
+      for (let idx=0; idx<hiddenRemaining.length; idx++) {
+        const isLast = idx===hiddenRemaining.length-1 && done.length===0;
+        h += renderBacklogRow(hiddenRemaining[idx], isLast);
+      }
+
+      // Done items inside collapsed section
+      if (done.length > 0) {
+        for (let idx=0; idx<done.length; idx++) {
+          const i = done[idx];
+          const isLast = idx===done.length-1;
+          h += '<a href="'+jiraBase+i.key+'" target="_blank" style="display:flex;align-items:center;gap:8px;padding:3px 14px;text-decoration:none;opacity:0.35;transition:opacity 0.1s;'+(isLast?'':'border-bottom:1px solid var(--border);')+'" onmouseover="this.style.opacity=\'0.6\'" onmouseout="this.style.opacity=\'0.35\'">';
+          h += '<span style="color:#22c55e;font-size:11px;min-width:16px;text-align:center">\u2714</span>';
+          h += '<span style="font-size:10px;color:var(--text-muted);font-family:monospace;min-width:72px">'+i.key+'</span>';
+          h += '<span style="flex:1;font-size:11px;color:var(--text-muted);text-decoration:line-through;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+i.summary+'</span>';
+          h += '<span style="font-size:8px;padding:1px 5px;border-radius:2px;background:#22c55e15;color:#22c55e;font-weight:600">Done</span>';
+          h += '</a>';
+        }
+      }
+      h += '</div>';
+    } else if (done.length > 0) {
+      // No hidden remaining but there are done items — show them directly
       for (const i of done) {
         h += '<a href="'+jiraBase+i.key+'" target="_blank" style="display:flex;align-items:center;gap:8px;padding:3px 14px;text-decoration:none;opacity:0.35;transition:opacity 0.1s" onmouseover="this.style.opacity=\'0.6\'" onmouseout="this.style.opacity=\'0.35\'">';
         h += '<span style="color:#22c55e;font-size:11px;min-width:16px;text-align:center">\u2714</span>';
