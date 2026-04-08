@@ -41,6 +41,19 @@
     "goal": "Ringsted Festival prep — accessibility, billettyper, delegate access, dashboards, POS-forbedringer, test-runde af Sprint 3 features, gate design og onboarding-plan.",
     "issues": [
       {
+        "key": "LCAP-1071",
+        "summary": "Billet-flow: Deeplink i billetmail til automatisk aktivering i app",
+        "status": "Ready for release",
+        "statusCategory": "indeterminate",
+        "assignee": "Jakob Højgård",
+        "priority": "Highest",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-08T12:22:45.749+0200"
+      },
+      {
         "key": "LCAP-1080",
         "summary": "B2B portal — virksomheder administrerer egne billetter",
         "status": "Backlog",
@@ -51,7 +64,7 @@
         "labels": [
           "commerce"
         ],
-        "updated": "2026-04-08T12:06:12.099+0200"
+        "updated": "2026-04-08T12:22:39.554+0200"
       },
       {
         "key": "LCAP-1078",
@@ -64,7 +77,33 @@
         "labels": [
           "commerce"
         ],
-        "updated": "2026-04-08T12:06:10.523+0200"
+        "updated": "2026-04-08T12:22:37.572+0200"
+      },
+      {
+        "key": "LCAP-1084",
+        "summary": "Manager Beats-tildeling — påkrævet begrundelse ved allokering",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-08T12:22:23.767+0200"
+      },
+      {
+        "key": "LCAP-1072",
+        "summary": "App: Scan alle billetter i signup-flow og videresend til andre — claim kun én selv",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "Highest",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-08T12:22:00.122+0200"
       },
       {
         "key": "LCAP-1162",
@@ -157,32 +196,6 @@
         "updated": "2026-04-07T19:14:46.383+0200"
       },
       {
-        "key": "LCAP-1071",
-        "summary": "Billet-flow: Deeplink i billetmail til automatisk aktivering i app",
-        "status": "Ready for release",
-        "statusCategory": "indeterminate",
-        "assignee": "Jakob Højgård",
-        "priority": "Highest",
-        "type": "Task",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-04-07T19:14:45.838+0200"
-      },
-      {
-        "key": "LCAP-1072",
-        "summary": "App: Scan alle billetter i signup-flow og videresend til andre — claim kun én selv",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Jakob Højgård",
-        "priority": "Highest",
-        "type": "Task",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-04-07T19:14:44.835+0200"
-      },
-      {
         "key": "LCAP-1156",
         "summary": "E2E: expand Swedbank sandbox tests for cashout reversal flow",
         "status": "Backlog",
@@ -207,19 +220,6 @@
           "pos"
         ],
         "updated": "2026-04-07T11:49:45.738+0200"
-      },
-      {
-        "key": "LCAP-1084",
-        "summary": "Manager Beats-tildeling — påkrævet begrundelse ved allokering",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Tony Dieu",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-07T11:31:26.796+0200"
       },
       {
         "key": "LCAP-1068",
@@ -445,5 +445,5 @@
       }
     ]
   },
-  "generated": "2026-04-08T10:10:24.354Z"
+  "generated": "2026-04-08T10:37:45.018Z"
 }
