@@ -27,8 +27,12 @@ const LABEL_TO_PHASE = {'phase-build':'build','phase-test':'test','phase-live':'
 const STATUS_TO_PHASE = {'Done':'live','Released':'live'};
 
 const PERSON_MAP = {
-  'mikkel laursen':'mikkel','michael krag':'michael','edwin leo':'edwin',
-  'tony singh':'tony','jakob lydersen':'jakob',
+  'mikkel kornval christoffersen':'mikkel','mikkel kornval':'mikkel','mikkel laursen':'mikkel',
+  'michael thuren':'michael','michael krag':'michael',
+  'edwin maldonado':'edwin','edwin leo':'edwin',
+  'tony dieu':'tony','tony singh':'tony',
+  'jakob højgård':'jakob','jakob lydersen':'jakob',
+  'simon jensen':'simon',
 };
 function normalizePerson(n) { return PERSON_MAP[n.toLowerCase()] || null; }
 
@@ -90,57 +94,63 @@ async function fetchEpics() {
   return all;
 }
 
-// === Sprint data fetching (JQL-based, works with Kanban boards) ===
+// === Active work fetching (Kanban-compatible — no sprint boards needed) ===
 async function fetchCurrentSprint() {
-  const jqlQueries = [
-    'project = LCAP AND sprint in openSprints() ORDER BY updated DESC',
-    'project = LCAP AND sprint in futureSprints() ORDER BY updated DESC',
-  ];
+  // Fetch all active work: In Progress + Selected for Development
+  // This replaces sprint-based queries since all boards are Kanban
+  const jql = 'project = LCAP AND status IN ("In Progress", "Selected for Development") ORDER BY priority ASC, updated DESC';
+  const fields = ['summary','status','assignee','priority','issuetype','labels','updated'];
+  let allIssues = [];
+  let nextPageToken = null;
+  do {
+    const body = { jql, maxResults: 200, fields };
+    if (nextPageToken) body.nextPageToken = nextPageToken;
+    const resp = await fetch(`${JIRA_BASE}/rest/api/3/search/jql`, {
+      method: 'POST',
+      headers: { 'Authorization': `Basic ${AUTH}`, 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (!resp.ok) { console.log(`Active work JQL failed: ${resp.status}`); break; }
+    const data = await resp.json();
+    allIssues = allIssues.concat(data.issues || []);
+    nextPageToken = data.nextPageToken || null;
+  } while (nextPageToken);
 
-  for (const jql of jqlQueries) {
-    let allIssues = [];
-    let nextPageToken = null;
-    do {
-      const body = { jql, maxResults: 100, fields: ['summary','status','assignee','priority','issuetype','labels','updated','customfield_10020'] };
-      if (nextPageToken) body.nextPageToken = nextPageToken;
-      const resp = await fetch(`${JIRA_BASE}/rest/api/3/search/jql`, {
-        method: 'POST',
-        headers: { 'Authorization': `Basic ${AUTH}`, 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      });
-      if (!resp.ok) { console.log(`Sprint JQL failed (${resp.status}): ${jql}`); break; }
-      const data = await resp.json();
-      allIssues = allIssues.concat(data.issues || []);
-      nextPageToken = data.nextPageToken || null;
-    } while (nextPageToken);
-
-    if (allIssues.length === 0) continue;
-
-    // Extract sprint metadata from customfield_10020
-    const sprintMap = {};
-    for (const issue of allIssues) {
-      const sprints = issue.fields.customfield_10020 || [];
-      for (const s of sprints) {
-        if (s.state === 'active' || s.state === 'future') {
-          if (!sprintMap[s.id]) sprintMap[s.id] = { ...s, issues: [] };
-          sprintMap[s.id].issues.push(issue);
-        }
-      }
-    }
-
-    // Prefer active over future; if multiple, pick earliest start
-    const sprints = Object.values(sprintMap);
-    const active = sprints.filter(s => s.state === 'active');
-    const chosen = active.length > 0
-      ? active.sort((a, b) => new Date(a.startDate) - new Date(b.startDate))[0]
-      : sprints.sort((a, b) => new Date(a.startDate) - new Date(b.startDate))[0];
-
-    if (chosen) {
-      console.log(`Found sprint: ${chosen.name} (state: ${chosen.state}, ${chosen.issues.length} issues)`);
-      return chosen;
-    }
+  if (allIssues.length === 0) {
+    console.log('No active issues found');
+    return null;
   }
-  return null;
+
+  // Also fetch issues in test/review pipeline
+  const testJql = 'project = LCAP AND status IN ("Ready for testing", "Ready for test", "READY FOR TEST AT DEV", "Ready for release") ORDER BY priority ASC, updated DESC';
+  let testIssues = [];
+  nextPageToken = null;
+  do {
+    const body = { jql: testJql, maxResults: 200, fields };
+    if (nextPageToken) body.nextPageToken = nextPageToken;
+    const resp = await fetch(`${JIRA_BASE}/rest/api/3/search/jql`, {
+      method: 'POST',
+      headers: { 'Authorization': `Basic ${AUTH}`, 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (!resp.ok) { console.log(`Test pipeline JQL failed: ${resp.status}`); break; }
+    const data = await resp.json();
+    testIssues = testIssues.concat(data.issues || []);
+    nextPageToken = data.nextPageToken || null;
+  } while (nextPageToken);
+
+  const combinedIssues = [...allIssues, ...testIssues];
+  console.log(`Found ${allIssues.length} active + ${testIssues.length} in test pipeline = ${combinedIssues.length} total issues`);
+
+  // Return as a synthetic "sprint" object for compatibility with the dashboard
+  return {
+    name: 'Aktivt Sprint',
+    state: 'active',
+    startDate: new Date().toISOString(),
+    endDate: null,
+    goal: '',
+    issues: combinedIssues,
+  };
 }
 
 function issueToSprintIssue(issue) {
