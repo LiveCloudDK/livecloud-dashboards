@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-08T11:32:57.178Z",
+    "startDate": "2026-04-08T11:35:00.468Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -921,7 +921,7 @@
         "priority": "Medium",
         "type": "Sub-task",
         "labels": [],
-        "updated": "2026-04-08T13:32:27.661+0200"
+        "updated": "2026-04-08T13:34:04.092+0200"
       },
       {
         "key": "LCAP-1084",
@@ -2530,5 +2530,5 @@
       }
     ]
   },
-  "generated": "2026-04-08T11:32:57.179Z"
+  "generated": "2026-04-08T11:35:00.468Z"
 }
