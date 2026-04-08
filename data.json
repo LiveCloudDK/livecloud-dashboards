@@ -41,6 +41,33 @@
     "goal": "Ringsted Festival prep — accessibility, billettyper, delegate access, dashboards, POS-forbedringer, test-runde af Sprint 3 features, gate design og onboarding-plan.",
     "issues": [
       {
+        "key": "LCAP-1070",
+        "summary": "FMS/POS: Konfigurerbar indstilling — kun Beats-betaling tilladt ved event",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "commerce",
+          "fms"
+        ],
+        "updated": "2026-04-08T07:19:18.201+0200"
+      },
+      {
+        "key": "LCAP-1065",
+        "summary": "POS/FMS: Konfigurerbare Beats-påfyldningsbeløb (mere end 100)",
+        "status": "Ready for release",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-04-08T07:14:04.890+0200"
+      },
+      {
         "key": "LCAP-1078",
         "summary": "Delegate access — end-to-end færdiggørelse og test",
         "status": "Backlog",
@@ -145,19 +172,6 @@
         "updated": "2026-04-07T14:13:40.619+0200"
       },
       {
-        "key": "LCAP-1065",
-        "summary": "POS/FMS: Konfigurerbare Beats-påfyldningsbeløb (mere end 100)",
-        "status": "Ready for testing",
-        "statusCategory": "indeterminate",
-        "assignee": "Tony Dieu",
-        "priority": "High",
-        "type": "Task",
-        "labels": [
-          "pos"
-        ],
-        "updated": "2026-04-07T11:58:17.154+0200"
-      },
-      {
         "key": "LCAP-1059",
         "summary": "POS: Transaktioner opdateres for langsomt — hurtigere refresh/websockets",
         "status": "Ready for testing",
@@ -208,20 +222,6 @@
           "app"
         ],
         "updated": "2026-04-07T08:32:29.025+0200"
-      },
-      {
-        "key": "LCAP-1070",
-        "summary": "FMS/POS: Konfigurerbar indstilling — kun Beats-betaling tilladt ved event",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Simon Jensen",
-        "priority": "High",
-        "type": "Task",
-        "labels": [
-          "commerce",
-          "fms"
-        ],
-        "updated": "2026-04-06T11:15:02.701+0200"
       },
       {
         "key": "LCAP-1082",
@@ -434,5 +434,5 @@
       }
     ]
   },
-  "generated": "2026-04-07T19:27:09.213Z"
+  "generated": "2026-04-08T05:35:44.678Z"
 }
