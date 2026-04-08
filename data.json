@@ -41,6 +41,19 @@
     "goal": "Ringsted Festival prep — accessibility, billettyper, delegate access, dashboards, POS-forbedringer, test-runde af Sprint 3 features, gate design og onboarding-plan.",
     "issues": [
       {
+        "key": "LCAP-1079",
+        "summary": "Billettyper: Camping (2/4 adgang), børnebilletter og ledsagerbilletter",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Highest",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-08T07:44:18.512+0200"
+      },
+      {
         "key": "LCAP-1070",
         "summary": "FMS/POS: Konfigurerbar indstilling — kun Beats-betaling tilladt ved event",
         "status": "Ready for test",
@@ -237,19 +250,6 @@
         "updated": "2026-04-06T09:49:38.680+0200"
       },
       {
-        "key": "LCAP-1079",
-        "summary": "Billettyper: Camping (2/4 adgang), børnebilletter og ledsagerbilletter",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Highest",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-04T09:17:21.356+0200"
-      },
-      {
         "key": "LCAP-1116",
         "summary": "POS App: terminal picker from FMS + send X-Terminal-Id header",
         "status": "Done",
@@ -434,5 +434,5 @@
       }
     ]
   },
-  "generated": "2026-04-08T05:35:44.678Z"
+  "generated": "2026-04-08T06:12:26.687Z"
 }
