@@ -1252,17 +1252,22 @@ function renderCurrentSprint() {
   const sprintEndDate = new Date(activeSprint.end);
   const daysLeft = Math.max(0, Math.ceil((sprintEndDate - now) / (1000*60*60*24)));
 
-  // ── Counts ──
+  // ── Split issues into sprint work vs test pipeline ──
+  const testStatuses = new Set(['ready for testing','ready for test','ready for test at dev','ready for release']);
+  const sprintIssues = sprint.issues.filter(i => !testStatuses.has((i.status||'').toLowerCase()));
+  const testPipelineIssues = sprint.issues.filter(i => testStatuses.has((i.status||'').toLowerCase()));
+
+  // ── Counts (only sprint issues) ──
   let nDone=0, nProg=0, nTodo=0;
-  for (const i of sprint.issues) {
+  for (const i of sprintIssues) {
     if (i.statusCategory==='done') nDone++; else if (i.statusCategory==='indeterminate') nProg++; else nTodo++;
   }
-  const total = sprint.issues.length;
+  const total = sprintIssues.length;
   const pct = total>0 ? Math.round(nDone/total*100) : 0;
 
   // ── Group by person, sort within (supports co-assignees via assignees array) ──
   const byP = {};
-  for (const i of sprint.issues) {
+  for (const i of sprintIssues) {
     const names = Array.isArray(i.assignees) && i.assignees.length > 0
       ? i.assignees : (i.assignee ? [i.assignee] : ['Unassigned']);
     for (const k of names) (byP[k]=byP[k]||[]).push(i);
@@ -1497,6 +1502,53 @@ function renderCurrentSprint() {
     h += '</div>';
   }
 
+  // ── Test Pipeline summary (collapsed) ──
+  if (testPipelineIssues.length > 0) {
+    const testByStatus = {};
+    for (const i of testPipelineIssues) {
+      const s = i.status || 'Unknown';
+      testByStatus[s] = (testByStatus[s] || 0) + 1;
+    }
+    h += '<div style="margin-top:8px;background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden">';
+    h += '<button onclick="(function(btn){var sec=document.getElementById(\'test-pipeline-collapse\');var isOpen=sec.style.display!==\'none\';sec.style.display=isOpen?\'none\':\'block\';btn.querySelector(\'.tp-icon\').textContent=isOpen?\'\u25B6\':\'\u25BC\';})(this)" style="width:100%;padding:10px 14px;background:transparent;border:none;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--text-muted);transition:color 0.15s" onmouseover="this.style.color=\'var(--accent-light)\'" onmouseout="this.style.color=\'var(--text-muted)\'">';
+    h += '<span class="tp-icon" style="font-size:8px">\u25B6</span>';
+    h += '<span style="font-size:12px;font-weight:700;color:var(--text)">Test Pipeline</span>';
+    h += '<span style="font-size:11px;color:var(--text-muted)">' + testPipelineIssues.length + ' tickets</span>';
+    h += '<span style="flex:1"></span>';
+    const statusTags = Object.entries(testByStatus).map(([s,c]) => {
+      const tc = s.toLowerCase().includes('release') ? '#a855f7' : '#eab308';
+      return '<span style="font-size:9px;padding:1px 6px;border-radius:3px;background:'+tc+'15;color:'+tc+';font-weight:600">'+s+' ('+c+')</span>';
+    }).join(' ');
+    h += statusTags;
+    h += '</button>';
+    h += '<div id="test-pipeline-collapse" style="display:none;border-top:1px solid var(--border)">';
+
+    // Group test pipeline by person
+    const testByP = {};
+    for (const i of testPipelineIssues) {
+      const names = Array.isArray(i.assignees) && i.assignees.length > 0
+        ? i.assignees : (i.assignee ? [i.assignee] : ['Unassigned']);
+      for (const k of names) (testByP[k]=testByP[k]||[]).push(i);
+    }
+    const testPeople = order.filter(n=>testByP[n]).concat(Object.keys(testByP).filter(n=>!order.includes(n)));
+    for (const pn of testPeople) {
+      const issues = testByP[pn];
+      const m = tm(pn);
+      h += '<div style="padding:6px 14px;border-bottom:1px solid var(--border)">';
+      h += '<div style="font-size:11px;font-weight:700;color:'+m.c+';margin-bottom:3px">'+m.n+' <span style="font-weight:400;color:var(--text-muted)">('+issues.length+')</span></div>';
+      for (const i of issues) {
+        const sc = sCol(i.statusCategory);
+        h += '<a href="'+jiraBase+i.key+'" target="_blank" style="display:flex;align-items:center;gap:6px;padding:2px 0;text-decoration:none;font-size:11px;opacity:0.7;transition:opacity 0.1s" onmouseover="this.style.opacity=\'1\'" onmouseout="this.style.opacity=\'0.7\'">';
+        h += '<span style="font-size:10px;color:var(--text-muted);font-family:monospace;min-width:68px">'+i.key+'</span>';
+        h += '<span style="flex:1;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+i.summary+'</span>';
+        h += '<span style="font-size:9px;padding:1px 5px;border-radius:3px;background:'+sc+'15;color:'+sc+';font-weight:600;flex-shrink:0;white-space:nowrap">'+i.status+'</span>';
+        h += '</a>';
+      }
+      h += '</div>';
+    }
+    h += '</div></div>';
+  }
+
   return h;
 }
 
@@ -1684,11 +1736,14 @@ function getSprintTasks(sprint) {
 function renderSprints() {
   let html = '<div style="margin-bottom:24px">';
 
-  // ── Compute live stats from Jira data ──
+  // ── Compute live stats from Jira data (exclude test pipeline) ──
   const jiraSprint = window._sprintData;
-  const liveTotal = jiraSprint ? jiraSprint.issues.length : 0;
-  const liveDone = jiraSprint ? jiraSprint.issues.filter(i=>i.statusCategory==='done').length : 0;
-  const liveInProgress = jiraSprint ? jiraSprint.issues.filter(i=>i.statusCategory==='indeterminate').length : 0;
+  const _testStatuses2 = new Set(['ready for testing','ready for test','ready for test at dev','ready for release']);
+  const jiraSprintIssues = jiraSprint ? jiraSprint.issues.filter(i => !_testStatuses2.has((i.status||'').toLowerCase())) : [];
+  const jiraTestPipeline = jiraSprint ? jiraSprint.issues.filter(i => _testStatuses2.has((i.status||'').toLowerCase())) : [];
+  const liveTotal = jiraSprintIssues.length;
+  const liveDone = jiraSprintIssues.filter(i=>i.statusCategory==='done').length;
+  const liveInProgress = jiraSprintIssues.filter(i=>i.statusCategory==='indeterminate').length;
 
   // Compute remaining sprints to festival
   const sprintEndDates = [
@@ -1708,7 +1763,8 @@ function renderSprints() {
   html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700;color:var(--accent)">' + sprintsLeft + '</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Sprints til festival</div></div>';
   html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700;color:var(--blue)">' + devSprintsLeft + '</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Dev-sprints</div></div>';
   html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700">' + totalCapacity + '</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Ticket-kapacitet (m/ Simon)</div></div>';
-  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700;color:var(--orange)">' + liveTotal + '</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Aktiv pipeline (Jira)</div></div>';
+  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700;color:var(--orange)">' + liveTotal + '</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Sprint-tickets (Jira)</div></div>';
+  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700;color:var(--yellow)">' + jiraTestPipeline.length + '</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Test pipeline</div></div>';
   html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700;color:' + (buffer >= 0 ? 'var(--green)' : 'var(--red)') + '">' + (buffer >= 0 ? '+' : '') + buffer + '</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Buffer</div></div>';
   html += '</div>';
 
@@ -1738,12 +1794,12 @@ function renderSprints() {
   html += '</div>';
   html += '</div>';
 
-  // ── Build Jira ticket counts per person for active sprint ──
+  // ── Build Jira ticket counts per person for active sprint (excl. test pipeline) ──
   const jiraPersonCounts = {};
   const jiraPersonIssues = {};
   const nameToShort = { 'Tony Dieu':'Tony', 'Michael Thuren':'Michael', 'Mikkel Kornval Christoffersen':'Mikkel', 'Edwin Maldonado':'Edwin', 'Simon Jensen':'Simon', 'Jakob H\u00f8jg\u00e5rd':'Jakob' };
-  if (jiraSprint && jiraSprint.issues) {
-    for (const issue of jiraSprint.issues) {
+  if (jiraSprintIssues.length > 0) {
+    for (const issue of jiraSprintIssues) {
       const names = Array.isArray(issue.assignees) && issue.assignees.length > 0
         ? issue.assignees : (issue.assignee ? [issue.assignee] : []);
       for (const fullName of names) {
@@ -1845,7 +1901,7 @@ function renderSprints() {
     // Expandable ticket detail per person
     // For active sprint: show LIVE Jira tickets; for others: show roadmap tasks
     const jiraBase = 'https://u-ii-u.atlassian.net/browse/';
-    if (isActive && jiraSprint && jiraSprint.issues.length > 0) {
+    if (isActive && jiraSprintIssues.length > 0) {
       const detailId = 'sprint-detail-' + s.id;
       const pri = { Highest:0, High:1, Medium:2, Low:3, Lowest:4 };
       const sCol = (c) => c==='done'?'#22c55e':c==='indeterminate'?'#3b82f6':'#6b7280';
