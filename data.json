@@ -41,6 +41,19 @@
     "goal": "Ringsted Festival prep — accessibility, billettyper, delegate access, dashboards, POS-forbedringer, test-runde af Sprint 3 features, gate design og onboarding-plan.",
     "issues": [
       {
+        "key": "LCAP-1155",
+        "summary": "FMS: dedicated cashout endpoint for beats-to-card refund",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Sub-task",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-08T10:54:08.191+0200"
+      },
+      {
         "key": "LCAP-1079",
         "summary": "Billettyper: Camping (2/4 adgang), børnebilletter og ledsagerbilletter",
         "status": "Ready for test",
@@ -170,19 +183,6 @@
           "pos"
         ],
         "updated": "2026-04-07T14:17:21.048+0200"
-      },
-      {
-        "key": "LCAP-1155",
-        "summary": "FMS: dedicated cashout endpoint for beats-to-card refund",
-        "status": "Backlog",
-        "statusCategory": "new",
-        "assignee": "Tony Dieu",
-        "priority": "High",
-        "type": "Sub-task",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-07T14:13:40.619+0200"
       },
       {
         "key": "LCAP-1059",
@@ -434,5 +434,5 @@
       }
     ]
   },
-  "generated": "2026-04-08T08:40:17.256Z"
+  "generated": "2026-04-08T09:08:17.908Z"
 }
