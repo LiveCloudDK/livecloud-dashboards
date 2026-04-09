@@ -36,10 +36,32 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-09T08:10:11.856Z",
+    "startDate": "2026-04-09T08:46:33.724Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-1122",
+        "summary": "Feat: Add product category filtering and search to vendor product API",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-09T10:44:39.783+0200"
+      },
+      {
+        "key": "LCAP-1125",
+        "summary": "Feat: Add vendor product bulk update endpoint (price, availability, sort_order)",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-09T10:44:38.943+0200"
+      },
       {
         "key": "LCAP-850",
         "summary": "Map Feature — Integration testing & venue data setup for Bodegafesten",
@@ -238,17 +260,6 @@
         "updated": "2026-04-08T17:02:01.840+0200"
       },
       {
-        "key": "LCAP-1122",
-        "summary": "Feat: Add product category filtering and search to vendor product API",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-08T17:01:37.275+0200"
-      },
-      {
         "key": "LCAP-1075",
         "summary": "App: Accessibility — font size scaling bryder layout",
         "status": "In Progress",
@@ -260,17 +271,6 @@
           "app"
         ],
         "updated": "2026-04-08T15:14:07.861+0200"
-      },
-      {
-        "key": "LCAP-1125",
-        "summary": "Feat: Add vendor product bulk update endpoint (price, availability, sort_order)",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-08T13:25:39.288+0200"
       },
       {
         "key": "LCAP-1082",
@@ -848,7 +848,20 @@
         "labels": [
           "commerce"
         ],
-        "updated": "2026-04-09T09:50:55.473+0200"
+        "updated": "2026-04-09T10:21:33.430+0200"
+      },
+      {
+        "key": "LCAP-989",
+        "summary": "Delegate revoke — gæst kan tilbagekalde en delegeret dag",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Highest",
+        "type": "Sub-task",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-09T10:21:13.218+0200"
       },
       {
         "key": "LCAP-608",
@@ -901,19 +914,6 @@
           "fms"
         ],
         "updated": "2026-03-31T14:04:20.638+0200"
-      },
-      {
-        "key": "LCAP-989",
-        "summary": "Delegate revoke — gæst kan tilbagekalde en delegeret dag",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Highest",
-        "type": "Sub-task",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-03-31T09:16:22.964+0200"
       },
       {
         "key": "LCAP-310",
@@ -979,6 +979,17 @@
         "updated": "2026-04-07T11:49:44.967+0200"
       },
       {
+        "key": "LCAP-1123",
+        "summary": "Feat: Vendor profile CRUD endpoint for FMS dashboard settings",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-09T10:44:37.449+0200"
+      },
+      {
         "key": "LCAP-1084",
         "summary": "Manager Beats-tildeling — påkrævet begrundelse ved allokering",
         "status": "Ready for test",
@@ -1014,17 +1025,6 @@
           "app"
         ],
         "updated": "2026-04-08T14:01:33.282+0200"
-      },
-      {
-        "key": "LCAP-1123",
-        "summary": "Feat: Vendor profile CRUD endpoint for FMS dashboard settings",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-08T13:34:04.092+0200"
       },
       {
         "key": "LCAP-1129",
@@ -1573,5 +1573,5 @@
       }
     }
   },
-  "generated": "2026-04-09T08:10:11.857Z"
+  "generated": "2026-04-09T08:46:33.726Z"
 }
