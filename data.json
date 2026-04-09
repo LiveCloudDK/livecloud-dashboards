@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-09T07:31:47.251Z",
+    "startDate": "2026-04-09T08:10:11.856Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -609,6 +609,20 @@
         "updated": "2026-01-21T17:07:54.880+0100"
       },
       {
+        "key": "LCAP-1170",
+        "summary": "Commerce Completion: payment, inventory, checkout, notifications, settlement",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Epic",
+        "labels": [
+          "commerce",
+          "epic"
+        ],
+        "updated": "2026-04-09T09:45:47.966+0200"
+      },
+      {
         "key": "LCAP-1195",
         "summary": "POS API: Eksternt vendor API design — Joe & the Juice integration",
         "status": "Selected for Development",
@@ -707,17 +721,6 @@
         "type": "Story",
         "labels": [],
         "updated": "2026-04-08T21:25:38.810+0200"
-      },
-      {
-        "key": "LCAP-573",
-        "summary": "Favorite Artist preview component",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Edwin Maldonado",
-        "priority": "High",
-        "type": "Task",
-        "labels": [],
-        "updated": "2026-04-08T21:16:53.210+0200"
       },
       {
         "key": "LCAP-1169",
@@ -835,6 +838,19 @@
         "updated": "2026-03-30T13:27:15.443+0200"
       },
       {
+        "key": "LCAP-990",
+        "summary": "Transfer revoke — kontoholder kan tilbagekalde overført billet",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Highest",
+        "type": "Sub-task",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-09T09:50:55.473+0200"
+      },
+      {
         "key": "LCAP-608",
         "summary": "Revoked ticket - maby not status but a trace if a ticket delegate or transfere is revoked",
         "status": "In Progress",
@@ -885,19 +901,6 @@
           "fms"
         ],
         "updated": "2026-03-31T14:04:20.638+0200"
-      },
-      {
-        "key": "LCAP-990",
-        "summary": "Transfer revoke — kontoholder kan tilbagekalde overført billet",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Highest",
-        "type": "Sub-task",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-03-31T09:16:27.410+0200"
       },
       {
         "key": "LCAP-989",
@@ -1123,17 +1126,6 @@
           "pos"
         ],
         "updated": "2026-04-06T15:56:37.254+0200"
-      },
-      {
-        "key": "LCAP-618",
-        "summary": "Artist screen: It should be able pick a featured artist that gets put at the top and fills the total width",
-        "status": "READY FOR TEST AT DEV",
-        "statusCategory": "indeterminate",
-        "assignee": "Edwin Maldonado",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-05T18:17:42.924+0200"
       },
       {
         "key": "LCAP-1090",
@@ -1403,19 +1395,6 @@
         "updated": "2026-03-31T14:09:09.573+0200"
       },
       {
-        "key": "LCAP-532",
-        "summary": "Color options in fms",
-        "status": "READY FOR TEST AT DEV",
-        "statusCategory": "indeterminate",
-        "assignee": "Jakob Højgård",
-        "priority": "High",
-        "type": "Sub-task",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-03-30T13:27:13.210+0200"
-      },
-      {
         "key": "LCAP-1009",
         "summary": "FMS<->POS refund sync, anonymous checkout gap & Swedbank TransactionHistory",
         "status": "Ready for testing",
@@ -1559,8 +1538,8 @@
         "updated": "2026-03-30T13:26:31.672+0200"
       }
     ],
-    "testQueueCount": 47,
-    "readyForReleaseCount": 90,
+    "testQueueCount": 45,
+    "readyForReleaseCount": 88,
     "capacityCounts": {
       "michael": {
         "active": 34,
@@ -1568,9 +1547,9 @@
         "readyForRelease": 38
       },
       "tony": {
-        "active": 13,
+        "active": 14,
         "testQueue": 14,
-        "readyForRelease": 20
+        "readyForRelease": 18
       },
       "mikkel": {
         "active": 10,
@@ -1579,20 +1558,20 @@
       },
       "jakob": {
         "active": 8,
-        "testQueue": 5,
+        "testQueue": 4,
         "readyForRelease": 11
       },
       "edwin": {
-        "active": 2,
-        "testQueue": 7,
-        "readyForRelease": 2
+        "active": 1,
+        "testQueue": 6,
+        "readyForRelease": 3
       },
       "simon": {
         "active": 9,
         "testQueue": 5,
-        "readyForRelease": 8
+        "readyForRelease": 7
       }
     }
   },
-  "generated": "2026-04-09T07:31:47.252Z"
+  "generated": "2026-04-09T08:10:11.857Z"
 }
