@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-09T11:30:38.692Z",
+    "startDate": "2026-04-09T11:35:26.970Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -634,6 +634,35 @@
         "updated": "2026-01-21T17:07:54.880+0100"
       },
       {
+        "key": "LCAP-1168",
+        "summary": "FMS: build own Swedbank Pay integration, migrate online flows from POS",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Story",
+        "labels": [
+          "commerce",
+          "phase-1",
+          "pos"
+        ],
+        "updated": "2026-04-09T13:30:36.332+0200"
+      },
+      {
+        "key": "LCAP-1155",
+        "summary": "FMS: dedicated cashout endpoint for beats-to-card refund",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Sub-task",
+        "labels": [
+          "commerce",
+          "phase-1"
+        ],
+        "updated": "2026-04-09T13:30:35.662+0200"
+      },
+      {
         "key": "LCAP-1170",
         "summary": "Commerce Completion: payment, inventory, checkout, notifications, settlement",
         "status": "In Progress",
@@ -660,35 +689,6 @@
           "ws8-pos-api"
         ],
         "updated": "2026-04-09T08:34:21.014+0200"
-      },
-      {
-        "key": "LCAP-1155",
-        "summary": "FMS: dedicated cashout endpoint for beats-to-card refund",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Tony Dieu",
-        "priority": "High",
-        "type": "Sub-task",
-        "labels": [
-          "commerce",
-          "phase-1"
-        ],
-        "updated": "2026-04-09T13:30:35.662+0200"
-      },
-      {
-        "key": "LCAP-1168",
-        "summary": "FMS: build own Swedbank Pay integration, migrate online flows from POS",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Tony Dieu",
-        "priority": "High",
-        "type": "Story",
-        "labels": [
-          "commerce",
-          "phase-1",
-          "pos"
-        ],
-        "updated": "2026-04-09T13:30:36.332+0200"
       },
       {
         "key": "LCAP-1167",
@@ -1678,5 +1678,5 @@
       }
     }
   ],
-  "generated": "2026-04-09T11:30:43.286Z"
+  "generated": "2026-04-09T11:35:34.202Z"
 }
