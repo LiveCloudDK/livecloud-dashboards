@@ -2124,10 +2124,22 @@ function renderSprints() {
 function renderCapacity() {
   let html = '<div class="capacity-container">';
 
+  // Override hardcoded counts with synced Jira data if available
+  const _syncCounts = window._sprintData && window._sprintData.capacityCounts;
+  if (_syncCounts) {
+    for (const [person, counts] of Object.entries(_syncCounts)) {
+      if (capacityData[person]) {
+        capacityData[person].activeTickets = counts.active;
+        capacityData[person].testQueue = counts.testQueue;
+        capacityData[person].readyForRelease = counts.readyForRelease;
+      }
+    }
+  }
+
   // Summary dashboard
   html += '<div class="capacity-dashboard">';
 
-  // Compute live summary from capacityData
+  // Compute live summary from capacityData (now using synced values)
   const _totalCap = Object.values(capacityData).reduce((s,p) => s + p.capacity, 0);
   const _totalActive = Object.values(capacityData).reduce((s,p) => s + p.activeTickets, 0);
   const _buffer = _totalCap - _totalActive;
@@ -2202,7 +2214,7 @@ function renderCapacity() {
 
   html += '</div>';
 
-  // Per-person capacity
+  // Per-person capacity — uses live Jira counts (synced at top of renderCapacity)
   html += '<div class="capacity-card" style="margin-bottom:32px">';
   html += '<h3 style="margin-bottom:16px">Individuel Kapacitet</h3>';
 
@@ -2211,7 +2223,6 @@ function renderCapacity() {
     const cap = capacityData[person];
     const utilization = (cap.activeTickets / cap.capacity * 100).toFixed(0);
     const buffer = cap.capacity - cap.activeTickets;
-    const status = cap.activeTickets > cap.capacity ? 'RISK' : 'OK';
     const barColor = cap.activeTickets > cap.capacity ? 'bar-risk' : (buffer < 10 ? 'bar-warning' : 'bar-ok');
     const statusColor = cap.activeTickets > cap.capacity ? 'var(--red)' : (buffer < 10 ? 'var(--yellow)' : 'var(--green)');
 
@@ -2229,7 +2240,7 @@ function renderCapacity() {
     // Clear labels
     html += `<div class="bar-label">${cap.activeTickets} aktive</div>`;
     html += `<div class="bar-label" style="color:var(--text-muted)">af ${cap.capacity}</div>`;
-    html += `<div class="bar-label" style="color:${statusColor};font-weight:700;min-width:50px">${buffer >= 0 ? buffer + ' ledig' : Math.abs(buffer) + ' over'}</div>`;
+    html += `<div class="bar-label" style="color:${statusColor};font-weight:700;min-width:50px">${buffer >= 0 ? buffer + ' buffer' : Math.abs(buffer) + ' over'}</div>`;
 
     html += '</div></div>';
     html += '</div>';
@@ -2270,7 +2281,7 @@ function renderCapacity() {
   html += '<div style="background:var(--surface2);border-radius:8px;padding:16px;border-left:3px solid var(--red)">';
   html += '<div style="font-weight:700;margin-bottom:8px;color:var(--red)">Gap 3: QA / Test (Edwin)</div>';
   html += '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">QA-kø: <span style="color:var(--orange);font-weight:700">' + _testQueueCount + ' tickets</span> venter på test | <span style="color:var(--green);font-weight:700">' + _readyForReleaseCount + '</span> klar til release</div>';
-  html += '<div style="font-size:12px;line-height:1.6">82 tickets venter på test. Test deles mellem Jakob, Edwin og Simon. Samlet QA-kapacitet ~50+ tickets inden freeze.</div>';
+  html += '<div style="font-size:12px;line-height:1.6">Test deles mellem Jakob, Edwin og Simon. Samlet QA-kapacitet ~50+ tickets inden freeze.</div>';
   html += '</div>';
 
   // Gap 4: Unassigned backlog

@@ -222,7 +222,46 @@ async function main() {
 
   let sprint = null;
   const sprintData = await fetchCurrentSprint();
+  // Compute per-person ticket counts from raw Jira data
+  let capacityCounts = null;
   if (sprintData) {
+    const personCounts = {};
+    const knownPersons = ['michael', 'tony', 'mikkel', 'jakob', 'edwin', 'simon'];
+    knownPersons.forEach(p => { personCounts[p] = { active: 0, testQueue: 0, readyForRelease: 0 }; });
+
+    // Count active issues (In Progress + Selected for Development) per person
+    for (const issue of sprintData.issues) {
+      const assignee = issue.fields?.assignee?.displayName;
+      if (!assignee) continue;
+      const person = normalizePerson(assignee);
+      if (person && personCounts[person]) personCounts[person].active++;
+    }
+
+    // Count test queue issues per person (from the raw testIssues stored in sprintData)
+    // We already have testQueueCount and readyForReleaseCount as totals
+    // For per-person breakdown, we need the raw issues — let's use sprint.issues statuses
+    // Actually the combinedIssues includes test issues, so we can re-derive from status
+    for (const issue of sprintData.issues) {
+      const status = issue.fields?.status?.name;
+      const assignee = issue.fields?.assignee?.displayName;
+      if (!assignee) continue;
+      const person = normalizePerson(assignee);
+      if (!person || !personCounts[person]) continue;
+      if (['Ready for testing', 'Ready for test', 'READY FOR TEST AT DEV'].includes(status)) {
+        personCounts[person].testQueue++;
+        personCounts[person].active--; // Don't double-count
+      }
+    }
+
+    // Count ready for release per person
+    for (const issue of (sprintData.releaseIssues || [])) {
+      const person = normalizePerson(issue.assignee);
+      if (person && personCounts[person]) personCounts[person].readyForRelease++;
+    }
+
+    capacityCounts = personCounts;
+    console.log('Per-person counts:', JSON.stringify(personCounts));
+
     sprint = {
       name: sprintData.name,
       state: sprintData.state,
@@ -232,6 +271,7 @@ async function main() {
       issues: sprintData.issues.map(issueToSprintIssue),
       testQueueCount: sprintData.testQueueCount || 0,
       readyForReleaseCount: sprintData.readyForReleaseCount || 0,
+      capacityCounts,
     };
   } else {
     console.log('No active or future sprint found');
