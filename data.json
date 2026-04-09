@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-09T11:20:58.130Z",
+    "startDate": "2026-04-09T11:30:38.692Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -670,9 +670,10 @@
         "priority": "High",
         "type": "Sub-task",
         "labels": [
-          "commerce"
+          "commerce",
+          "phase-1"
         ],
-        "updated": "2026-04-09T00:16:06.955+0200"
+        "updated": "2026-04-09T13:30:35.662+0200"
       },
       {
         "key": "LCAP-1168",
@@ -684,9 +685,10 @@
         "type": "Story",
         "labels": [
           "commerce",
+          "phase-1",
           "pos"
         ],
-        "updated": "2026-04-09T00:16:06.240+0200"
+        "updated": "2026-04-09T13:30:36.332+0200"
       },
       {
         "key": "LCAP-1167",
@@ -1676,5 +1678,5 @@
       }
     }
   ],
-  "generated": "2026-04-09T11:21:04.036Z"
+  "generated": "2026-04-09T11:30:43.286Z"
 }
