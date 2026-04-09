@@ -36,10 +36,24 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-09T08:46:33.724Z",
+    "startDate": "2026-04-09T09:27:50.983Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-1199",
+        "summary": "Ticket type valid_from/valid_to dates display incorrectly on edit page",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Bug",
+        "labels": [
+          "bug",
+          "fms"
+        ],
+        "updated": "2026-04-09T11:26:14.919+0200"
+      },
       {
         "key": "LCAP-1122",
         "summary": "Feat: Add product category filtering and search to vendor product API",
@@ -848,7 +862,7 @@
         "labels": [
           "commerce"
         ],
-        "updated": "2026-04-09T10:21:33.430+0200"
+        "updated": "2026-04-09T11:18:09.038+0200"
       },
       {
         "key": "LCAP-989",
@@ -977,17 +991,6 @@
           "pos"
         ],
         "updated": "2026-04-07T11:49:44.967+0200"
-      },
-      {
-        "key": "LCAP-1123",
-        "summary": "Feat: Vendor profile CRUD endpoint for FMS dashboard settings",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-09T10:44:37.449+0200"
       },
       {
         "key": "LCAP-1084",
@@ -1538,7 +1541,7 @@
         "updated": "2026-03-30T13:26:31.672+0200"
       }
     ],
-    "testQueueCount": 45,
+    "testQueueCount": 44,
     "readyForReleaseCount": 88,
     "capacityCounts": {
       "michael": {
@@ -1567,11 +1570,100 @@
         "readyForRelease": 3
       },
       "simon": {
-        "active": 9,
-        "testQueue": 5,
+        "active": 10,
+        "testQueue": 4,
         "readyForRelease": 7
       }
     }
   },
-  "generated": "2026-04-09T08:46:33.726Z"
+  "publicStats": {
+    "totalFeatures": 0,
+    "featuresDone": 0,
+    "featuresInProgress": 0,
+    "featuresInTest": 0,
+    "featuresReadyForRelease": 0,
+    "featuresDoneCount": 0,
+    "featuresBacklog": 0,
+    "byWorkstream": {
+      "Onboarding": {
+        "done": 0,
+        "total": 0
+      },
+      "POS": {
+        "done": 0,
+        "total": 0
+      },
+      "App": {
+        "done": 0,
+        "total": 0
+      },
+      "Backend": {
+        "done": 0,
+        "total": 0
+      },
+      "B2B": {
+        "done": 0,
+        "total": 0
+      },
+      "Webshop": {
+        "done": 0,
+        "total": 0
+      },
+      "Personal": {
+        "done": 0,
+        "total": 0
+      },
+      "POS API": {
+        "done": 0,
+        "total": 0
+      },
+      "NFC/Wallet": {
+        "done": 0,
+        "total": 0
+      },
+      "Gates": {
+        "done": 0,
+        "total": 0
+      }
+    }
+  },
+  "festivals": [
+    {
+      "id": "festhallen",
+      "name": "Festhallen (Bodegafesten)",
+      "date": "2026-03-28",
+      "capacity": 600,
+      "color": "#ec4899",
+      "colorEnd": "#f97316",
+      "status": "completed",
+      "apiStatus": "ok",
+      "apiData": {
+        "name": "Festhallen (Bodegafesten)",
+        "guestCount": null,
+        "ticketsSold": null,
+        "topLevelKeys": [
+          "data"
+        ]
+      }
+    },
+    {
+      "id": "ringsted",
+      "name": "Ringsted Festival 2026",
+      "date": "2026-07-30",
+      "capacity": 20000,
+      "color": "#6366f1",
+      "colorEnd": "#a855f7",
+      "status": "upcoming",
+      "apiStatus": "ok",
+      "apiData": {
+        "name": "Ringsted Festival 2026",
+        "guestCount": null,
+        "ticketsSold": null,
+        "topLevelKeys": [
+          "data"
+        ]
+      }
+    }
+  ],
+  "generated": "2026-04-09T09:27:55.805Z"
 }
