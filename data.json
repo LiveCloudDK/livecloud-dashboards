@@ -36,10 +36,58 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-09T04:42:33.001Z",
+    "startDate": "2026-04-09T04:49:18.245Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-1143",
+        "summary": "FMS: Vendor sandbox environment with test data seeder",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Low",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-09T00:24:17.450+0200"
+      },
+      {
+        "key": "LCAP-1142",
+        "summary": "FMS: OpenAPI spec and vendor API documentation",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Low",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-09T00:24:16.698+0200"
+      },
+      {
+        "key": "LCAP-854",
+        "summary": "Man skal kunne uploade til media library fra “opret artist” siden. og andre steder hvor man kan oprette et objekt med et billede, så man ikke skal ud i medie library og uploade først",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Low",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-03-31T18:33:53.398+0200"
+      },
+      {
+        "key": "LCAP-737",
+        "summary": "Tab bar state switching + Beats display",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Edwin Maldonado",
+        "priority": "Low",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-03-12T10:49:57.732+0100"
+      },
       {
         "key": "LCAP-492",
         "summary": "B2B Ticket Purchase & Invitation Workflows",
@@ -50,6 +98,59 @@
         "type": "Story",
         "labels": [],
         "updated": "2026-04-09T06:37:52.786+0200"
+      },
+      {
+        "key": "LCAP-1139",
+        "summary": "FMS: API key scopes and permissions per vendor",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-09T00:24:14.599+0200"
+      },
+      {
+        "key": "LCAP-1137",
+        "summary": "FMS: Outbound webhooks with HMAC signing for vendors",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-09T00:24:13.101+0200"
+      },
+      {
+        "key": "LCAP-1136",
+        "summary": "FMS: Vendor self-serve product catalog API",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-09T00:24:12.259+0200"
+      },
+      {
+        "key": "LCAP-1191",
+        "summary": "FMS: Payment failure recovery - retry with different method",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "checkout",
+          "commerce"
+        ],
+        "updated": "2026-04-09T00:22:20.715+0200"
       },
       {
         "key": "LCAP-1163",
@@ -227,6 +328,150 @@
         "updated": "2026-04-08T13:25:39.288+0200"
       },
       {
+        "key": "LCAP-1159",
+        "summary": "Indkøb af POS-enheder til Ringsted Festival",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [],
+        "updated": "2026-04-07T22:27:20.061+0200"
+      },
+      {
+        "key": "LCAP-1158",
+        "summary": "Undersøg Apple VAS-certificerede POS-enheder",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [],
+        "updated": "2026-04-07T22:27:19.596+0200"
+      },
+      {
+        "key": "LCAP-1094",
+        "summary": "Apple VAS — provider-certifikat og NFC pass-opsætning",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-07T22:11:25.897+0200"
+      },
+      {
+        "key": "LCAP-1160",
+        "summary": "Esper MDM — opret og konfigurer POS-enheder",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [],
+        "updated": "2026-04-07T22:01:48.800+0200"
+      },
+      {
+        "key": "LCAP-1028",
+        "summary": "E2E test: all payment flows - buy, refund, partial refund",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "app",
+          "e2e",
+          "testing"
+        ],
+        "updated": "2026-04-07T21:25:37.337+0200"
+      },
+      {
+        "key": "LCAP-919",
+        "summary": "Revoke staging-fms DO Spaces access to single bucket",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-07T21:25:34.023+0200"
+      },
+      {
+        "key": "LCAP-849",
+        "summary": "FMS Backoffice — Map editor for vendor pin placement",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-07T19:58:47.205+0200"
+      },
+      {
+        "key": "LCAP-848",
+        "summary": "Content API — Map data endpoint for vendor locations",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-07T19:58:46.671+0200"
+      },
+      {
+        "key": "LCAP-736",
+        "summary": "In-event state layout and components",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-07T19:14:48.087+0200"
+      },
+      {
+        "key": "LCAP-1152",
+        "summary": "Fix pre-existing PHPStan errors (180 errors blocking CI)",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "techdebt"
+        ],
+        "updated": "2026-04-07T10:49:08.368+0200"
+      },
+      {
+        "key": "LCAP-1069",
+        "summary": "App: Beats auto-refill — automatisk påfyldning når saldo er lav",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-07T08:32:29.025+0200"
+      },
+      {
+        "key": "LCAP-1146",
+        "summary": "POS: Respekter beats-only betalingsindstilling ved event",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [],
+        "updated": "2026-04-06T11:15:39.268+0200"
+      },
+      {
         "key": "LCAP-1082",
         "summary": "Inventory management — komplet lagerstyring i FMS",
         "status": "In Progress",
@@ -238,6 +483,110 @@
           "fms"
         ],
         "updated": "2026-04-06T09:49:38.680+0200"
+      },
+      {
+        "key": "LCAP-1053",
+        "summary": "Send orderItems to Swedbank Pay on payment order creation, capture and reversal",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-03T20:31:37.594+0200"
+      },
+      {
+        "key": "LCAP-1127",
+        "summary": "Question: Should PosOrderService fail on invalid product IDs?",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Bug",
+        "labels": [],
+        "updated": "2026-04-01T14:33:36.473+0200"
+      },
+      {
+        "key": "LCAP-805",
+        "summary": "[Admin] UserResource - list, view, edit users with summit filtering",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "Festhallen"
+        ],
+        "updated": "2026-04-01T11:36:38.840+0200"
+      },
+      {
+        "key": "LCAP-811",
+        "summary": "[Admin] Remaining domain resources - Events, Venues, Commerce (stretch)",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "Festhallen",
+          "fms"
+        ],
+        "updated": "2026-03-31T18:35:27.976+0200"
+      },
+      {
+        "key": "LCAP-1091",
+        "summary": "Medarbejder-portal — personaleadministration og adgangsstyring",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-03-31T18:33:52.782+0200"
+      },
+      {
+        "key": "LCAP-1081",
+        "summary": "FMS Dashboard — mobil-responsive og real-time sync med Swedbank/SoftPOS",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-03-31T18:33:50.980+0200"
+      },
+      {
+        "key": "LCAP-938",
+        "summary": "Promotional rewards — køb X og få Y",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-03-31T14:21:01.870+0200"
+      },
+      {
+        "key": "LCAP-940",
+        "summary": "Discount visning i app og storefront",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "app",
+          "commerce"
+        ],
+        "updated": "2026-03-31T14:21:01.299+0200"
       },
       {
         "key": "LCAP-946",
@@ -253,6 +602,110 @@
         "updated": "2026-03-31T14:21:00.635+0200"
       },
       {
+        "key": "LCAP-1004",
+        "summary": "Staging miljø — separat test-miljø nu produktion har rigtige brugere",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-31T14:20:59.676+0200"
+      },
+      {
+        "key": "LCAP-1007",
+        "summary": "Support case log — registrér og kategorisér bruger-issues",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-03-31T14:20:58.737+0200"
+      },
+      {
+        "key": "LCAP-1074",
+        "summary": "Test-runde: Verificér alle Ready for test features efter Bodegafesten",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Epic",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-31T14:20:56.785+0200"
+      },
+      {
+        "key": "LCAP-918",
+        "summary": "Add Nightwatch monitoring to Festhallen FMS and UserCentral servers",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-03-31T14:04:27.140+0200"
+      },
+      {
+        "key": "LCAP-936",
+        "summary": "Discount engine — core pricing rules backend",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-03-31T14:04:25.857+0200"
+      },
+      {
+        "key": "LCAP-939",
+        "summary": "Discount admin UI — konfiguration af rabatter",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-03-31T14:04:25.195+0200"
+      },
+      {
+        "key": "LCAP-1058",
+        "summary": "Inventory opdateres ikke ved ordre/køb",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Bug",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-03-31T14:04:10.289+0200"
+      },
+      {
+        "key": "LCAP-935",
+        "summary": "Commerce integration test + storefront klargøring",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-03-31T14:03:25.025+0200"
+      },
+      {
         "key": "LCAP-969",
         "summary": "Inventory dashboard widget — real-time lagerstatus",
         "status": "Selected for Development",
@@ -264,6 +717,45 @@
           "fms"
         ],
         "updated": "2026-03-31T14:03:24.512+0200"
+      },
+      {
+        "key": "LCAP-984",
+        "summary": "Gate scanner — vis om adgang tilhører owner eller delegate",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-03-31T14:03:23.960+0200"
+      },
+      {
+        "key": "LCAP-1083",
+        "summary": "Gate design — fysisk check-in setup med festivalsikkerhed",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-03-31T14:03:21.249+0200"
+      },
+      {
+        "key": "LCAP-1085",
+        "summary": "POS: Terminaler har udfordringer med at læse kort - undersøg cover-påvirkning",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Bug",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-03-31T14:03:17.734+0200"
       },
       {
         "key": "LCAP-915",
@@ -279,6 +771,147 @@
         "updated": "2026-03-31T14:03:09.113+0200"
       },
       {
+        "key": "LCAP-929",
+        "summary": "Align ticket type and ticket information",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-31T14:03:07.841+0200"
+      },
+      {
+        "key": "LCAP-934",
+        "summary": "UI review: transfer emails + app download landing page",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-31T14:03:07.225+0200"
+      },
+      {
+        "key": "LCAP-937",
+        "summary": "Beats bundle pricing — volumenrabat API",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-31T14:03:06.469+0200"
+      },
+      {
+        "key": "LCAP-949",
+        "summary": "Firebase Analytics — extended events (POS, scanner, Beats)",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-31T14:03:05.625+0200"
+      },
+      {
+        "key": "LCAP-976",
+        "summary": "Pre-order — lagertræk ved ordreplacering vs. betaling",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-31T14:03:02.889+0200"
+      },
+      {
+        "key": "LCAP-978",
+        "summary": "Kvitteringer i app — købshistorik under profil",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-31T14:03:02.310+0200"
+      },
+      {
+        "key": "LCAP-1076",
+        "summary": "Ringsted Festival — summit/event setup og onboarding-plan",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-31T14:02:54.697+0200"
+      },
+      {
+        "key": "LCAP-1086",
+        "summary": "Ticket scanning workflow — multi-scan regler, QR fjernelse, self-scanning",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-31T14:02:54.065+0200"
+      },
+      {
+        "key": "LCAP-1093",
+        "summary": "NFC / Wallet — Apple VAS, Google Wallet og NFC-armbånd",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Epic",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-31T14:02:52.220+0200"
+      },
+      {
+        "key": "LCAP-1092",
+        "summary": "POS API — tredjeparts betalingsinitiering (Joe & Juice, Volt m.fl.)",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-03-30T21:13:05.610+0200"
+      },
+      {
+        "key": "LCAP-830",
+        "summary": "Gate operations — attendee lookup view for gate staff",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-03-30T13:30:08.992+0200"
+      },
+      {
         "key": "LCAP-832",
         "summary": "Age verification at POS — block alcohol sales to minors",
         "status": "In Progress",
@@ -288,6 +921,17 @@
         "type": "Story",
         "labels": [],
         "updated": "2026-03-30T13:30:07.420+0200"
+      },
+      {
+        "key": "LCAP-831",
+        "summary": "Dress rehearsal at venue — full gate setup with scanner devices",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-03-30T13:30:06.896+0200"
       },
       {
         "key": "LCAP-910",
@@ -342,6 +986,19 @@
         "updated": "2026-03-30T13:27:46.679+0200"
       },
       {
+        "key": "LCAP-1098",
+        "summary": "Swedbank API — træk af transaktioner og kvitteringer",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-03-30T13:27:43.293+0200"
+      },
+      {
         "key": "LCAP-765",
         "summary": "Checkout flow + delivery options",
         "status": "In Progress",
@@ -368,6 +1025,123 @@
         "updated": "2026-03-30T13:27:26.487+0200"
       },
       {
+        "key": "LCAP-627",
+        "summary": "Criipto/MitID setup",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-03-30T13:27:25.274+0200"
+      },
+      {
+        "key": "LCAP-626",
+        "summary": "Web \"min side\" login",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-03-30T13:27:24.752+0200"
+      },
+      {
+        "key": "LCAP-148",
+        "summary": "Festival Credits",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-03-30T13:27:21.871+0200"
+      },
+      {
+        "key": "LCAP-147",
+        "summary": "Payment setup",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-03-30T13:27:21.266+0200"
+      },
+      {
+        "key": "LCAP-122",
+        "summary": "Food and beverage",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-03-30T13:27:20.774+0200"
+      },
+      {
+        "key": "LCAP-983",
+        "summary": "FMS Admin — vis og administrér aktive delegationer pr. gæst",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-03-30T13:27:17.395+0200"
+      },
+      {
+        "key": "LCAP-962",
+        "summary": "Inventory dashboard widget — real-time lagerstatus",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-03-30T13:27:16.739+0200"
+      },
+      {
+        "key": "LCAP-1096",
+        "summary": "POS App — NFC-læsning af wallet passes og armbånd",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-03-30T13:26:59.297+0200"
+      },
+      {
+        "key": "LCAP-1063",
+        "summary": "Hardware: Undersøg om terminal-cover påvirker kortlæsning",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-03-30T13:26:56.592+0200"
+      },
+      {
         "key": "LCAP-319",
         "summary": "POS-system",
         "status": "In Progress",
@@ -379,6 +1153,45 @@
           "pos"
         ],
         "updated": "2026-03-30T13:26:41.633+0200"
+      },
+      {
+        "key": "LCAP-1095",
+        "summary": "Wallet Pass — generering og distribution af digitale billetter",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-30T13:26:40.568+0200"
+      },
+      {
+        "key": "LCAP-1077",
+        "summary": "App: Interaktivt festival-kort (map feature)",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-30T13:26:40.038+0200"
+      },
+      {
+        "key": "LCAP-982",
+        "summary": "Profilskærm — Beats transaktionshistorik",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-30T13:26:34.018+0200"
       },
       {
         "key": "LCAP-981",
@@ -420,6 +1233,57 @@
         "updated": "2026-03-30T13:26:29.265+0200"
       },
       {
+        "key": "LCAP-566",
+        "summary": "Festhallen app v1.0.0",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Epic",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-30T13:26:28.644+0200"
+      },
+      {
+        "key": "LCAP-184",
+        "summary": "API Client & Integration Layer",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-30T13:26:27.391+0200"
+      },
+      {
+        "key": "LCAP-1031",
+        "summary": "Admin refund UI, channel column, and sales improvements",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "fms",
+          "operations"
+        ],
+        "updated": "2026-03-26T15:23:09.971+0100"
+      },
+      {
+        "key": "LCAP-606",
+        "summary": "Add a time indicator on the schedule timeline and listview that shows a line/ border for the current time of day",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-03-23T09:55:38.896+0100"
+      },
+      {
         "key": "LCAP-598",
         "summary": "Ticket + Festival ID in wallet",
         "status": "Selected for Development",
@@ -429,6 +1293,28 @@
         "type": "Story",
         "labels": [],
         "updated": "2026-03-17T16:03:03.809+0100"
+      },
+      {
+        "key": "LCAP-109",
+        "summary": "Scanner app admin interface",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Epic",
+        "labels": [],
+        "updated": "2026-03-17T16:00:52.418+0100"
+      },
+      {
+        "key": "LCAP-613",
+        "summary": "Improvements for FMS v1.0.0",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-03-17T11:55:24.836+0100"
       },
       {
         "key": "LCAP-914",
@@ -451,6 +1337,149 @@
         "type": "Sub-task",
         "labels": [],
         "updated": "2026-03-17T11:42:13.225+0100"
+      },
+      {
+        "key": "LCAP-850",
+        "summary": "Map Feature — Integration testing & venue data setup for Bodegafesten",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-03-17T11:42:04.611+0100"
+      },
+      {
+        "key": "LCAP-847",
+        "summary": "Map View — Category filter and vendor search on map",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-03-17T11:42:02.833+0100"
+      },
+      {
+        "key": "LCAP-846",
+        "summary": "Map View — Interactive venue map with vendor location pins",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-03-17T11:42:02.218+0100"
+      },
+      {
+        "key": "LCAP-845",
+        "summary": "Festival Venue Map — Interactive vendor map with location pins",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Epic",
+        "labels": [],
+        "updated": "2026-03-17T11:42:01.348+0100"
+      },
+      {
+        "key": "LCAP-836",
+        "summary": "Delegate access — delegate receive flow (app)",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-03-17T10:43:37.054+0100"
+      },
+      {
+        "key": "LCAP-835",
+        "summary": "Delegate access — owner delegation flow (app)",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-03-17T10:43:36.601+0100"
+      },
+      {
+        "key": "LCAP-864",
+        "summary": "Beats Currency — Connect wallet balance to pre-order flow",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-03-16T11:45:21.153+0100"
+      },
+      {
+        "key": "LCAP-863",
+        "summary": "Pre-Order — Integration testing & end-to-end validation",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-03-16T11:45:20.616+0100"
+      },
+      {
+        "key": "LCAP-862",
+        "summary": "Swedbank Pay SDK — Payment integration for pre-orders",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-03-16T11:45:20.002+0100"
+      },
+      {
+        "key": "LCAP-861",
+        "summary": "Pre-Order API — Menu & stall endpoints for consumer app",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-03-16T11:45:19.262+0100"
+      },
+      {
+        "key": "LCAP-860",
+        "summary": "Pre-Order UI — Merge feature branch & align with FMS theme/design",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-03-16T11:45:18.735+0100"
+      },
+      {
+        "key": "LCAP-859",
+        "summary": "Pre-Order App — Connect UI to live API (replace mock data)",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-03-16T11:45:18.206+0100"
+      },
+      {
+        "key": "LCAP-858",
+        "summary": "Pre-Order — Order lifecycle & pickup notifications",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-03-16T11:45:17.454+0100"
       },
       {
         "key": "LCAP-895",
@@ -486,6 +1515,28 @@
         "updated": "2026-03-16T09:32:45.404+0100"
       },
       {
+        "key": "LCAP-822",
+        "summary": "FMS TabMenu states",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [],
+        "updated": "2026-03-16T09:20:33.038+0100"
+      },
+      {
+        "key": "LCAP-785",
+        "summary": "Smoke tests",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-03-13T14:25:57.724+0100"
+      },
+      {
         "key": "LCAP-672",
         "summary": "Swedbank / POS-afhængigheder",
         "status": "In Progress",
@@ -517,6 +1568,113 @@
         "type": "Story",
         "labels": [],
         "updated": "2026-03-02T15:07:23.811+0100"
+      },
+      {
+        "key": "LCAP-735",
+        "summary": "Post-TestFlight monitoring and hotfixes",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-03-02T08:41:35.504+0100"
+      },
+      {
+        "key": "LCAP-837",
+        "summary": "add artis component",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-02-24T14:12:21.234+0100"
+      },
+      {
+        "key": "LCAP-838",
+        "summary": "Add a test editor component",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-02-24T14:12:10.233+0100"
+      },
+      {
+        "key": "LCAP-834",
+        "summary": "Delegate access — time window management backend",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-02-24T10:40:48.098+0100"
+      },
+      {
+        "key": "LCAP-809",
+        "summary": "[B2B Portal] Create B2B panel provider + login flow",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "Festhallen"
+        ],
+        "updated": "2026-02-23T13:42:51.395+0100"
+      },
+      {
+        "key": "LCAP-808",
+        "summary": "[Admin] Navigation groups + domain-based menu structure",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "Festhallen"
+        ],
+        "updated": "2026-02-23T13:42:08.430+0100"
+      },
+      {
+        "key": "LCAP-804",
+        "summary": "[Admin] Summit scope trait (HasSummitScope) + Spatie permission setup",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "Festhallen"
+        ],
+        "updated": "2026-02-23T13:39:54.191+0100"
+      },
+      {
+        "key": "LCAP-803",
+        "summary": "[Admin] Create admin panel provider + summit tenancy config",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "Festhallen"
+        ],
+        "updated": "2026-02-23T13:39:06.332+0100"
+      },
+      {
+        "key": "LCAP-738",
+        "summary": "Gate scan listener + state management",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-02-20T13:23:03.971+0100"
       },
       {
         "key": "LCAP-723",
@@ -552,6 +1710,105 @@
         "updated": "2026-02-19T00:52:12.972+0100"
       },
       {
+        "key": "LCAP-773",
+        "summary": "Users find it difficult to select a date and time using the counter component",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-02-09T10:48:05.876+0100"
+      },
+      {
+        "key": "LCAP-772",
+        "summary": "Removing the initial screen from the Tab Menu options causes a backend error because the initial page slug no longer exists in the array",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-02-09T10:16:26.830+0100"
+      },
+      {
+        "key": "LCAP-769",
+        "summary": "Tickets to multiple access options",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-02-09T08:52:46.754+0100"
+      },
+      {
+        "key": "LCAP-719",
+        "summary": "[Festhallen] Commerce API",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Epic",
+        "labels": [],
+        "updated": "2026-02-06T15:28:48.886+0100"
+      },
+      {
+        "key": "LCAP-702",
+        "summary": "Treat Events like artists",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-02-04T12:34:52.712+0100"
+      },
+      {
+        "key": "LCAP-659",
+        "summary": "Auth Component",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-02-01T16:34:23.315+0100"
+      },
+      {
+        "key": "LCAP-100",
+        "summary": "Scanner app",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Epic",
+        "labels": [],
+        "updated": "2026-01-21T19:29:47.039+0100"
+      },
+      {
+        "key": "LCAP-467",
+        "summary": "Flat list: Mulighed for at skjule punkter uden at skulle slette",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-01-21T17:08:15.395+0100"
+      },
+      {
+        "key": "LCAP-412",
+        "summary": "Cloudflare Edge Caching",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Initiative",
+        "labels": [],
+        "updated": "2026-01-21T17:08:04.031+0100"
+      },
+      {
         "key": "LCAP-387",
         "summary": "Adapter for new commerce platform",
         "status": "Selected for Development",
@@ -561,6 +1818,192 @@
         "type": "Story",
         "labels": [],
         "updated": "2026-01-21T17:07:54.880+0100"
+      },
+      {
+        "key": "LCAP-581",
+        "summary": "Add excerpt",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-01-19T14:34:25.342+0100"
+      },
+      {
+        "key": "LCAP-580",
+        "summary": "Remove everything for internal",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-01-19T14:34:23.270+0100"
+      },
+      {
+        "key": "LCAP-611",
+        "summary": "Move Festhallen.dk to DO",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [],
+        "updated": "2026-01-19T14:31:19.690+0100"
+      },
+      {
+        "key": "LCAP-366",
+        "summary": "Role-Based Access Control (RBAC)",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-01-19T11:24:40.346+0100"
+      },
+      {
+        "key": "LCAP-612",
+        "summary": "Conditional tabbar menu, and setup",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-01-16T10:41:09.286+0100"
+      },
+      {
+        "key": "LCAP-596",
+        "summary": "This Epic collects all relevant work related to devops",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Epic",
+        "labels": [],
+        "updated": "2026-01-12T14:12:08.875+0100"
+      },
+      {
+        "key": "LCAP-497",
+        "summary": "Web Tickets",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Epic",
+        "labels": [],
+        "updated": "2026-01-02T10:30:30.667+0100"
+      },
+      {
+        "key": "LCAP-81",
+        "summary": "API: localize WP",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [],
+        "updated": "2025-12-23T10:19:25.741+0100"
+      },
+      {
+        "key": "LCAP-409",
+        "summary": "Hardware decisions",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2025-12-23T10:07:40.588+0100"
+      },
+      {
+        "key": "LCAP-389",
+        "summary": "Migration from Shopify to new commerce",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2025-12-23T09:45:09.731+0100"
+      },
+      {
+        "key": "LCAP-425",
+        "summary": "Scanner Dashboard komponenter",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2025-12-23T09:28:13.210+0100"
+      },
+      {
+        "key": "LCAP-1179",
+        "summary": "POS: Deprecate FMS bridge endpoints after Swedbank migration",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-04-09T00:28:30.701+0200"
+      },
+      {
+        "key": "LCAP-1141",
+        "summary": "FMS: Idempotency keys on all vendor API write endpoints",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-09T00:24:16.036+0200"
+      },
+      {
+        "key": "LCAP-1140",
+        "summary": "FMS: Guest identification via QR code for third-party vendors",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-09T00:24:15.326+0200"
+      },
+      {
+        "key": "LCAP-1138",
+        "summary": "FMS: Order refund endpoint for third-party vendors",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-09T00:24:13.867+0200"
+      },
+      {
+        "key": "LCAP-1188",
+        "summary": "FMS: Swedbank Pay Cloud API integration for settlement reconciliation",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-09T00:19:52.514+0200"
       },
       {
         "key": "LCAP-1155",
@@ -588,6 +2031,20 @@
           "pos"
         ],
         "updated": "2026-04-09T00:16:06.240+0200"
+      },
+      {
+        "key": "LCAP-1170",
+        "summary": "Commerce Completion: payment, inventory, checkout, notifications, settlement",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Epic",
+        "labels": [
+          "commerce",
+          "epic"
+        ],
+        "updated": "2026-04-09T00:15:15.769+0200"
       },
       {
         "key": "LCAP-1167",
@@ -673,6 +2130,68 @@
         "updated": "2026-04-08T15:18:08.879+0200"
       },
       {
+        "key": "LCAP-1162",
+        "summary": "BUG: antal på ticket gemmes ikke",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-08T11:31:54.448+0200"
+      },
+      {
+        "key": "LCAP-1161",
+        "summary": "Export af tickets giver et export af produkter, uden tickets",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-08T11:28:15.614+0200"
+      },
+      {
+        "key": "LCAP-975",
+        "summary": "Pre-order — menu og vendor browsing API",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-07T20:12:13.254+0200"
+      },
+      {
+        "key": "LCAP-1145",
+        "summary": "FMS: Online Beats-påfyldning fejler - 0% konvertering ved Bodega Festen",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Bug",
+        "labels": [
+          "fms",
+          "pos"
+        ],
+        "updated": "2026-04-07T12:21:34.563+0200"
+      },
+      {
+        "key": "LCAP-1068",
+        "summary": "App: Kreditkort påkrævet i app for Beats top-up",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-07T08:45:20.724+0200"
+      },
+      {
         "key": "LCAP-1118",
         "summary": "Simon onboarding: FMS starter tickets",
         "status": "In Progress",
@@ -682,6 +2201,32 @@
         "type": "Story",
         "labels": [],
         "updated": "2026-04-06T09:11:50.657+0200"
+      },
+      {
+        "key": "LCAP-1046",
+        "summary": "POS/FMS payment sync: fix missing notifications, remove pre-payment order creation, deprecate order proxy",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Story",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-03T15:19:14.968+0200"
+      },
+      {
+        "key": "LCAP-1144",
+        "summary": "FMS: Third-party vendor integration",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Story",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-03T12:53:14.354+0200"
       },
       {
         "key": "LCAP-1054",
@@ -695,6 +2240,82 @@
           "pos"
         ],
         "updated": "2026-04-02T08:28:52.805+0200"
+      },
+      {
+        "key": "LCAP-1126",
+        "summary": "Feat: Assign existing users to summits with role selection",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "High",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-01T11:38:21.475+0200"
+      },
+      {
+        "key": "LCAP-1048",
+        "summary": "FMS: handle void webhook, accept softpay top-ups, fix backfill and refund validation, standardize amount units",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "High",
+        "type": "Sub-task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-03-31T18:33:52.184+0200"
+      },
+      {
+        "key": "LCAP-955",
+        "summary": "Lagerstyring — vendor inventory management",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Epic",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-03-31T14:04:24.696+0200"
+      },
+      {
+        "key": "LCAP-958",
+        "summary": "Salgshastighed og lagerstatus — grøn/gul/rød beregning",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-03-31T14:04:22.957+0200"
+      },
+      {
+        "key": "LCAP-959",
+        "summary": "Stikprøve-flow — fysisk lagerkontrol",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-03-31T14:04:22.384+0200"
+      },
+      {
+        "key": "LCAP-960",
+        "summary": "Sammensatte produkter — ingrediens-lagertræk",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-03-31T14:04:21.827+0200"
       },
       {
         "key": "LCAP-965",
@@ -762,6 +2383,269 @@
         "updated": "2026-03-31T14:04:17.443+0200"
       },
       {
+        "key": "LCAP-1011",
+        "summary": "FMS Admin — masseredigering af produkter og vendors",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-03-31T14:04:15.655+0200"
+      },
+      {
+        "key": "LCAP-1052",
+        "summary": "Guest order API returns pending/cancelled orders to app",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Bug",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-31T14:04:11.542+0200"
+      },
+      {
+        "key": "LCAP-1047",
+        "summary": "POS: fix missing FMS notifications, deprecate order proxy, standardize amount units",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Sub-task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-03-31T14:03:20.106+0200"
+      },
+      {
+        "key": "LCAP-970",
+        "summary": "Pre-Order Backend — bestil i app, betal ved bar",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Epic",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-31T14:03:04.929+0200"
+      },
+      {
+        "key": "LCAP-974",
+        "summary": "Pre-order — gæstenotifikationer og app-status",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-31T14:03:04.229+0200"
+      },
+      {
+        "key": "LCAP-999",
+        "summary": "Beats top-up fra consumer app — afklaring og evt. implementation",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-31T14:03:01.466+0200"
+      },
+      {
+        "key": "LCAP-1049",
+        "summary": "POS App: align amount fields with backend DKK standardization",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Sub-task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-31T14:02:56.722+0200"
+      },
+      {
+        "key": "LCAP-1056",
+        "summary": "Guest App: MobilePay betaling hænger efter godkendt køb",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "High",
+        "type": "Bug",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-31T14:02:56.088+0200"
+      },
+      {
+        "key": "LCAP-1057",
+        "summary": "Gate scan skriver ikke tilbage til eksternt billetsystem (Ringsted)",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Bug",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-31T14:02:55.403+0200"
+      },
+      {
+        "key": "LCAP-1114",
+        "summary": "POS App: integrate POST /orders endpoint for pre-payment order creation",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-03-31T10:07:58.032+0200"
+      },
+      {
+        "key": "LCAP-1061",
+        "summary": "POS: Split payment — brug Beats først, betal resten med kort",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-03-30T21:13:06.430+0200"
+      },
+      {
+        "key": "LCAP-1101",
+        "summary": "Vagtordning & supportplan under Ringsted Festival",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "festival-ops",
+          "operations"
+        ],
+        "updated": "2026-03-30T14:29:56.540+0200"
+      },
+      {
+        "key": "LCAP-1100",
+        "summary": "Personale-onboarding — POS + App træning til festival",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "festival-ops",
+          "operations"
+        ],
+        "updated": "2026-03-30T14:29:55.213+0200"
+      },
+      {
+        "key": "LCAP-1099",
+        "summary": "Rekruttér supportere & frivillige til Ringsted Festival",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "festival-ops",
+          "operations"
+        ],
+        "updated": "2026-03-30T14:29:54.143+0200"
+      },
+      {
+        "key": "LCAP-571",
+        "summary": "Logic for binding tickets to users ",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-03-30T13:27:43.827+0200"
+      },
+      {
+        "key": "LCAP-973",
+        "summary": "Pre-order — POS scan og ordrevisning",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-03-30T13:27:37.332+0200"
+      },
+      {
+        "key": "LCAP-624",
+        "summary": "Usercentral: Brugeroprettelse & Login",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-03-30T13:27:24.246+0200"
+      },
+      {
+        "key": "LCAP-347",
+        "summary": "Payment Gateway Integration",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-03-30T13:27:23.658+0200"
+      },
+      {
+        "key": "LCAP-330",
+        "summary": "Checkout Flow",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-03-30T13:27:22.481+0200"
+      },
+      {
+        "key": "LCAP-961",
+        "summary": "Bulk-væsker — liter/enheds-beregning og spild",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-03-30T13:27:16.101+0200"
+      },
+      {
         "key": "LCAP-992",
         "summary": "Admin dashboard — brugeradministration i UserCentral",
         "status": "In Progress",
@@ -773,6 +2657,244 @@
           "fms"
         ],
         "updated": "2026-03-30T13:27:15.443+0200"
+      },
+      {
+        "key": "LCAP-1067",
+        "summary": "POS/App: Initier betaling fra POS på kundens app efter identifikation",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-03-30T13:26:58.181+0200"
+      },
+      {
+        "key": "LCAP-1062",
+        "summary": "POS/Backend: Refund Beats til kreditkort",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-03-30T13:26:56.107+0200"
+      },
+      {
+        "key": "LCAP-1017",
+        "summary": "POS App — UI adjustments (basket scroll + beats visibility)",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Story",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-03-30T13:26:46.218+0200"
+      },
+      {
+        "key": "LCAP-1016",
+        "summary": "Attendee: Skjul cancelled tickets eller flyt til separat tab",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-03-30T13:26:45.614+0200"
+      },
+      {
+        "key": "LCAP-1015",
+        "summary": "Bonus Beats ved køb - konfigurerbare discount tiers",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-03-30T13:26:45.096+0200"
+      },
+      {
+        "key": "LCAP-1013",
+        "summary": "Admin Dashboard: Attendee-detaljevisning med klikbare wallets, orders og transaktioner",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-03-30T13:26:43.957+0200"
+      },
+      {
+        "key": "LCAP-1012",
+        "summary": "Produkt-oprettelse med multi-select vendor-tilknytning (uden gem først)",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-03-30T13:26:43.367+0200"
+      },
+      {
+        "key": "LCAP-1066",
+        "summary": "Koncept: App-first — alt starter i kundens app (scan, betaling, identifikation)",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "High",
+        "type": "Story",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-30T13:26:36.237+0200"
+      },
+      {
+        "key": "LCAP-562",
+        "summary": "Navigation",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "High",
+        "type": "Story",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-30T13:26:28.023+0200"
+      },
+      {
+        "key": "LCAP-754",
+        "summary": "Beats balance display on pass",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-02-26T05:38:53.874+0100"
+      },
+      {
+        "key": "LCAP-827",
+        "summary": "Fejl på start af session",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Bug",
+        "labels": [],
+        "updated": "2026-02-24T09:04:32.921+0100"
+      },
+      {
+        "key": "LCAP-826",
+        "summary": "404 fejl på api/gate/{{gate}}",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Bug",
+        "labels": [],
+        "updated": "2026-02-24T09:03:45.481+0100"
+      },
+      {
+        "key": "LCAP-531",
+        "summary": "API improvement for Image optimization",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [],
+        "updated": "2026-01-21T16:56:41.535+0100"
+      },
+      {
+        "key": "LCAP-335",
+        "summary": "Create Stalls as Vendors",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-01-19T11:26:43.480+0100"
+      },
+      {
+        "key": "LCAP-336",
+        "summary": "Stall Sales Overview",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-01-19T11:26:24.863+0100"
+      },
+      {
+        "key": "LCAP-337",
+        "summary": "Manual Order Creation",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-01-19T11:26:19.649+0100"
+      },
+      {
+        "key": "LCAP-338",
+        "summary": "Invoice Automation",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-01-19T11:26:18.125+0100"
+      },
+      {
+        "key": "LCAP-340",
+        "summary": "Order Log & Audit Trail",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-01-19T11:26:06.658+0100"
+      },
+      {
+        "key": "LCAP-349",
+        "summary": "Reporting API",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-01-19T11:25:31.935+0100"
+      },
+      {
+        "key": "LCAP-487",
+        "summary": "VIP guests: can have free bar free food in some stalls",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-01-19T11:21:42.174+0100"
       },
       {
         "key": "LCAP-608",
@@ -799,6 +2921,32 @@
           "app"
         ],
         "updated": "2026-04-08T21:25:03.764+0200"
+      },
+      {
+        "key": "LCAP-956",
+        "summary": "Inventory datamodel — vendor lager + centrallager",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Highest",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-03-31T14:04:24.062+0200"
+      },
+      {
+        "key": "LCAP-957",
+        "summary": "Inventory API — lager endpoints",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Highest",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-03-31T14:04:23.558+0200"
       },
       {
         "key": "LCAP-963",
@@ -840,6 +2988,19 @@
         "updated": "2026-03-31T14:04:13.812+0200"
       },
       {
+        "key": "LCAP-1024",
+        "summary": "Fulltest: Billet-scanning og registrering — alle scenarier",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Edwin Maldonado",
+        "priority": "Highest",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-03-31T14:02:57.525+0200"
+      },
+      {
         "key": "LCAP-990",
         "summary": "Transfer revoke — kontoholder kan tilbagekalde overført billet",
         "status": "Selected for Development",
@@ -864,6 +3025,32 @@
           "commerce"
         ],
         "updated": "2026-03-31T09:16:22.964+0200"
+      },
+      {
+        "key": "LCAP-972",
+        "summary": "Pre-order API — ordre-placering og status-endpoints",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Highest",
+        "type": "Task",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-03-30T13:27:36.645+0200"
+      },
+      {
+        "key": "LCAP-971",
+        "summary": "Pre-order datamodel — ordrer, status og TTL",
+        "status": "Backlog",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Highest",
+        "type": "Task",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-03-30T13:27:36.004+0200"
       },
       {
         "key": "LCAP-310",
@@ -2570,5 +4757,5 @@
       }
     ]
   },
-  "generated": "2026-04-09T04:42:33.001Z"
+  "generated": "2026-04-09T04:49:18.246Z"
 }
