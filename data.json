@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-09T12:18:14.841Z",
+    "startDate": "2026-04-09T12:50:10.531Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -865,6 +865,19 @@
         "updated": "2026-03-30T13:27:15.443+0200"
       },
       {
+        "key": "LCAP-989",
+        "summary": "Delegate revoke — gæst kan tilbagekalde en delegeret dag",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Highest",
+        "type": "Sub-task",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-09T14:26:56.787+0200"
+      },
+      {
         "key": "LCAP-990",
         "summary": "Transfer revoke — kontoholder kan tilbagekalde overført billet",
         "status": "In Progress",
@@ -876,19 +889,6 @@
           "commerce"
         ],
         "updated": "2026-04-09T11:18:09.038+0200"
-      },
-      {
-        "key": "LCAP-989",
-        "summary": "Delegate revoke — gæst kan tilbagekalde en delegeret dag",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Highest",
-        "type": "Sub-task",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-09T10:21:13.218+0200"
       },
       {
         "key": "LCAP-608",
@@ -995,7 +995,7 @@
       {
         "key": "LCAP-1151",
         "summary": "POS: Remove provider abstraction - go FMS-only",
-        "status": "Ready for testing",
+        "status": "Ready for test",
         "statusCategory": "indeterminate",
         "assignee": null,
         "priority": "Low",
@@ -1003,7 +1003,106 @@
         "labels": [
           "pos"
         ],
-        "updated": "2026-04-07T11:49:44.967+0200"
+        "updated": "2026-04-09T14:29:43.841+0200"
+      },
+      {
+        "key": "LCAP-774",
+        "summary": "Issues uploading videos and large images",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-09T14:31:34.505+0200"
+      },
+      {
+        "key": "LCAP-775",
+        "summary": "Error when creating an event with the date 29/02/2026 02:00:00",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-09T14:31:29.660+0200"
+      },
+      {
+        "key": "LCAP-853",
+        "summary": "man skal kunne oprette en artist og inden man trykke gem skal man kunne vælge om den bliver publiceret med det samme eller ej",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-09T14:31:25.413+0200"
+      },
+      {
+        "key": "LCAP-1035",
+        "summary": "POS sale webhook missing payee_reference and payment_order_id for FMS orders",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Bug",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-09T14:31:14.761+0200"
+      },
+      {
+        "key": "LCAP-1073",
+        "summary": "App: Fjern QR-kode fra billet-skærmen i appen",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-09T14:30:29.181+0200"
+      },
+      {
+        "key": "LCAP-1089",
+        "summary": "App update kommunikation — vis kort forklaringstekst ved refreshes",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-09T14:30:16.348+0200"
+      },
+      {
+        "key": "LCAP-1090",
+        "summary": "Endpoint/environment parameter cleanup og dokumentation",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-09T14:30:13.730+0200"
+      },
+      {
+        "key": "LCAP-1131",
+        "summary": "POS: Add terminal_id to refund flow for POS-initiated refunds",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": null,
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "fms",
+          "pos"
+        ],
+        "updated": "2026-04-09T14:29:58.964+0200"
       },
       {
         "key": "LCAP-1084",
@@ -1019,30 +1118,6 @@
         "updated": "2026-04-08T21:25:45.751+0200"
       },
       {
-        "key": "LCAP-853",
-        "summary": "man skal kunne oprette en artist og inden man trykke gem skal man kunne vælge om den bliver publiceret med det samme eller ej",
-        "status": "READY FOR TEST AT DEV",
-        "statusCategory": "indeterminate",
-        "assignee": "Edwin Maldonado",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-08T20:32:40.360+0200"
-      },
-      {
-        "key": "LCAP-1073",
-        "summary": "App: Fjern QR-kode fra billet-skærmen i appen",
-        "status": "READY FOR TEST AT DEV",
-        "statusCategory": "indeterminate",
-        "assignee": "Mikkel Kornval Christoffersen",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-04-08T14:01:33.282+0200"
-      },
-      {
         "key": "LCAP-1129",
         "summary": "Enforce consistent use of Eloquent API Resources and Form Request Validation",
         "status": "Ready for test",
@@ -1054,19 +1129,6 @@
           "fms"
         ],
         "updated": "2026-04-08T07:19:54.714+0200"
-      },
-      {
-        "key": "LCAP-1035",
-        "summary": "POS sale webhook missing payee_reference and payment_order_id for FMS orders",
-        "status": "Ready for testing",
-        "statusCategory": "indeterminate",
-        "assignee": "Edwin Maldonado",
-        "priority": "Medium",
-        "type": "Bug",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-04-07T21:25:33.257+0200"
       },
       {
         "key": "LCAP-1135",
@@ -1082,55 +1144,6 @@
         "updated": "2026-04-07T21:25:11.882+0200"
       },
       {
-        "key": "LCAP-1089",
-        "summary": "App update kommunikation — vis kort forklaringstekst ved refreshes",
-        "status": "READY FOR TEST AT DEV",
-        "statusCategory": "indeterminate",
-        "assignee": "Mikkel Kornval Christoffersen",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-04-07T19:14:47.474+0200"
-      },
-      {
-        "key": "LCAP-1131",
-        "summary": "POS: Add terminal_id to refund flow for POS-initiated refunds",
-        "status": "Ready for testing",
-        "statusCategory": "indeterminate",
-        "assignee": null,
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [
-          "fms",
-          "pos"
-        ],
-        "updated": "2026-04-07T12:16:33.837+0200"
-      },
-      {
-        "key": "LCAP-774",
-        "summary": "Issues uploading videos and large images",
-        "status": "READY FOR TEST AT DEV",
-        "statusCategory": "indeterminate",
-        "assignee": "Edwin Maldonado",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-06T19:27:51.851+0200"
-      },
-      {
-        "key": "LCAP-775",
-        "summary": "Error when creating an event with the date 29/02/2026 02:00:00",
-        "status": "READY FOR TEST AT DEV",
-        "statusCategory": "indeterminate",
-        "assignee": "Edwin Maldonado",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-06T18:17:11.148+0200"
-      },
-      {
         "key": "LCAP-932",
         "summary": "Align datetime/ timestamp format:",
         "status": "Ready for test",
@@ -1142,19 +1155,6 @@
           "pos"
         ],
         "updated": "2026-04-06T15:56:37.254+0200"
-      },
-      {
-        "key": "LCAP-1090",
-        "summary": "Endpoint/environment parameter cleanup og dokumentation",
-        "status": "READY FOR TEST AT DEV",
-        "statusCategory": "indeterminate",
-        "assignee": "Edwin Maldonado",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-04-05T16:47:31.333+0200"
       },
       {
         "key": "LCAP-1119",
@@ -1331,6 +1331,73 @@
         "updated": "2026-02-17T16:44:09.294+0100"
       },
       {
+        "key": "LCAP-1009",
+        "summary": "FMS<->POS refund sync, anonymous checkout gap & Swedbank TransactionHistory",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Story",
+        "labels": [
+          "pos",
+          "refund",
+          "swedbank"
+        ],
+        "updated": "2026-04-09T14:31:20.732+0200"
+      },
+      {
+        "key": "LCAP-1059",
+        "summary": "POS: Transaktioner opdateres for langsomt — hurtigere refresh/websockets",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-04-09T14:30:57.727+0200"
+      },
+      {
+        "key": "LCAP-1060",
+        "summary": "POS: Transaktioner per terminal med manager-overblik per bar",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-04-09T14:30:54.955+0200"
+      },
+      {
+        "key": "LCAP-1088",
+        "summary": "Bug: PIN-kode input på Android — screen transition delays og focus loss",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Jakob Højgård",
+        "priority": "High",
+        "type": "Bug",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-09T14:30:21.623+0200"
+      },
+      {
+        "key": "LCAP-1147",
+        "summary": "POS: FMS order reconciliation command for missing sale/top-up notifications",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-04-09T14:29:54.751+0200"
+      },
+      {
         "key": "LCAP-1070",
         "summary": "FMS/POS: Konfigurerbar indstilling — kun Beats-betaling tilladt ved event",
         "status": "Ready for test",
@@ -1359,71 +1426,69 @@
         "updated": "2026-04-07T20:12:13.879+0200"
       },
       {
-        "key": "LCAP-1147",
-        "summary": "POS: FMS order reconciliation command for missing sale/top-up notifications",
-        "status": "Ready for testing",
-        "statusCategory": "indeterminate",
-        "assignee": "Tony Dieu",
-        "priority": "High",
-        "type": "Task",
-        "labels": [
-          "pos"
-        ],
-        "updated": "2026-04-07T12:36:03.502+0200"
-      },
-      {
-        "key": "LCAP-1059",
-        "summary": "POS: Transaktioner opdateres for langsomt — hurtigere refresh/websockets",
-        "status": "Ready for testing",
-        "statusCategory": "indeterminate",
-        "assignee": "Tony Dieu",
-        "priority": "High",
-        "type": "Task",
-        "labels": [
-          "pos"
-        ],
-        "updated": "2026-04-07T11:49:45.738+0200"
-      },
-      {
-        "key": "LCAP-1060",
-        "summary": "POS: Transaktioner per terminal med manager-overblik per bar",
-        "status": "Ready for testing",
-        "statusCategory": "indeterminate",
-        "assignee": "Tony Dieu",
-        "priority": "High",
-        "type": "Task",
-        "labels": [
-          "pos"
-        ],
-        "updated": "2026-04-02T08:17:17.168+0200"
-      },
-      {
-        "key": "LCAP-1088",
-        "summary": "Bug: PIN-kode input på Android — screen transition delays og focus loss",
-        "status": "READY FOR TEST AT DEV",
+        "key": "LCAP-928",
+        "summary": "Time is wrong multiple places on the screens showing tickets",
+        "status": "Ready for test",
         "statusCategory": "indeterminate",
         "assignee": "Jakob Højgård",
-        "priority": "High",
+        "priority": "Highest",
+        "type": "Sub-task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-09T14:31:23.085+0200"
+      },
+      {
+        "key": "LCAP-1038",
+        "summary": "POS App — Bugs og fixes fra test (refund, saldo, Beats pris)",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "Highest",
+        "type": "Story",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-04-09T14:31:04.948+0200"
+      },
+      {
+        "key": "LCAP-1045",
+        "summary": "Bug: Limbo-tilstand når SoftPOS app går ned — mangler \"start forfra\" knap",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "Highest",
+        "type": "Sub-task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-04-09T14:31:00.349+0200"
+      },
+      {
+        "key": "LCAP-1064",
+        "summary": "POS: Auto-logout af gæst efter gennemført betaling (kritisk)",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "Highest",
+        "type": "Bug",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-04-09T14:30:33.248+0200"
+      },
+      {
+        "key": "LCAP-1087",
+        "summary": "Bug: Login/redirect fejl når brugere har flere apps installeret",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Jakob Højgård",
+        "priority": "Highest",
         "type": "Bug",
         "labels": [
           "app"
         ],
-        "updated": "2026-03-31T14:09:09.573+0200"
-      },
-      {
-        "key": "LCAP-1009",
-        "summary": "FMS<->POS refund sync, anonymous checkout gap & Swedbank TransactionHistory",
-        "status": "Ready for testing",
-        "statusCategory": "indeterminate",
-        "assignee": "Tony Dieu",
-        "priority": "High",
-        "type": "Story",
-        "labels": [
-          "pos",
-          "refund",
-          "swedbank"
-        ],
-        "updated": "2026-03-26T21:50:52.336+0100"
+        "updated": "2026-04-09T14:30:24.307+0200"
       },
       {
         "key": "LCAP-1027",
@@ -1450,19 +1515,6 @@
         "updated": "2026-04-08T13:12:41.651+0200"
       },
       {
-        "key": "LCAP-1087",
-        "summary": "Bug: Login/redirect fejl når brugere har flere apps installeret",
-        "status": "Ready for testing",
-        "statusCategory": "indeterminate",
-        "assignee": "Jakob Højgård",
-        "priority": "Highest",
-        "type": "Bug",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-04-08T09:03:26.447+0200"
-      },
-      {
         "key": "LCAP-1079",
         "summary": "Billettyper: Camping (2/4 adgang), børnebilletter og ledsagerbilletter",
         "status": "Ready for test",
@@ -1474,19 +1526,6 @@
           "commerce"
         ],
         "updated": "2026-04-08T07:44:18.512+0200"
-      },
-      {
-        "key": "LCAP-1045",
-        "summary": "Bug: Limbo-tilstand når SoftPOS app går ned — mangler \"start forfra\" knap",
-        "status": "Ready for testing",
-        "statusCategory": "indeterminate",
-        "assignee": "Tony Dieu",
-        "priority": "Highest",
-        "type": "Sub-task",
-        "labels": [
-          "pos"
-        ],
-        "updated": "2026-04-07T08:59:44.305+0200"
       },
       {
         "key": "LCAP-996",
@@ -1513,45 +1552,6 @@
           "fms"
         ],
         "updated": "2026-03-31T14:03:22.719+0200"
-      },
-      {
-        "key": "LCAP-1064",
-        "summary": "POS: Auto-logout af gæst efter gennemført betaling (kritisk)",
-        "status": "READY FOR TEST AT DEV",
-        "statusCategory": "indeterminate",
-        "assignee": "Tony Dieu",
-        "priority": "Highest",
-        "type": "Bug",
-        "labels": [
-          "pos"
-        ],
-        "updated": "2026-03-30T15:46:39.807+0200"
-      },
-      {
-        "key": "LCAP-1038",
-        "summary": "POS App — Bugs og fixes fra test (refund, saldo, Beats pris)",
-        "status": "Ready for testing",
-        "statusCategory": "indeterminate",
-        "assignee": "Tony Dieu",
-        "priority": "Highest",
-        "type": "Story",
-        "labels": [
-          "pos"
-        ],
-        "updated": "2026-03-30T13:26:49.650+0200"
-      },
-      {
-        "key": "LCAP-928",
-        "summary": "Time is wrong multiple places on the screens showing tickets",
-        "status": "Ready for testing",
-        "statusCategory": "indeterminate",
-        "assignee": "Jakob Højgård",
-        "priority": "Highest",
-        "type": "Sub-task",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-03-30T13:26:31.672+0200"
       }
     ],
     "testQueueCount": 44,
@@ -1678,5 +1678,5 @@
       }
     }
   ],
-  "generated": "2026-04-09T12:18:22.474Z"
+  "generated": "2026-04-09T12:50:17.956Z"
 }
