@@ -867,6 +867,371 @@
     /* Sprints overview: tighter cards */
     body.view-sprints .timeline > div { margin-bottom: 12px !important; }
   }
+
+  /* ═══════════════════════════════════════════════════════════
+     SHOWCASE VIEW
+     ═══════════════════════════════════════════════════════════ */
+
+  .showcase-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 32px 24px;
+  }
+
+  /* ── Hero section ── */
+  .showcase-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 48px;
+    padding: 40px;
+    background: linear-gradient(135deg, rgba(99,102,241,0.12), rgba(168,85,247,0.08));
+    border-radius: 20px;
+    border: 1px solid rgba(99,102,241,0.2);
+  }
+
+  .showcase-hero-left { text-align: center; }
+
+  .showcase-countdown { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+
+  .countdown-number {
+    font-size: 96px;
+    font-weight: 900;
+    line-height: 1;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -4px;
+  }
+
+  .countdown-label {
+    font-size: 16px;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-top: 4px;
+  }
+
+  .countdown-date {
+    font-size: 13px;
+    color: var(--text-muted);
+    opacity: 0.7;
+  }
+
+  .showcase-hero-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .progress-ring-container {
+    width: 180px;
+    height: 180px;
+  }
+
+  .progress-ring {
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+  }
+
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .hero-stat-num {
+    font-size: 24px;
+    font-weight: 800;
+  }
+
+  .hero-stat-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── Sections ── */
+  .showcase-section {
+    margin-bottom: 36px;
+  }
+
+  .showcase-section-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+
+  /* ── Grid layouts ── */
+  .showcase-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .showcase-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  /* ── Cards ── */
+  .showcase-card {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .showcase-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+
+  .showcase-card.glow-indigo {
+    border-color: rgba(99,102,241,0.3);
+    box-shadow: 0 0 20px rgba(99,102,241,0.08);
+  }
+
+  .showcase-card.glow-pink {
+    border-color: rgba(236,72,153,0.3);
+    box-shadow: 0 0 20px rgba(236,72,153,0.08);
+  }
+
+  .showcase-card-header {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-muted);
+  }
+
+  /* Pulse dot animation */
+  .pulse-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 4px rgba(34,197,94,0.4); opacity: 1; }
+    50% { box-shadow: 0 0 12px rgba(34,197,94,0.8); opacity: 0.7; }
+  }
+
+  /* Feature list items */
+  .showcase-feature-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    font-size: 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  .showcase-feature-item:last-child {
+    border-bottom: none;
+  }
+
+  .feature-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── Workstream progress bars ── */
+  .showcase-bars {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid var(--border);
+  }
+
+  .ws-progress-row {
+    display: grid;
+    grid-template-columns: 100px 1fr 50px;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+  }
+
+  .ws-progress-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 500;
+    text-align: right;
+  }
+
+  .ws-progress-track {
+    height: 8px;
+    background: var(--surface2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .ws-progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1s ease-out;
+  }
+
+  .ws-progress-pct {
+    font-size: 13px;
+    font-weight: 700;
+    text-align: right;
+  }
+
+  /* ── Festival cards ── */
+  .festival-card {
+    border-left: 4px solid !important;
+    border: 1px solid var(--border);
+  }
+
+  .festival-header {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+
+  .festival-metric {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .festival-big-num {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--text);
+  }
+
+  .festival-metric-label {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .festival-fill-track {
+    height: 6px;
+    background: var(--surface2);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+
+  .festival-fill-bar {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 1.2s ease-out;
+  }
+
+  .festival-status {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── Platform highlight cards ── */
+  .showcase-highlight {
+    border-radius: 16px;
+    padding: 24px 20px;
+    text-align: center;
+    color: #fff;
+    transition: transform 0.2s, box-shadow 0.2s;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .showcase-highlight:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+
+  .highlight-icon {
+    font-size: 36px;
+    line-height: 1;
+  }
+
+  .highlight-title {
+    font-size: 16px;
+    font-weight: 800;
+  }
+
+  .highlight-desc {
+    font-size: 12px;
+    opacity: 0.85;
+    line-height: 1.4;
+  }
+
+  /* ── Footer ── */
+  .showcase-footer {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    opacity: 0.5;
+    padding: 32px 0 16px;
+  }
+
+  /* ── Showcase responsive ── */
+  @media (max-width: 768px) {
+    .showcase-container { padding: 16px; }
+
+    .showcase-hero {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding: 24px;
+    }
+
+    .countdown-number { font-size: 64px; letter-spacing: -2px; }
+
+    .progress-ring-container { width: 140px; height: 140px; }
+
+    .hero-stats { gap: 16px; }
+    .hero-stat-num { font-size: 20px; }
+
+    .showcase-grid-2 { grid-template-columns: 1fr; }
+    .showcase-grid-4 { grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    .ws-progress-row { grid-template-columns: 70px 1fr 40px; gap: 8px; }
+    .ws-progress-label { font-size: 11px; }
+
+    .festival-big-num { font-size: 24px; }
+    .showcase-highlight { min-height: 110px; padding: 16px 12px; }
+    .highlight-icon { font-size: 28px; }
+  }
+
+  @media (max-width: 480px) {
+    .showcase-grid-4 { grid-template-columns: 1fr; }
+    .countdown-number { font-size: 48px; }
+    .ws-progress-row { grid-template-columns: 60px 1fr 36px; }
+  }
   </style>
 </head>
 <body>
@@ -906,6 +1271,7 @@
     <button class="filter-btn view-btn" data-view="sprints">Sprints</button>
     <button class="filter-btn view-btn" data-view="capacity">Kapacitet</button>
     <button class="filter-btn view-btn" data-view="current-sprint">Aktivt Sprint</button>
+    <button class="filter-btn view-btn" data-view="showcase" style="background:linear-gradient(135deg,#6366f1,#a855f7);color:#fff;border:none">Showcase</button>
   </div>
   <div class="filter-group">
     <label>Person</label>
@@ -937,6 +1303,7 @@
     <button class="mobile-tab" data-view="overview">Overblik</button>
     <button class="mobile-tab" data-view="detail">Gantt</button>
     <button class="mobile-tab" data-view="capacity">Kapacitet</button>
+    <button class="mobile-tab" data-view="showcase">Showcase</button>
   </div>
 </div>
 <div class="mobile-sub-bar">
@@ -1193,6 +1560,8 @@ let wsNames = {
         if (data.columns && data.columns.length > 0) columns = data.columns;
         if (data.wsNames && Object.keys(data.wsNames).length > 0) wsNames = data.wsNames;
         if (data.sprint) window._sprintData = data.sprint;
+        if (data.publicStats) window._publicStats = data.publicStats;
+        if (data.festivals) window._festivals = data.festivals;
         const genDate = new Date(data.generated);
         const dateStr = genDate.toLocaleDateString('da-DK', { day:'numeric', month:'short', year:'numeric' });
         const timeStr = genDate.toLocaleTimeString('da-DK', { hour:'2-digit', minute:'2-digit' });
@@ -1205,6 +1574,16 @@ let wsNames = {
         console.log('Loaded ' + tasks.length + ' tasks from data.json (' + data.generated + ')');
       } catch (err) {
         console.warn('data.json not available, using fallback tasks:', err.message);
+      }
+      // Load curated public features for showcase view
+      try {
+        const pfResp = await fetch('public-features.json?v=' + Date.now());
+        if (pfResp.ok) {
+          window._publicFeatures = await pfResp.json();
+          console.log('Loaded public-features.json');
+        }
+      } catch (e) {
+        console.warn('public-features.json not available:', e.message);
       }
     }
 
@@ -1248,7 +1627,7 @@ const personColors = {
 
 // ===== RENDER =====
 // Restore view from URL hash (e.g. #current-sprint)
-const validViews = ['detail','overview','sprints','capacity','current-sprint'];
+const validViews = ['detail','overview','sprints','capacity','current-sprint','showcase'];
 const hashView = location.hash.replace('#','');
 const state = { ws: 'all', person: 'all', phase: 'all', view: validViews.includes(hashView) ? hashView : 'detail' };
 
@@ -1615,7 +1994,12 @@ function render() {
   // Toggle body class for view-specific mobile CSS
   document.body.className = 'view-' + state.view;
 
-  if (state.view === 'capacity') {
+  if (state.view === 'showcase') {
+    legend.style.display = 'none';
+    html = renderShowcase();
+    tl.innerHTML = html;
+    animateShowcase();
+  } else if (state.view === 'capacity') {
     legend.style.display = 'none';
     html = renderCapacity();
     tl.innerHTML = html;
@@ -2119,6 +2503,186 @@ function renderSprints() {
   html += '</div>';
   document.getElementById('stat-visible').textContent = visibleCount;
   return html;
+}
+
+// ===== SHOWCASE VIEW =====
+function renderShowcase() {
+  const ps = window._publicStats || {};
+  const festivals = window._festivals || [];
+  const pf = window._publicFeatures || {};
+
+  const totalFeatures = ps.totalFeatures || 245;
+  const featuresDone = ps.featuresDone || 89;
+  const featuresInProgress = ps.featuresInProgress || 76;
+  const featuresInTest = ps.featuresInTest || 51;
+  const pctDone = totalFeatures > 0 ? Math.round(featuresDone / totalFeatures * 100) : 0;
+
+  // Festival countdown
+  const festDate = new Date('2026-07-30');
+  const now = new Date();
+  const daysLeft = Math.max(0, Math.ceil((festDate - now) / (1000*60*60*24)));
+
+  let html = '<div class="showcase-container">';
+
+  // ── HERO SECTION ──
+  html += '<div class="showcase-hero">';
+  html += '<div class="showcase-hero-left">';
+  html += '<div class="showcase-countdown">';
+  html += '<div class="countdown-number">' + daysLeft + '</div>';
+  html += '<div class="countdown-label">dage til Ringsted Festival</div>';
+  html += '<div class="countdown-date">30. juli \u2013 1. august 2026</div>';
+  html += '</div>';
+  html += '</div>';
+  html += '<div class="showcase-hero-right">';
+  html += '<div class="progress-ring-container">';
+  // SVG donut
+  const radius = 70, circumference = 2 * Math.PI * radius;
+  const offset = circumference - (pctDone / 100) * circumference;
+  html += `<svg viewBox="0 0 180 180" class="progress-ring">`;
+  html += `<defs><linearGradient id="ring-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#22c55e"/></linearGradient></defs>`;
+  html += `<circle cx="90" cy="90" r="${radius}" fill="none" stroke="var(--surface2)" stroke-width="12"/>`;
+  html += `<circle cx="90" cy="90" r="${radius}" fill="none" stroke="url(#ring-grad)" stroke-width="12" stroke-linecap="round" stroke-dasharray="${circumference}" stroke-dashoffset="${offset}" transform="rotate(-90 90 90)" class="ring-progress"/>`;
+  html += `<text x="90" y="82" text-anchor="middle" fill="var(--text)" font-size="28" font-weight="800">${pctDone}%</text>`;
+  html += `<text x="90" y="104" text-anchor="middle" fill="var(--text-muted)" font-size="11">platform klar</text>`;
+  html += `</svg>`;
+  html += '</div>';
+  html += `<div class="hero-stats">`;
+  html += `<div class="hero-stat"><span class="hero-stat-num" style="color:#22c55e">${featuresDone}</span><span class="hero-stat-label">f\u00e6rdige</span></div>`;
+  html += `<div class="hero-stat"><span class="hero-stat-num" style="color:#3b82f6">${featuresInProgress}</span><span class="hero-stat-label">i gang</span></div>`;
+  html += `<div class="hero-stat"><span class="hero-stat-num" style="color:#f97316">${featuresInTest}</span><span class="hero-stat-label">i test</span></div>`;
+  html += `</div>`;
+  html += '</div>';
+  html += '</div>';
+
+  // ── HVAD SKER DER NU ──
+  html += '<div class="showcase-section">';
+  html += '<div class="showcase-grid-2">';
+
+  // Current focus
+  html += '<div class="showcase-card glow-indigo">';
+  html += '<div class="showcase-card-header"><span class="pulse-dot"></span> Lige nu</div>';
+  const currentFocus = pf.currentFocus || ['Billet-overf\u00f8rsel med deeplink', 'B2B virksomhedsbilletter', 'Beats purchase & spend', 'Joe & the Juice vendor API'];
+  for (const item of currentFocus) {
+    html += `<div class="showcase-feature-item"><span class="feature-dot" style="background:#6366f1"></span>${item}</div>`;
+  }
+  html += '</div>';
+
+  // Next up
+  html += '<div class="showcase-card glow-pink">';
+  html += '<div class="showcase-card-header">\u2192 N\u00e6ste sprint</div>';
+  const nextFocus = pf.nextUpFocus || ['Apple VAS & Google Smart Tap', 'NFC-armb\u00e5nd kobling', 'Webshop til billetsalg', 'Festival Experience: kort & community'];
+  for (const item of nextFocus) {
+    html += `<div class="showcase-feature-item"><span class="feature-dot" style="background:#ec4899"></span>${item}</div>`;
+  }
+  html += '</div>';
+
+  html += '</div></div>';
+
+  // ── WORKSTREAM PROGRESS ──
+  const ws = ps.byWorkstream || {};
+  const wsEntries = Object.entries(ws).filter(([,v]) => v.total > 0);
+  if (wsEntries.length > 0) {
+    html += '<div class="showcase-section">';
+    html += '<h2 class="showcase-section-title">Feature Progress</h2>';
+    html += '<div class="showcase-bars">';
+    const wsColors = ['#6366f1','#3b82f6','#06b6d4','#22c55e','#eab308','#f97316','#ef4444','#ec4899','#a855f7','#8b5cf6'];
+    wsEntries.forEach(([name, data], i) => {
+      const pct = data.total > 0 ? Math.round(data.done / data.total * 100) : 0;
+      const color = wsColors[i % wsColors.length];
+      html += '<div class="ws-progress-row">';
+      html += `<div class="ws-progress-label">${name}</div>`;
+      html += '<div class="ws-progress-track">';
+      html += `<div class="ws-progress-fill" style="width:${pct}%;background:${color}" data-pct="${pct}"></div>`;
+      html += '</div>';
+      html += `<div class="ws-progress-pct" style="color:${color}">${pct}%</div>`;
+      html += '</div>';
+    });
+    html += '</div></div>';
+  }
+
+  // ── FESTIVAL ATTENDEES ──
+  html += '<div class="showcase-section">';
+  html += '<h2 class="showcase-section-title">Festivaller</h2>';
+  html += '<div class="showcase-grid-2">';
+
+  const festivalData = festivals.length > 0 ? festivals : (pf.festivals || []);
+  for (const fest of festivalData) {
+    const grad = `linear-gradient(135deg, ${fest.color || '#6366f1'}, ${fest.colorEnd || fest.color || '#a855f7'})`;
+    const festD = new Date(fest.date);
+    const isPast = festD < now;
+    const daysToFest = Math.ceil((festD - now) / (1000*60*60*24));
+    const guestCount = fest.apiData?.guestCount || fest.apiData?.ticketsSold || null;
+    const capacity = fest.capacity || 0;
+
+    html += `<div class="showcase-card festival-card" style="border-image:${grad} 1;border-left:4px solid">`;
+    html += `<div class="festival-header" style="background:${grad};-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">${fest.name}</div>`;
+
+    if (guestCount !== null) {
+      const fillPct = capacity > 0 ? Math.min(100, Math.round(guestCount / capacity * 100)) : 0;
+      html += `<div class="festival-metric"><span class="festival-big-num">${guestCount.toLocaleString('da-DK')}</span><span class="festival-metric-label">/ ${capacity.toLocaleString('da-DK')} tilmeldte</span></div>`;
+      html += '<div class="festival-fill-track">';
+      html += `<div class="festival-fill-bar" style="width:${fillPct}%;background:${grad}"></div>`;
+      html += '</div>';
+    } else if (fest.apiStatus === 'ok') {
+      html += '<div class="festival-metric"><span class="festival-metric-label">Data tilg\u00e6ngelig \u2014 opdateres ved n\u00e6ste sync</span></div>';
+    } else {
+      html += '<div class="festival-metric"><span class="festival-metric-label" style="opacity:0.5">Billetdata kommer snart</span></div>';
+    }
+
+    if (isPast) {
+      html += `<div class="festival-status" style="color:${fest.color || '#22c55e'}">Gennemf\u00f8rt</div>`;
+    } else {
+      html += `<div class="festival-status">${daysToFest} dage</div>`;
+    }
+    html += '</div>';
+  }
+
+  html += '</div></div>';
+
+  // ── PLATFORM HIGHLIGHTS ──
+  const highlights = pf.highlights || [
+    { icon: '\u26a1', title: 'Beats Credits', desc: 'Digital festival-valuta', gradient: 'linear-gradient(135deg,#6366f1,#a855f7)' },
+    { icon: '\ud83d\udcf1', title: 'NFC-armb\u00e5nd', desc: 'Tap & go', gradient: 'linear-gradient(135deg,#06b6d4,#22c55e)' },
+    { icon: '\ud83d\uddfa\ufe0f', title: 'Festival App', desc: 'Kort, program, community', gradient: 'linear-gradient(135deg,#ec4899,#f97316)' },
+    { icon: '\ud83c\udfab', title: 'Digital Billet', desc: 'Deeplink-aktivering', gradient: 'linear-gradient(135deg,#eab308,#f97316)' },
+  ];
+
+  html += '<div class="showcase-section">';
+  html += '<h2 class="showcase-section-title">Platformen</h2>';
+  html += '<div class="showcase-grid-4">';
+  for (const h of highlights) {
+    html += `<div class="showcase-highlight" style="background:${h.gradient}">`;
+    html += `<div class="highlight-icon">${h.icon}</div>`;
+    html += `<div class="highlight-title">${h.title}</div>`;
+    html += `<div class="highlight-desc">${h.desc}</div>`;
+    html += '</div>';
+  }
+  html += '</div></div>';
+
+  // ── FOOTER ──
+  html += '<div class="showcase-footer">LiveCloud Platform \u00b7 Ringsted Festival 2026 \u00b7 livecloud.dk</div>';
+
+  html += '</div>';
+  return html;
+}
+
+function animateShowcase() {
+  // Animate progress bars
+  setTimeout(() => {
+    document.querySelectorAll('.ws-progress-fill').forEach(el => {
+      const pct = el.dataset.pct;
+      el.style.width = '0%';
+      requestAnimationFrame(() => { el.style.transition = 'width 1s ease-out'; el.style.width = pct + '%'; });
+    });
+    // Animate ring
+    const ring = document.querySelector('.ring-progress');
+    if (ring) {
+      const final = ring.getAttribute('stroke-dashoffset');
+      const circ = ring.getAttribute('stroke-dasharray');
+      ring.setAttribute('stroke-dashoffset', circ);
+      requestAnimationFrame(() => { ring.style.transition = 'stroke-dashoffset 1.5s ease-out'; ring.setAttribute('stroke-dashoffset', final); });
+    }
+  }, 100);
 }
 
 function renderCapacity() {

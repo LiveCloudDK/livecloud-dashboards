@@ -1,0 +1,42 @@
+{
+  "currentFocus": [
+    "Billet-overførsel med deeplink — del billetter med venner",
+    "B2B virksomhedsbilletter og akkreditering",
+    "Beats purchase & spend via POS",
+    "Joe & the Juice vendor API integration"
+  ],
+  "nextUpFocus": [
+    "Apple VAS & Google Smart Tap — wallet-billetter",
+    "NFC-armbånd kobling til profiler",
+    "Webshop til online billetsalg",
+    "Festival Experience: interaktivt kort, boder & community"
+  ],
+  "highlights": [
+    { "icon": "\u26a1", "title": "Beats Credits", "desc": "Digital festival-valuta \u2014 hurtigere betaling, kortere k\u00f8er", "gradient": "linear-gradient(135deg, #6366f1, #a855f7)" },
+    { "icon": "\ud83d\udcf1", "title": "NFC-armb\u00e5nd", "desc": "Tap & go \u2014 adgang og betaling i \u00e9t", "gradient": "linear-gradient(135deg, #06b6d4, #22c55e)" },
+    { "icon": "\ud83d\uddfa\ufe0f", "title": "Festival App", "desc": "Kort, program, community \u2014 alt i lommen", "gradient": "linear-gradient(135deg, #ec4899, #f97316)" },
+    { "icon": "\ud83c\udfab", "title": "Digital Billet", "desc": "Deeplink-aktivering \u2014 ingen PDF, ingen print", "gradient": "linear-gradient(135deg, #eab308, #f97316)" }
+  ],
+  "festivals": [
+    {
+      "id": "festhallen",
+      "name": "Festhallen (Bodegafesten)",
+      "date": "2026-03-28",
+      "capacity": 600,
+      "color": "#ec4899",
+      "colorEnd": "#f97316",
+      "fmsUrl": "https://festhallen.livecloud.dk/api/v1.1/app-content/019b0d7b-b8b6-7008-a19c-4f496788d972",
+      "status": "completed"
+    },
+    {
+      "id": "ringsted",
+      "name": "Ringsted Festival 2026",
+      "date": "2026-07-30",
+      "capacity": 20000,
+      "color": "#6366f1",
+      "colorEnd": "#a855f7",
+      "fmsUrl": "https://ringstedfestival.livecloud.dk/api/v1.1/app-content/019afe04-3e87-73c9-9d2e-7b3936585a79",
+      "status": "upcoming"
+    }
+  ]
+}

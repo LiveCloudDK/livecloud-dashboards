@@ -278,10 +278,124 @@ async function main() {
     console.log('No active or future sprint found');
   }
 
-  const output = { tasks, columns: COLUMNS, wsNames: WS_NAMES, sprint, generated: new Date().toISOString() };
+  // === Public Stats (for Showcase view) ===
+  const publicStats = await fetchPublicStats();
+
+  // === Festival data from FMS ===
+  const festivals = await fetchFestivalData();
+
+  const output = { tasks, columns: COLUMNS, wsNames: WS_NAMES, sprint, publicStats, festivals, generated: new Date().toISOString() };
   const fs = await import('node:fs');
   fs.writeFileSync('data.json', JSON.stringify(output, null, 2));
-  console.log(`Wrote data.json (${tasks.length} tasks, sprint: ${sprint ? sprint.name : 'none'}, QA queue: ${sprint?.testQueueCount || 0}, ready for release: ${sprint?.readyForReleaseCount || 0})`);
+  console.log(`Wrote data.json (${tasks.length} tasks, sprint: ${sprint ? sprint.name : 'none'}, QA queue: ${sprint?.testQueueCount || 0}, ready for release: ${sprint?.readyForReleaseCount || 0}, festivals: ${festivals.length})`);
+}
+
+// === Public Stats — aggregate Jira data for showcase view ===
+async function fetchPublicStats() {
+  const statusGroups = {
+    done: '"Done", "Closed"',
+    readyForRelease: '"Ready for release"',
+    inTest: '"Ready for testing", "Ready for test", "READY FOR TEST AT DEV"',
+    inProgress: '"In Progress", "Selected for Development"',
+    backlog: '"Backlog"',
+  };
+
+  const counts = {};
+  for (const [key, statuses] of Object.entries(statusGroups)) {
+    try {
+      const jql = `project = LCAP AND status IN (${statuses})`;
+      const resp = await fetch(`${JIRA_BASE}/rest/api/3/search/jql`, {
+        method: 'POST',
+        headers: { 'Authorization': `Basic ${AUTH}`, 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ jql, maxResults: 0 }),
+      });
+      if (!resp.ok) { counts[key] = 0; continue; }
+      const data = await resp.json();
+      counts[key] = data.issues?.totalCount || data.total || 0;
+    } catch (e) { counts[key] = 0; }
+  }
+
+  // Per-workstream breakdown (done vs total) using labels
+  const wsLabels = {
+    'Onboarding': 'ws1-onboarding', 'POS': 'ws2-pos', 'App': 'ws3-app',
+    'Backend': 'ws4-backend', 'B2B': 'ws5-b2b', 'Webshop': 'ws6-webshop',
+    'Personal': 'ws7-personal', 'POS API': 'ws8-pos-api', 'NFC/Wallet': 'ws9-nfc',
+    'Gates': 'ws10-gates'
+  };
+  const byWorkstream = {};
+  for (const [wsName, label] of Object.entries(wsLabels)) {
+    try {
+      const doneJql = `project = LCAP AND labels = "${label}" AND status IN ("Done", "Closed", "Ready for release")`;
+      const totalJql = `project = LCAP AND labels = "${label}"`;
+      const [doneResp, totalResp] = await Promise.all([
+        fetch(`${JIRA_BASE}/rest/api/3/search/jql`, { method: 'POST', headers: { 'Authorization': `Basic ${AUTH}`, 'Accept': 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify({ jql: doneJql, maxResults: 0 }) }),
+        fetch(`${JIRA_BASE}/rest/api/3/search/jql`, { method: 'POST', headers: { 'Authorization': `Basic ${AUTH}`, 'Accept': 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify({ jql: totalJql, maxResults: 0 }) }),
+      ]);
+      const doneData = doneResp.ok ? await doneResp.json() : { issues: { totalCount: 0 } };
+      const totalData = totalResp.ok ? await totalResp.json() : { issues: { totalCount: 0 } };
+      byWorkstream[wsName] = {
+        done: doneData.issues?.totalCount || doneData.total || 0,
+        total: totalData.issues?.totalCount || totalData.total || 0,
+      };
+    } catch (e) {
+      byWorkstream[wsName] = { done: 0, total: 0 };
+    }
+  }
+
+  const totalFeatures = counts.done + counts.readyForRelease + counts.inTest + counts.inProgress + counts.backlog;
+  const featuresDone = counts.done + counts.readyForRelease;
+
+  console.log(`Public stats: ${featuresDone}/${totalFeatures} done (${counts.done} done, ${counts.readyForRelease} ready for release, ${counts.inTest} in test, ${counts.inProgress} in progress, ${counts.backlog} backlog)`);
+
+  return {
+    totalFeatures,
+    featuresDone,
+    featuresInProgress: counts.inProgress,
+    featuresInTest: counts.inTest,
+    featuresReadyForRelease: counts.readyForRelease,
+    featuresDoneCount: counts.done,
+    featuresBacklog: counts.backlog,
+    byWorkstream,
+  };
+}
+
+// === Festival data from FMS APIs ===
+async function fetchFestivalData() {
+  let featuresConfig;
+  try {
+    const fs = await import('node:fs');
+    featuresConfig = JSON.parse(fs.readFileSync('public-features.json', 'utf8'));
+  } catch (e) {
+    console.log('No public-features.json found, skipping festival data');
+    return [];
+  }
+
+  const results = [];
+  for (const fest of (featuresConfig.festivals || [])) {
+    const result = { id: fest.id, name: fest.name, date: fest.date, capacity: fest.capacity, color: fest.color, colorEnd: fest.colorEnd, status: fest.status };
+    try {
+      const resp = await fetch(fest.fmsUrl, { headers: { 'Accept': 'application/json' } });
+      if (!resp.ok) { result.apiStatus = 'error'; result.apiError = resp.status; results.push(result); continue; }
+      const data = await resp.json();
+      // Extract what we can — structure may vary, we'll log it on first run
+      result.apiStatus = 'ok';
+      result.apiData = {
+        name: data.name || data.title || data.event?.name || fest.name,
+        // Try common patterns for attendee/guest counts
+        guestCount: data.guest_count || data.guests?.length || data.attendees || data.stats?.guests || null,
+        ticketsSold: data.tickets_sold || data.stats?.tickets_sold || null,
+        // Store raw keys so we can inspect structure
+        topLevelKeys: Object.keys(data),
+      };
+      console.log(`Festival ${fest.id}: API ok, keys: ${Object.keys(data).join(', ')}`);
+    } catch (e) {
+      result.apiStatus = 'unreachable';
+      result.apiError = e.message;
+      console.log(`Festival ${fest.id}: ${e.message}`);
+    }
+    results.push(result);
+  }
+  return results;
 }
 
 main().catch(e => { console.error(e); process.exit(1); });
