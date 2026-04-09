@@ -36,10 +36,49 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-09T12:50:10.531Z",
+    "startDate": "2026-04-09T13:32:13.233Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-1165",
+        "summary": "Ordreholder: fordel Beats frit på tildelte billetter",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-09T15:26:06.534+0200"
+      },
+      {
+        "key": "LCAP-1097",
+        "summary": "NFC-armbånd — kobling til brugerprofil og wallet",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-09T15:24:49.594+0200"
+      },
+      {
+        "key": "LCAP-1166",
+        "summary": "Profil-løs billet: QR-kode → service desk → armbånd",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-09T15:24:30.771+0200"
+      },
       {
         "key": "LCAP-610",
         "summary": "When I share a external/ url -link from artist details - the link should try to open the app and not the web",
@@ -191,19 +230,6 @@
         "updated": "2026-04-08T21:27:12.379+0200"
       },
       {
-        "key": "LCAP-1097",
-        "summary": "NFC-armbånd — kobling til brugerprofil og wallet",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Jakob Højgård",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-04-08T21:25:47.952+0200"
-      },
-      {
         "key": "LCAP-674",
         "summary": "B2B ticket handling",
         "status": "Selected for Development",
@@ -239,28 +265,6 @@
           "Festhallen"
         ],
         "updated": "2026-04-08T21:25:24.652+0200"
-      },
-      {
-        "key": "LCAP-1166",
-        "summary": "Profil-løs billet: QR-kode → service desk → armbånd",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [],
-        "updated": "2026-04-08T21:25:18.074+0200"
-      },
-      {
-        "key": "LCAP-1165",
-        "summary": "Ordreholder: fordel Beats frit på tildelte billetter",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [],
-        "updated": "2026-04-08T21:25:15.961+0200"
       },
       {
         "key": "LCAP-1124",
@@ -1678,5 +1682,5 @@
       }
     }
   ],
-  "generated": "2026-04-09T12:50:17.956Z"
+  "generated": "2026-04-09T13:32:19.989Z"
 }
