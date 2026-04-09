@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-09T06:41:31.142Z",
+    "startDate": "2026-04-09T06:49:42.411Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -1184,17 +1184,6 @@
         "updated": "2026-04-01T13:22:30.737+0200"
       },
       {
-        "key": "LCAP-602",
-        "summary": "FMS: Hide Artist from Artist overview but show Event on Schedule",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Tony Dieu",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-01T11:58:51.177+0200"
-      },
-      {
         "key": "LCAP-912",
         "summary": "EDGE-4: External claim timeout leaves inconsistent state",
         "status": "Ready for test",
@@ -1312,19 +1301,6 @@
         "updated": "2026-03-30T13:27:28.624+0200"
       },
       {
-        "key": "LCAP-746",
-        "summary": "Swedbank Pay SoftPOS integration",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Tony Dieu",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-03-30T13:27:28.066+0200"
-      },
-      {
         "key": "LCAP-673",
         "summary": "Finansiel routing",
         "status": "Ready for test",
@@ -1336,17 +1312,6 @@
           "commerce"
         ],
         "updated": "2026-03-30T13:27:27.029+0200"
-      },
-      {
-        "key": "LCAP-720",
-        "summary": "[Festhallen] Beats System",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Epic",
-        "labels": [],
-        "updated": "2026-03-20T16:00:56.374+0100"
       },
       {
         "key": "LCAP-642",
@@ -1369,17 +1334,6 @@
         "type": "Sub-task",
         "labels": [],
         "updated": "2026-02-17T16:44:09.294+0100"
-      },
-      {
-        "key": "LCAP-668",
-        "summary": "Ticket handling",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [],
-        "updated": "2026-02-17T14:48:08.375+0100"
       },
       {
         "key": "LCAP-1070",
@@ -1605,18 +1559,18 @@
         "updated": "2026-03-30T13:26:31.672+0200"
       }
     ],
-    "testQueueCount": 50,
-    "readyForReleaseCount": 86,
+    "testQueueCount": 46,
+    "readyForReleaseCount": 90,
     "capacityCounts": {
       "michael": {
         "active": 35,
-        "testQueue": 12,
-        "readyForRelease": 36
+        "testQueue": 10,
+        "readyForRelease": 38
       },
       "tony": {
         "active": 13,
-        "testQueue": 16,
-        "readyForRelease": 18
+        "testQueue": 14,
+        "readyForRelease": 20
       },
       "mikkel": {
         "active": 10,
@@ -1640,5 +1594,5 @@
       }
     }
   },
-  "generated": "2026-04-09T06:41:31.143Z"
+  "generated": "2026-04-09T06:49:42.412Z"
 }
