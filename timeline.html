@@ -406,6 +406,7 @@
   .capacity-card .metric-label {
     color: var(--text-muted);
     font-size: 12px;
+    margin-right: 4px;
   }
 
   .capacity-person-row {
@@ -1117,48 +1118,50 @@ const overviewTasks = [
 ];
 
 // Capacity data  -  team members and their metrics
+// Active = In Progress + Selected for Development (live from Jira 9. apr)
+// Capacity = estimated tickets achievable Sprint 4-10 (7 sprints)
 const capacityData = {
   'michael': {
     name: 'Michael Thuren',
-    avgVelocity: 13.5,
-    activeTickets: 18,
-    capacity: 42,
-    note: 'Ti+To+½Fre (2,5 dage/uge)  -  velocity allerede baseret på deltid. 40 total tickets.',
+    avgVelocity: 5.5,
+    activeTickets: 35,
+    capacity: 39,
+    note: 'Ti+To+½Fre (2,5 dage/uge). 35 aktive + 48 i test-kø + 49 i backlog = 132 total. Backend-arkitektur, B2B, Beats.',
   },
   'tony': {
     name: 'Tony Dieu',
-    avgVelocity: 10.5,
-    activeTickets: 42,
-    capacity: 33,
-    note: 'POS, Swedbank, NFC/Wallet. 91 total tickets.',
+    avgVelocity: 10,
+    activeTickets: 12,
+    capacity: 70,
+    note: 'POS, NFC/Wallet, POS API tredjepart, gate-hardware. 12 aktive + 2 i test = 14 total.',
   },
   'mikkel': {
     name: 'Mikkel Kornval Christoffersen',
-    avgVelocity: 9.5,
-    activeTickets: 12,
-    capacity: 29,
-    note: 'App UI: accessibility, QR, profil-screens, map app-views. 36 total tickets.',
+    avgVelocity: 8,
+    activeTickets: 6,
+    capacity: 56,
+    note: 'App UI, festival-kort/map, accessibility, QR, profil. 6 aktive + 12 i test + 14 i backlog = 32 total.',
   },
   'jakob': {
     name: 'Jakob Højgård',
-    avgVelocity: 15,
-    activeTickets: 18,
-    capacity: 47,
-    note: 'Billet-flow (scanning, deeplink, aktivering), gate design, UX. 40 total tickets.',
+    avgVelocity: 8,
+    activeTickets: 8,
+    capacity: 56,
+    note: 'Billet-flow, deeplink, gate design, UX, QA. 8 aktive + 16 i test + 21 i backlog = 45 total.',
   },
   'edwin': {
     name: 'Edwin Maldonado',
     avgVelocity: 6,
-    activeTickets: 8,
-    capacity: 19,
-    note: 'FMS/integration: staging, ETag, map API + FMS editor, E2E test. 25 total tickets.',
+    activeTickets: 2,
+    capacity: 42,
+    note: 'FMS/integration, map editor, staging, E2E test, QA. 2 aktive + 9 i test + 16 i backlog = 27 total.',
   },
   'simon': {
     name: 'Simon Jensen',
     avgVelocity: 7,
-    activeTickets: 20,
-    capacity: 30,
-    note: 'FMS vendor API, B2B portal, Content/Events, ticket allocation. 35 total tickets.',
+    activeTickets: 9,
+    capacity: 49,
+    note: 'FMS vendor API, B2B portal, Content/Events, QA. 9 aktive + 13 i test = 22 total.',
   }
 };
 
@@ -1851,6 +1854,23 @@ function renderSprints() {
     }
   }
 
+  // Determine which sprint is active based on today's date
+  const _sprintDatesLookup = [
+    { id: 4, start: '2026-03-30', end: '2026-04-10' },
+    { id: 5, start: '2026-04-13', end: '2026-04-24' },
+    { id: 6, start: '2026-04-27', end: '2026-05-08' },
+    { id: 7, start: '2026-05-11', end: '2026-05-22' },
+    { id: 8, start: '2026-05-25', end: '2026-06-05' },
+    { id: 9, start: '2026-06-08', end: '2026-06-19' },
+    { id: 10, start: '2026-06-22', end: '2026-07-03' },
+    { id: 11, start: '2026-07-06', end: '2026-07-17' },
+    { id: 12, start: '2026-07-20', end: '2026-07-31' },
+  ];
+  const _today = new Date();
+  const _activeSprint = _sprintDatesLookup.find(sd => _today >= new Date(sd.start) && _today <= new Date(sd.end))
+    || _sprintDatesLookup.find(sd => _today < new Date(sd.end))
+    || _sprintDatesLookup[0];
+
   // Sprint cards
   let visibleCount = 0;
   for (const s of sprintData) {
@@ -1861,9 +1881,11 @@ function renderSprints() {
       if (!hasP) continue;
     }
     visibleCount++;
-    const color = sprintColors[s.type];
-    const bg = sprintBgColors[s.type];
-    const isActive = s.type === 'active';
+    // Determine active status from date, not hardcoded type
+    const isActive = s.id === _activeSprint.id;
+    const displayType = isActive ? 'active' : s.type === 'active' ? 'planned' : s.type;
+    const color = sprintColors[displayType];
+    const bg = sprintBgColors[displayType];
 
     html += `<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden;border-left:4px solid ${color}">`;
 
@@ -1879,8 +1901,8 @@ function renderSprints() {
     }
     const badgeColors = { active: 'var(--accent)', planned: 'var(--surface2)', freeze: 'var(--red)', buffer: 'var(--yellow)', festival: 'var(--green)' };
     const badgeText = { active: 'AKTIV', planned: 'PLANLAGT', freeze: 'FREEZE', buffer: 'BUFFER', festival: 'FESTIVAL' };
-    const badgeFg = s.type === 'buffer' || s.type === 'festival' ? '#000' : s.type === 'planned' ? 'var(--text-muted)' : '#fff';
-    html += `<span style="padding:3px 12px;border-radius:12px;font-size:11px;font-weight:700;background:${badgeColors[s.type]};color:${badgeFg};${s.type==='planned'?'border:1px solid var(--border)':''}">${badgeText[s.type]}</span>`;
+    const badgeFg = displayType === 'buffer' || displayType === 'festival' ? '#000' : displayType === 'planned' ? 'var(--text-muted)' : '#fff';
+    html += `<span style="padding:3px 12px;border-radius:12px;font-size:11px;font-weight:700;background:${badgeColors[displayType]};color:${badgeFg};${displayType==='planned'?'border:1px solid var(--border)':''}">${badgeText[displayType]}</span>`;
     html += `</div></div>`;
 
     // Body
@@ -2093,20 +2115,27 @@ function renderCapacity() {
   // Summary dashboard
   html += '<div class="capacity-dashboard">';
 
+  // Compute live summary from capacityData
+  const _totalCap = Object.values(capacityData).reduce((s,p) => s + p.capacity, 0);
+  const _totalActive = Object.values(capacityData).reduce((s,p) => s + p.activeTickets, 0);
+  const _buffer = _totalCap - _totalActive;
+  const _freezeDate = new Date('2026-07-01');
+  const _weeksLeft = Math.max(0, ((_freezeDate - new Date()) / (1000*60*60*24*7))).toFixed(1);
+
   // Team total
   html += '<div class="capacity-card">';
   html += '<h3>Team Kapacitet</h3>';
   html += '<div class="metric">';
   html += '<span class="metric-label">Samlet kapacitet:</span>';
-  html += '<span class="metric-value" style="color:var(--green)">212 tickets</span>';
+  html += '<span class="metric-value" style="color:var(--green)">' + _totalCap + ' tickets</span>';
   html += '</div>';
   html += '<div class="metric">';
   html += '<span class="metric-label">Aktiv pipeline:</span>';
-  html += '<span class="metric-value" style="color:var(--accent-light)">115 tickets</span>';
+  html += '<span class="metric-value" style="color:var(--accent-light)">' + _totalActive + ' tickets</span>';
   html += '</div>';
   html += '<div class="metric">';
   html += '<span class="metric-label">Buffer:</span>';
-  html += '<span class="metric-value" style="color:var(--green)">+89 tickets</span>';
+  html += '<span class="metric-value" style="color:' + (_buffer >= 0 ? 'var(--green)' : 'var(--red)') + '">' + (_buffer >= 0 ? '+' : '') + _buffer + ' tickets</span>';
   html += '</div>';
   html += '</div>';
 
@@ -2115,11 +2144,11 @@ function renderCapacity() {
   html += '<h3>Tidsramme</h3>';
   html += '<div class="metric">';
   html += '<span class="metric-label">Til feature freeze:</span>';
-  html += '<span class="metric-value">13.3 uger</span>';
+  html += '<span class="metric-value">' + _weeksLeft + ' uger</span>';
   html += '</div>';
   html += '<div class="metric">';
-  html += '<span class="metric-label">Eller:</span>';
-  html += '<span class="metric-value">3.1 måneder</span>';
+  html += '<span class="metric-label">Dev-sprints:</span>';
+  html += '<span class="metric-value">7 (Sprint 4–10)</span>';
   html += '</div>';
   html += '<div class="metric">';
   html += '<span class="metric-label">Dato:</span>';
@@ -2131,25 +2160,29 @@ function renderCapacity() {
   html += '<div class="capacity-card">';
   html += '<h3>Test Kø</h3>';
   html += '<div class="metric">';
-  html += '<span class="metric-label">Backlog tickets:</span>';
-  html += '<span class="metric-value" style="color:var(--red)">82</span>';
+  html += '<span class="metric-label">Tickets i test:</span>';
+  html += '<span class="metric-value" style="color:var(--red)">100</span>';
   html += '</div>';
-  html += '<div class="metric" style="color:var(--red); font-weight:600">';
-  html += '<span class="metric-label">Status: </span>';
-  html += '<span>Delt QA: Jakob + Edwin + Simon</span>';
+  html += '<div class="metric">';
+  html += '<span class="metric-label">QA-team:</span>';
+  html += '<span style="color:var(--text)">Jakob (16) + Edwin (9) + Simon (13)</span>';
+  html += '</div>';
+  html += '<div class="metric">';
+  html += '<span class="metric-label">Største kø:</span>';
+  html += '<span style="color:var(--red)">Michael (48 venter på test)</span>';
   html += '</div>';
   html += '</div>';
 
   // Backlog
   html += '<div class="capacity-card">';
-  html += '<h3>Backlog</h3>';
+  html += '<h3>Assigned Backlog</h3>';
   html += '<div class="metric">';
   html += '<span class="metric-label">Tickets:</span>';
-  html += '<span class="metric-value" style="color:var(--yellow)">213</span>';
+  html += '<span class="metric-value" style="color:var(--yellow)">100</span>';
   html += '</div>';
   html += '<div class="metric">';
-  html += '<span class="metric-label">Status:</span>';
-  html += '<span style="color:var(--text-muted)">Afventer aktivering</span>';
+  html += '<span class="metric-label">Fordeling:</span>';
+  html += '<span style="color:var(--text-muted)">Michael (49), Jakob (21), Edwin (16), Mikkel (14)</span>';
   html += '</div>';
   html += '</div>';
 
@@ -2193,10 +2226,10 @@ function renderCapacity() {
   // Risk section
   html += '<div class="risk-section">';
   html += '<h3>Risiko & Anbefalinger</h3>';
-  html += '<div class="risk-item">Michael arbejder ti+to+½fre (2,5 dage/uge). Simon ejer FMS, Webshop og B2B backend, hvilket holder Michaels load på ~30 tickets (vs. 42 kapacitet). Michael fokuserer på arkitektur.</div>';
-  html += '<div class="risk-item">Test-kø (82 tickets) deles mellem Jakob, Edwin og Simon. Samlet QA-kapacitet ~50+ tickets inden freeze.</div>';
-  html += '<div class="risk-item">Buffer ~89 tickets (efter 8 Festival Experience-stories er fordelt på Sprint 6-8). Fortsat god margin til backlog og uventede opgaver.</div>';
-  html += '<div class="risk-item">Samlet vurdering: Aktiv pipeline realistisk med 6 devs. Swedbank færdig (Tony). Teamet kører med fuld kapacitet.</div>';
+  html += '<div class="risk-item" style="border-left:3px solid var(--red);padding-left:12px">Michael har 35 aktive tickets (kapacitet: 39) + 48 i test-kø + 49 i backlog = 132 total. Kritisk overbelastet. Simon ejer FMS/B2B backend og aflaster, men backlog bør omfordeles.</div>';
+  html += '<div class="risk-item">Test-kø er vokset til 100 tickets. Michael alene ejer 48 af dem. QA-teamet (Jakob 16, Simon 13, Edwin 9) dækker resten. Mikkel har 12 i test.</div>';
+  html += '<div class="risk-item">Tony og Simon har lav belastning (14 og 22 total) og stor buffer. Mulighed for at flytte backlog-tickets fra Michael/Jakob til dem.</div>';
+  html += '<div class="risk-item">Samlet kapacitet (' + _totalCap + ') vs. aktiv pipeline (' + _totalActive + ') giver buffer på +' + _buffer + ' tickets. Teamet er samlet set i god form, men fordelingen er skæv.</div>';
   html += '</div>';
 
   // Capacity Gap Analysis & Onboarding Recommendation
