@@ -96,9 +96,9 @@ async function fetchEpics() {
 
 // === Active work fetching (Kanban-compatible — no sprint boards needed) ===
 async function fetchCurrentSprint() {
-  // Fetch all active work: In Progress + Selected for Development
+  // Fetch all active work: In Progress + Selected for Development + assigned Backlog
   // This replaces sprint-based queries since all boards are Kanban
-  const jql = 'project = LCAP AND status IN ("In Progress", "Selected for Development") ORDER BY priority ASC, updated DESC';
+  const jql = 'project = LCAP AND (status IN ("In Progress", "Selected for Development") OR (status = "Backlog" AND assignee IS NOT EMPTY)) ORDER BY priority ASC, updated DESC';
   const fields = ['summary','status','assignee','priority','issuetype','labels','updated'];
   let allIssues = [];
   let nextPageToken = null;
