@@ -992,7 +992,7 @@ let tasks = [
   // === FASE 1: Sprint 4 (Mar 30 - Apr 13) ===
   // WS1 Onboarding
   { id:'ws1-scan', label:'Billet-scanning & aktivering (løsningsdesign)', ws:'1', persons:['jakob','michael'], start:0, span:2, phase:'critical', jira:'LCAP-1076', deps:[], desc:'Jakob overtager billet-flow. Michael på backend.' },
-    { id:'ws4-simon-p1', label:'Simon onboarding: Quick wins (vendor API)', ws:'4', persons:['simon'], start:0, span:1, phase:'test', jira:'LCAP-1118', deps:[] },
+    { id:'ws4-simon-p1', label:'Simon: FMS vendor API', ws:'4', persons:['simon'], start:0, span:1, phase:'build', jira:'LCAP-1118', deps:[] },
     { id:'ws4-simon-p2', label:'Simon: CRUD, exports, bulk ops', ws:'4', persons:['simon'], start:1, span:2, phase:'build', jira:'LCAP-1129', deps:['ws4-simon-p1'] },
   { id:'ws1-backend', label:'Onboarding backend (claim, delegate, transfer)', ws:'1', persons:['michael'], start:0, span:2, phase:'build', jira:'LCAP-1078,1079,989,990', deps:[] },
   { id:'ws1-app', label:'Onboarding app flows (billet-scanning + deeplink)', ws:'1', persons:['jakob'], start:0, span:2, phase:'build', jira:'LCAP-1071,1072', deps:[], desc:'Jakob overtager hele billet-flowet fra Mikkel' },
@@ -1098,7 +1098,7 @@ const overviewTasks = [
   { id:'ov-2', label:'WS2  -  POS Fixes', ws:'2', persons:['tony'], start:0, span:3, phases:[{start:0,span:2,phase:'build'},{start:2,span:1,phase:'test'}], desc:'Ret alle POS findings fra Bodegafesten + feedback fra barpersonale.', jira:'LCAP-1012-1065' },
   { id:'ov-3', label:'WS3  -  App (fixes + Festival XP)', ws:'3', persons:['mikkel','edwin'], start:0, span:7, phases:[{start:0,span:1,phase:'critical'},{start:1,span:1,phase:'build'},{start:2,span:2,phase:'test'},{start:4,span:3,phase:'build'}], desc:'Sprint 4: Mikkel overtager app UI (a11y, QR, profil). Test-runde Apr H2–Maj H1. Sprint 6-8: Festival Experience  -  kort, boder, community, gamification, pre-order (8 stories).', jira:'LCAP-1075,597,1102-1110' },
   { id:'ov-4', label:'WS4  -  Backend / FMS', ws:'4', persons:['michael','tony'], start:0, span:7, phases:[{start:0,span:2,phase:'build'},{start:2,span:2,phase:'build'},{start:4,span:2,phase:'build'},{start:6,span:1,phase:'test'}], desc:'Backend fixes, Dashboard, Inventory, Beats mgr. Swedbank færdig Sprint 4 (Tony).', jira:'LCAP-765,1081,1082,1098' },
-  { id:'ov-5', label:'WS5  -  B2B Flows', ws:'5', persons:['michael','simon','edwin'], start:3, span:4, phases:[{start:3,span:3,phase:'build'},{start:6,span:1,phase:'test'}], desc:'B2B portal, akkreditering, virksomhedsbilletter. Simon overtager portal fra Tony.', jira:'LCAP-633,810,1080' },
+  { id:'ov-5', label:'WS5  -  B2B Flows', ws:'5', persons:['michael','simon','edwin'], start:3, span:4, phases:[{start:3,span:3,phase:'build'},{start:6,span:1,phase:'test'}], desc:'B2B portal, akkreditering, virksomhedsbilletter. Simon ejer portal.', jira:'LCAP-633,810,1080' },
   { id:'ov-6', label:'WS6  -  Webshop', ws:'6', persons:['simon','edwin'], start:3, span:4, phases:[{start:3,span:3,phase:'build'},{start:6,span:1,phase:'test'}], desc:'Online salg af billetter og produkter.', jira:'LCAP-330,971-973' },
   { id:'ov-7', label:'WS7  -  Medarbejder-portal', ws:'7', persons:['jakob'], start:4, span:3, phases:[{start:4,span:2,phase:'build'},{start:6,span:1,phase:'test'}], desc:'Personaleadministration, roller, adgangsstyring.', jira:'LCAP-1091' },
   { id:'ov-8', label:'WS8  -  POS API (tredjepart)', ws:'8', persons:['tony'], start:3, span:4, phases:[{start:3,span:2,phase:'build'},{start:5,span:2,phase:'test'}], desc:'API for Joe & Juice, Volt m.fl.  -  betalingsinitiering + webhook.', jira:'LCAP-1092' },
@@ -1123,14 +1123,14 @@ const capacityData = {
     avgVelocity: 13.5,
     activeTickets: 18,
     capacity: 42,
-    note: 'Ti+To+½Fre (2,5 dage/uge)  -  velocity allerede baseret på deltid. 40 total tickets. FMS/Content flyttet til Simon.',
+    note: 'Ti+To+½Fre (2,5 dage/uge)  -  velocity allerede baseret på deltid. 40 total tickets.',
   },
   'tony': {
     name: 'Tony Dieu',
     avgVelocity: 10.5,
     activeTickets: 42,
     capacity: 33,
-    note: 'POS, Swedbank, NFC/Wallet. FMS vendor API → Simon. 91 total tickets.',
+    note: 'POS, Swedbank, NFC/Wallet. 91 total tickets.',
   },
   'mikkel': {
     name: 'Mikkel Kornval Christoffersen',
@@ -1155,10 +1155,10 @@ const capacityData = {
   },
   'simon': {
     name: 'Simon Jensen',
-    avgVelocity: 4,
+    avgVelocity: 7,
     activeTickets: 20,
     capacity: 30,
-    note: 'FMS vendor API, B2B portal, Content/Events, ticket allocation. 35 total tickets. Ramp-up.',
+    note: 'FMS vendor API, B2B portal, Content/Events, ticket allocation. 35 total tickets.',
   }
 };
 
@@ -1657,7 +1657,7 @@ const sprintData = [
     dates: '30. mar – 10. apr', colStart: 0, colSpan: 2,
     type: 'planned', tickets: 31, capacity: 26,
     goal: 'Billettyper, Bodegafest-findings, billet-flow, app UI, staging, Swedbank API.',
-    persons: { 'Michael': { count: 7, focus: 'Billettyper, backend onboarding, B2B' }, 'Tony': { count: 8, focus: 'POS findings + feedback, Swedbank integration' }, 'Jakob': { count: 6, focus: 'Billet-flow (scanning, deeplink, aktivering)' }, 'Mikkel': { count: 6, focus: 'App UI: accessibility fix, QR, profil-screens' }, 'Edwin': { count: 4, focus: 'Staging E2E alignment, FMS ETag caching' }, 'Simon': { count: 2, focus: 'FMS QA, test-runde (ramp-up)' } },
+    persons: { 'Michael': { count: 7, focus: 'Billettyper, backend onboarding, B2B' }, 'Tony': { count: 8, focus: 'POS findings + feedback, Swedbank integration' }, 'Jakob': { count: 6, focus: 'Billet-flow (scanning, deeplink, aktivering)' }, 'Mikkel': { count: 6, focus: 'App UI: accessibility fix, QR, profil-screens' }, 'Edwin': { count: 4, focus: 'Staging E2E alignment, FMS ETag caching' }, 'Simon': { count: 2, focus: 'FMS QA, vendor API' } },
     workstreams: ['WS1','WS2','WS3','WS4','Test']
   },
   {
@@ -1802,7 +1802,7 @@ function renderSprints() {
   html += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:24px">';
   html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700;color:var(--accent)">' + sprintsLeft + '</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Sprints til festival</div></div>';
   html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700;color:var(--blue)">' + devSprintsLeft + '</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Dev-sprints</div></div>';
-  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700">' + totalCapacity + '</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Ticket-kapacitet (m/ Simon)</div></div>';
+  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700">' + totalCapacity + '</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Ticket-kapacitet</div></div>';
   html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700;color:var(--orange)">' + liveTotal + '</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Sprint-tickets (Jira)</div></div>';
   html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700;color:var(--yellow)">' + jiraTestPipeline.length + '</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Test pipeline</div></div>';
   html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px"><div style="font-size:28px;font-weight:700;color:' + (buffer >= 0 ? 'var(--green)' : 'var(--red)') + '">' + (buffer >= 0 ? '+' : '') + buffer + '</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Buffer</div></div>';
@@ -2108,8 +2108,8 @@ function renderCapacity() {
   html += '<span class="metric-value" style="color:var(--red)">82</span>';
   html += '</div>';
   html += '<div class="metric" style="color:var(--red); font-weight:600">';
-  html += '<span class="metric-label">Status:</span>';
-  html += '<span>Delt QA: Jakob + Edwin + Simon (Mikkel overdrager)</span>';
+  html += '<span class="metric-label">Status: </span>';
+  html += '<span>Delt QA: Jakob + Edwin + Simon</span>';
   html += '</div>';
   html += '</div>';
 
@@ -2166,23 +2166,23 @@ function renderCapacity() {
   // Risk section
   html += '<div class="risk-section">';
   html += '<h3>Risiko & Anbefalinger</h3>';
-  html += '<div class="risk-item">Michael arbejder ti+to+½fre (2,5 dage/uge). Simon starter 1. april og overtager FMS, Webshop og B2B backend fra Sprint 5, hvilket reducerer Michaels load fra 54 → ~30 tickets.</div>';
-  html += '<div class="risk-item">Test-kø (50 tickets) fordeles på Jakob, Edwin og Simon. Mikkel overdrager tests til dem. Samlet kapacitet ~50+ (fra Sprint 6) skal hjælpe med test</div>';
+  html += '<div class="risk-item">Michael arbejder ti+to+½fre (2,5 dage/uge). Simon ejer FMS, Webshop og B2B backend, hvilket holder Michaels load på ~30 tickets (vs. 42 kapacitet). Michael fokuserer på arkitektur.</div>';
+  html += '<div class="risk-item">Test-kø (82 tickets) deles mellem Jakob, Edwin og Simon. Samlet QA-kapacitet ~50+ tickets inden freeze.</div>';
   html += '<div class="risk-item">Buffer ~89 tickets (efter 8 Festival Experience-stories er fordelt på Sprint 6-8). Fortsat god margin til backlog og uventede opgaver.</div>';
-  html += '<div class="risk-item">Samlet vurdering: Aktiv pipeline (115) + nye app-features (~8) er realistisk med 6 devs. Swedbank færdig i Sprint 4 (Tony). Michael kan fokusere på arkitektur.</div>';
+  html += '<div class="risk-item">Samlet vurdering: Aktiv pipeline realistisk med 6 devs. Swedbank færdig (Tony). Teamet kører med fuld kapacitet.</div>';
   html += '</div>';
 
   // Capacity Gap Analysis & Onboarding Recommendation
   html += '<div class="risk-section" style="border-color:var(--accent);margin-bottom:32px">';
-  html += '<h3 style="color:var(--accent-light)">Kapacitets-gaps & Simon-onboarding</h3>';
+  html += '<h3 style="color:var(--accent-light)">Kapacitets-gaps & Mitigering</h3>';
 
   html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:20px">';
 
   // Gap 1: Backend/API (Michael)
   html += '<div style="background:var(--surface2);border-radius:8px;padding:16px;border-left:3px solid var(--red)">';
   html += '<div style="font-weight:700;margin-bottom:8px;color:var(--red)">Gap 1: Backend / API (Michael)</div>';
-  html += '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">Deficit: <span style="color:var(--red);font-weight:700">-12 tickets</span> → <span style="color:var(--green);font-weight:700">mitigeret med Simon</span></div>';
-  html += '<div style="font-size:12px;line-height:1.6">Michael arbejder ti+to+½fre (2,5 dage/uge). Simon overtager FMS, Webshop Web UI og B2B backend fra Sprint 5, hvilket reducerer Michaels load til ~30 tickets (vs. 42 kapacitet). Swedbank færdig i Sprint 4 (Tony). Michael kan fokusere på arkitektur og cross-system integration.</div>';
+  html += '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">Deficit: <span style="color:var(--red);font-weight:700">-12 tickets</span> → <span style="color:var(--green);font-weight:700">mitigeret</span></div>';
+  html += '<div style="font-size:12px;line-height:1.6">Michael arbejder ti+to+½fre (2,5 dage/uge). Simon ejer FMS, Webshop Web UI og B2B backend, hvilket holder Michaels load på ~30 tickets (vs. 42 kapacitet). Swedbank færdig (Tony). Michael fokuserer på arkitektur og cross-system integration.</div>';
   html += '</div>';
 
   // Gap 2: POS / Infra (Tony)
@@ -2196,7 +2196,7 @@ function renderCapacity() {
   html += '<div style="background:var(--surface2);border-radius:8px;padding:16px;border-left:3px solid var(--red)">';
   html += '<div style="font-weight:700;margin-bottom:8px;color:var(--red)">Gap 3: QA / Test (Edwin)</div>';
   html += '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">Test-kø: <span style="color:var(--red);font-weight:700">82 tickets</span> vs kapacitet: 19</div>';
-  html += '<div style="font-size:12px;line-height:1.6">82 tickets venter på test allerede nu, og flere kommer fra dev. Test deles mellem Jakob, Edwin og Simon. Mikkel overdrager sine test-opgaver til de tre. Samlet QA-kapacitet ~50+ tickets inden freeze i stedet for Edwins 19 alene.</div>';
+  html += '<div style="font-size:12px;line-height:1.6">82 tickets venter på test. Test deles mellem Jakob, Edwin og Simon. Samlet QA-kapacitet ~50+ tickets inden freeze.</div>';
   html += '</div>';
 
   // Gap 4: Unassigned backlog
@@ -2208,40 +2208,40 @@ function renderCapacity() {
 
   html += '</div>';
 
-  // Simon Onboarding Status
-  html += '<div style="background:rgba(34,197,94,0.08);border:1px solid var(--green);border-radius:8px;padding:20px;margin-top:8px">';
-  html += '<div style="font-weight:700;font-size:15px;margin-bottom:12px;color:var(--green)">✓ Simon  -  Backend-udvikler (starter 1. april)</div>';
+  // Simon — Team Member Profile
+  html += '<div style="background:rgba(251,146,60,0.08);border:1px solid var(--orange);border-radius:8px;padding:20px;margin-top:8px">';
+  html += '<div style="font-weight:700;font-size:15px;margin-bottom:12px;color:var(--orange)">Simon Jensen  —  Backend-udvikler</div>';
 
   html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px">';
 
-  // Onboarding
-  html += '<div style="background:var(--surface);border-radius:8px;padding:16px">';
-  html += '<div style="font-weight:700;margin-bottom:8px;color:var(--accent-light)">Onboarding</div>';
-  html += '<div style="font-size:12px;line-height:1.8">';
-  html += '<div><strong>Uge 1 (1-4. apr):</strong> Miljø, arkitektur, første PR</div>';
-  html += '<div><strong>Uge 2 (7-11. apr):</strong> FMS-tickets, PR-flow</div>';
-  html += '<div><strong>Primær mentor:</strong> Tony (~14 timer)</div>';
-  html += '<div><strong>Sekundær:</strong> Michael (arkitektur, ~6 timer)</div>';
-  html += '</div></div>';
-
-  // Progression
+  // Ansvarsområder
   html += '<div style="background:var(--surface);border-radius:8px;padding:16px">';
   html += '<div style="font-weight:700;margin-bottom:8px;color:var(--accent-light)">Ansvarsområder</div>';
   html += '<div style="font-size:12px;line-height:1.8">';
-  html += '<div><strong>Sprint 5:</strong> FMS Dashboard (~3 tickets)</div>';
-  html += '<div><strong>Sprint 6:</strong> FMS + Webshop Web UI (~5)</div>';
+  html += '<div><strong>FMS:</strong> Vendor API, Dashboard, CRUD</div>';
+  html += '<div><strong>B2B:</strong> Portal, akkreditering, bulk ops</div>';
+  html += '<div><strong>Webshop:</strong> Web UI, Content/Events</div>';
+  html += '<div><strong>QA:</strong> Delt test med Jakob + Edwin</div>';
+  html += '</div></div>';
+
+  // Sprint-plan
+  html += '<div style="background:var(--surface);border-radius:8px;padding:16px">';
+  html += '<div style="font-weight:700;margin-bottom:8px;color:var(--accent-light)">Sprint-plan</div>';
+  html += '<div style="font-size:12px;line-height:1.8">';
+  html += '<div><strong>Sprint 5:</strong> FMS Dashboard + B2B portal (~5)</div>';
+  html += '<div><strong>Sprint 6:</strong> FMS + Webshop Web UI (~7)</div>';
   html += '<div><strong>Sprint 7-8:</strong> Webshop + B2B backend (~7/spr)</div>';
   html += '<div><strong>Sprint 9-10:</strong> Hardening + bugfix (~5+3)</div>';
   html += '</div></div>';
 
-  // Impact
+  // Kapacitet
   html += '<div style="background:var(--surface);border-radius:8px;padding:16px">';
-  html += '<div style="font-weight:700;margin-bottom:8px;color:var(--green)">Impact</div>';
+  html += '<div style="font-weight:700;margin-bottom:8px;color:var(--orange)">Kapacitet</div>';
   html += '<div style="font-size:12px;line-height:1.8">';
-  html += '<div><strong>+30 tickets</strong> kapacitet (Sprint 5-10)</div>';
-  html += '<div><strong>+27%</strong> team velocity (fra ~26 til ~33/sprint)</div>';
+  html += '<div><strong>30 tickets</strong> total kapacitet (Sprint 5-10)</div>';
+  html += '<div><strong>~7/sprint</strong> velocity</div>';
   html += '<div><strong>Fjerner SPOF</strong> på backend (Michael)</div>';
-  html += '<div><strong>Buffer:</strong> +89 tickets til backlog</div>';
+  html += '<div><strong>Full-time</strong> 5 dage/uge</div>';
   html += '</div></div>';
 
   html += '</div>';
