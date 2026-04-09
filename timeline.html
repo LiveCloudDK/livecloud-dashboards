@@ -1125,43 +1125,55 @@ const capacityData = {
     name: 'Michael Thuren',
     avgVelocity: 5.5,
     activeTickets: 35,
+    testQueue: 12,
+    readyForRelease: 25,
+    backlog: 49,
     capacity: 39,
-    note: 'Ti+To+½Fre (2,5 dage/uge). 35 aktive + 48 i test-kø + 49 i backlog = 132 total. Backend-arkitektur, B2B, Beats.',
   },
   'tony': {
     name: 'Tony Dieu',
     avgVelocity: 10,
     activeTickets: 12,
+    testQueue: 17,
+    readyForRelease: 9,
+    backlog: 0,
     capacity: 70,
-    note: 'POS, NFC/Wallet, POS API tredjepart, gate-hardware. 12 aktive + 2 i test = 14 total.',
   },
   'mikkel': {
     name: 'Mikkel Kornval Christoffersen',
     avgVelocity: 8,
     activeTickets: 10,
+    testQueue: 2,
+    readyForRelease: 9,
+    backlog: 12,
     capacity: 56,
-    note: 'App UI, festival-kort/map, accessibility, QR, profil. 6 aktive + 12 i test + 14 i backlog = 32 total.',
   },
   'jakob': {
     name: 'Jakob Højgård',
     avgVelocity: 8,
     activeTickets: 8,
+    testQueue: 5,
+    readyForRelease: 5,
+    backlog: 21,
     capacity: 56,
-    note: 'Billet-flow, deeplink, gate design, UX, QA. 8 aktive + 16 i test + 21 i backlog = 45 total.',
   },
   'edwin': {
     name: 'Edwin Maldonado',
     avgVelocity: 6,
     activeTickets: 2,
+    testQueue: 7,
+    readyForRelease: 2,
+    backlog: 16,
     capacity: 42,
-    note: 'FMS/integration, map editor, staging, E2E test, QA. 2 aktive + 9 i test + 16 i backlog = 27 total.',
   },
   'simon': {
     name: 'Simon Jensen',
     avgVelocity: 7,
     activeTickets: 9,
+    testQueue: 5,
+    readyForRelease: 8,
+    backlog: 2,
     capacity: 49,
-    note: 'FMS vendor API, B2B portal, Content/Events, QA. 9 aktive + 13 i test = 22 total.',
   }
 };
 
@@ -1691,7 +1703,7 @@ const sprintData = [
     id: 8, name: 'Sprint 8', subtitle: 'Integration-test + Festival XP færdig',
     dates: '25. maj – 5. jun', colStart: 5, colSpan: 1,
     type: 'planned', tickets: 36, capacity: 33,
-    goal: 'Alle features bygget. Cross-system integrations-test. Festival XP: chat, lokation, gamification. Test-kø tom.',
+    goal: 'Alle features bygget. Cross-system integrations-test. Festival XP: chat, lokation, gamification. QA-kø tom.',
     persons: { 'Michael': { count: 4, focus: 'Cross-system integration, arkitektur' }, 'Tony': { count: 5, focus: 'POS↔NFC↔Gate E2E, backlog' }, 'Mikkel': { count: 7, focus: 'App E2E + Community: chat + del lokation' }, 'Jakob': { count: 7, focus: 'Vagtordning, onboarding-plan' }, 'Edwin': { count: 6, focus: 'E2E regression + Gamification' }, 'Simon': { count: 7, focus: 'B2B backend, backlog-tickets' } },
     workstreams: ['Test','Ops','WS3']
   },
@@ -2156,12 +2168,18 @@ function renderCapacity() {
   html += '</div>';
   html += '</div>';
 
-  // Test queue
+  // Test queue (real Jira data — excludes "Ready for release")
+  const _testQueueCount = (window._sprintData && window._sprintData.testQueueCount) || 51;
+  const _readyForReleaseCount = (window._sprintData && window._sprintData.readyForReleaseCount) || 59;
   html += '<div class="capacity-card">';
-  html += '<h3>Test Kø</h3>';
+  html += '<h3>QA-kø</h3>';
   html += '<div class="metric">';
-  html += '<span class="metric-label">Tickets i test:</span>';
-  html += '<span class="metric-value" style="color:var(--orange)">100</span>';
+  html += '<span class="metric-label">Venter på test:</span>';
+  html += '<span class="metric-value" style="color:var(--orange)">' + _testQueueCount + '</span>';
+  html += '</div>';
+  html += '<div class="metric">';
+  html += '<span class="metric-label">Ready for release:</span>';
+  html += '<span class="metric-value" style="color:var(--green)">' + _readyForReleaseCount + '</span>';
   html += '</div>';
   html += '<div class="metric">';
   html += '<span class="metric-label">QA-ansvarlige:</span>';
@@ -2178,7 +2196,7 @@ function renderCapacity() {
   html += '</div>';
   html += '<div class="metric">';
   html += '<span class="metric-label">Fordeling:</span>';
-  html += '<span style="color:var(--text-muted)">Michael (49), Jakob (21), Edwin (16), Mikkel (14)</span>';
+  html += '<span style="color:var(--text-muted)">Michael (49), Jakob (21), Edwin (16), Mikkel (12), Simon (2)</span>';
   html += '</div>';
   html += '</div>';
 
@@ -2223,9 +2241,9 @@ function renderCapacity() {
   html += '<div class="risk-section">';
   html += '<h3>Risiko & Anbefalinger</h3>';
   html += '<div class="risk-item">Backend-kapacitet er den primære flaskehals. Simon aflaster med FMS/B2B, men backlog bør omfordeles yderligere for at balancere teamet.</div>';
-  html += '<div class="risk-item">Test-kø (100 tickets) kræver fokus. QA deles mellem Jakob, Edwin og Simon. Planlæg dedikerede test-sprints i Sprint 6-7.</div>';
+  html += '<div class="risk-item">QA-kø (51 tickets venter på test, 59 klar til release). QA deles mellem Jakob, Edwin og Simon. Planlæg dedikerede test-sprints i Sprint 6-7.</div>';
   html += '<div class="risk-item">Samlet kapacitet (' + _totalCap + ') vs. aktiv pipeline (' + _totalActive + ') giver buffer på +' + _buffer + ' tickets. God margin til uventede opgaver og backlog.</div>';
-  html += '<div class="risk-item">Anbefaling: Omfordel backlog-tickets fra overbelastede til underbelastede teammedlemmer. Prioritér test-kø afvikling inden Sprint 8.</div>';
+  html += '<div class="risk-item">Anbefaling: Omfordel backlog-tickets fra overbelastede til underbelastede teammedlemmer. Prioritér QA-kø afvikling inden Sprint 8.</div>';
   html += '</div>';
 
   // Capacity Gap Analysis & Onboarding Recommendation
@@ -2251,7 +2269,7 @@ function renderCapacity() {
   // Gap 3: QA / Test
   html += '<div style="background:var(--surface2);border-radius:8px;padding:16px;border-left:3px solid var(--red)">';
   html += '<div style="font-weight:700;margin-bottom:8px;color:var(--red)">Gap 3: QA / Test (Edwin)</div>';
-  html += '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">Test-kø: <span style="color:var(--red);font-weight:700">82 tickets</span> vs kapacitet: 19</div>';
+  html += '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">QA-kø: <span style="color:var(--orange);font-weight:700">' + _testQueueCount + ' tickets</span> venter på test | <span style="color:var(--green);font-weight:700">' + _readyForReleaseCount + '</span> klar til release</div>';
   html += '<div style="font-size:12px;line-height:1.6">82 tickets venter på test. Test deles mellem Jakob, Edwin og Simon. Samlet QA-kapacitet ~50+ tickets inden freeze.</div>';
   html += '</div>';
 

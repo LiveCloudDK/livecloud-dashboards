@@ -121,8 +121,8 @@ async function fetchCurrentSprint() {
     return null;
   }
 
-  // Also fetch issues in test/review pipeline
-  const testJql = 'project = LCAP AND status IN ("Ready for testing", "Ready for test", "READY FOR TEST AT DEV", "Ready for release") ORDER BY priority ASC, updated DESC';
+  // Fetch issues in QA pipeline (excluding "Ready for release" — those are already tested)
+  const testJql = 'project = LCAP AND status IN ("Ready for testing", "Ready for test", "READY FOR TEST AT DEV") ORDER BY priority ASC, updated DESC';
   let testIssues = [];
   nextPageToken = null;
   do {
@@ -139,8 +139,26 @@ async function fetchCurrentSprint() {
     nextPageToken = data.nextPageToken || null;
   } while (nextPageToken);
 
+  // Fetch "Ready for release" separately (tested, awaiting deploy)
+  const releaseJql = 'project = LCAP AND status = "Ready for release" ORDER BY priority ASC, updated DESC';
+  let releaseIssues = [];
+  nextPageToken = null;
+  do {
+    const body = { jql: releaseJql, maxResults: 200, fields };
+    if (nextPageToken) body.nextPageToken = nextPageToken;
+    const resp = await fetch(`${JIRA_BASE}/rest/api/3/search/jql`, {
+      method: 'POST',
+      headers: { 'Authorization': `Basic ${AUTH}`, 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (!resp.ok) { console.log(`Release pipeline JQL failed: ${resp.status}`); break; }
+    const data = await resp.json();
+    releaseIssues = releaseIssues.concat(data.issues || []);
+    nextPageToken = data.nextPageToken || null;
+  } while (nextPageToken);
+
   const combinedIssues = [...allIssues, ...testIssues];
-  console.log(`Found ${allIssues.length} active + ${testIssues.length} in test pipeline = ${combinedIssues.length} total issues`);
+  console.log(`Found ${allIssues.length} active + ${testIssues.length} in QA + ${releaseIssues.length} ready for release = ${allIssues.length + testIssues.length + releaseIssues.length} total issues`);
 
   // Return as a synthetic "sprint" object for compatibility with the dashboard
   return {
@@ -150,6 +168,9 @@ async function fetchCurrentSprint() {
     endDate: null,
     goal: '',
     issues: combinedIssues,
+    testQueueCount: testIssues.length,
+    readyForReleaseCount: releaseIssues.length,
+    releaseIssues: releaseIssues.map(issueToSprintIssue),
   };
 }
 
@@ -209,6 +230,8 @@ async function main() {
       endDate: sprintData.endDate,
       goal: sprintData.goal || '',
       issues: sprintData.issues.map(issueToSprintIssue),
+      testQueueCount: sprintData.testQueueCount || 0,
+      readyForReleaseCount: sprintData.readyForReleaseCount || 0,
     };
   } else {
     console.log('No active or future sprint found');
@@ -217,7 +240,7 @@ async function main() {
   const output = { tasks, columns: COLUMNS, wsNames: WS_NAMES, sprint, generated: new Date().toISOString() };
   const fs = await import('node:fs');
   fs.writeFileSync('data.json', JSON.stringify(output, null, 2));
-  console.log(`Wrote data.json (${tasks.length} tasks, sprint: ${sprint ? sprint.name : 'none'})`);
+  console.log(`Wrote data.json (${tasks.length} tasks, sprint: ${sprint ? sprint.name : 'none'}, QA queue: ${sprint?.testQueueCount || 0}, ready for release: ${sprint?.readyForReleaseCount || 0})`);
 }
 
 main().catch(e => { console.error(e); process.exit(1); });
