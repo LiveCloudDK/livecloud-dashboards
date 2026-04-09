@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-09T06:49:42.411Z",
+    "startDate": "2026-04-09T07:31:47.251Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -887,19 +887,6 @@
         "updated": "2026-03-31T14:04:20.638+0200"
       },
       {
-        "key": "LCAP-1027",
-        "summary": "Fix sku constraints for products",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Highest",
-        "type": "Initiative",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-03-31T14:04:13.812+0200"
-      },
-      {
         "key": "LCAP-990",
         "summary": "Transfer revoke — kontoholder kan tilbagekalde overført billet",
         "status": "Selected for Development",
@@ -1444,6 +1431,19 @@
         "updated": "2026-03-26T21:50:52.336+0100"
       },
       {
+        "key": "LCAP-1027",
+        "summary": "Fix sku constraints for products",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Highest",
+        "type": "Initiative",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-09T09:10:47.135+0200"
+      },
+      {
         "key": "LCAP-1153",
         "summary": "Align app, endpoints, environments og FMS på staging for fuld E2E test",
         "status": "Ready for test",
@@ -1559,12 +1559,12 @@
         "updated": "2026-03-30T13:26:31.672+0200"
       }
     ],
-    "testQueueCount": 46,
+    "testQueueCount": 47,
     "readyForReleaseCount": 90,
     "capacityCounts": {
       "michael": {
-        "active": 35,
-        "testQueue": 10,
+        "active": 34,
+        "testQueue": 11,
         "readyForRelease": 38
       },
       "tony": {
@@ -1594,5 +1594,5 @@
       }
     }
   },
-  "generated": "2026-04-09T06:49:42.412Z"
+  "generated": "2026-04-09T07:31:47.252Z"
 }
