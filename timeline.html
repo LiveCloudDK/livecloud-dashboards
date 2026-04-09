@@ -1034,7 +1034,7 @@ let tasks = [
   { id:'ws7-test', label:'Medarbejder-portal test', ws:'7', persons:['jakob'], start:6, span:1, phase:'test', jira:'', deps:['ws7-build'] },
 
   // WS8 POS API
-  { id:'ws8-api', label:'POS API  -  tredjepart (Joe & Juice, Volt)', ws:'8', persons:['tony'], start:3, span:2, phase:'build', jira:'LCAP-1092', deps:['ws2-fix'] },
+  { id:'ws8-api', label:'POS API  -  tredjepart (Joe & Juice, Volt)', ws:'8', persons:['tony','jakob'], start:3, span:2, phase:'build', jira:'LCAP-1092,LCAP-1195', deps:['ws2-fix'] },
   { id:'ws8-test', label:'POS API partner-test', ws:'8', persons:['tony'], start:5, span:2, phase:'test', jira:'', deps:['ws8-api'] },
 
   // WS9 NFC/Wallet
@@ -1102,7 +1102,7 @@ const overviewTasks = [
   { id:'ov-5', label:'WS5  -  B2B Flows', ws:'5', persons:['michael','simon','edwin'], start:3, span:4, phases:[{start:3,span:3,phase:'build'},{start:6,span:1,phase:'test'}], desc:'B2B portal, akkreditering, virksomhedsbilletter. Simon ejer portal.', jira:'LCAP-633,810,1080' },
   { id:'ov-6', label:'WS6  -  Webshop', ws:'6', persons:['simon','edwin'], start:3, span:4, phases:[{start:3,span:3,phase:'build'},{start:6,span:1,phase:'test'}], desc:'Online salg af billetter og produkter.', jira:'LCAP-330,971-973' },
   { id:'ov-7', label:'WS7  -  Medarbejder-portal', ws:'7', persons:['jakob'], start:4, span:3, phases:[{start:4,span:2,phase:'build'},{start:6,span:1,phase:'test'}], desc:'Personaleadministration, roller, adgangsstyring.', jira:'LCAP-1091' },
-  { id:'ov-8', label:'WS8  -  POS API (tredjepart)', ws:'8', persons:['tony'], start:3, span:4, phases:[{start:3,span:2,phase:'build'},{start:5,span:2,phase:'test'}], desc:'API for Joe & Juice, Volt m.fl.  -  betalingsinitiering + webhook.', jira:'LCAP-1092' },
+  { id:'ov-8', label:'WS8  -  POS API (tredjepart)', ws:'8', persons:['tony','jakob'], start:3, span:4, phases:[{start:3,span:2,phase:'build'},{start:5,span:2,phase:'test'}], desc:'API for Joe & Juice, Volt m.fl.  -  betalingsinitiering + webhook. Jakob: vendor-kommunikation + produktkrav.', jira:'LCAP-1092,LCAP-1195' },
   { id:'ov-9', label:'WS9  -  NFC / Wallet', ws:'9', persons:['tony','jakob'], start:2, span:5, phases:[{start:2,span:1,phase:'build'},{start:3,span:3,phase:'build'},{start:6,span:1,phase:'test'}], desc:'Apple VAS, Google Wallet, NFC-armbånd, POS-læsning.', jira:'LCAP-1093-1097' },
   { id:'ov-10', label:'WS10  -  Check-in / Gates', ws:'10', persons:['jakob','tony','edwin','michael'], start:2, span:5, phases:[{start:2,span:1,phase:'build'},{start:3,span:3,phase:'build'},{start:6,span:1,phase:'test'}], desc:'Gate design, hardware, software, integrations-test.', jira:'LCAP-1083,984' },
   { id:'ov-festxp', label:'App  -  Festival Experience & Community', ws:'3', persons:['mikkel','edwin','michael'], start:4, span:4, phases:[{start:4,span:1,phase:'build'},{start:5,span:1,phase:'build'},{start:6,span:1,phase:'build'},{start:7,span:1,phase:'test'}], desc:'Kort, boder, community, gamification, CDP, pre-order. Epic LCAP-1102 (8 stories).', jira:'LCAP-1102-1110' },
@@ -1672,16 +1672,16 @@ const sprintData = [
     dates: '30. mar – 10. apr', colStart: 0, colSpan: 2,
     type: 'planned', tickets: 31, capacity: 26,
     goal: 'Billettyper, Bodegafest-findings, billet-flow, app UI, staging, Swedbank API.',
-    persons: { 'Michael': { count: 7, focus: 'Billettyper, backend onboarding, B2B' }, 'Tony': { count: 8, focus: 'POS findings + feedback, Swedbank integration' }, 'Jakob': { count: 6, focus: 'Billet-flow (scanning, deeplink, aktivering)' }, 'Mikkel': { count: 6, focus: 'App UI: accessibility fix, QR, profil-screens' }, 'Edwin': { count: 4, focus: 'Staging E2E alignment, FMS ETag caching' }, 'Simon': { count: 2, focus: 'FMS QA, vendor API' } },
-    workstreams: ['WS1','WS2','WS3','WS4','Test']
+    persons: { 'Michael': { count: 7, focus: 'Billettyper, backend onboarding, B2B' }, 'Tony': { count: 8, focus: 'POS findings + feedback, Swedbank, Joe & the Juice vendor API discovery' }, 'Jakob': { count: 6, focus: 'Billet-flow (scanning, deeplink, aktivering), Joe & the Juice møde' }, 'Mikkel': { count: 6, focus: 'App UI: accessibility fix, QR, profil-screens' }, 'Edwin': { count: 4, focus: 'Staging E2E alignment, FMS ETag caching' }, 'Simon': { count: 2, focus: 'FMS QA, vendor API' } },
+    workstreams: ['WS1','WS2','WS3','WS4','WS8','Test']
   },
   {
     id: 5, name: 'Sprint 5', subtitle: 'Deeplink + B2B + Beats-logik',
     dates: '13. apr – 24. apr', colStart: 2, colSpan: 1,
     type: 'active', tickets: 22, capacity: 26,
     goal: 'Deeplink erstatter PDF-billetter. B2B/akkreditering: ordreholder-flow, Beats-fordeling, profil-løs billet. Delegate/transfer-logik færdig. Beats purchase+spend. Head start 9. apr.',
-    persons: { 'Michael': { count: 10, focus: 'B2B ordrehåndtering, delegate access, Beats purchase/spend/refund, revoked ticket' }, 'Tony': { count: 3, focus: 'Claim ticket, Shopify→ticket-engine, Beats-tildeling (VAS skubbet)' }, 'Jakob': { count: 5, focus: 'Deeplink→PDF erstatning, billet-flow, transfer, NFC-armbånd' }, 'Simon': { count: 3, focus: 'FMS B2B kundeoprettelse, B2B portal, ticket allocation' }, 'Mikkel': { count: 0, focus: 'App UI (fortsætter Sprint 4 scope)' }, 'Edwin': { count: 0, focus: 'Staging + FMS (fortsætter Sprint 4 scope)' } },
-    workstreams: ['WS1','WS5','WS9','Test']
+    persons: { 'Michael': { count: 10, focus: 'B2B ordrehåndtering, delegate access, Beats purchase/spend/refund, revoked ticket' }, 'Tony': { count: 3, focus: 'Claim ticket, Shopify→ticket-engine, Beats-tildeling, vendor API design (Joe & the Juice)' }, 'Jakob': { count: 5, focus: 'Deeplink→PDF erstatning, billet-flow, transfer, NFC-armbånd, vendor API krav' }, 'Simon': { count: 3, focus: 'FMS B2B kundeoprettelse, B2B portal, ticket allocation' }, 'Mikkel': { count: 0, focus: 'App UI (fortsætter Sprint 4 scope)' }, 'Edwin': { count: 0, focus: 'Staging + FMS (fortsætter Sprint 4 scope)' } },
+    workstreams: ['WS1','WS5','WS8','WS9','Test']
   },
   {
     id: 6, name: 'Sprint 6', subtitle: 'Apple VAS + Feature-build + integrationer',
