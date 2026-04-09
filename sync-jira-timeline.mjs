@@ -255,6 +255,7 @@ async function main() {
 
     // Count ready for release per person
     for (const issue of (sprintData.releaseIssues || [])) {
+      if (!issue.assignee) continue;
       const person = normalizePerson(issue.assignee);
       if (person && personCounts[person]) personCounts[person].readyForRelease++;
     }
