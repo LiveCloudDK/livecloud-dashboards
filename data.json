@@ -36,10 +36,23 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-09T14:21:55.461Z",
+    "startDate": "2026-04-09T15:03:09.542Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-1166",
+        "summary": "Profil-løs billet: QR-kode → service desk → armbånd",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-09T16:33:57.390+0200"
+      },
       {
         "key": "LCAP-610",
         "summary": "When I share a external/ url -link from artist details - the link should try to open the app and not the web",
@@ -89,19 +102,6 @@
           "app"
         ],
         "updated": "2026-04-09T15:24:49.594+0200"
-      },
-      {
-        "key": "LCAP-1166",
-        "summary": "Profil-løs billet: QR-kode → service desk → armbånd",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-04-09T15:24:30.771+0200"
       },
       {
         "key": "LCAP-1199",
@@ -300,19 +300,6 @@
         "type": "Sub-task",
         "labels": [],
         "updated": "2026-04-08T17:02:01.840+0200"
-      },
-      {
-        "key": "LCAP-1075",
-        "summary": "App: Accessibility — font size scaling bryder layout",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Mikkel Kornval Christoffersen",
-        "priority": "Medium",
-        "type": "Bug",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-04-08T15:14:07.861+0200"
       },
       {
         "key": "LCAP-1082",
@@ -960,19 +947,6 @@
         "updated": "2026-03-30T13:27:12.619+0200"
       },
       {
-        "key": "LCAP-944",
-        "summary": "Event tracking dashboard — KPI overview",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Mikkel Kornval Christoffersen",
-        "priority": "Highest",
-        "type": "Task",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-03-30T13:26:32.191+0200"
-      },
-      {
         "key": "LCAP-841",
         "summary": "Bugs and findings",
         "status": "In Progress",
@@ -995,6 +969,19 @@
           "pos"
         ],
         "updated": "2026-04-09T14:29:43.841+0200"
+      },
+      {
+        "key": "LCAP-1075",
+        "summary": "App: Accessibility — font size scaling bryder layout",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Bug",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-09T16:24:31.070+0200"
       },
       {
         "key": "LCAP-774",
@@ -1558,8 +1545,8 @@
         "updated": "2026-03-31T14:03:22.719+0200"
       }
     ],
-    "testQueueCount": 45,
-    "readyForReleaseCount": 85,
+    "testQueueCount": 46,
+    "readyForReleaseCount": 86,
     "capacityCounts": {
       "michael": {
         "active": 34,
@@ -1572,9 +1559,9 @@
         "readyForRelease": 18
       },
       "mikkel": {
-        "active": 9,
-        "testQueue": 3,
-        "readyForRelease": 8
+        "active": 7,
+        "testQueue": 4,
+        "readyForRelease": 9
       },
       "jakob": {
         "active": 8,
@@ -1682,5 +1669,5 @@
       }
     }
   ],
-  "generated": "2026-04-09T14:22:00.080Z"
+  "generated": "2026-04-09T15:03:14.545Z"
 }
