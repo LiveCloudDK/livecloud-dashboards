@@ -1886,22 +1886,49 @@ function renderSprints() {
     // Body
     html += `<div style="padding:16px 20px">`;
 
-    // Goal
-    html += `<div style="font-size:13px;color:var(--text-muted);margin-bottom:14px;line-height:1.5"><strong style="color:var(--text)">Mål:</strong> ${s.goal}</div>`;
+    // Goal — for active sprint, use Jira sprint goal if available
+    const displayGoal = isActive && jiraSprint && jiraSprint.goal ? jiraSprint.goal : s.goal;
+    html += `<div style="font-size:13px;color:var(--text-muted);margin-bottom:14px;line-height:1.5"><strong style="color:var(--text)">Mål:</strong> ${displayGoal}</div>`;
 
-    // Person rows — use live Jira counts for active sprint
-    for (const [name, data] of Object.entries(s.persons)) {
-      const pColors = { 'Michael': 'var(--blue)', 'Tony': 'var(--orange)', 'Mikkel': 'var(--cyan)', 'Jakob': 'var(--accent)', 'Edwin': 'var(--green)', 'Simon': '#10b981', 'Hele teamet': 'var(--text-muted)' };
-      const liveCount = isActive && jiraPersonCounts[name] !== undefined ? jiraPersonCounts[name] : null;
-      const displayCount = liveCount !== null ? liveCount : (data.count || ' - ');
-      const countDiff = liveCount !== null && data.count ? liveCount - data.count : 0;
-      html += `<div style="display:flex;align-items:center;gap:12px;padding:5px 0;border-bottom:1px solid rgba(46,51,69,0.3)">`;
-      html += `<div style="font-size:12px;font-weight:600;min-width:90px;color:${pColors[name] || 'var(--text)'}">${name}</div>`;
-      html += `<div style="font-size:12px;color:var(--text-muted);flex:1">${data.focus}</div>`;
-      html += `<div style="font-size:13px;font-weight:700;min-width:30px;text-align:right">${displayCount}`;
-      if (countDiff > 0) html += ` <span style="font-size:10px;color:var(--red);font-weight:600">(+${countDiff})</span>`;
-      else if (countDiff < 0) html += ` <span style="font-size:10px;color:var(--green);font-weight:600">(${countDiff})</span>`;
-      html += `</div></div>`;
+    // Person rows — for active sprint, derive focus from live Jira issues
+    const pColors = { 'Michael': 'var(--blue)', 'Tony': 'var(--orange)', 'Mikkel': 'var(--cyan)', 'Jakob': 'var(--accent)', 'Edwin': 'var(--green)', 'Simon': '#10b981', 'Hele teamet': 'var(--text-muted)' };
+    if (isActive && jiraSprintIssues.length > 0) {
+      // Build person rows from live Jira data, ordered consistently
+      const sprintPersonOrder = ['Tony','Michael','Mikkel','Edwin','Simon','Jakob'];
+      // Merge: all planned + any Jira-only persons
+      const allPersons = new Set([...Object.keys(s.persons), ...Object.keys(jiraPersonCounts)]);
+      const orderedPersons = sprintPersonOrder.filter(p => allPersons.has(p)).concat([...allPersons].filter(p => !sprintPersonOrder.includes(p)));
+      for (const name of orderedPersons) {
+        if (name === 'Hele teamet') continue;
+        const issues = jiraPersonIssues[name] || [];
+        const count = issues.length;
+        // Derive focus from top in-progress or selected-for-dev issue
+        const inProg = issues.filter(i => (i.status||'').toLowerCase() === 'in progress');
+        const selDev = issues.filter(i => (i.status||'').toLowerCase() === 'selected for development');
+        const topIssue = inProg[0] || selDev[0] || issues[0];
+        const focusText = topIssue ? topIssue.summary : (s.persons[name] ? s.persons[name].focus : '');
+        // Status breakdown
+        const nInProg = issues.filter(i => i.statusCategory === 'indeterminate').length;
+        const nTodo = issues.filter(i => i.statusCategory === 'new').length;
+        const nDoneP = issues.filter(i => i.statusCategory === 'done').length;
+        html += `<div style="display:flex;align-items:center;gap:12px;padding:5px 0;border-bottom:1px solid rgba(46,51,69,0.3)">`;
+        html += `<div style="font-size:12px;font-weight:600;min-width:90px;color:${pColors[name] || 'var(--text)'}">${name}</div>`;
+        html += `<div style="font-size:12px;color:var(--text-muted);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${focusText}">${focusText}</div>`;
+        html += `<div style="font-size:13px;font-weight:700;min-width:30px;text-align:right;display:flex;align-items:center;gap:4px;justify-content:flex-end">`;
+        if (nInProg > 0) html += `<span style="font-size:10px;padding:1px 4px;border-radius:3px;background:rgba(59,130,246,0.15);color:#3b82f6">${nInProg}</span>`;
+        if (nTodo > 0) html += `<span style="font-size:10px;padding:1px 4px;border-radius:3px;background:rgba(107,114,128,0.15);color:#9ca3af">${nTodo}</span>`;
+        if (nDoneP > 0) html += `<span style="font-size:10px;padding:1px 4px;border-radius:3px;background:rgba(34,197,94,0.15);color:#22c55e">${nDoneP}</span>`;
+        html += `<span style="margin-left:2px">${count}</span>`;
+        html += `</div></div>`;
+      }
+    } else {
+      // Non-active sprints: use hardcoded sprintData
+      for (const [name, data] of Object.entries(s.persons)) {
+        html += `<div style="display:flex;align-items:center;gap:12px;padding:5px 0;border-bottom:1px solid rgba(46,51,69,0.3)">`;
+        html += `<div style="font-size:12px;font-weight:600;min-width:90px;color:${pColors[name] || 'var(--text)'}">${name}</div>`;
+        html += `<div style="font-size:12px;color:var(--text-muted);flex:1">${data.focus}</div>`;
+        html += `<div style="font-size:13px;font-weight:700;min-width:30px;text-align:right">${data.count || ' - '}</div></div>`;
+      }
     }
 
     // Workstream tags
