@@ -909,27 +909,24 @@
     100% { transform: rotate(var(--r2, 5deg)); }
   }
 
-  /* ── Showcase atmosphere background ── */
+  /* ── Showcase atmosphere ── */
+  body.view-showcase {
+    background:
+      radial-gradient(ellipse at 30% 30%, rgba(42,8,69,0.7) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 50%, rgba(26,10,46,0.5) 0%, transparent 60%),
+      var(--bg);
+  }
+
   .showcase-container {
     max-width: 1000px;
     margin: 0 auto;
     padding: 32px 24px;
     position: relative;
     overflow: hidden;
+    min-height: 80vh;
   }
 
-  .showcase-bg {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    background:
-      radial-gradient(ellipse at 30% 50%, rgba(42,8,69,0.7) 0%, transparent 60%),
-      radial-gradient(ellipse at 70% 40%, rgba(26,10,46,0.5) 0%, transparent 60%),
-      var(--bg);
-    overflow: hidden;
-  }
-
-  .showcase-bg .stage-light {
+  .showcase-container .stage-light {
     position: absolute;
     width: 200px;
     height: 600px;
@@ -937,32 +934,36 @@
     filter: blur(40px);
     animation: stageSwing 8s ease-in-out infinite alternate;
     pointer-events: none;
+    z-index: 0;
   }
 
-  .showcase-bg .crowd-glow {
+  .showcase-crowd-glow {
     position: absolute;
-    bottom: -100px;
-    left: 0;
-    right: 0;
+    bottom: 0;
+    left: -10%;
+    right: -10%;
     height: 300px;
     background: radial-gradient(ellipse at 50% 100%, rgba(255,170,40,0.08) 0%, transparent 70%);
     pointer-events: none;
+    z-index: 0;
   }
 
-  .showcase-bg .bokeh {
+  .showcase-container .bokeh {
     position: absolute;
     border-radius: 50%;
     filter: blur(1px);
     animation: bokehFloat ease-in-out infinite alternate;
     pointer-events: none;
+    z-index: 0;
   }
 
-  .showcase-bg .particle {
+  .showcase-container .particle {
     position: absolute;
     background: rgba(255,255,255,0.6);
     border-radius: 50%;
     animation: particleRise linear infinite;
     pointer-events: none;
+    z-index: 0;
   }
 
   /* ── Hero section ── */
@@ -2168,17 +2169,10 @@ function render() {
   // Toggle body class for view-specific mobile CSS
   document.body.className = 'view-' + state.view;
 
-  // Clean up showcase background when leaving
-  const existingBg = document.querySelector('.showcase-bg');
-  if (existingBg && state.view !== 'showcase') existingBg.remove();
-
   if (state.view === 'showcase') {
     legend.style.display = 'none';
     html = renderShowcase();
     tl.innerHTML = html;
-    // Move showcase-bg to body level for fixed positioning
-    const bgEl = tl.querySelector('.showcase-bg');
-    if (bgEl) document.body.appendChild(bgEl);
     animateShowcase();
   } else if (state.view === 'capacity') {
     legend.style.display = 'none';
@@ -2704,18 +2698,12 @@ function renderShowcase() {
   const daysLeft = Math.max(0, Math.ceil((festDate - now) / (1000*60*60*24)));
 
   let html = '';
-
-  // ── ATMOSPHERIC BACKGROUND ──
-  html += '<div class="showcase-bg" id="showcase-bg">';
-  // Stage lights
-  html += '<div class="stage-light" style="left:15%;background:linear-gradient(rgba(156,39,176,0.25),transparent);--r1:-18deg;--r2:8deg;animation-duration:10s"></div>';
-  html += '<div class="stage-light" style="left:50%;background:linear-gradient(rgba(99,102,241,0.2),transparent);--r1:-8deg;--r2:15deg;animation-duration:12s;animation-delay:-3s"></div>';
-  html += '<div class="stage-light" style="left:80%;background:linear-gradient(rgba(236,72,153,0.18),transparent);--r1:-12deg;--r2:10deg;animation-duration:9s;animation-delay:-6s"></div>';
-  // Crowd glow
-  html += '<div class="crowd-glow"></div>';
-  html += '</div>';
-
   html += '<div class="showcase-container">';
+  // Stage lights (inside container, absolute positioned)
+  html += '<div class="stage-light" style="left:10%;background:linear-gradient(rgba(156,39,176,0.25),transparent);--r1:-18deg;--r2:8deg;animation-duration:10s"></div>';
+  html += '<div class="stage-light" style="left:45%;background:linear-gradient(rgba(99,102,241,0.2),transparent);--r1:-8deg;--r2:15deg;animation-duration:12s;animation-delay:-3s"></div>';
+  html += '<div class="stage-light" style="left:78%;background:linear-gradient(rgba(236,72,153,0.18),transparent);--r1:-12deg;--r2:10deg;animation-duration:9s;animation-delay:-6s"></div>';
+  html += '<div class="showcase-crowd-glow"></div>';
 
   // ── HERO SECTION ──
   html += '<div class="showcase-hero">';
@@ -2861,7 +2849,7 @@ function renderShowcase() {
 
 function animateShowcase() {
   // Spawn bokeh lights
-  const bg = document.getElementById('showcase-bg');
+  const bg = document.querySelector('.showcase-container');
   if (bg) {
     const bokehColors = [
       'rgba(156,39,176,0.35)', 'rgba(206,147,216,0.3)', 'rgba(255,170,40,0.3)',
