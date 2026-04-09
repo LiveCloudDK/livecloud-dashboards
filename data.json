@@ -36,10 +36,21 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-09T04:27:11.486Z",
+    "startDate": "2026-04-09T04:38:17.802Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-492",
+        "summary": "B2B Ticket Purchase & Invitation Workflows",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-09T06:37:52.786+0200"
+      },
       {
         "key": "LCAP-1163",
         "summary": "FMS: B2B kundeoprettelse (ordreholder-konto)",
@@ -109,17 +120,6 @@
         "type": "Story",
         "labels": [],
         "updated": "2026-04-08T21:25:33.386+0200"
-      },
-      {
-        "key": "LCAP-492",
-        "summary": "B2B Ticket Purchase & Invitation Workflows",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": null,
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [],
-        "updated": "2026-04-08T21:25:29.412+0200"
       },
       {
         "key": "LCAP-1080",
@@ -2570,5 +2570,5 @@
       }
     ]
   },
-  "generated": "2026-04-09T04:27:11.487Z"
+  "generated": "2026-04-09T04:38:17.803Z"
 }
