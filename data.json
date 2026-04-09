@@ -36,10 +36,34 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-09T13:32:13.233Z",
+    "startDate": "2026-04-09T14:21:55.461Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-610",
+        "summary": "When I share a external/ url -link from artist details - the link should try to open the app and not the web",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-09T16:14:51.406+0200"
+      },
+      {
+        "key": "LCAP-597",
+        "summary": "Mobile App Improvements for V3",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-09T16:10:47.144+0200"
+      },
       {
         "key": "LCAP-1165",
         "summary": "Ordreholder: fordel Beats frit på tildelte billetter",
@@ -78,17 +102,6 @@
           "fms"
         ],
         "updated": "2026-04-09T15:24:30.771+0200"
-      },
-      {
-        "key": "LCAP-610",
-        "summary": "When I share a external/ url -link from artist details - the link should try to open the app and not the web",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": null,
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-09T13:05:24.559+0200"
       },
       {
         "key": "LCAP-1199",
@@ -480,19 +493,6 @@
           "app"
         ],
         "updated": "2026-03-30T13:26:32.891+0200"
-      },
-      {
-        "key": "LCAP-597",
-        "summary": "Mobile App Improvements for V3",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Edwin Maldonado",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-03-30T13:26:29.265+0200"
       },
       {
         "key": "LCAP-598",
@@ -960,19 +960,6 @@
         "updated": "2026-03-30T13:27:12.619+0200"
       },
       {
-        "key": "LCAP-998",
-        "summary": "Telefonnummer-felt i signup flow + profilindstillinger",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Mikkel Kornval Christoffersen",
-        "priority": "Highest",
-        "type": "Task",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-03-30T13:26:34.545+0200"
-      },
-      {
         "key": "LCAP-944",
         "summary": "Event tracking dashboard — KPI overview",
         "status": "Selected for Development",
@@ -1430,6 +1417,19 @@
         "updated": "2026-04-07T20:12:13.879+0200"
       },
       {
+        "key": "LCAP-998",
+        "summary": "Telefonnummer-felt i signup flow + profilindstillinger",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Highest",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-09T16:08:18.212+0200"
+      },
+      {
         "key": "LCAP-928",
         "summary": "Time is wrong multiple places on the screens showing tickets",
         "status": "Ready for test",
@@ -1558,8 +1558,8 @@
         "updated": "2026-03-31T14:03:22.719+0200"
       }
     ],
-    "testQueueCount": 44,
-    "readyForReleaseCount": 87,
+    "testQueueCount": 45,
+    "readyForReleaseCount": 85,
     "capacityCounts": {
       "michael": {
         "active": 34,
@@ -1572,9 +1572,9 @@
         "readyForRelease": 18
       },
       "mikkel": {
-        "active": 10,
-        "testQueue": 2,
-        "readyForRelease": 10
+        "active": 9,
+        "testQueue": 3,
+        "readyForRelease": 8
       },
       "jakob": {
         "active": 8,
@@ -1582,7 +1582,7 @@
         "readyForRelease": 10
       },
       "edwin": {
-        "active": 1,
+        "active": 2,
         "testQueue": 6,
         "readyForRelease": 3
       },
@@ -1682,5 +1682,5 @@
       }
     }
   ],
-  "generated": "2026-04-09T13:32:19.989Z"
+  "generated": "2026-04-09T14:22:00.080Z"
 }
