@@ -395,18 +395,17 @@
     justify-content: space-between;
     align-items: baseline;
     padding: 6px 0;
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .capacity-card .metric-value {
-    font-size: 18px;
     font-weight: 700;
   }
 
   .capacity-card .metric-label {
     color: var(--text-muted);
-    font-size: 12px;
-    margin-right: 4px;
+    margin-right: 6px;
+    flex-shrink: 0;
   }
 
   .capacity-person-row {
@@ -2152,7 +2151,7 @@ function renderCapacity() {
   html += '</div>';
   html += '<div class="metric">';
   html += '<span class="metric-label">Dato:</span>';
-  html += '<span class="metric-value" style="font-size:14px">1. juli</span>';
+  html += '<span class="metric-value">1. juli</span>';
   html += '</div>';
   html += '</div>';
 
@@ -2161,15 +2160,11 @@ function renderCapacity() {
   html += '<h3>Test Kø</h3>';
   html += '<div class="metric">';
   html += '<span class="metric-label">Tickets i test:</span>';
-  html += '<span class="metric-value" style="color:var(--red)">100</span>';
+  html += '<span class="metric-value" style="color:var(--orange)">100</span>';
   html += '</div>';
   html += '<div class="metric">';
-  html += '<span class="metric-label">QA-team:</span>';
-  html += '<span style="color:var(--text)">Jakob (16) + Edwin (9) + Simon (13)</span>';
-  html += '</div>';
-  html += '<div class="metric">';
-  html += '<span class="metric-label">Største kø:</span>';
-  html += '<span style="color:var(--red)">Michael (48 venter på test)</span>';
+  html += '<span class="metric-label">QA-ansvarlige:</span>';
+  html += '<span>Jakob, Edwin, Simon</span>';
   html += '</div>';
   html += '</div>';
 
@@ -2226,10 +2221,10 @@ function renderCapacity() {
   // Risk section
   html += '<div class="risk-section">';
   html += '<h3>Risiko & Anbefalinger</h3>';
-  html += '<div class="risk-item" style="border-left:3px solid var(--red);padding-left:12px">Michael har 35 aktive tickets (kapacitet: 39) + 48 i test-kø + 49 i backlog = 132 total. Kritisk overbelastet. Simon ejer FMS/B2B backend og aflaster, men backlog bør omfordeles.</div>';
-  html += '<div class="risk-item">Test-kø er vokset til 100 tickets. Michael alene ejer 48 af dem. QA-teamet (Jakob 16, Simon 13, Edwin 9) dækker resten. Mikkel har 12 i test.</div>';
-  html += '<div class="risk-item">Tony og Simon har lav belastning (14 og 22 total) og stor buffer. Mulighed for at flytte backlog-tickets fra Michael/Jakob til dem.</div>';
-  html += '<div class="risk-item">Samlet kapacitet (' + _totalCap + ') vs. aktiv pipeline (' + _totalActive + ') giver buffer på +' + _buffer + ' tickets. Teamet er samlet set i god form, men fordelingen er skæv.</div>';
+  html += '<div class="risk-item">Backend-kapacitet er den primære flaskehals. Simon aflaster med FMS/B2B, men backlog bør omfordeles yderligere for at balancere teamet.</div>';
+  html += '<div class="risk-item">Test-kø (100 tickets) kræver fokus. QA deles mellem Jakob, Edwin og Simon. Planlæg dedikerede test-sprints i Sprint 6-7.</div>';
+  html += '<div class="risk-item">Samlet kapacitet (' + _totalCap + ') vs. aktiv pipeline (' + _totalActive + ') giver buffer på +' + _buffer + ' tickets. God margin til uventede opgaver og backlog.</div>';
+  html += '<div class="risk-item">Anbefaling: Omfordel backlog-tickets fra overbelastede til underbelastede teammedlemmer. Prioritér test-kø afvikling inden Sprint 8.</div>';
   html += '</div>';
 
   // Capacity Gap Analysis & Onboarding Recommendation
