@@ -2169,6 +2169,9 @@ function render() {
   // Toggle body class for view-specific mobile CSS
   document.body.className = 'view-' + state.view;
 
+  // Cleanup stale fixed overlays from showcase
+  document.querySelectorAll('body > .showcase-bg').forEach(el => el.remove());
+
   if (state.view === 'showcase') {
     legend.style.display = 'none';
     html = renderShowcase();
