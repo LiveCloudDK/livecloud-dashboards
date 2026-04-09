@@ -36,10 +36,21 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-09T10:52:56.779Z",
+    "startDate": "2026-04-09T11:20:58.130Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-610",
+        "summary": "When I share a external/ url -link from artist details - the link should try to open the app and not the web",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": null,
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-09T13:05:24.559+0200"
+      },
       {
         "key": "LCAP-1199",
         "summary": "Ticket type valid_from/valid_to dates display incorrectly on edit page",
@@ -1542,7 +1553,7 @@
       }
     ],
     "testQueueCount": 44,
-    "readyForReleaseCount": 88,
+    "readyForReleaseCount": 87,
     "capacityCounts": {
       "michael": {
         "active": 34,
@@ -1562,7 +1573,7 @@
       "jakob": {
         "active": 8,
         "testQueue": 4,
-        "readyForRelease": 11
+        "readyForRelease": 10
       },
       "edwin": {
         "active": 1,
@@ -1665,5 +1676,5 @@
       }
     }
   ],
-  "generated": "2026-04-09T10:53:01.586Z"
+  "generated": "2026-04-09T11:21:04.036Z"
 }
