@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-09T05:23:06.010Z",
+    "startDate": "2026-04-09T06:41:31.142Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -607,6 +607,20 @@
         "type": "Story",
         "labels": [],
         "updated": "2026-01-21T17:07:54.880+0100"
+      },
+      {
+        "key": "LCAP-1195",
+        "summary": "POS API: Eksternt vendor API design — Joe & the Juice integration",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "vendor-integration",
+          "ws8-pos-api"
+        ],
+        "updated": "2026-04-09T08:34:21.014+0200"
       },
       {
         "key": "LCAP-1155",
@@ -1233,19 +1247,6 @@
         "updated": "2026-03-30T13:27:45.574+0200"
       },
       {
-        "key": "LCAP-904",
-        "summary": "Gate Scanning EDGE-1: Concurrent gate scan allows double entry",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Tony Dieu",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-03-30T13:27:45.057+0200"
-      },
-      {
         "key": "LCAP-764",
         "summary": "Cart implementation",
         "status": "Ready for test",
@@ -1604,8 +1605,40 @@
         "updated": "2026-03-30T13:26:31.672+0200"
       }
     ],
-    "testQueueCount": 51,
-    "readyForReleaseCount": 85
+    "testQueueCount": 50,
+    "readyForReleaseCount": 86,
+    "capacityCounts": {
+      "michael": {
+        "active": 35,
+        "testQueue": 12,
+        "readyForRelease": 36
+      },
+      "tony": {
+        "active": 13,
+        "testQueue": 16,
+        "readyForRelease": 18
+      },
+      "mikkel": {
+        "active": 10,
+        "testQueue": 2,
+        "readyForRelease": 10
+      },
+      "jakob": {
+        "active": 8,
+        "testQueue": 5,
+        "readyForRelease": 11
+      },
+      "edwin": {
+        "active": 2,
+        "testQueue": 7,
+        "readyForRelease": 2
+      },
+      "simon": {
+        "active": 9,
+        "testQueue": 5,
+        "readyForRelease": 8
+      }
+    }
   },
-  "generated": "2026-04-09T05:23:06.011Z"
+  "generated": "2026-04-09T06:41:31.143Z"
 }
