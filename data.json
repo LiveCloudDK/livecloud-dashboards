@@ -36,10 +36,21 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-10T06:20:29.204Z",
+    "startDate": "2026-04-10T07:03:45.260Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-610",
+        "summary": "When I share a external/ url -link from artist details - the link should try to open the app and not the web",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-10T08:50:23.890+0200"
+      },
       {
         "key": "LCAP-1166",
         "summary": "Profil-løs billet: QR-kode → service desk → armbånd",
@@ -52,17 +63,6 @@
           "fms"
         ],
         "updated": "2026-04-09T16:33:57.390+0200"
-      },
-      {
-        "key": "LCAP-610",
-        "summary": "When I share a external/ url -link from artist details - the link should try to open the app and not the web",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Edwin Maldonado",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-09T16:14:51.406+0200"
       },
       {
         "key": "LCAP-597",
@@ -1669,5 +1669,5 @@
       }
     }
   ],
-  "generated": "2026-04-10T06:20:36.042Z"
+  "generated": "2026-04-10T07:03:54.134Z"
 }
