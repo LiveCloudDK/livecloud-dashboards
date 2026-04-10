@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-10T13:30:54.060Z",
+    "startDate": "2026-04-10T14:10:06.324Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -526,83 +526,6 @@
         "updated": "2026-03-16T09:32:45.404+0100"
       },
       {
-        "key": "LCAP-672",
-        "summary": "Swedbank / POS-afhængigheder",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [],
-        "updated": "2026-03-03T10:58:32.453+0100"
-      },
-      {
-        "key": "LCAP-763",
-        "summary": "Product and catagory browsing UI",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Jakob Højgård",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [],
-        "updated": "2026-03-02T15:07:43.382+0100"
-      },
-      {
-        "key": "LCAP-731",
-        "summary": "QR/NFC ticket presentation for gate scanning",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Jakob Højgård",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [],
-        "updated": "2026-03-02T15:07:23.811+0100"
-      },
-      {
-        "key": "LCAP-723",
-        "summary": "[Festhallen] Wallet & NFC",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Jakob Højgård",
-        "priority": "Medium",
-        "type": "Epic",
-        "labels": [],
-        "updated": "2026-02-20T10:55:20.552+0100"
-      },
-      {
-        "key": "LCAP-721",
-        "summary": "[Festhallen] POS Vendor Bar App",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Jakob Højgård",
-        "priority": "Medium",
-        "type": "Epic",
-        "labels": [],
-        "updated": "2026-02-20T10:55:19.888+0100"
-      },
-      {
-        "key": "LCAP-410",
-        "summary": "Frontend",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Tony Dieu",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [],
-        "updated": "2026-02-19T00:52:12.972+0100"
-      },
-      {
-        "key": "LCAP-387",
-        "summary": "Adapter for new commerce platform",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Tony Dieu",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [],
-        "updated": "2026-01-21T17:07:54.880+0100"
-      },
-      {
         "key": "LCAP-1207",
         "summary": "FMS: Akkrediterings-interface — listehåndtering og adgangsstyring",
         "status": "Selected for Development",
@@ -923,17 +846,6 @@
           "fms"
         ],
         "updated": "2026-03-30T13:27:12.619+0200"
-      },
-      {
-        "key": "LCAP-841",
-        "summary": "Bugs and findings",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Highest",
-        "type": "Story",
-        "labels": [],
-        "updated": "2026-03-04T13:42:08.071+0100"
       },
       {
         "key": "LCAP-1151",
@@ -1274,28 +1186,6 @@
         "updated": "2026-03-30T13:27:27.029+0200"
       },
       {
-        "key": "LCAP-642",
-        "summary": "Rapportering til e-conomic (CSV udtræk)",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-03-03T09:35:48.660+0100"
-      },
-      {
-        "key": "LCAP-706",
-        "summary": "Account code skal også på boden",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": null,
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-02-17T16:44:09.294+0100"
-      },
-      {
         "key": "LCAP-1009",
         "summary": "FMS<->POS refund sync, anonymous checkout gap & Swedbank TransactionHistory",
         "status": "Ready for test",
@@ -1545,16 +1435,16 @@
         "updated": "2026-03-31T14:03:22.719+0200"
       }
     ],
-    "testQueueCount": 48,
+    "testQueueCount": 46,
     "readyForReleaseCount": 86,
     "capacityCounts": {
       "michael": {
-        "active": 33,
-        "testQueue": 12,
+        "active": 31,
+        "testQueue": 11,
         "readyForRelease": 38
       },
       "tony": {
-        "active": 14,
+        "active": 12,
         "testQueue": 14,
         "readyForRelease": 18
       },
@@ -1564,7 +1454,7 @@
         "readyForRelease": 9
       },
       "jakob": {
-        "active": 8,
+        "active": 4,
         "testQueue": 4,
         "readyForRelease": 10
       },
@@ -1669,5 +1559,5 @@
       }
     }
   ],
-  "generated": "2026-04-10T13:31:01.107Z"
+  "generated": "2026-04-10T14:10:13.243Z"
 }
