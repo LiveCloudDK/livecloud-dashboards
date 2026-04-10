@@ -36,10 +36,69 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-10T11:31:40.109Z",
+    "startDate": "2026-04-10T12:00:07.940Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-492",
+        "summary": "B2B Ticket Purchase & Invitation Workflows",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-10T13:47:13.350+0200"
+      },
+      {
+        "key": "LCAP-1080",
+        "summary": "B2B portal — virksomheder administrerer egne billetter",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-10T13:47:11.648+0200"
+      },
+      {
+        "key": "LCAP-810",
+        "summary": "[B2B Portal] Ticket allocation + distribution resources",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "Festhallen"
+        ],
+        "updated": "2026-04-10T13:47:09.667+0200"
+      },
+      {
+        "key": "LCAP-1164",
+        "summary": "B2B ordrehåndtering + fakturastatus-tracking",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [],
+        "updated": "2026-04-10T13:47:07.755+0200"
+      },
+      {
+        "key": "LCAP-1163",
+        "summary": "FMS: B2B kundeoprettelse (ordreholder-konto)",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [],
+        "updated": "2026-04-10T13:47:06.167+0200"
+      },
       {
         "key": "LCAP-610",
         "summary": "When I share a external/ url -link from artist details - the link should try to open the app and not the web",
@@ -175,28 +234,6 @@
         "updated": "2026-04-09T07:13:31.169+0200"
       },
       {
-        "key": "LCAP-492",
-        "summary": "B2B Ticket Purchase & Invitation Workflows",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [],
-        "updated": "2026-04-09T06:37:52.786+0200"
-      },
-      {
-        "key": "LCAP-1163",
-        "summary": "FMS: B2B kundeoprettelse (ordreholder-konto)",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [],
-        "updated": "2026-04-08T21:27:22.624+0200"
-      },
-      {
         "key": "LCAP-1157",
         "summary": "Shopify → Ticket Engine: nye billetter med deeplink til app (Mædlfest, Oktoberfest, Julefester)",
         "status": "In Progress",
@@ -206,17 +243,6 @@
         "type": "Task",
         "labels": [],
         "updated": "2026-04-08T21:27:20.706+0200"
-      },
-      {
-        "key": "LCAP-1164",
-        "summary": "B2B ordrehåndtering + fakturastatus-tracking",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [],
-        "updated": "2026-04-08T21:27:15.251+0200"
       },
       {
         "key": "LCAP-1078",
@@ -241,32 +267,6 @@
         "type": "Story",
         "labels": [],
         "updated": "2026-04-08T21:25:33.386+0200"
-      },
-      {
-        "key": "LCAP-1080",
-        "summary": "B2B portal — virksomheder administrerer egne billetter",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-08T21:25:26.830+0200"
-      },
-      {
-        "key": "LCAP-810",
-        "summary": "[B2B Portal] Ticket allocation + distribution resources",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "Festhallen"
-        ],
-        "updated": "2026-04-08T21:25:24.652+0200"
       },
       {
         "key": "LCAP-1124",
@@ -601,6 +601,19 @@
         "type": "Story",
         "labels": [],
         "updated": "2026-01-21T17:07:54.880+0100"
+      },
+      {
+        "key": "LCAP-1207",
+        "summary": "FMS: Akkrediterings-interface — listehåndtering og adgangsstyring",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "High",
+        "type": "Story",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-10T13:50:30.928+0200"
       },
       {
         "key": "LCAP-1168",
@@ -1561,7 +1574,7 @@
         "readyForRelease": 3
       },
       "simon": {
-        "active": 8,
+        "active": 9,
         "testQueue": 6,
         "readyForRelease": 7
       }
@@ -1656,5 +1669,5 @@
       }
     }
   ],
-  "generated": "2026-04-10T11:31:44.704Z"
+  "generated": "2026-04-10T12:00:15.372Z"
 }
