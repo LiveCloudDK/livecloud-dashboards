@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-10T07:03:45.260Z",
+    "startDate": "2026-04-10T07:51:47.837Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -116,17 +116,6 @@
           "fms"
         ],
         "updated": "2026-04-09T11:26:14.919+0200"
-      },
-      {
-        "key": "LCAP-1122",
-        "summary": "Feat: Add product category filtering and search to vendor product API",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-09T10:44:39.783+0200"
       },
       {
         "key": "LCAP-1125",
@@ -289,17 +278,6 @@
         "type": "Sub-task",
         "labels": [],
         "updated": "2026-04-08T17:19:31.459+0200"
-      },
-      {
-        "key": "LCAP-1121",
-        "summary": "Feat: Add GET /vendor/v1/orders/summary endpoint for vendor dashboard stats",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-08T17:02:01.840+0200"
       },
       {
         "key": "LCAP-1082",
@@ -971,6 +949,98 @@
         "updated": "2026-04-09T14:29:43.841+0200"
       },
       {
+        "key": "LCAP-1119",
+        "summary": "Fix: Add missing sort_order field to Vendor API product listing",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-10T09:45:59.600+0200"
+      },
+      {
+        "key": "LCAP-1120",
+        "summary": "Fix: Validate vendor pincode length and format in API login",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-10T09:45:55.382+0200"
+      },
+      {
+        "key": "LCAP-1121",
+        "summary": "Feat: Add GET /vendor/v1/orders/summary endpoint for vendor dashboard stats",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-10T09:45:53.314+0200"
+      },
+      {
+        "key": "LCAP-1122",
+        "summary": "Feat: Add product category filtering and search to vendor product API",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-10T09:45:48.458+0200"
+      },
+      {
+        "key": "LCAP-1123",
+        "summary": "Feat: Vendor profile CRUD endpoint for FMS dashboard settings",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-10T09:45:43.634+0200"
+      },
+      {
+        "key": "LCAP-1129",
+        "summary": "Enforce consistent use of Eloquent API Resources and Form Request Validation",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-10T09:45:38.191+0200"
+      },
+      {
+        "key": "LCAP-1152",
+        "summary": "Fix pre-existing PHPStan errors (180 errors blocking CI)",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "techdebt"
+        ],
+        "updated": "2026-04-10T09:45:36.501+0200"
+      },
+      {
+        "key": "LCAP-853",
+        "summary": "man skal kunne oprette en artist og inden man trykker gem skal man kunne vælge om den bliver publiceret med det samme eller ej",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-10T09:41:06.416+0200"
+      },
+      {
         "key": "LCAP-1075",
         "summary": "App: Accessibility — font size scaling bryder layout",
         "status": "Ready for test",
@@ -1004,17 +1074,6 @@
         "type": "Sub-task",
         "labels": [],
         "updated": "2026-04-09T14:31:29.660+0200"
-      },
-      {
-        "key": "LCAP-853",
-        "summary": "man skal kunne oprette en artist og inden man trykke gem skal man kunne vælge om den bliver publiceret med det samme eller ej",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Edwin Maldonado",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-09T14:31:25.413+0200"
       },
       {
         "key": "LCAP-1035",
@@ -1096,19 +1155,6 @@
         "updated": "2026-04-08T21:25:45.751+0200"
       },
       {
-        "key": "LCAP-1129",
-        "summary": "Enforce consistent use of Eloquent API Resources and Form Request Validation",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Edwin Maldonado",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-04-08T07:19:54.714+0200"
-      },
-      {
         "key": "LCAP-1135",
         "summary": "FMS: Third-party vendor API key authentication",
         "status": "Ready for test",
@@ -1133,28 +1179,6 @@
           "pos"
         ],
         "updated": "2026-04-06T15:56:37.254+0200"
-      },
-      {
-        "key": "LCAP-1119",
-        "summary": "Fix: Add missing sort_order field to Vendor API product listing",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-01T13:22:43.189+0200"
-      },
-      {
-        "key": "LCAP-1120",
-        "summary": "Fix: Validate vendor pincode length and format in API login",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-01T13:22:30.737+0200"
       },
       {
         "key": "LCAP-912",
@@ -1545,7 +1569,7 @@
         "updated": "2026-03-31T14:03:22.719+0200"
       }
     ],
-    "testQueueCount": 46,
+    "testQueueCount": 50,
     "readyForReleaseCount": 86,
     "capacityCounts": {
       "michael": {
@@ -1574,8 +1598,8 @@
         "readyForRelease": 3
       },
       "simon": {
-        "active": 10,
-        "testQueue": 4,
+        "active": 8,
+        "testQueue": 8,
         "readyForRelease": 7
       }
     }
@@ -1669,5 +1693,5 @@
       }
     }
   ],
-  "generated": "2026-04-10T07:03:54.134Z"
+  "generated": "2026-04-10T07:51:54.816Z"
 }
