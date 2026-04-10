@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-10T07:51:47.837Z",
+    "startDate": "2026-04-10T08:30:11.646Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -834,19 +834,6 @@
         "updated": "2026-03-30T13:27:15.443+0200"
       },
       {
-        "key": "LCAP-989",
-        "summary": "Delegate revoke — gæst kan tilbagekalde en delegeret dag",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Highest",
-        "type": "Sub-task",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-09T14:26:56.787+0200"
-      },
-      {
         "key": "LCAP-990",
         "summary": "Transfer revoke — kontoholder kan tilbagekalde overført billet",
         "status": "In Progress",
@@ -960,17 +947,6 @@
         "updated": "2026-04-10T09:45:59.600+0200"
       },
       {
-        "key": "LCAP-1120",
-        "summary": "Fix: Validate vendor pincode length and format in API login",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-10T09:45:55.382+0200"
-      },
-      {
         "key": "LCAP-1121",
         "summary": "Feat: Add GET /vendor/v1/orders/summary endpoint for vendor dashboard stats",
         "status": "Ready for test",
@@ -1002,32 +978,6 @@
         "type": "Sub-task",
         "labels": [],
         "updated": "2026-04-10T09:45:43.634+0200"
-      },
-      {
-        "key": "LCAP-1129",
-        "summary": "Enforce consistent use of Eloquent API Resources and Form Request Validation",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Edwin Maldonado",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-04-10T09:45:38.191+0200"
-      },
-      {
-        "key": "LCAP-1152",
-        "summary": "Fix pre-existing PHPStan errors (180 errors blocking CI)",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [
-          "techdebt"
-        ],
-        "updated": "2026-04-10T09:45:36.501+0200"
       },
       {
         "key": "LCAP-853",
@@ -1428,6 +1378,19 @@
         "updated": "2026-04-07T20:12:13.879+0200"
       },
       {
+        "key": "LCAP-989",
+        "summary": "Delegate revoke — gæst kan tilbagekalde en delegeret dag",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Highest",
+        "type": "Sub-task",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-10T10:11:39.068+0200"
+      },
+      {
         "key": "LCAP-998",
         "summary": "Telefonnummer-felt i signup flow + profilindstillinger",
         "status": "Ready for test",
@@ -1569,12 +1532,12 @@
         "updated": "2026-03-31T14:03:22.719+0200"
       }
     ],
-    "testQueueCount": 50,
+    "testQueueCount": 48,
     "readyForReleaseCount": 86,
     "capacityCounts": {
       "michael": {
-        "active": 34,
-        "testQueue": 11,
+        "active": 33,
+        "testQueue": 12,
         "readyForRelease": 38
       },
       "tony": {
@@ -1594,12 +1557,12 @@
       },
       "edwin": {
         "active": 2,
-        "testQueue": 6,
+        "testQueue": 5,
         "readyForRelease": 3
       },
       "simon": {
         "active": 8,
-        "testQueue": 8,
+        "testQueue": 6,
         "readyForRelease": 7
       }
     }
@@ -1693,5 +1656,5 @@
       }
     }
   ],
-  "generated": "2026-04-10T07:51:54.816Z"
+  "generated": "2026-04-10T08:30:17.459Z"
 }
