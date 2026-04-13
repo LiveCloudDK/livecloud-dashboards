@@ -36,10 +36,23 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-13T18:24:04.749Z",
+    "startDate": "2026-04-13T18:51:55.197Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-810",
+        "summary": "B2B Portal: Ticket allocation + distribution resources",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-13T20:44:42.479+0200"
+      },
       {
         "key": "LCAP-1077",
         "summary": "App: Interaktivt festival-kort (map feature)",
@@ -101,19 +114,6 @@
           "commerce"
         ],
         "updated": "2026-04-10T13:47:11.648+0200"
-      },
-      {
-        "key": "LCAP-810",
-        "summary": "[B2B Portal] Ticket allocation + distribution resources",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "Festhallen"
-        ],
-        "updated": "2026-04-10T13:47:09.667+0200"
       },
       {
         "key": "LCAP-1164",
@@ -1552,5 +1552,5 @@
       }
     }
   ],
-  "generated": "2026-04-13T18:24:11.814Z"
+  "generated": "2026-04-13T18:52:01.507Z"
 }
