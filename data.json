@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-13T17:48:01.314Z",
+    "startDate": "2026-04-13T18:24:04.749Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -51,7 +51,7 @@
         "labels": [
           "app"
         ],
-        "updated": "2026-04-13T09:54:39.678+0200"
+        "updated": "2026-04-13T20:06:53.387+0200"
       },
       {
         "key": "LCAP-850",
@@ -62,7 +62,7 @@
         "priority": "Medium",
         "type": "Story",
         "labels": [],
-        "updated": "2026-04-13T09:53:43.222+0200"
+        "updated": "2026-04-13T20:06:51.412+0200"
       },
       {
         "key": "LCAP-610",
@@ -1378,19 +1378,6 @@
         "updated": "2026-04-09T14:31:00.349+0200"
       },
       {
-        "key": "LCAP-1064",
-        "summary": "POS: Auto-logout af gæst efter gennemført betaling (kritisk)",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Tony Dieu",
-        "priority": "Highest",
-        "type": "Bug",
-        "labels": [
-          "pos"
-        ],
-        "updated": "2026-04-09T14:30:33.248+0200"
-      },
-      {
         "key": "LCAP-1087",
         "summary": "Bug: Login/redirect fejl når brugere har flere apps installeret",
         "status": "Ready for test",
@@ -1439,56 +1426,30 @@
           "commerce"
         ],
         "updated": "2026-04-08T07:44:18.512+0200"
-      },
-      {
-        "key": "LCAP-996",
-        "summary": "FMS: GET order status endpoint for guest app",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Highest",
-        "type": "Task",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-03-31T14:03:23.437+0200"
-      },
-      {
-        "key": "LCAP-997",
-        "summary": "FMS: Vendor order status update endpoints (preparing/ready/completed)",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Highest",
-        "type": "Task",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-03-31T14:03:22.719+0200"
       }
     ],
-    "testQueueCount": 47,
-    "readyForReleaseCount": 85,
+    "testQueueCount": 44,
+    "readyForReleaseCount": 72,
     "capacityCounts": {
       "michael": {
         "active": 31,
-        "testQueue": 11,
-        "readyForRelease": 38
+        "testQueue": 9,
+        "readyForRelease": 32
       },
       "tony": {
         "active": 13,
-        "testQueue": 15,
-        "readyForRelease": 18
+        "testQueue": 14,
+        "readyForRelease": 17
       },
       "mikkel": {
         "active": 7,
         "testQueue": 4,
-        "readyForRelease": 9
+        "readyForRelease": 6
       },
       "jakob": {
         "active": 4,
         "testQueue": 4,
-        "readyForRelease": 10
+        "readyForRelease": 8
       },
       "edwin": {
         "active": 2,
@@ -1498,7 +1459,7 @@
       "simon": {
         "active": 9,
         "testQueue": 6,
-        "readyForRelease": 6
+        "readyForRelease": 5
       }
     }
   },
@@ -1591,5 +1552,5 @@
       }
     }
   ],
-  "generated": "2026-04-13T17:48:08.395Z"
+  "generated": "2026-04-13T18:24:11.814Z"
 }
