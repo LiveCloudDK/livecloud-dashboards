@@ -36,10 +36,24 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-13T07:03:23.487Z",
+    "startDate": "2026-04-13T07:25:51.586Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-610",
+        "summary": "When I share a external/ url -link from artist details - the link should try to open the app and not the web",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [
+          "app",
+          "backend"
+        ],
+        "updated": "2026-04-13T09:07:44.061+0200"
+      },
       {
         "key": "LCAP-492",
         "summary": "B2B Ticket Purchase & Invitation Workflows",
@@ -98,17 +112,6 @@
         "type": "Task",
         "labels": [],
         "updated": "2026-04-10T13:47:06.167+0200"
-      },
-      {
-        "key": "LCAP-610",
-        "summary": "When I share a external/ url -link from artist details - the link should try to open the app and not the web",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Edwin Maldonado",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-10T08:50:23.890+0200"
       },
       {
         "key": "LCAP-1166",
@@ -1574,5 +1577,5 @@
       }
     }
   ],
-  "generated": "2026-04-13T07:03:28.664Z"
+  "generated": "2026-04-13T07:25:56.203Z"
 }
