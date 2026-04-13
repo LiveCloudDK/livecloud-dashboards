@@ -36,10 +36,34 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-13T07:25:51.586Z",
+    "startDate": "2026-04-13T08:15:21.015Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-1077",
+        "summary": "App: Interaktivt festival-kort (map feature)",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-13T09:54:39.678+0200"
+      },
+      {
+        "key": "LCAP-850",
+        "summary": "Map Feature",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-13T09:53:43.222+0200"
+      },
       {
         "key": "LCAP-610",
         "summary": "When I share a external/ url -link from artist details - the link should try to open the app and not the web",
@@ -189,30 +213,6 @@
         "type": "Sub-task",
         "labels": [],
         "updated": "2026-04-09T10:44:38.943+0200"
-      },
-      {
-        "key": "LCAP-850",
-        "summary": "Map Feature — Integration testing & venue data setup for Bodegafesten",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Mikkel Kornval Christoffersen",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [],
-        "updated": "2026-04-09T07:13:36.852+0200"
-      },
-      {
-        "key": "LCAP-1077",
-        "summary": "App: Interaktivt festival-kort (map feature)",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Mikkel Kornval Christoffersen",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-04-09T07:13:34.989+0200"
       },
       {
         "key": "LCAP-847",
@@ -527,6 +527,20 @@
         "type": "Story",
         "labels": [],
         "updated": "2026-03-16T09:32:45.404+0100"
+      },
+      {
+        "key": "LCAP-1215",
+        "summary": "API: GET /tickets bør filtrere på summit_id",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Bug",
+        "labels": [
+          "api",
+          "tickets"
+        ],
+        "updated": "2026-04-13T10:09:37.190+0200"
       },
       {
         "key": "LCAP-1214",
@@ -1454,7 +1468,7 @@
       }
     ],
     "testQueueCount": 46,
-    "readyForReleaseCount": 86,
+    "readyForReleaseCount": 85,
     "capacityCounts": {
       "michael": {
         "active": 31,
@@ -1462,7 +1476,7 @@
         "readyForRelease": 38
       },
       "tony": {
-        "active": 13,
+        "active": 14,
         "testQueue": 14,
         "readyForRelease": 18
       },
@@ -1484,7 +1498,7 @@
       "simon": {
         "active": 9,
         "testQueue": 6,
-        "readyForRelease": 7
+        "readyForRelease": 6
       }
     }
   },
@@ -1577,5 +1591,5 @@
       }
     }
   ],
-  "generated": "2026-04-13T07:25:56.203Z"
+  "generated": "2026-04-13T08:15:27.912Z"
 }
