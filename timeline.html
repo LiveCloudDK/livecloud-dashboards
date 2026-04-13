@@ -1547,15 +1547,16 @@ let columns = [
 const visibleCols = 18;
 
 let tasks = [
-  // === FASE 1: Sprint 4 (Mar 30 - Apr 13) ===
+  // === FASE 1: Sprint 4 (Mar 30 - Apr 13) AFSLUTTER I DAG 13/4 - Sprint 5 starter 14/4 ===
   // WS1 Onboarding
-  { id:'ws1-scan', label:'Billet-scanning & aktivering (løsningsdesign)', ws:'1', persons:['jakob','michael'], start:0, span:2, phase:'critical', jira:'LCAP-1076', deps:[], desc:'Jakob overtager billet-flow. Michael på backend.' },
+  { id:'ws1-scan', label:'Billet-scanning & aktivering (løsningsdesign)', ws:'1', persons:['jakob','michael'], start:0, span:2, phase:'critical', jira:'LCAP-1076', deps:[], desc:'Jakob weekend-arbejde: corner cases dukker op. Build til staging ~frokost man 13/4. Ticket Rule Book nødvendig.' },
     { id:'ws4-simon-p1', label:'Simon: FMS vendor API', ws:'4', persons:['simon'], start:0, span:1, phase:'build', jira:'LCAP-1118', deps:[] },
     { id:'ws4-simon-p2', label:'Simon: CRUD, exports, bulk ops', ws:'4', persons:['simon'], start:1, span:2, phase:'build', jira:'LCAP-1129', deps:['ws4-simon-p1'] },
   { id:'ws1-backend', label:'Onboarding backend (claim, delegate, transfer)', ws:'1', persons:['michael'], start:0, span:2, phase:'build', jira:'LCAP-1078,1079,989,990', deps:[] },
-  { id:'ws1-app', label:'Onboarding app flows (billet-scanning + deeplink)', ws:'1', persons:['jakob'], start:0, span:2, phase:'build', jira:'LCAP-1071,1072', deps:[], desc:'Jakob overtager hele billet-flowet fra Mikkel' },
+  { id:'ws1-app', label:'Onboarding app flows (billet-scanning + deeplink)', ws:'1', persons:['jakob'], start:0, span:3, phase:'build', jira:'LCAP-1071,1072,1167', deps:[], desc:'Jakob weekend-arbejde pga. corner cases. Forlænget ind i Sprint 5. Build til staging man 13/4 frokost.' },
   { id:'ws1-ux', label:'Onboarding UX/UI (Jakob + Jay)', ws:'1', persons:['jakob'], start:0, span:1, phase:'build', jira:'', deps:[] },
   { id:'ws1-edge', label:'EDGE cases (transfer/claim sikkerhed)', ws:'1', persons:['michael','tony'], start:0, span:2, phase:'build', jira:'LCAP-904-912', deps:[] },
+  { id:'ws1-rulebook', label:'Ticket Rule Book - billet-lifecycle regler', ws:'1', persons:['jakob','michael'], start:2, span:1, phase:'critical', jira:'', deps:['ws1-edge'], desc:'Regelsæt for hvad der kan ske med billetter post-claim: transfer, delegate, revoke, assign, re-claim. Identificeret 13/4 under weekend-arbejde pga. corner cases.' },
   { id:'ws1-test', label:'Test-runde Sprint 3 features (25 tickets)', ws:'1', persons:['edwin'], start:0, span:2, phase:'test', jira:'LCAP-1074', deps:[] },
   { id:'ws1-billettyper', label:'Billettyper: camping, børne, ledsager', ws:'1', persons:['michael'], start:1, span:2, phase:'build', jira:'LCAP-1079', deps:['ws1-backend'] },
 
@@ -1652,7 +1653,7 @@ let tasks = [
 
 // Overview tasks  -  one bar per workstream showing full span
 const overviewTasks = [
-  { id:'ov-1', label:'WS1  -  Onboarding / Billetter', ws:'1', persons:['jakob','michael','edwin'], start:0, span:3, phases:[{start:0,span:2,phase:'build'},{start:2,span:1,phase:'test'}], desc:'Claim, delegate, transfer, billettyper. Jakob overtager hele billet-flowet.', jira:'LCAP-1071-1079' },
+  { id:'ov-1', label:'WS1  -  Onboarding / Billetter', ws:'1', persons:['jakob','michael','edwin'], start:0, span:3, phases:[{start:0,span:2,phase:'build'},{start:2,span:1,phase:'critical'}], desc:'Claim, delegate, transfer, billettyper. Jakob weekend-arbejde: corner cases i ticket flow. Ticket Rule Book nødvendig (regelsæt for billet-lifecycle). Build til staging man 13/4.', jira:'LCAP-1071-1079,1167' },
   { id:'ov-2', label:'WS2  -  POS Fixes', ws:'2', persons:['tony'], start:0, span:3, phases:[{start:0,span:2,phase:'build'},{start:2,span:1,phase:'test'}], desc:'Ret alle POS findings fra Bodegafesten + feedback fra barpersonale.', jira:'LCAP-1012-1065' },
   { id:'ov-3', label:'WS3  -  App (fixes + Festival XP)', ws:'3', persons:['mikkel','edwin'], start:0, span:7, phases:[{start:0,span:1,phase:'critical'},{start:1,span:1,phase:'build'},{start:2,span:2,phase:'test'},{start:4,span:3,phase:'build'}], desc:'Sprint 4: Mikkel overtager app UI (a11y, QR, profil). Test-runde Apr H2–Maj H1. Sprint 6-8: Festival Experience  -  kort, boder, community, gamification, pre-order (8 stories).', jira:'LCAP-1075,597,1102-1110' },
   { id:'ov-4', label:'WS4  -  Backend / FMS', ws:'4', persons:['michael','tony'], start:0, span:7, phases:[{start:0,span:2,phase:'build'},{start:2,span:2,phase:'build'},{start:4,span:2,phase:'build'},{start:6,span:1,phase:'test'}], desc:'Backend fixes, Dashboard, Inventory, Beats mgr. Swedbank færdig Sprint 4 (Tony).', jira:'LCAP-765,1081,1082,1098' },
