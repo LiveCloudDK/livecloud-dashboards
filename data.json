@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-13T08:15:21.015Z",
+    "startDate": "2026-04-13T09:09:26.070Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -529,24 +529,10 @@
         "updated": "2026-03-16T09:32:45.404+0100"
       },
       {
-        "key": "LCAP-1215",
-        "summary": "API: GET /tickets bør filtrere på summit_id",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Tony Dieu",
-        "priority": "High",
-        "type": "Bug",
-        "labels": [
-          "api",
-          "tickets"
-        ],
-        "updated": "2026-04-13T10:09:37.190+0200"
-      },
-      {
         "key": "LCAP-1214",
         "summary": "API: Sekundære camping-adgange returneres som \"owned\" i stedet for \"unclaimed\"",
-        "status": "Selected for Development",
-        "statusCategory": "new",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
         "assignee": "Tony Dieu",
         "priority": "High",
         "type": "Bug",
@@ -555,7 +541,35 @@
           "camping",
           "tickets"
         ],
-        "updated": "2026-04-13T08:54:21.683+0200"
+        "updated": "2026-04-13T11:09:22.284+0200"
+      },
+      {
+        "key": "LCAP-1216",
+        "summary": "API: GET /tickets — product type og unikke ticket-data pr. underliggende billet",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Story",
+        "labels": [
+          "api",
+          "tickets"
+        ],
+        "updated": "2026-04-13T11:09:23.837+0200"
+      },
+      {
+        "key": "LCAP-1215",
+        "summary": "API: GET /tickets bør filtrere på summit_id",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Bug",
+        "labels": [
+          "api",
+          "tickets"
+        ],
+        "updated": "2026-04-13T11:09:23.101+0200"
       },
       {
         "key": "LCAP-1207",
@@ -1476,7 +1490,7 @@
         "readyForRelease": 38
       },
       "tony": {
-        "active": 14,
+        "active": 15,
         "testQueue": 14,
         "readyForRelease": 18
       },
@@ -1591,5 +1605,5 @@
       }
     }
   ],
-  "generated": "2026-04-13T08:15:27.912Z"
+  "generated": "2026-04-13T09:09:31.969Z"
 }
