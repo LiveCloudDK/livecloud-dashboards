@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-13T06:41:43.131Z",
+    "startDate": "2026-04-13T07:03:23.487Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -524,6 +524,21 @@
         "type": "Story",
         "labels": [],
         "updated": "2026-03-16T09:32:45.404+0100"
+      },
+      {
+        "key": "LCAP-1214",
+        "summary": "API: Sekundære camping-adgange returneres som \"owned\" i stedet for \"unclaimed\"",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Bug",
+        "labels": [
+          "api",
+          "camping",
+          "tickets"
+        ],
+        "updated": "2026-04-13T08:54:21.683+0200"
       },
       {
         "key": "LCAP-1207",
@@ -1444,7 +1459,7 @@
         "readyForRelease": 38
       },
       "tony": {
-        "active": 12,
+        "active": 13,
         "testQueue": 14,
         "readyForRelease": 18
       },
@@ -1559,5 +1574,5 @@
       }
     }
   ],
-  "generated": "2026-04-13T06:41:49.996Z"
+  "generated": "2026-04-13T07:03:28.664Z"
 }
