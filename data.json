@@ -36,10 +36,182 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-14T08:32:34.763Z",
+    "startDate": "2026-04-14T09:09:34.975Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-674",
+        "summary": "B2B ticket handling",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-14T10:35:55.161+0200"
+      },
+      {
+        "key": "LCAP-671",
+        "summary": "Checkout API",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-14T10:35:53.427+0200"
+      },
+      {
+        "key": "LCAP-1078",
+        "summary": "Delegate access — end-to-end færdiggørelse og test",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-14T10:35:43.147+0200"
+      },
+      {
+        "key": "LCAP-492",
+        "summary": "B2B Ticket Purchase & Invitation Workflows",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-14T10:35:41.443+0200"
+      },
+      {
+        "key": "LCAP-1165",
+        "summary": "Ordreholder: fordel Beats frit på tildelte billetter",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-14T10:35:39.559+0200"
+      },
+      {
+        "key": "LCAP-1164",
+        "summary": "B2B ordrehåndtering + fakturastatus-tracking",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [],
+        "updated": "2026-04-14T10:35:37.762+0200"
+      },
+      {
+        "key": "LCAP-1166",
+        "summary": "Profil-løs billet: QR-kode → service desk → armbånd",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-14T10:35:29.037+0200"
+      },
+      {
+        "key": "LCAP-915",
+        "summary": "EDGE-13: Transfer settlement not scoped by summit",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-14T10:35:20.240+0200"
+      },
+      {
+        "key": "LCAP-914",
+        "summary": "EDGE-12: Token proliferation on repeated exchange",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-14T10:35:18.306+0200"
+      },
+      {
+        "key": "LCAP-913",
+        "summary": "EDGE-8: Summit ID overwritten on every exchange",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-14T10:35:16.681+0200"
+      },
+      {
+        "key": "LCAP-910",
+        "summary": "EDGE-14: Bundle movement resolution not scoped by recipient",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-14T10:35:15.182+0200"
+      },
+      {
+        "key": "LCAP-909",
+        "summary": "EDGE-11: Partial bundle transfer is silent",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-14T10:35:13.693+0200"
+      },
+      {
+        "key": "LCAP-908",
+        "summary": "EDGE-10: Delegate guard only checks anchor ticket in bundle",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-14T10:35:12.052+0200"
+      },
+      {
+        "key": "LCAP-907",
+        "summary": "EDGE-7: UserCentral email change invalidates pending transfers",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-14T10:35:10.270+0200"
+      },
       {
         "key": "LCAP-765",
         "summary": "Checkout flow + delivery options",
@@ -113,31 +285,6 @@
         "updated": "2026-04-13T20:06:51.412+0200"
       },
       {
-        "key": "LCAP-610",
-        "summary": "When I share a external/ url -link from artist details - the link should try to open the app and not the web",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Edwin Maldonado",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [
-          "app",
-          "backend"
-        ],
-        "updated": "2026-04-13T09:07:44.061+0200"
-      },
-      {
-        "key": "LCAP-492",
-        "summary": "B2B Ticket Purchase & Invitation Workflows",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [],
-        "updated": "2026-04-10T13:47:13.350+0200"
-      },
-      {
         "key": "LCAP-1080",
         "summary": "B2B portal — virksomheder administrerer egne billetter",
         "status": "Selected for Development",
@@ -151,17 +298,6 @@
         "updated": "2026-04-10T13:47:11.648+0200"
       },
       {
-        "key": "LCAP-1164",
-        "summary": "B2B ordrehåndtering + fakturastatus-tracking",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [],
-        "updated": "2026-04-10T13:47:07.755+0200"
-      },
-      {
         "key": "LCAP-1163",
         "summary": "FMS: B2B kundeoprettelse (ordreholder-konto)",
         "status": "In Progress",
@@ -171,19 +307,6 @@
         "type": "Task",
         "labels": [],
         "updated": "2026-04-10T13:47:06.167+0200"
-      },
-      {
-        "key": "LCAP-1166",
-        "summary": "Profil-løs billet: QR-kode → service desk → armbånd",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-04-09T16:33:57.390+0200"
       },
       {
         "key": "LCAP-597",
@@ -197,19 +320,6 @@
           "app"
         ],
         "updated": "2026-04-09T16:10:47.144+0200"
-      },
-      {
-        "key": "LCAP-1165",
-        "summary": "Ordreholder: fordel Beats frit på tildelte billetter",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-04-09T15:26:06.534+0200"
       },
       {
         "key": "LCAP-1097",
@@ -283,30 +393,6 @@
         "updated": "2026-04-08T21:27:20.706+0200"
       },
       {
-        "key": "LCAP-1078",
-        "summary": "Delegate access — end-to-end færdiggørelse og test",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-08T21:27:12.379+0200"
-      },
-      {
-        "key": "LCAP-674",
-        "summary": "B2B ticket handling",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [],
-        "updated": "2026-04-08T21:25:33.386+0200"
-      },
-      {
         "key": "LCAP-1124",
         "summary": "Feat: Add vendor sales CSV export endpoint",
         "status": "In Progress",
@@ -357,19 +443,6 @@
         "updated": "2026-03-31T14:03:24.512+0200"
       },
       {
-        "key": "LCAP-915",
-        "summary": "EDGE-13: Transfer settlement not scoped by summit",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-03-31T14:03:09.113+0200"
-      },
-      {
         "key": "LCAP-832",
         "summary": "Age verification at POS — block alcohol sales to minors",
         "status": "In Progress",
@@ -379,71 +452,6 @@
         "type": "Story",
         "labels": [],
         "updated": "2026-03-30T13:30:07.420+0200"
-      },
-      {
-        "key": "LCAP-910",
-        "summary": "EDGE-14: Bundle movement resolution not scoped by recipient",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-03-30T13:27:48.281+0200"
-      },
-      {
-        "key": "LCAP-909",
-        "summary": "EDGE-11: Partial bundle transfer is silent",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-03-30T13:27:47.659+0200"
-      },
-      {
-        "key": "LCAP-908",
-        "summary": "EDGE-10: Delegate guard only checks anchor ticket in bundle",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-03-30T13:27:47.182+0200"
-      },
-      {
-        "key": "LCAP-907",
-        "summary": "EDGE-7: UserCentral email change invalidates pending transfers",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-03-30T13:27:46.679+0200"
-      },
-      {
-        "key": "LCAP-671",
-        "summary": "Checkout API",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-03-30T13:27:26.487+0200"
       },
       {
         "key": "LCAP-319",
@@ -494,28 +502,6 @@
         "type": "Story",
         "labels": [],
         "updated": "2026-03-17T16:03:03.809+0100"
-      },
-      {
-        "key": "LCAP-914",
-        "summary": "EDGE-12: Token proliferation on repeated exchange",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-03-17T11:42:13.812+0100"
-      },
-      {
-        "key": "LCAP-913",
-        "summary": "EDGE-8: Summit ID overwritten on every exchange",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-03-17T11:42:13.225+0100"
       },
       {
         "key": "LCAP-895",
@@ -898,6 +884,20 @@
           "pos"
         ],
         "updated": "2026-04-09T14:29:43.841+0200"
+      },
+      {
+        "key": "LCAP-610",
+        "summary": "When I share a external/ url -link from artist details - the link should try to open the app and not the web",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [
+          "app",
+          "backend"
+        ],
+        "updated": "2026-04-14T10:57:15.147+0200"
       },
       {
         "key": "LCAP-757",
@@ -1450,7 +1450,7 @@
         "updated": "2026-04-08T07:44:18.512+0200"
       }
     ],
-    "testQueueCount": 44,
+    "testQueueCount": 45,
     "readyForReleaseCount": 40,
     "capacityCounts": {
       "michael": {
@@ -1474,8 +1474,8 @@
         "readyForRelease": 8
       },
       "edwin": {
-        "active": 2,
-        "testQueue": 6,
+        "active": 1,
+        "testQueue": 7,
         "readyForRelease": 3
       },
       "simon": {
@@ -1574,5 +1574,5 @@
       }
     }
   ],
-  "generated": "2026-04-14T08:32:41.393Z"
+  "generated": "2026-04-14T09:09:39.481Z"
 }
