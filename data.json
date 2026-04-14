@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-14T09:13:24.035Z",
+    "startDate": "2026-04-14T09:22:42.503Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -1553,27 +1553,21 @@
       "status": "completed",
       "apiStatus": "ok",
       "apiData": {
-        "name": "Festhallen (Bodegafesten)",
-        "guestCount": null,
-        "ticketsSold": null,
-        "topLevelKeys": [
-          "data"
-        ],
-        "innerKeys": [
-          "metadata",
-          "theme",
-          "brand",
-          "design",
-          "screens",
-          "vendors",
-          "talents",
-          "artists",
-          "venues",
-          "news",
-          "schedule",
-          "media",
-          "socials",
-          "i18n"
+        "name": "Festhallen",
+        "season": 2026,
+        "startsAt": "2026-01-01T00:00:00.000000Z",
+        "endsAt": "2026-12-31T00:00:00.000000Z",
+        "address": "Festhallen",
+        "artists": 5,
+        "events": 3,
+        "venues": 2,
+        "news": 0,
+        "screens": 16,
+        "media": 77,
+        "vendors": 4,
+        "venueNames": [
+          "Festhallen Main Stage",
+          "Latin Pavillon"
         ]
       }
     },
@@ -1587,30 +1581,27 @@
       "status": "upcoming",
       "apiStatus": "ok",
       "apiData": {
-        "name": "Ringsted Festival 2026",
-        "guestCount": null,
-        "ticketsSold": null,
-        "topLevelKeys": [
-          "data"
-        ],
-        "innerKeys": [
-          "metadata",
-          "theme",
-          "brand",
-          "design",
-          "screens",
-          "vendors",
-          "talents",
-          "artists",
-          "venues",
-          "news",
-          "schedule",
-          "media",
-          "socials",
-          "i18n"
+        "name": "Ringsted Festival",
+        "season": 2026,
+        "startsAt": "2026-07-30T00:00:00.000000Z",
+        "endsAt": "2026-08-01T00:00:00.000000Z",
+        "address": "Søndervang 2, 4100 Ringsted",
+        "artists": 42,
+        "events": 53,
+        "venues": 5,
+        "news": 140,
+        "screens": 14,
+        "media": 329,
+        "vendors": 0,
+        "venueNames": [
+          "Anlægsscenen",
+          "Reaktoren",
+          "Nordscenen",
+          "Alpehytten",
+          "Latin Pavillon"
         ]
       }
     }
   ],
-  "generated": "2026-04-14T09:13:29.311Z"
+  "generated": "2026-04-14T09:22:47.941Z"
 }
