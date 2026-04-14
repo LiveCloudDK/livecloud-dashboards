@@ -398,7 +398,7 @@ async function fetchFestivalData() {
 
   const results = [];
   for (const fest of (featuresConfig.festivals || [])) {
-    const result = { id: fest.id, name: fest.name, date: fest.date, capacity: fest.capacity, color: fest.color, colorEnd: fest.colorEnd, status: fest.status };
+    const result = { id: fest.id, name: fest.name, date: fest.date, capacity: fest.capacity, color: fest.color, colorEnd: fest.colorEnd, status: fest.status, kpi: fest.kpi || null };
     try {
       const resp = await fetch(fest.fmsUrl, { headers: { 'Accept': 'application/json' } });
       if (!resp.ok) { result.apiStatus = 'error'; result.apiError = resp.status; results.push(result); continue; }

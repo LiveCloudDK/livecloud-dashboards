@@ -2871,18 +2871,51 @@ function renderShowcase() {
 
     // Status badge
     if (isPast) {
-      html += `<div style="display:inline-block;padding:3px 10px;border-radius:10px;font-size:10px;font-weight:700;background:${fest.color || '#22c55e'}20;color:${fest.color || '#22c55e'};margin-bottom:10px">GENNEMFORT</div>`;
+      html += `<div style="display:inline-block;padding:3px 10px;border-radius:10px;font-size:10px;font-weight:700;background:${fest.color || '#22c55e'}20;color:${fest.color || '#22c55e'};margin-bottom:12px">GENNEMFORT</div>`;
     } else {
-      html += `<div style="display:inline-block;padding:3px 10px;border-radius:10px;font-size:10px;font-weight:700;background:${fest.color || '#6366f1'}20;color:${fest.color || '#6366f1'};margin-bottom:10px">${daysToFest} dage</div>`;
+      html += `<div style="display:inline-block;padding:3px 10px;border-radius:10px;font-size:10px;font-weight:700;background:${fest.color || '#6366f1'}20;color:${fest.color || '#6366f1'};margin-bottom:12px">${daysToFest} dage</div>`;
     }
 
-    // Capacity
-    if (capacity > 0) {
-      html += `<div style="font-size:12px;color:var(--text-muted);margin-bottom:10px">${capacity.toLocaleString('da-DK')} kapacitet</div>`;
-    }
+    const kpi = fest.kpi;
+    if (kpi) {
+      // ── KPI dashboard for events with sales/dashboard data ──
+      const fmtDKK = (v) => v.toLocaleString('da-DK') + ' DKK';
+      const fmtNum = (v) => v.toLocaleString('da-DK');
 
-    // FMS content stats
-    if (fest.apiStatus === 'ok' && (api.artists > 0 || api.events > 0 || api.venues > 0)) {
+      // Revenue headline
+      html += `<div style="margin-bottom:14px">`;
+      html += `<div style="font-size:24px;font-weight:700;background:${grad};-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">${fmtDKK(kpi.revenue)}</div>`;
+      html += `<div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.3px">Total omsaetning</div>`;
+      html += `</div>`;
+
+      // KPI grid
+      html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px">';
+      const kpiStats = [
+        { val: fmtNum(kpi.ticketsSold), label: 'Billetter solgt' },
+        { val: '~' + fmtNum(kpi.actualAttendees), label: 'Deltagere' },
+        { val: fmtNum(kpi.fmsOrders), label: 'FMS ordrer' },
+        { val: fmtNum(kpi.guestsWithApp), label: 'App-gaester' },
+        { val: fmtNum(kpi.scannedInApp), label: 'Skannet i app' },
+        { val: fmtNum(kpi.noShow), label: 'No-show' },
+      ];
+      for (const s of kpiStats) {
+        html += `<div style="text-align:center;padding:6px 4px;background:var(--surface2);border-radius:6px">`;
+        html += `<div style="font-size:15px;font-weight:700;color:var(--text)">${s.val}</div>`;
+        html += `<div style="font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.3px">${s.label}</div>`;
+        html += '</div>';
+      }
+      html += '</div>';
+
+      // Revenue breakdown
+      html += '<div style="font-size:11px;color:var(--text-muted);line-height:1.8;border-top:1px solid var(--border);padding-top:8px">';
+      html += `<div>FMS revenue: ${fmtDKK(kpi.fmsRevenue)}</div>`;
+      html += `<div>Swedbank captures: ${fmtDKK(kpi.swedbankCaptures)}</div>`;
+      const attendPct = capacity > 0 ? Math.round(kpi.actualAttendees / capacity * 100) : 0;
+      html += `<div>Belaegning: ~${attendPct}% (${fmtNum(kpi.actualAttendees)} / ${fmtNum(capacity)})</div>`;
+      html += '</div>';
+
+    } else if (fest.apiStatus === 'ok' && (api.artists > 0 || api.events > 0 || api.venues > 0)) {
+      // ── FMS content stats for upcoming events ──
       html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">';
       const stats = [];
       if (api.artists > 0) stats.push({ val: api.artists, label: 'Kunstnere' });
@@ -2891,7 +2924,6 @@ function renderShowcase() {
       if (api.news > 0) stats.push({ val: api.news, label: 'Nyheder' });
       if (api.vendors > 0) stats.push({ val: api.vendors, label: 'Boder' });
       if (api.media > 0) stats.push({ val: api.media, label: 'Medier' });
-      // Show max 6 stats in grid
       for (const s of stats.slice(0, 6)) {
         html += `<div style="text-align:center;padding:6px 4px;background:var(--surface2);border-radius:6px">`;
         html += `<div style="font-size:18px;font-weight:700;background:${grad};-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">${s.val}</div>`;
@@ -2900,20 +2932,15 @@ function renderShowcase() {
       }
       html += '</div>';
 
-      // Venue names
       if (api.venueNames && api.venueNames.length > 0) {
         html += '<div style="font-size:10px;color:var(--text-muted);line-height:1.6">';
         html += api.venueNames.join(' / ');
         html += '</div>';
       }
-
-      // App screens indicator
-      if (api.screens > 0) {
-        html += `<div style="font-size:10px;color:var(--text-muted);margin-top:6px">${api.screens} app-sektioner konfigureret</div>`;
+      if (capacity > 0) {
+        html += `<div style="font-size:10px;color:var(--text-muted);margin-top:6px">${capacity.toLocaleString('da-DK')} kapacitet</div>`;
       }
-    } else if (fest.apiStatus === 'error') {
-      html += '<div style="font-size:11px;color:var(--text-muted);opacity:0.6">API lukket (event afsluttet)</div>';
-    } else if (!fest.apiStatus) {
+    } else if (!fest.apiStatus && !kpi) {
       html += '<div style="font-size:11px;color:var(--text-muted);opacity:0.5">Afventer data...</div>';
     }
 
