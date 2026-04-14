@@ -36,10 +36,23 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-14T12:50:26.330Z",
+    "startDate": "2026-04-14T13:32:35.127Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-1077",
+        "summary": "App: Interaktivt festival-kort (map feature)",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-14T15:11:52.405+0200"
+      },
       {
         "key": "LCAP-1163",
         "summary": "FMS: B2B kundeoprettelse (ordreholder-konto)",
@@ -294,19 +307,6 @@
           "fms"
         ],
         "updated": "2026-04-13T21:40:05.051+0200"
-      },
-      {
-        "key": "LCAP-1077",
-        "summary": "App: Interaktivt festival-kort (map feature)",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Mikkel Kornval Christoffersen",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-04-13T20:06:53.387+0200"
       },
       {
         "key": "LCAP-850",
@@ -1466,7 +1466,7 @@
         "backlog": 58
       },
       "mikkel": {
-        "active": 7,
+        "active": 6,
         "testQueue": 4,
         "readyForRelease": 6,
         "backlog": 11
@@ -1478,7 +1478,7 @@
         "backlog": 22
       },
       "edwin": {
-        "active": 1,
+        "active": 2,
         "testQueue": 7,
         "readyForRelease": 3,
         "backlog": 10
@@ -1788,5 +1788,5 @@
       }
     }
   ],
-  "generated": "2026-04-14T12:54:20.071Z"
+  "generated": "2026-04-14T13:32:42.001Z"
 }
