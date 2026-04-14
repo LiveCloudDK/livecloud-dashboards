@@ -49,11 +49,11 @@
           "garderoben": { "orders": 30, "revenue": 1850, "softpay": 1700, "beats": 150 }
         },
         "topProducts": [
-          { "name": "Tuborg Classic fadoel", "qty": 703, "revenue": 45695 },
-          { "name": "Groen Tuborg fadoel", "qty": 499, "revenue": 29940 },
-          { "name": "10 Blandede Shotsroer", "qty": 165, "revenue": 41250 },
+          { "name": "Tuborg Classic fadøl", "qty": 703, "revenue": 45695 },
+          { "name": "Grøn Tuborg fadøl", "qty": 499, "revenue": 29940 },
+          { "name": "10 Blandede Shotsrør", "qty": 165, "revenue": 41250 },
           { "name": "Gin Hass", "qty": 134, "revenue": 11390 },
-          { "name": "5 SOEM (garderobe)", "qty": 37, "revenue": 1850 }
+          { "name": "5 SØM (garderobe)", "qty": 37, "revenue": 1850 }
         ],
         "beats": {
           "issued": 32202,
@@ -61,10 +61,10 @@
           "unused": 9659,
           "usageRate": 70,
           "sources": {
-            "welcomeBonus": { "amount": 20490, "note": "342 gaester x 60 DKK" },
+            "welcomeBonus": { "amount": 20490, "note": "342 gæster x 60 DKK" },
             "onlineTopup": { "amount": 9362, "note": "Kort via Swedbank" },
             "adminComp": { "amount": 1600, "note": "800 reelle + 800 test" },
-            "bingo": { "amount": 750, "note": "Praemier ved event-aktiviteter" }
+            "bingo": { "amount": 750, "note": "Præmier ved event-aktiviteter" }
           }
         },
         "reconciliation": {
@@ -87,10 +87,10 @@
           { "hour": "00", "orders": 29, "revenue": 2724 }
         ],
         "observations": [
-          { "title": "Scanner-problem ved indgangen", "desc": "~93 gaester (22%) kunne ikke skannes, verificeret via backend-opslag." },
+          { "title": "Scanner-problem ved indgangen", "desc": "~93 gæster (22%) kunne ikke skannes, verificeret via backend-opslag." },
           { "title": "37 SoftPOS-betalinger mangler i FMS", "desc": "14.174 DKK registreret i Swedbank men ikke i FMS. POS-app mistede forbindelse. Fix: LCAP-1054." },
-          { "title": "30% af Beats ubrugte", "desc": "9.659 DKK forblev ubrugt. Gaesterne brugte ikke alle tildelte credits." },
-          { "title": "Online Beats-checkout problemer", "desc": "16 annullerede ordrer (7.400 DKK) fra 3 gaester. Fix: LCAP-1145." },
+          { "title": "30% af Beats ubrugte", "desc": "9.659 DKK forblev ubrugt. Gæsterne brugte ikke alle tildelte credits." },
+          { "title": "Online Beats-checkout problemer", "desc": "16 annullerede ordrer (7.400 DKK) fra 3 gæster. Fix: LCAP-1145." },
           { "title": "PSP-afstemning: 100% match", "desc": "Alle 21 online top-up transaktioner matcher mellem Swedbank og FMS." },
           { "title": "Beats-balance fuldt afstemt", "desc": "Alle 32.202 DKK redegjort: velkomstbonus + online + admin + bingo." }
         ]

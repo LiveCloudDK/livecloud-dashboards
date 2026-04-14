@@ -2877,7 +2877,7 @@ function renderShowcase() {
 
     // Status badge
     if (isPast) {
-      html += `<div style="display:inline-block;padding:3px 10px;border-radius:10px;font-size:10px;font-weight:700;background:${fest.color || '#22c55e'}20;color:${fest.color || '#22c55e'};margin-bottom:12px">GENNEMFORT</div>`;
+      html += `<div style="display:inline-block;padding:3px 10px;border-radius:10px;font-size:10px;font-weight:700;background:${fest.color || '#22c55e'}20;color:${fest.color || '#22c55e'};margin-bottom:12px">GENNEMFØRT</div>`;
     } else {
       html += `<div style="display:inline-block;padding:3px 10px;border-radius:10px;font-size:10px;font-weight:700;background:${fest.color || '#6366f1'}20;color:${fest.color || '#6366f1'};margin-bottom:12px">${daysToFest} dage</div>`;
     }
@@ -2891,7 +2891,7 @@ function renderShowcase() {
       // Revenue headline
       html += `<div style="margin-bottom:14px">`;
       html += `<div style="font-size:24px;font-weight:700;background:${grad};-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">${fmtDKK(kpi.revenue)}</div>`;
-      html += `<div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.3px">Total omsaetning</div>`;
+      html += `<div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.3px">Total omsætning</div>`;
       html += `</div>`;
 
       // Computed rates
@@ -2907,7 +2907,7 @@ function renderShowcase() {
         { val: appAdoption + '%', label: 'App adoption' },
         { val: fmtNum(kpi.fmsOrders), label: 'FMS ordrer' },
         { val: fmtNum(kpi.noShow), label: 'No-show' },
-        { val: '~' + attendPct + '%', label: 'Belaegning' },
+        { val: '~' + attendPct + '%', label: 'Belægning' },
       ];
       for (const s of kpiStats) {
         html += `<div style="text-align:center;padding:6px 4px;background:var(--surface2);border-radius:6px">`;
@@ -3060,7 +3060,7 @@ function animateShowcase() {
 function renderFesthallen() {
   const pf = window._publicFeatures || {};
   const fest = (pf.festivals || []).find(f => f.id === 'festhallen');
-  if (!fest || !fest.kpi) return '<div style="padding:40px;color:var(--text-muted)">Ingen Festhallen-data tilgaengelig.</div>';
+  if (!fest || !fest.kpi) return '<div style="padding:40px;color:var(--text-muted)">Ingen Festhallen-data tilgængelig.</div>';
 
   const kpi = fest.kpi;
   const ch = kpi.channels || {};
@@ -3077,13 +3077,13 @@ function renderFesthallen() {
   html += '<div style="text-align:center;padding:40px 20px 20px">';
   html += '<div style="font-size:36px;font-weight:800;background:' + grad + ';-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Bodegafesten 2026</div>';
   html += '<div style="font-size:14px;color:var(--text-muted);margin-top:4px">Festhallen, Ringsted &middot; 28. marts 2026</div>';
-  html += '<div style="font-size:12px;color:var(--text-muted);margin-top:2px;opacity:0.6">Omsaetningsrapport & Afstemning</div>';
+  html += '<div style="font-size:12px;color:var(--text-muted);margin-top:2px;opacity:0.6">Omsætningsrapport & Afstemning</div>';
   html += '</div>';
 
   // ── HEADLINE KPI ──
   html += '<div style="text-align:center;padding:20px;margin-bottom:24px">';
   html += '<div style="font-size:42px;font-weight:800;background:' + grad + ';-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">' + fmtDKK(kpi.revenue) + '</div>';
-  html += '<div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px">Total reel omsaetning</div>';
+  html += '<div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px">Total reel omsætning</div>';
   html += '</div>';
 
   // ── TOP KPI GRID ──
@@ -3095,7 +3095,7 @@ function renderFesthallen() {
     { val: appAdoption + '%', label: 'App adoption', color: '#22c55e' },
     { val: fmtNum(kpi.fmsOrders), label: 'FMS ordrer', color: '#6366f1' },
     { val: fmtNum(kpi.noShow), label: 'No-show', color: '#ef4444' },
-    { val: '~' + Math.round(kpi.actualAttendees / (fest.capacity || 600) * 100) + '%', label: 'Belaegning', color: '#3b82f6' },
+    { val: '~' + Math.round(kpi.actualAttendees / (fest.capacity || 600) * 100) + '%', label: 'Belægning', color: '#3b82f6' },
   ];
   for (const k of topKpis) {
     html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center">';
@@ -3129,7 +3129,7 @@ function renderFesthallen() {
 
   // ── OMSAETNING PER VENDOR ──
   html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin:0 20px 24px">';
-  html += '<div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:16px">Omsaetning per vendor</div>';
+  html += '<div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:16px">Omsætning per vendor</div>';
   const vendorMax = Math.max(...Object.values(vd).map(v => v.revenue));
   const vendorColors = { storeBar: '#3b82f6', lilleBar: '#06b6d4', garderoben: '#a855f7' };
   const vendorNames = { storeBar: 'Store bar', lilleBar: 'Lille bar', garderoben: 'Garderoben' };
@@ -3171,7 +3171,7 @@ function renderFesthallen() {
   }
   html += '</div>';
 
-  // ── BEATS OEKOSYSTEM ──
+  // ── BEATS ØKOSYSTEM ──
   html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin:0 20px 24px">';
   html += '<div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:16px">Beats (Credits)</div>';
 
@@ -3203,8 +3203,8 @@ function renderFesthallen() {
   const srcItems = [
     { label: 'Velkomstbonus', data: sources.welcomeBonus, color: '#3b82f6' },
     { label: 'Online top-up', data: sources.onlineTopup, color: '#22c55e' },
-    { label: 'Admin-komplementaere', data: sources.adminComp, color: '#eab308' },
-    { label: 'Bingo + praemier', data: sources.bingo, color: '#a855f7' },
+    { label: 'Admin-komplementære', data: sources.adminComp, color: '#eab308' },
+    { label: 'Bingo + præmier', data: sources.bingo, color: '#a855f7' },
   ].filter(s => s.data);
   for (const s of srcItems) {
     const pct = (s.data.amount / srcTotal * 100).toFixed(0);
@@ -3259,7 +3259,7 @@ function renderFesthallen() {
   html += '</div>';
   html += '<div style="font-size:11px;color:var(--text-muted);line-height:1.6">';
   html += '<div>Swedbank total: ' + fmtDKK(rc.swedbankTotal) + ' &middot; FMS total: ' + fmtDKK(rc.fmsTotal) + '</div>';
-  html += '<div>37 SoftPOS-betalinger gik igennem Swedbank men naaede ikke FMS (POS-app forbindelsesfejl). Pengene er sikret.</div>';
+  html += '<div>37 SoftPOS-betalinger gik igennem Swedbank men nåede ikke FMS (POS-app forbindelsesfejl). Pengene er sikret.</div>';
   html += '</div>';
   html += '</div>';
 
