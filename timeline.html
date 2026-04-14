@@ -1461,7 +1461,6 @@
     <button class="filter-btn view-btn" data-view="sprints">Sprints</button>
     <button class="filter-btn view-btn" data-view="capacity">Kapacitet</button>
     <button class="filter-btn view-btn" data-view="current-sprint">Aktivt Sprint</button>
-    <button class="filter-btn view-btn" data-view="festhallen" style="background:linear-gradient(135deg,#ec4899,#f97316);color:#fff;border:none">Festhallen</button>
     <button class="filter-btn view-btn" data-view="showcase" style="background:linear-gradient(135deg,#6366f1,#a855f7);color:#fff;border:none">Showcase</button>
   </div>
   <div class="filter-group">
@@ -1494,7 +1493,6 @@
     <button class="mobile-tab" data-view="overview">Overblik</button>
     <button class="mobile-tab" data-view="detail">Gantt</button>
     <button class="mobile-tab" data-view="capacity">Kapacitet</button>
-    <button class="mobile-tab" data-view="festhallen">Festhallen</button>
     <button class="mobile-tab" data-view="showcase">Showcase</button>
   </div>
 </div>
@@ -2873,7 +2871,8 @@ function renderShowcase() {
     const api = fest.apiData || {};
     const capacity = fest.capacity || 0;
 
-    html += `<div class="showcase-card festival-card" style="border-image:${grad} 1;border-left:4px solid">`;
+    const hasDetail = !!fest.kpi;
+    html += `<div class="showcase-card festival-card" style="border-image:${grad} 1;border-left:4px solid;${hasDetail ? 'cursor:pointer' : ''}" ${hasDetail ? 'onclick="state.view=\'festhallen\';history.replaceState(null,\'\',\'#festhallen\');render();document.querySelectorAll(\'.view-btn,.mobile-tab\').forEach(b=>b.classList.remove(\'active\'))"' : ''} ${hasDetail ? 'title="Klik for at se fuld rapport"' : ''}>`;
     html += `<div class="festival-header" style="background:${grad};-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">${fest.name}</div>`;
 
     // Status badge
@@ -2970,6 +2969,10 @@ function renderShowcase() {
       }
     } else if (!fest.apiStatus && !kpi) {
       html += '<div style="font-size:11px;color:var(--text-muted);opacity:0.5">Afventer data...</div>';
+    }
+
+    if (hasDetail) {
+      html += '<div style="margin-top:10px;font-size:10px;color:' + (fest.color || '#6366f1') + ';text-transform:uppercase;letter-spacing:0.5px;font-weight:600">Se fuld rapport &#8594;</div>';
     }
 
     html += '</div>';
