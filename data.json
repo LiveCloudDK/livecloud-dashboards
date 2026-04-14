@@ -36,10 +36,23 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-14T07:52:27.198Z",
+    "startDate": "2026-04-14T08:32:34.763Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-765",
+        "summary": "Checkout flow + delivery options",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-14T10:29:09.608+0200"
+      },
       {
         "key": "LCAP-836",
         "summary": "Delegate access — delegate receive flow (app)",
@@ -420,19 +433,6 @@
         "updated": "2026-03-30T13:27:46.679+0200"
       },
       {
-        "key": "LCAP-765",
-        "summary": "Checkout flow + delivery options",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-03-30T13:27:32.190+0200"
-      },
-      {
         "key": "LCAP-671",
         "summary": "Checkout API",
         "status": "In Progress",
@@ -549,6 +549,17 @@
         "type": "Story",
         "labels": [],
         "updated": "2026-03-16T09:32:45.404+0100"
+      },
+      {
+        "key": "LCAP-334",
+        "summary": "Refund & Transfer Beats",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-14T10:28:18.680+0200"
       },
       {
         "key": "LCAP-1207",
@@ -681,17 +692,6 @@
           "commerce"
         ],
         "updated": "2026-04-08T21:25:40.763+0200"
-      },
-      {
-        "key": "LCAP-334",
-        "summary": "Refund & Transfer Beats",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "High",
-        "type": "Story",
-        "labels": [],
-        "updated": "2026-04-08T21:25:38.810+0200"
       },
       {
         "key": "LCAP-1169",
@@ -898,6 +898,56 @@
           "pos"
         ],
         "updated": "2026-04-09T14:29:43.841+0200"
+      },
+      {
+        "key": "LCAP-757",
+        "summary": "Payment API endpoint",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-14T10:29:02.553+0200"
+      },
+      {
+        "key": "LCAP-755",
+        "summary": "Credit management core system",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-14T10:28:55.383+0200"
+      },
+      {
+        "key": "LCAP-748",
+        "summary": "Cart and order management",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-14T10:28:46.735+0200"
+      },
+      {
+        "key": "LCAP-738",
+        "summary": "Gate scan listener + state management",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-14T09:53:04.192+0200"
       },
       {
         "key": "LCAP-1119",
@@ -1160,19 +1210,6 @@
         "updated": "2026-03-30T13:27:31.539+0200"
       },
       {
-        "key": "LCAP-757",
-        "summary": "Payment API endpoint",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-03-30T13:27:30.405+0200"
-      },
-      {
         "key": "LCAP-756",
         "summary": "Balance API endpoint",
         "status": "Ready for test",
@@ -1184,32 +1221,6 @@
           "commerce"
         ],
         "updated": "2026-03-30T13:27:29.729+0200"
-      },
-      {
-        "key": "LCAP-755",
-        "summary": "Credit management core system",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-03-30T13:27:29.133+0200"
-      },
-      {
-        "key": "LCAP-748",
-        "summary": "Cart and order management",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-03-30T13:27:28.624+0200"
       },
       {
         "key": "LCAP-673",
@@ -1439,13 +1450,13 @@
         "updated": "2026-04-08T07:44:18.512+0200"
       }
     ],
-    "testQueueCount": 43,
-    "readyForReleaseCount": 72,
+    "testQueueCount": 44,
+    "readyForReleaseCount": 40,
     "capacityCounts": {
       "michael": {
         "active": 31,
         "testQueue": 9,
-        "readyForRelease": 32
+        "readyForRelease": 0
       },
       "tony": {
         "active": 13,
@@ -1464,7 +1475,7 @@
       },
       "edwin": {
         "active": 2,
-        "testQueue": 5,
+        "testQueue": 6,
         "readyForRelease": 3
       },
       "simon": {
@@ -1563,5 +1574,5 @@
       }
     }
   ],
-  "generated": "2026-04-14T07:52:31.942Z"
+  "generated": "2026-04-14T08:32:41.393Z"
 }
