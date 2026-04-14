@@ -36,10 +36,21 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-14T12:18:59.189Z",
+    "startDate": "2026-04-14T12:50:26.330Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-1163",
+        "summary": "FMS: B2B kundeoprettelse (ordreholder-konto)",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [],
+        "updated": "2026-04-14T14:40:55.104+0200"
+      },
       {
         "key": "LCAP-969",
         "summary": "Inventory dashboard widget — real-time lagerstatus",
@@ -320,17 +331,6 @@
           "commerce"
         ],
         "updated": "2026-04-10T13:47:11.648+0200"
-      },
-      {
-        "key": "LCAP-1163",
-        "summary": "FMS: B2B kundeoprettelse (ordreholder-konto)",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [],
-        "updated": "2026-04-10T13:47:06.167+0200"
       },
       {
         "key": "LCAP-597",
@@ -1788,5 +1788,5 @@
       }
     }
   ],
-  "generated": "2026-04-14T12:19:06.815Z"
+  "generated": "2026-04-14T12:54:20.071Z"
 }
