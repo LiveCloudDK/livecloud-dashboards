@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-14T09:25:05.864Z",
+    "startDate": "2026-04-14T09:40:12.060Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -1551,6 +1551,19 @@
       "color": "#ec4899",
       "colorEnd": "#f97316",
       "status": "completed",
+      "kpi": {
+        "revenue": 260961,
+        "fmsRevenue": 246787,
+        "fmsOrders": 1457,
+        "swedbankCaptures": 238376,
+        "ticketsSold": 486,
+        "guestsWithApp": 344,
+        "guestsManualScan": 17,
+        "scannedInApp": 315,
+        "estimatedUnscanned": 93,
+        "actualAttendees": 425,
+        "noShow": 61
+      },
       "apiStatus": "ok",
       "apiData": {
         "name": "Festhallen",
@@ -1579,6 +1592,7 @@
       "color": "#6366f1",
       "colorEnd": "#a855f7",
       "status": "upcoming",
+      "kpi": null,
       "apiStatus": "ok",
       "apiData": {
         "name": "Ringsted Festival",
@@ -1603,5 +1617,5 @@
       }
     }
   ],
-  "generated": "2026-04-14T09:25:12.634Z"
+  "generated": "2026-04-14T09:40:18.585Z"
 }
