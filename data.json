@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-14T09:09:34.975Z",
+    "startDate": "2026-04-14T09:13:24.035Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -1456,32 +1456,38 @@
       "michael": {
         "active": 31,
         "testQueue": 9,
-        "readyForRelease": 0
+        "readyForRelease": 0,
+        "backlog": 46
       },
       "tony": {
         "active": 13,
         "testQueue": 14,
-        "readyForRelease": 17
+        "readyForRelease": 17,
+        "backlog": 58
       },
       "mikkel": {
         "active": 7,
         "testQueue": 4,
-        "readyForRelease": 6
+        "readyForRelease": 6,
+        "backlog": 11
       },
       "jakob": {
         "active": 6,
         "testQueue": 3,
-        "readyForRelease": 8
+        "readyForRelease": 8,
+        "backlog": 22
       },
       "edwin": {
         "active": 1,
         "testQueue": 7,
-        "readyForRelease": 3
+        "readyForRelease": 3,
+        "backlog": 10
       },
       "simon": {
         "active": 9,
         "testQueue": 6,
-        "readyForRelease": 5
+        "readyForRelease": 5,
+        "backlog": 23
       }
     }
   },
@@ -1552,6 +1558,22 @@
         "ticketsSold": null,
         "topLevelKeys": [
           "data"
+        ],
+        "innerKeys": [
+          "metadata",
+          "theme",
+          "brand",
+          "design",
+          "screens",
+          "vendors",
+          "talents",
+          "artists",
+          "venues",
+          "news",
+          "schedule",
+          "media",
+          "socials",
+          "i18n"
         ]
       }
     },
@@ -1570,9 +1592,25 @@
         "ticketsSold": null,
         "topLevelKeys": [
           "data"
+        ],
+        "innerKeys": [
+          "metadata",
+          "theme",
+          "brand",
+          "design",
+          "screens",
+          "vendors",
+          "talents",
+          "artists",
+          "venues",
+          "news",
+          "schedule",
+          "media",
+          "socials",
+          "i18n"
         ]
       }
     }
   ],
-  "generated": "2026-04-14T09:09:39.481Z"
+  "generated": "2026-04-14T09:13:29.311Z"
 }
