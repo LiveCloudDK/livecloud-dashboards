@@ -2461,9 +2461,37 @@ function renderSprints() {
     || _sprintDatesLookup.find(sd => _today < new Date(sd.end))
     || _sprintDatesLookup[0];
 
-  // Sprint cards
+  // Split sprints into active/upcoming and completed
+  const _completedSprintIds = new Set();
+  for (const sd of _sprintDatesLookup) {
+    if (sd.id !== _activeSprint.id && new Date(sd.end) < _today) {
+      _completedSprintIds.add(sd.id);
+    }
+  }
+  const _activeAndUpcoming = sprintData.filter(s => !_completedSprintIds.has(s.id));
+  const _completedSprints = sprintData.filter(s => _completedSprintIds.has(s.id));
+
+  // Sprint cards — active/upcoming first
   let visibleCount = 0;
-  for (const s of sprintData) {
+  const _allSprintGroups = [
+    { sprints: _activeAndUpcoming, label: null },
+    { sprints: _completedSprints, label: 'Afsluttede sprints' }
+  ];
+  for (const group of _allSprintGroups) {
+    if (group.label && group.sprints.length > 0) {
+      // Check if any completed sprint passes the person filter
+      const hasVisible = group.sprints.some(s => {
+        if (state.person === 'all') return true;
+        return Object.keys(s.persons).some(p => p.toLowerCase().includes(state.person));
+      });
+      if (hasVisible) {
+        html += `<div style="margin-top:32px;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px">`;
+        html += `<div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">${group.label}</div>`;
+        html += `<div style="font-size:11px;color:var(--text-muted);opacity:0.6">(${group.sprints.length})</div>`;
+        html += `</div>`;
+      }
+    }
+  for (const s of group.sprints) {
     // Filter by person if set
     if (state.person !== 'all') {
       const personName = state.person.charAt(0).toUpperCase() + state.person.slice(1);
@@ -2693,6 +2721,7 @@ function renderSprints() {
 
     html += `</div></div>`;
   }
+  } // end _allSprintGroups loop
 
   html += '</div>';
   document.getElementById('stat-visible').textContent = visibleCount;
@@ -2817,14 +2846,19 @@ function renderShowcase() {
     html += `<div class="showcase-card festival-card" style="border-image:${grad} 1;border-left:4px solid">`;
     html += `<div class="festival-header" style="background:${grad};-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">${fest.name}</div>`;
 
-    if (guestCount !== null) {
+    if (guestCount !== null && guestCount > 0) {
       const fillPct = capacity > 0 ? Math.min(100, Math.round(guestCount / capacity * 100)) : 0;
       html += `<div class="festival-metric"><span class="festival-big-num">${guestCount.toLocaleString('da-DK')}</span><span class="festival-metric-label">/ ${capacity.toLocaleString('da-DK')} tilmeldte</span></div>`;
       html += '<div class="festival-fill-track">';
       html += `<div class="festival-fill-bar" style="width:${fillPct}%;background:${grad}"></div>`;
       html += '</div>';
     } else if (fest.apiStatus === 'ok') {
-      html += '<div class="festival-metric"><span class="festival-metric-label">Data tilg\u00e6ngelig \u2014 opdateres ved n\u00e6ste sync</span></div>';
+      // API connected but guest count not yet available — show status and capacity
+      html += `<div class="festival-metric"><span class="festival-big-num" style="font-size:20px;opacity:0.6">—</span><span class="festival-metric-label">/ ${capacity.toLocaleString('da-DK')} kapacitet</span></div>`;
+      html += '<div class="festival-fill-track">';
+      html += '<div class="festival-fill-bar" style="width:0%;background:' + grad + '"></div>';
+      html += '</div>';
+      html += '<div style="font-size:10px;color:var(--text-muted);margin-top:4px;opacity:0.7">API tilsluttet — billetdata opdateres ved sync</div>';
     } else {
       html += '<div class="festival-metric"><span class="festival-metric-label" style="opacity:0.5">Billetdata kommer snart</span></div>';
     }
@@ -2926,6 +2960,7 @@ function renderCapacity() {
         capacityData[person].activeTickets = counts.active;
         capacityData[person].testQueue = counts.testQueue;
         capacityData[person].readyForRelease = counts.readyForRelease;
+        if (counts.backlog !== undefined) capacityData[person].backlog = counts.backlog;
       }
     }
   }
@@ -2993,16 +3028,23 @@ function renderCapacity() {
   html += '</div>';
   html += '</div>';
 
-  // Backlog
+  // Backlog — computed from live capacityData
+  const _totalBacklog = Object.values(capacityData).reduce((s,p) => s + (p.backlog || 0), 0);
+  const _backlogParts = ['michael','tony','mikkel','jakob','edwin','simon']
+    .map(k => ({ name: capacityData[k].name.split(' ')[0], count: capacityData[k].backlog || 0 }))
+    .filter(p => p.count > 0)
+    .sort((a,b) => b.count - a.count)
+    .map(p => p.name + ' (' + p.count + ')')
+    .join(', ');
   html += '<div class="capacity-card">';
   html += '<h3>Assigned Backlog</h3>';
   html += '<div class="metric">';
   html += '<span class="metric-label">Tickets:</span>';
-  html += '<span class="metric-value" style="color:var(--yellow)">100</span>';
+  html += '<span class="metric-value" style="color:var(--yellow)">' + _totalBacklog + '</span>';
   html += '</div>';
   html += '<div class="metric">';
   html += '<span class="metric-label">Fordeling:</span>';
-  html += '<span style="color:var(--text-muted)">Michael (49), Jakob (21), Edwin (16), Mikkel (12), Simon (2)</span>';
+  html += '<span style="color:var(--text-muted)">' + (_backlogParts || 'Ingen') + '</span>';
   html += '</div>';
   html += '</div>';
 
@@ -3046,9 +3088,9 @@ function renderCapacity() {
   html += '<div class="risk-section">';
   html += '<h3>Risiko & Anbefalinger</h3>';
   html += '<div class="risk-item">Backend-kapacitet er den primære flaskehals. Simon aflaster med FMS/B2B, men backlog bør omfordeles yderligere for at balancere teamet.</div>';
-  html += '<div class="risk-item">QA-kø (51 tickets venter på test, 59 klar til release). QA deles mellem Jakob, Edwin og Simon. Planlæg dedikerede test-sprints i Sprint 6-7.</div>';
-  html += '<div class="risk-item">Samlet kapacitet (' + _totalCap + ') vs. aktiv pipeline (' + _totalActive + ') giver buffer på +' + _buffer + ' tickets. God margin til uventede opgaver og backlog.</div>';
-  html += '<div class="risk-item">Anbefaling: Omfordel backlog-tickets fra overbelastede til underbelastede teammedlemmer. Prioritér QA-kø afvikling inden Sprint 8.</div>';
+  html += '<div class="risk-item">QA-kø (' + _testQueueCount + ' tickets venter på test, ' + _readyForReleaseCount + ' klar til release). QA deles mellem Jakob, Edwin og Simon. Planlæg dedikerede test-sprints i Sprint 6-7.</div>';
+  html += '<div class="risk-item">Samlet kapacitet (' + _totalCap + ') vs. aktiv pipeline (' + _totalActive + ') giver buffer på ' + (_buffer >= 0 ? '+' : '') + _buffer + ' tickets. ' + (_buffer >= 20 ? 'God margin til uventede opgaver og backlog.' : _buffer >= 0 ? 'Begrænset margin — prioritér omhyggeligt.' : 'Over kapacitet — omfordeling nødvendig.') + '</div>';
+  html += '<div class="risk-item">Assigned backlog: ' + _totalBacklog + ' tickets. Anbefaling: Omfordel backlog-tickets fra overbelastede til underbelastede teammedlemmer. Prioritér QA-kø afvikling inden Sprint 8.</div>';
   html += '</div>';
 
   // Capacity Gap Analysis & Onboarding Recommendation
@@ -3058,31 +3100,37 @@ function renderCapacity() {
   html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:20px">';
 
   // Gap 1: Backend/API (Michael)
-  html += '<div style="background:var(--surface2);border-radius:8px;padding:16px;border-left:3px solid var(--red)">';
-  html += '<div style="font-weight:700;margin-bottom:8px;color:var(--red)">Gap 1: Backend / API (Michael)</div>';
-  html += '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">Deficit: <span style="color:var(--red);font-weight:700">-12 tickets</span> → <span style="color:var(--green);font-weight:700">mitigeret</span></div>';
-  html += '<div style="font-size:12px;line-height:1.6">Michael arbejder ti+to+½fre (2,5 dage/uge). Simon ejer FMS, Webshop Web UI og B2B backend, hvilket holder Michaels load på ~30 tickets (vs. 42 kapacitet). Swedbank færdig (Tony). Michael fokuserer på arkitektur og cross-system integration.</div>';
+  const _michaelCap = capacityData['michael'];
+  const _michaelDiff = _michaelCap.capacity - _michaelCap.activeTickets;
+  html += '<div style="background:var(--surface2);border-radius:8px;padding:16px;border-left:3px solid ' + (_michaelDiff < 0 ? 'var(--red)' : 'var(--green)') + '">';
+  html += '<div style="font-weight:700;margin-bottom:8px;color:' + (_michaelDiff < 0 ? 'var(--red)' : 'var(--green)') + '">Gap 1: Backend / API (Michael)</div>';
+  html += '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">Aktiv: ' + _michaelCap.activeTickets + ' / ' + _michaelCap.capacity + ' kapacitet — <span style="color:' + (_michaelDiff >= 0 ? 'var(--green)' : 'var(--red)') + ';font-weight:700">' + (_michaelDiff >= 0 ? '+' + _michaelDiff + ' buffer' : Math.abs(_michaelDiff) + ' over') + '</span></div>';
+  html += '<div style="font-size:12px;line-height:1.6">Michael arbejder ti+to+½fre (2,5 dage/uge). Simon ejer FMS, Webshop Web UI og B2B backend. Michael fokuserer på arkitektur og cross-system integration.</div>';
   html += '</div>';
 
   // Gap 2: POS / Infra (Tony)
+  const _tonyCap = capacityData['tony'];
+  const _tonyDiff = _tonyCap.capacity - _tonyCap.activeTickets;
   html += '<div style="background:var(--surface2);border-radius:8px;padding:16px;border-left:3px solid var(--orange)">';
   html += '<div style="font-weight:700;margin-bottom:8px;color:var(--orange)">Gap 2: POS / Infrastruktur (Tony)</div>';
-  html += '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">Deficit: <span style="color:var(--orange);font-weight:700">-1 ticket</span> (men mange store opgaver)</div>';
-  html += '<div style="font-size:12px;line-height:1.6">Tony ejer POS-koden, NFC/Wallet, POS API for tredjepart og gate-hardware. Median cycle time er 17.5 dage  -  de fleste opgaver er komplekse integrations-arbejde. WS8, WS9 og WS10 er alle afhængige af Tony.</div>';
+  html += '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">Aktiv: ' + _tonyCap.activeTickets + ' / ' + _tonyCap.capacity + ' kapacitet — <span style="color:' + (_tonyDiff >= 0 ? 'var(--green)' : 'var(--orange)') + ';font-weight:700">' + (_tonyDiff >= 0 ? '+' + _tonyDiff + ' buffer' : Math.abs(_tonyDiff) + ' over') + '</span></div>';
+  html += '<div style="font-size:12px;line-height:1.6">Tony ejer POS-koden, NFC/Wallet, POS API for tredjepart og gate-hardware. WS8, WS9 og WS10 er alle afhængige af Tony.</div>';
   html += '</div>';
 
   // Gap 3: QA / Test
-  html += '<div style="background:var(--surface2);border-radius:8px;padding:16px;border-left:3px solid var(--red)">';
-  html += '<div style="font-weight:700;margin-bottom:8px;color:var(--red)">Gap 3: QA / Test (Edwin)</div>';
+  const _qaTotal = _testQueueCount + _readyForReleaseCount;
+  const _qaColor = _testQueueCount > 40 ? 'var(--red)' : _testQueueCount > 20 ? 'var(--orange)' : 'var(--green)';
+  html += '<div style="background:var(--surface2);border-radius:8px;padding:16px;border-left:3px solid ' + _qaColor + '">';
+  html += '<div style="font-weight:700;margin-bottom:8px;color:' + _qaColor + '">Gap 3: QA / Test</div>';
   html += '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">QA-kø: <span style="color:var(--orange);font-weight:700">' + _testQueueCount + ' tickets</span> venter på test | <span style="color:var(--green);font-weight:700">' + _readyForReleaseCount + '</span> klar til release</div>';
-  html += '<div style="font-size:12px;line-height:1.6">Test deles mellem Jakob, Edwin og Simon. Samlet QA-kapacitet ~50+ tickets inden freeze.</div>';
+  html += '<div style="font-size:12px;line-height:1.6">Test deles mellem Jakob, Edwin og Simon. Samlet QA-pipeline: ' + _qaTotal + ' tickets.</div>';
   html += '</div>';
 
-  // Gap 4: Unassigned backlog
+  // Gap 4: Backlog overview
   html += '<div style="background:var(--surface2);border-radius:8px;padding:16px;border-left:3px solid var(--yellow)">';
-  html += '<div style="font-weight:700;margin-bottom:8px;color:var(--yellow)">Gap 4: Ufordelt Backlog</div>';
-  html += '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">61 ufordelte + 213 i backlog</div>';
-  html += '<div style="font-size:12px;line-height:1.6">Festival Experience & Community (LCAP-1102, 8 stories) er nu fordelt: Sprint 6 (kort + boder), Sprint 7 (community + CDP + pre-order), Sprint 8 (chat + lokation + gamification). Buffer reduceret fra 97→89  -  fortsat god margin.</div>';
+  html += '<div style="font-weight:700;margin-bottom:8px;color:var(--yellow)">Gap 4: Backlog</div>';
+  html += '<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">Assigned backlog: <span style="font-weight:700">' + _totalBacklog + ' tickets</span></div>';
+  html += '<div style="font-size:12px;line-height:1.6">' + (_backlogParts ? 'Fordeling: ' + _backlogParts + '.' : 'Ingen assigned backlog.') + ' Buffer på ' + (_buffer >= 0 ? '+' : '') + _buffer + ' tickets giver ' + (_buffer >= 20 ? 'god margin til uventede opgaver.' : _buffer >= 0 ? 'begrænset margin — prioritér omhyggeligt.' : 'ingen margin — omfordeling nødvendig.') + '</div>';
   html += '</div>';
 
   html += '</div>';
@@ -3114,11 +3162,13 @@ function renderCapacity() {
   html += '</div></div>';
 
   // Kapacitet
+  const _simonCap = capacityData['simon'];
+  const _simonBuffer = _simonCap.capacity - _simonCap.activeTickets;
   html += '<div style="background:var(--surface);border-radius:8px;padding:16px">';
   html += '<div style="font-weight:700;margin-bottom:8px;color:var(--orange)">Kapacitet</div>';
   html += '<div style="font-size:12px;line-height:1.8">';
-  html += '<div><strong>30 tickets</strong> total kapacitet (Sprint 5-10)</div>';
-  html += '<div><strong>~7/sprint</strong> velocity</div>';
+  html += '<div><strong>' + _simonCap.capacity + ' tickets</strong> total kapacitet</div>';
+  html += '<div><strong>' + _simonCap.activeTickets + ' aktive</strong> — ' + (_simonBuffer >= 0 ? '+' + _simonBuffer + ' buffer' : Math.abs(_simonBuffer) + ' over') + '</div>';
   html += '<div><strong>Fjerner SPOF</strong> på backend (Michael)</div>';
   html += '<div><strong>Full-time</strong> 5 dage/uge</div>';
   html += '</div></div>';

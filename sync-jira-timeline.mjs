@@ -227,7 +227,7 @@ async function main() {
   if (sprintData) {
     const personCounts = {};
     const knownPersons = ['michael', 'tony', 'mikkel', 'jakob', 'edwin', 'simon'];
-    knownPersons.forEach(p => { personCounts[p] = { active: 0, testQueue: 0, readyForRelease: 0 }; });
+    knownPersons.forEach(p => { personCounts[p] = { active: 0, testQueue: 0, readyForRelease: 0, backlog: 0 }; });
 
     // Count active issues (In Progress + Selected for Development) per person
     for (const issue of sprintData.issues) {
@@ -259,6 +259,32 @@ async function main() {
       const person = normalizePerson(issue.assignee);
       if (person && personCounts[person]) personCounts[person].readyForRelease++;
     }
+
+    // Count backlog per person
+    const backlogJql = 'project = LCAP AND status = "Backlog" AND assignee IS NOT EMPTY ORDER BY assignee ASC';
+    let backlogIssues = [];
+    let bpToken = null;
+    do {
+      const body = { jql: backlogJql, maxResults: 200, fields: ['assignee'] };
+      if (bpToken) body.nextPageToken = bpToken;
+      const resp = await fetch(`${JIRA_BASE}/rest/api/3/search/jql`, {
+        method: 'POST',
+        headers: { 'Authorization': `Basic ${AUTH}`, 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      if (!resp.ok) { console.log(`Backlog JQL failed: ${resp.status}`); break; }
+      const data = await resp.json();
+      backlogIssues = backlogIssues.concat(data.issues || []);
+      bpToken = data.nextPageToken || null;
+    } while (bpToken);
+
+    for (const issue of backlogIssues) {
+      const assignee = issue.fields?.assignee?.displayName;
+      if (!assignee) continue;
+      const person = normalizePerson(assignee);
+      if (person && personCounts[person]) personCounts[person].backlog++;
+    }
+    console.log(`Fetched ${backlogIssues.length} assigned backlog issues`);
 
     capacityCounts = personCounts;
     console.log('Per-person counts:', JSON.stringify(personCounts));
@@ -379,15 +405,17 @@ async function fetchFestivalData() {
       const data = await resp.json();
       // Extract what we can — structure may vary, we'll log it on first run
       result.apiStatus = 'ok';
+      // FMS API wraps content under a `data` key — drill into it
+      const inner = data.data || data;
+      const flat = typeof inner === 'object' && !Array.isArray(inner) ? inner : {};
       result.apiData = {
-        name: data.name || data.title || data.event?.name || fest.name,
-        // Try common patterns for attendee/guest counts
-        guestCount: data.guest_count || data.guests?.length || data.attendees || data.stats?.guests || null,
-        ticketsSold: data.tickets_sold || data.stats?.tickets_sold || null,
-        // Store raw keys so we can inspect structure
+        name: flat.name || flat.title || data.name || data.title || data.event?.name || fest.name,
+        guestCount: flat.guest_count ?? flat.guestCount ?? flat.guests?.length ?? flat.attendees ?? flat.stats?.guests ?? data.guest_count ?? data.guests?.length ?? data.attendees ?? data.stats?.guests ?? null,
+        ticketsSold: flat.tickets_sold ?? flat.ticketsSold ?? flat.stats?.tickets_sold ?? data.tickets_sold ?? data.stats?.tickets_sold ?? null,
         topLevelKeys: Object.keys(data),
+        innerKeys: Object.keys(flat),
       };
-      console.log(`Festival ${fest.id}: API ok, keys: ${Object.keys(data).join(', ')}`);
+      console.log(`Festival ${fest.id}: API ok, top keys: ${Object.keys(data).join(', ')}, inner keys: ${Object.keys(flat).join(', ')}`);
     } catch (e) {
       result.apiStatus = 'unreachable';
       result.apiError = e.message;
