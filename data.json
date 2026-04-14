@@ -36,10 +36,32 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-14T07:03:36.643Z",
+    "startDate": "2026-04-14T07:52:27.198Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-836",
+        "summary": "Delegate access — delegate receive flow (app)",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-14T09:29:33.115+0200"
+      },
+      {
+        "key": "LCAP-835",
+        "summary": "Delegate access — owner delegation flow (app)",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-14T09:29:30.891+0200"
+      },
       {
         "key": "LCAP-810",
         "summary": "B2B Portal: Ticket allocation + distribution resources",
@@ -1436,7 +1458,7 @@
         "readyForRelease": 6
       },
       "jakob": {
-        "active": 4,
+        "active": 6,
         "testQueue": 3,
         "readyForRelease": 8
       },
@@ -1541,5 +1563,5 @@
       }
     }
   ],
-  "generated": "2026-04-14T07:03:41.595Z"
+  "generated": "2026-04-14T07:52:31.942Z"
 }
