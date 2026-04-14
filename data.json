@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-14T10:21:05.462Z",
+    "startDate": "2026-04-14T10:27:55.945Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -537,6 +537,19 @@
         "updated": "2026-03-16T09:32:45.404+0100"
       },
       {
+        "key": "LCAP-977",
+        "summary": "Kvitterings-API — købshistorik og transaktionslog",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-14T12:21:38.509+0200"
+      },
+      {
         "key": "LCAP-992",
         "summary": "Admin dashboard — brugeradministration i UserCentral",
         "status": "In Progress",
@@ -782,19 +795,6 @@
         "updated": "2026-04-02T08:28:52.805+0200"
       },
       {
-        "key": "LCAP-977",
-        "summary": "Kvitterings-API — købshistorik og transaktionslog",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "High",
-        "type": "Task",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-03-31T14:04:17.443+0200"
-      },
-      {
         "key": "LCAP-964",
         "summary": "Inventory API — lager endpoints",
         "status": "Selected for Development",
@@ -884,6 +884,19 @@
           "pos"
         ],
         "updated": "2026-04-09T14:29:43.841+0200"
+      },
+      {
+        "key": "LCAP-673",
+        "summary": "Finansiel routing",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-14T12:21:40.063+0200"
       },
       {
         "key": "LCAP-764",
@@ -1223,19 +1236,6 @@
         "updated": "2026-03-30T13:27:45.574+0200"
       },
       {
-        "key": "LCAP-673",
-        "summary": "Finansiel routing",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-03-30T13:27:27.029+0200"
-      },
-      {
         "key": "LCAP-1214",
         "summary": "API: Sekundære camping-adgange returneres som \"owned\" i stedet for \"unclaimed\"",
         "status": "Ready for test",
@@ -1346,6 +1346,19 @@
         "updated": "2026-04-07T20:12:13.879+0200"
       },
       {
+        "key": "LCAP-1079",
+        "summary": "Billettyper: Camping (2/4 adgang), børnebilletter og ledsagerbilletter",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Highest",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-14T12:21:49.265+0200"
+      },
+      {
         "key": "LCAP-1027",
         "summary": "Fix sku constraints for products",
         "status": "Ready for test",
@@ -1435,19 +1448,6 @@
           "app"
         ],
         "updated": "2026-04-09T14:30:24.307+0200"
-      },
-      {
-        "key": "LCAP-1079",
-        "summary": "Billettyper: Camping (2/4 adgang), børnebilletter og ledsagerbilletter",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Highest",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-08T07:44:18.512+0200"
       }
     ],
     "testQueueCount": 45,
@@ -1788,5 +1788,5 @@
       }
     }
   ],
-  "generated": "2026-04-14T10:21:13.886Z"
+  "generated": "2026-04-14T10:28:01.406Z"
 }
