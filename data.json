@@ -36,10 +36,23 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-14T13:32:35.127Z",
+    "startDate": "2026-04-14T14:20:29.627Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-907",
+        "summary": "EDGE-7: UserCentral email change invalidates pending transfers",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-14T16:17:27.041+0200"
+      },
       {
         "key": "LCAP-1077",
         "summary": "App: Interaktivt festival-kort (map feature)",
@@ -259,19 +272,6 @@
           "commerce"
         ],
         "updated": "2026-04-14T10:35:12.052+0200"
-      },
-      {
-        "key": "LCAP-907",
-        "summary": "EDGE-7: UserCentral email change invalidates pending transfers",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-14T10:35:10.270+0200"
       },
       {
         "key": "LCAP-836",
@@ -1788,5 +1788,5 @@
       }
     }
   ],
-  "generated": "2026-04-14T13:32:42.001Z"
+  "generated": "2026-04-14T14:20:37.743Z"
 }
