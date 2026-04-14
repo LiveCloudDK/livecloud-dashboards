@@ -1776,6 +1776,29 @@ let wsNames = {
       } catch (e) {
         console.warn('public-features.json not available:', e.message);
       }
+      // Sync derived data from Jira into shared state
+      syncLiveData();
+    }
+
+    // ── Central data sync — called after every loadTimelineData() ──
+    // Updates capacityData and any derived state so all views use live numbers
+    function syncLiveData() {
+      const sprint = window._sprintData;
+      if (!sprint) return;
+
+      // Sync per-person capacity counts from Jira
+      const counts = sprint.capacityCounts;
+      if (counts) {
+        for (const [person, c] of Object.entries(counts)) {
+          if (capacityData[person]) {
+            capacityData[person].activeTickets = c.active;
+            capacityData[person].testQueue = c.testQueue;
+            capacityData[person].readyForRelease = c.readyForRelease;
+            if (c.backlog !== undefined) capacityData[person].backlog = c.backlog;
+          }
+        }
+      }
+      console.log('syncLiveData: capacityData updated from Jira');
     }
 
     // Manual sync button handler
@@ -2237,7 +2260,7 @@ function render() {
   }
 
   // Days to festival
-  const now = new Date(2026, 2, 30);
+  const now = new Date();
   const fest = new Date(2026, 6, 30);
   const days = Math.ceil((fest - now) / (1000*60*60*24));
   document.getElementById('stat-days').textContent = days;
@@ -2978,18 +3001,7 @@ function animateShowcase() {
 function renderCapacity() {
   let html = '<div class="capacity-container">';
 
-  // Override hardcoded counts with synced Jira data if available
-  const _syncCounts = window._sprintData && window._sprintData.capacityCounts;
-  if (_syncCounts) {
-    for (const [person, counts] of Object.entries(_syncCounts)) {
-      if (capacityData[person]) {
-        capacityData[person].activeTickets = counts.active;
-        capacityData[person].testQueue = counts.testQueue;
-        capacityData[person].readyForRelease = counts.readyForRelease;
-        if (counts.backlog !== undefined) capacityData[person].backlog = counts.backlog;
-      }
-    }
-  }
+  // capacityData is already synced by syncLiveData() after each load
 
   // Summary dashboard
   html += '<div class="capacity-dashboard">';
