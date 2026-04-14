@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-14T11:23:24.780Z",
+    "startDate": "2026-04-14T11:40:42.121Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -1604,17 +1604,17 @@
         },
         "topProducts": [
           {
-            "name": "Tuborg Classic fadoel",
+            "name": "Tuborg Classic fadøl",
             "qty": 703,
             "revenue": 45695
           },
           {
-            "name": "Groen Tuborg fadoel",
+            "name": "Grøn Tuborg fadøl",
             "qty": 499,
             "revenue": 29940
           },
           {
-            "name": "10 Blandede Shotsroer",
+            "name": "10 Blandede Shotsrør",
             "qty": 165,
             "revenue": 41250
           },
@@ -1624,7 +1624,7 @@
             "revenue": 11390
           },
           {
-            "name": "5 SOEM (garderobe)",
+            "name": "5 SØM (garderobe)",
             "qty": 37,
             "revenue": 1850
           }
@@ -1637,7 +1637,7 @@
           "sources": {
             "welcomeBonus": {
               "amount": 20490,
-              "note": "342 gaester x 60 DKK"
+              "note": "342 gæster x 60 DKK"
             },
             "onlineTopup": {
               "amount": 9362,
@@ -1649,7 +1649,7 @@
             },
             "bingo": {
               "amount": 750,
-              "note": "Praemier ved event-aktiviteter"
+              "note": "Præmier ved event-aktiviteter"
             }
           }
         },
@@ -1711,7 +1711,7 @@
         "observations": [
           {
             "title": "Scanner-problem ved indgangen",
-            "desc": "~93 gaester (22%) kunne ikke skannes, verificeret via backend-opslag."
+            "desc": "~93 gæster (22%) kunne ikke skannes, verificeret via backend-opslag."
           },
           {
             "title": "37 SoftPOS-betalinger mangler i FMS",
@@ -1719,11 +1719,11 @@
           },
           {
             "title": "30% af Beats ubrugte",
-            "desc": "9.659 DKK forblev ubrugt. Gaesterne brugte ikke alle tildelte credits."
+            "desc": "9.659 DKK forblev ubrugt. Gæsterne brugte ikke alle tildelte credits."
           },
           {
             "title": "Online Beats-checkout problemer",
-            "desc": "16 annullerede ordrer (7.400 DKK) fra 3 gaester. Fix: LCAP-1145."
+            "desc": "16 annullerede ordrer (7.400 DKK) fra 3 gæster. Fix: LCAP-1145."
           },
           {
             "title": "PSP-afstemning: 100% match",
@@ -1788,5 +1788,5 @@
       }
     }
   ],
-  "generated": "2026-04-14T11:23:32.874Z"
+  "generated": "2026-04-14T11:40:47.401Z"
 }
