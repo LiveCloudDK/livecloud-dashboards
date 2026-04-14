@@ -2840,34 +2840,60 @@ function renderShowcase() {
     const festD = new Date(fest.date);
     const isPast = festD < now;
     const daysToFest = Math.ceil((festD - now) / (1000*60*60*24));
-    const guestCount = fest.apiData?.guestCount || fest.apiData?.ticketsSold || null;
+    const api = fest.apiData || {};
     const capacity = fest.capacity || 0;
 
     html += `<div class="showcase-card festival-card" style="border-image:${grad} 1;border-left:4px solid">`;
     html += `<div class="festival-header" style="background:${grad};-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">${fest.name}</div>`;
 
-    if (guestCount !== null && guestCount > 0) {
-      const fillPct = capacity > 0 ? Math.min(100, Math.round(guestCount / capacity * 100)) : 0;
-      html += `<div class="festival-metric"><span class="festival-big-num">${guestCount.toLocaleString('da-DK')}</span><span class="festival-metric-label">/ ${capacity.toLocaleString('da-DK')} tilmeldte</span></div>`;
-      html += '<div class="festival-fill-track">';
-      html += `<div class="festival-fill-bar" style="width:${fillPct}%;background:${grad}"></div>`;
-      html += '</div>';
-    } else if (fest.apiStatus === 'ok') {
-      // API connected but guest count not yet available — show status and capacity
-      html += `<div class="festival-metric"><span class="festival-big-num" style="font-size:20px;opacity:0.6">—</span><span class="festival-metric-label">/ ${capacity.toLocaleString('da-DK')} kapacitet</span></div>`;
-      html += '<div class="festival-fill-track">';
-      html += '<div class="festival-fill-bar" style="width:0%;background:' + grad + '"></div>';
-      html += '</div>';
-      html += '<div style="font-size:10px;color:var(--text-muted);margin-top:4px;opacity:0.7">API tilsluttet — billetdata opdateres ved sync</div>';
+    // Status badge
+    if (isPast) {
+      html += `<div style="display:inline-block;padding:3px 10px;border-radius:10px;font-size:10px;font-weight:700;background:${fest.color || '#22c55e'}20;color:${fest.color || '#22c55e'};margin-bottom:10px">GENNEMFORT</div>`;
     } else {
-      html += '<div class="festival-metric"><span class="festival-metric-label" style="opacity:0.5">Billetdata kommer snart</span></div>';
+      html += `<div style="display:inline-block;padding:3px 10px;border-radius:10px;font-size:10px;font-weight:700;background:${fest.color || '#6366f1'}20;color:${fest.color || '#6366f1'};margin-bottom:10px">${daysToFest} dage</div>`;
     }
 
-    if (isPast) {
-      html += `<div class="festival-status" style="color:${fest.color || '#22c55e'}">Gennemf\u00f8rt</div>`;
-    } else {
-      html += `<div class="festival-status">${daysToFest} dage</div>`;
+    // Capacity
+    if (capacity > 0) {
+      html += `<div style="font-size:12px;color:var(--text-muted);margin-bottom:10px">${capacity.toLocaleString('da-DK')} kapacitet</div>`;
     }
+
+    // FMS content stats
+    if (fest.apiStatus === 'ok' && (api.artists > 0 || api.events > 0 || api.venues > 0)) {
+      html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">';
+      const stats = [];
+      if (api.artists > 0) stats.push({ val: api.artists, label: 'Kunstnere' });
+      if (api.events > 0) stats.push({ val: api.events, label: 'Events' });
+      if (api.venues > 0) stats.push({ val: api.venues, label: 'Scener' });
+      if (api.news > 0) stats.push({ val: api.news, label: 'Nyheder' });
+      if (api.vendors > 0) stats.push({ val: api.vendors, label: 'Boder' });
+      if (api.media > 0) stats.push({ val: api.media, label: 'Medier' });
+      // Show max 6 stats in grid
+      for (const s of stats.slice(0, 6)) {
+        html += `<div style="text-align:center;padding:6px 4px;background:var(--surface2);border-radius:6px">`;
+        html += `<div style="font-size:18px;font-weight:700;background:${grad};-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">${s.val}</div>`;
+        html += `<div style="font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.3px">${s.label}</div>`;
+        html += '</div>';
+      }
+      html += '</div>';
+
+      // Venue names
+      if (api.venueNames && api.venueNames.length > 0) {
+        html += '<div style="font-size:10px;color:var(--text-muted);line-height:1.6">';
+        html += api.venueNames.join(' / ');
+        html += '</div>';
+      }
+
+      // App screens indicator
+      if (api.screens > 0) {
+        html += `<div style="font-size:10px;color:var(--text-muted);margin-top:6px">${api.screens} app-sektioner konfigureret</div>`;
+      }
+    } else if (fest.apiStatus === 'error') {
+      html += '<div style="font-size:11px;color:var(--text-muted);opacity:0.6">API lukket (event afsluttet)</div>';
+    } else if (!fest.apiStatus) {
+      html += '<div style="font-size:11px;color:var(--text-muted);opacity:0.5">Afventer data...</div>';
+    }
+
     html += '</div>';
   }
 
@@ -2875,10 +2901,10 @@ function renderShowcase() {
 
   // ── PLATFORM HIGHLIGHTS ──
   const highlights = pf.highlights || [
-    { icon: '\u26a1', title: 'Beats Credits', desc: 'Digital festival-valuta', gradient: 'linear-gradient(135deg,#6366f1,#a855f7)' },
-    { icon: '\ud83d\udcf1', title: 'NFC-armb\u00e5nd', desc: 'Tap & go', gradient: 'linear-gradient(135deg,#06b6d4,#22c55e)' },
-    { icon: '\ud83d\uddfa\ufe0f', title: 'Festival App', desc: 'Kort, program, community', gradient: 'linear-gradient(135deg,#ec4899,#f97316)' },
-    { icon: '\ud83c\udfab', title: 'Digital Billet', desc: 'Deeplink-aktivering', gradient: 'linear-gradient(135deg,#eab308,#f97316)' },
+    { icon: '\u2261', title: 'Beats Credits', desc: 'Digital festival-valuta', gradient: 'linear-gradient(135deg,#6366f1,#a855f7)' },
+    { icon: '\u25C7', title: 'NFC-armb\u00e5nd', desc: 'Tap & go', gradient: 'linear-gradient(135deg,#06b6d4,#22c55e)' },
+    { icon: '\u25A3', title: 'Festival App', desc: 'Kort, program, community', gradient: 'linear-gradient(135deg,#ec4899,#f97316)' },
+    { icon: '\u2316', title: 'Digital Billet', desc: 'Deeplink-aktivering', gradient: 'linear-gradient(135deg,#eab308,#f97316)' },
   ];
 
   html += '<div class="showcase-section">';

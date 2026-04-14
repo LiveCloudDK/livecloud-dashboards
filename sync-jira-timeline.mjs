@@ -405,17 +405,26 @@ async function fetchFestivalData() {
       const data = await resp.json();
       // Extract what we can — structure may vary, we'll log it on first run
       result.apiStatus = 'ok';
-      // FMS API wraps content under a `data` key — drill into it
+      // FMS API wraps content under a `data` key
       const inner = data.data || data;
       const flat = typeof inner === 'object' && !Array.isArray(inner) ? inner : {};
+      const meta = flat.metadata || {};
       result.apiData = {
-        name: flat.name || flat.title || data.name || data.title || data.event?.name || fest.name,
-        guestCount: flat.guest_count ?? flat.guestCount ?? flat.guests?.length ?? flat.attendees ?? flat.stats?.guests ?? data.guest_count ?? data.guests?.length ?? data.attendees ?? data.stats?.guests ?? null,
-        ticketsSold: flat.tickets_sold ?? flat.ticketsSold ?? flat.stats?.tickets_sold ?? data.tickets_sold ?? data.stats?.tickets_sold ?? null,
-        topLevelKeys: Object.keys(data),
-        innerKeys: Object.keys(flat),
+        name: meta.name || flat.name || fest.name,
+        season: meta.season || null,
+        startsAt: meta.starts_at || null,
+        endsAt: meta.ends_at || null,
+        address: meta.address || null,
+        artists: Array.isArray(flat.artists) ? flat.artists.length : Array.isArray(flat.talents) ? flat.talents.length : 0,
+        events: flat.schedule?.events?.length || 0,
+        venues: Array.isArray(flat.venues) ? flat.venues.length : 0,
+        news: Array.isArray(flat.news) ? flat.news.length : 0,
+        screens: Array.isArray(flat.screens) ? flat.screens.length : 0,
+        media: Array.isArray(flat.media) ? flat.media.length : 0,
+        vendors: Array.isArray(flat.vendors) ? flat.vendors.length : 0,
+        venueNames: Array.isArray(flat.venues) ? flat.venues.map(v => v.name).filter(Boolean) : [],
       };
-      console.log(`Festival ${fest.id}: API ok, top keys: ${Object.keys(data).join(', ')}, inner keys: ${Object.keys(flat).join(', ')}`);
+      console.log(`Festival ${fest.id}: API ok — ${result.apiData.artists} artists, ${result.apiData.events} events, ${result.apiData.venues} venues, ${result.apiData.news} news`);
     } catch (e) {
       result.apiStatus = 'unreachable';
       result.apiError = e.message;

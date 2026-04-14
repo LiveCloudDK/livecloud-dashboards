@@ -12,10 +12,10 @@
     "Festival Experience: interaktivt kort, boder & community"
   ],
   "highlights": [
-    { "icon": "\u26a1", "title": "Beats Credits", "desc": "Digital festival-valuta \u2014 hurtigere betaling, kortere k\u00f8er", "gradient": "linear-gradient(135deg, #6366f1, #a855f7)" },
-    { "icon": "\ud83d\udcf1", "title": "NFC-armb\u00e5nd", "desc": "Tap & go \u2014 adgang og betaling i \u00e9t", "gradient": "linear-gradient(135deg, #06b6d4, #22c55e)" },
-    { "icon": "\ud83d\uddfa\ufe0f", "title": "Festival App", "desc": "Kort, program, community \u2014 alt i lommen", "gradient": "linear-gradient(135deg, #ec4899, #f97316)" },
-    { "icon": "\ud83c\udfab", "title": "Digital Billet", "desc": "Deeplink-aktivering \u2014 ingen PDF, ingen print", "gradient": "linear-gradient(135deg, #eab308, #f97316)" }
+    { "icon": "\u2261", "title": "Beats Credits", "desc": "Digital festival-valuta \u2014 hurtigere betaling, kortere k\u00f8er", "gradient": "linear-gradient(135deg, #6366f1, #a855f7)" },
+    { "icon": "\u25C7", "title": "NFC-armb\u00e5nd", "desc": "Tap & go \u2014 adgang og betaling i \u00e9t", "gradient": "linear-gradient(135deg, #06b6d4, #22c55e)" },
+    { "icon": "\u25A3", "title": "Festival App", "desc": "Kort, program, community \u2014 alt i lommen", "gradient": "linear-gradient(135deg, #ec4899, #f97316)" },
+    { "icon": "\u2316", "title": "Digital Billet", "desc": "Deeplink-aktivering \u2014 ingen PDF, ingen print", "gradient": "linear-gradient(135deg, #eab308, #f97316)" }
   ],
   "festivals": [
     {
