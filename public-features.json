@@ -31,14 +31,69 @@
         "revenue": 260961,
         "fmsRevenue": 246787,
         "fmsOrders": 1457,
-        "swedbankCaptures": 238376,
         "ticketsSold": 486,
         "guestsWithApp": 344,
         "guestsManualScan": 17,
         "scannedInApp": 315,
         "estimatedUnscanned": 93,
         "actualAttendees": 425,
-        "noShow": 61
+        "noShow": 61,
+        "channels": {
+          "softpay": { "orders": 1153, "revenue": 215952, "pct": 87.5, "note": "Kort tap-to-pay" },
+          "beats": { "orders": 283, "revenue": 22585, "pct": 9.2, "note": "Wallet-forbrug" },
+          "onlineTopup": { "orders": 21, "revenue": 8250, "pct": 3.3, "note": "Kort via PSP" }
+        },
+        "vendors": {
+          "storeBar": { "orders": 945, "revenue": 161378, "softpay": 148663, "beats": 12715 },
+          "lilleBar": { "orders": 461, "revenue": 75309, "softpay": 65589, "beats": 9720 },
+          "garderoben": { "orders": 30, "revenue": 1850, "softpay": 1700, "beats": 150 }
+        },
+        "topProducts": [
+          { "name": "Tuborg Classic fadoel", "qty": 703, "revenue": 45695 },
+          { "name": "Groen Tuborg fadoel", "qty": 499, "revenue": 29940 },
+          { "name": "10 Blandede Shotsroer", "qty": 165, "revenue": 41250 },
+          { "name": "Gin Hass", "qty": 134, "revenue": 11390 },
+          { "name": "5 SOEM (garderobe)", "qty": 37, "revenue": 1850 }
+        ],
+        "beats": {
+          "issued": 32202,
+          "used": 22543,
+          "unused": 9659,
+          "usageRate": 70,
+          "sources": {
+            "welcomeBonus": { "amount": 20490, "note": "342 gaester x 60 DKK" },
+            "onlineTopup": { "amount": 9362, "note": "Kort via Swedbank" },
+            "adminComp": { "amount": 1600, "note": "800 reelle + 800 test" },
+            "bingo": { "amount": 750, "note": "Praemier ved event-aktiviteter" }
+          }
+        },
+        "reconciliation": {
+          "swedbankTotal": 238376,
+          "fmsTotal": 224202,
+          "difference": 14174,
+          "missingOrders": 37,
+          "matchRate": 96.9,
+          "refunds": -25
+        },
+        "hourly": [
+          { "hour": "16", "orders": 49, "revenue": 9498 },
+          { "hour": "17", "orders": 196, "revenue": 40623 },
+          { "hour": "18", "orders": 201, "revenue": 50241 },
+          { "hour": "19", "orders": 175, "revenue": 39610 },
+          { "hour": "20", "orders": 176, "revenue": 34521 },
+          { "hour": "21", "orders": 160, "revenue": 27940 },
+          { "hour": "22", "orders": 125, "revenue": 14287 },
+          { "hour": "23", "orders": 79, "revenue": 10682 },
+          { "hour": "00", "orders": 29, "revenue": 2724 }
+        ],
+        "observations": [
+          { "title": "Scanner-problem ved indgangen", "desc": "~93 gaester (22%) kunne ikke skannes, verificeret via backend-opslag." },
+          { "title": "37 SoftPOS-betalinger mangler i FMS", "desc": "14.174 DKK registreret i Swedbank men ikke i FMS. POS-app mistede forbindelse. Fix: LCAP-1054." },
+          { "title": "30% af Beats ubrugte", "desc": "9.659 DKK forblev ubrugt. Gaesterne brugte ikke alle tildelte credits." },
+          { "title": "Online Beats-checkout problemer", "desc": "16 annullerede ordrer (7.400 DKK) fra 3 gaester. Fix: LCAP-1145." },
+          { "title": "PSP-afstemning: 100% match", "desc": "Alle 21 online top-up transaktioner matcher mellem Swedbank og FMS." },
+          { "title": "Beats-balance fuldt afstemt", "desc": "Alle 32.202 DKK redegjort: velkomstbonus + online + admin + bingo." }
+        ]
       }
     },
     {

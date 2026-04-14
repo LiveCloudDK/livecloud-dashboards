@@ -1461,6 +1461,7 @@
     <button class="filter-btn view-btn" data-view="sprints">Sprints</button>
     <button class="filter-btn view-btn" data-view="capacity">Kapacitet</button>
     <button class="filter-btn view-btn" data-view="current-sprint">Aktivt Sprint</button>
+    <button class="filter-btn view-btn" data-view="festhallen" style="background:linear-gradient(135deg,#ec4899,#f97316);color:#fff;border:none">Festhallen</button>
     <button class="filter-btn view-btn" data-view="showcase" style="background:linear-gradient(135deg,#6366f1,#a855f7);color:#fff;border:none">Showcase</button>
   </div>
   <div class="filter-group">
@@ -1493,6 +1494,7 @@
     <button class="mobile-tab" data-view="overview">Overblik</button>
     <button class="mobile-tab" data-view="detail">Gantt</button>
     <button class="mobile-tab" data-view="capacity">Kapacitet</button>
+    <button class="mobile-tab" data-view="festhallen">Festhallen</button>
     <button class="mobile-tab" data-view="showcase">Showcase</button>
   </div>
 </div>
@@ -2216,6 +2218,11 @@ function render() {
     html = renderShowcase();
     tl.innerHTML = html;
     animateShowcase();
+  } else if (state.view === 'festhallen') {
+    legend.style.display = 'none';
+    html = renderFesthallen();
+    tl.innerHTML = html;
+    animateFesthallen();
   } else if (state.view === 'capacity') {
     legend.style.display = 'none';
     html = renderCapacity();
@@ -2888,15 +2895,20 @@ function renderShowcase() {
       html += `<div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.3px">Total omsaetning</div>`;
       html += `</div>`;
 
-      // KPI grid
+      // Computed rates
+      const appAdoption = kpi.actualAttendees > 0 ? Math.round(kpi.guestsWithApp / kpi.actualAttendees * 100) : 0;
+      const attendPct = capacity > 0 ? Math.round(kpi.actualAttendees / capacity * 100) : 0;
+      const ch = kpi.channels || {};
+
+      // KPI grid — top line
       html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px">';
       const kpiStats = [
         { val: fmtNum(kpi.ticketsSold), label: 'Billetter solgt' },
         { val: '~' + fmtNum(kpi.actualAttendees), label: 'Deltagere' },
+        { val: appAdoption + '%', label: 'App adoption' },
         { val: fmtNum(kpi.fmsOrders), label: 'FMS ordrer' },
-        { val: fmtNum(kpi.guestsWithApp), label: 'App-gaester' },
-        { val: fmtNum(kpi.scannedInApp), label: 'Skannet i app' },
         { val: fmtNum(kpi.noShow), label: 'No-show' },
+        { val: '~' + attendPct + '%', label: 'Belaegning' },
       ];
       for (const s of kpiStats) {
         html += `<div style="text-align:center;padding:6px 4px;background:var(--surface2);border-radius:6px">`;
@@ -2906,13 +2918,29 @@ function renderShowcase() {
       }
       html += '</div>';
 
-      // Revenue breakdown
-      html += '<div style="font-size:11px;color:var(--text-muted);line-height:1.8;border-top:1px solid var(--border);padding-top:8px">';
-      html += `<div>FMS revenue: ${fmtDKK(kpi.fmsRevenue)}</div>`;
-      html += `<div>Swedbank captures: ${fmtDKK(kpi.swedbankCaptures)}</div>`;
-      const attendPct = capacity > 0 ? Math.round(kpi.actualAttendees / capacity * 100) : 0;
-      html += `<div>Belaegning: ~${attendPct}% (${fmtNum(kpi.actualAttendees)} / ${fmtNum(capacity)})</div>`;
-      html += '</div>';
+      // Channel breakdown
+      if (ch.softpay || ch.beats || ch.onlineTopup) {
+        html += '<div style="border-top:1px solid var(--border);padding-top:10px;margin-bottom:4px">';
+        html += '<div style="font-size:10px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:8px">Salgskanaler</div>';
+        const channels = [
+          { label: 'Softpay (kort)', data: ch.softpay },
+          { label: 'Beats (wallet)', data: ch.beats },
+          { label: 'Online top-up', data: ch.onlineTopup },
+        ].filter(c => c.data);
+        for (const c of channels) {
+          const barW = c.data.pct || 0;
+          html += '<div style="margin-bottom:6px">';
+          html += `<div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px">`;
+          html += `<span style="color:var(--text)">${c.label}</span>`;
+          html += `<span style="color:var(--text-muted)">${fmtNum(c.data.orders)} ordrer &middot; ${fmtDKK(c.data.revenue)}</span>`;
+          html += '</div>';
+          html += `<div style="height:4px;background:var(--surface2);border-radius:2px;overflow:hidden">`;
+          html += `<div style="height:100%;width:${barW}%;background:${grad};border-radius:2px"></div>`;
+          html += '</div>';
+          html += '</div>';
+        }
+        html += '</div>';
+      }
 
     } else if (fest.apiStatus === 'ok' && (api.artists > 0 || api.events > 0 || api.venues > 0)) {
       // ── FMS content stats for upcoming events ──
@@ -3021,6 +3049,249 @@ function animateShowcase() {
       const w = el.style.width;
       el.style.width = '0%';
       requestAnimationFrame(() => { el.style.transition = 'width 1.2s ease-out'; el.style.width = w; });
+    });
+  }, 100);
+}
+
+// ===== FESTHALLEN VIEW =====
+function renderFesthallen() {
+  const pf = window._publicFeatures || {};
+  const fest = (pf.festivals || []).find(f => f.id === 'festhallen');
+  if (!fest || !fest.kpi) return '<div style="padding:40px;color:var(--text-muted)">Ingen Festhallen-data tilgaengelig.</div>';
+
+  const kpi = fest.kpi;
+  const ch = kpi.channels || {};
+  const vd = kpi.vendors || {};
+  const bt = kpi.beats || {};
+  const rc = kpi.reconciliation || {};
+  const grad = 'linear-gradient(135deg, #ec4899, #f97316)';
+  const fmtDKK = (v) => v.toLocaleString('da-DK') + ' DKK';
+  const fmtNum = (v) => v.toLocaleString('da-DK');
+
+  let html = '<div class="showcase-container" style="--accent-grad:' + grad + '">';
+
+  // ── HEADER ──
+  html += '<div style="text-align:center;padding:40px 20px 20px">';
+  html += '<div style="font-size:36px;font-weight:800;background:' + grad + ';-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Bodegafesten 2026</div>';
+  html += '<div style="font-size:14px;color:var(--text-muted);margin-top:4px">Festhallen, Ringsted &middot; 28. marts 2026</div>';
+  html += '<div style="font-size:12px;color:var(--text-muted);margin-top:2px;opacity:0.6">Omsaetningsrapport & Afstemning</div>';
+  html += '</div>';
+
+  // ── HEADLINE KPI ──
+  html += '<div style="text-align:center;padding:20px;margin-bottom:24px">';
+  html += '<div style="font-size:42px;font-weight:800;background:' + grad + ';-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">' + fmtDKK(kpi.revenue) + '</div>';
+  html += '<div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px">Total reel omsaetning</div>';
+  html += '</div>';
+
+  // ── TOP KPI GRID ──
+  html += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;padding:0 20px;margin-bottom:32px">';
+  const appAdoption = Math.round(kpi.guestsWithApp / kpi.actualAttendees * 100);
+  const topKpis = [
+    { val: fmtNum(kpi.ticketsSold), label: 'Billetter solgt', color: '#ec4899' },
+    { val: '~' + fmtNum(kpi.actualAttendees), label: 'Deltagere', color: '#f97316' },
+    { val: appAdoption + '%', label: 'App adoption', color: '#22c55e' },
+    { val: fmtNum(kpi.fmsOrders), label: 'FMS ordrer', color: '#6366f1' },
+    { val: fmtNum(kpi.noShow), label: 'No-show', color: '#ef4444' },
+    { val: '~' + Math.round(kpi.actualAttendees / (fest.capacity || 600) * 100) + '%', label: 'Belaegning', color: '#3b82f6' },
+  ];
+  for (const k of topKpis) {
+    html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center">';
+    html += '<div style="font-size:24px;font-weight:700;color:' + k.color + '">' + k.val + '</div>';
+    html += '<div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.3px;margin-top:2px">' + k.label + '</div>';
+    html += '</div>';
+  }
+  html += '</div>';
+
+  // ── SALGSKANALER ──
+  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin:0 20px 24px">';
+  html += '<div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:16px">Salgskanaler (FMS)</div>';
+  const channels = [
+    { label: 'Softpay (kort)', data: ch.softpay, color: '#3b82f6' },
+    { label: 'Beats (wallet)', data: ch.beats, color: '#f97316' },
+    { label: 'Online top-up', data: ch.onlineTopup, color: '#22c55e' },
+  ].filter(c => c.data);
+  for (const c of channels) {
+    html += '<div style="margin-bottom:12px">';
+    html += '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px">';
+    html += '<div><span style="font-size:13px;font-weight:600;color:var(--text)">' + c.label + '</span><span style="font-size:11px;color:var(--text-muted);margin-left:8px">' + c.data.note + '</span></div>';
+    html += '<div style="font-size:12px;color:var(--text-muted)">' + fmtNum(c.data.orders) + ' ordrer &middot; ' + fmtDKK(c.data.revenue) + '</div>';
+    html += '</div>';
+    html += '<div style="height:8px;background:var(--surface2);border-radius:4px;overflow:hidden">';
+    html += '<div class="festhallen-bar" style="height:100%;width:' + c.data.pct + '%;background:' + c.color + ';border-radius:4px"></div>';
+    html += '</div>';
+    html += '<div style="font-size:10px;color:var(--text-muted);margin-top:2px;text-align:right">' + c.data.pct + '%</div>';
+    html += '</div>';
+  }
+  html += '</div>';
+
+  // ── OMSAETNING PER VENDOR ──
+  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin:0 20px 24px">';
+  html += '<div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:16px">Omsaetning per vendor</div>';
+  const vendorMax = Math.max(...Object.values(vd).map(v => v.revenue));
+  const vendorColors = { storeBar: '#3b82f6', lilleBar: '#06b6d4', garderoben: '#a855f7' };
+  const vendorNames = { storeBar: 'Store bar', lilleBar: 'Lille bar', garderoben: 'Garderoben' };
+  for (const [key, v] of Object.entries(vd)) {
+    const pct = vendorMax > 0 ? (v.revenue / vendorMax * 100) : 0;
+    const color = vendorColors[key] || '#6b7280';
+    html += '<div style="margin-bottom:14px">';
+    html += '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px">';
+    html += '<span style="font-size:13px;font-weight:600;color:var(--text)">' + (vendorNames[key] || key) + '</span>';
+    html += '<span style="font-size:12px;color:var(--text-muted)">' + fmtNum(v.orders) + ' ordrer &middot; ' + fmtDKK(v.revenue) + '</span>';
+    html += '</div>';
+    html += '<div style="height:8px;background:var(--surface2);border-radius:4px;overflow:hidden">';
+    html += '<div class="festhallen-bar" style="height:100%;width:' + pct + '%;background:' + color + ';border-radius:4px"></div>';
+    html += '</div>';
+    html += '<div style="display:flex;gap:12px;font-size:10px;color:var(--text-muted);margin-top:3px">';
+    html += '<span>Softpay: ' + fmtDKK(v.softpay) + '</span>';
+    html += '<span>Beats: ' + fmtDKK(v.beats) + '</span>';
+    html += '</div>';
+    html += '</div>';
+  }
+  html += '</div>';
+
+  // ── TOP PRODUKTER ──
+  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin:0 20px 24px">';
+  html += '<div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:16px">Top produkter</div>';
+  const prodMax = Math.max(...(kpi.topProducts || []).map(p => p.revenue));
+  for (const [i, p] of (kpi.topProducts || []).entries()) {
+    const pct = prodMax > 0 ? (p.revenue / prodMax * 100) : 0;
+    html += '<div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">';
+    html += '<div style="font-size:16px;font-weight:700;color:var(--text-muted);min-width:20px;text-align:right">' + (i + 1) + '</div>';
+    html += '<div style="flex:1">';
+    html += '<div style="display:flex;justify-content:space-between;margin-bottom:3px">';
+    html += '<span style="font-size:12px;font-weight:600;color:var(--text)">' + p.name + '</span>';
+    html += '<span style="font-size:11px;color:var(--text-muted)">' + fmtNum(p.qty) + ' stk &middot; ' + fmtDKK(p.revenue) + '</span>';
+    html += '</div>';
+    html += '<div style="height:5px;background:var(--surface2);border-radius:3px;overflow:hidden">';
+    html += '<div class="festhallen-bar" style="height:100%;width:' + pct + '%;background:' + grad + ';border-radius:3px"></div>';
+    html += '</div></div></div>';
+  }
+  html += '</div>';
+
+  // ── BEATS OEKOSYSTEM ──
+  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin:0 20px 24px">';
+  html += '<div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:16px">Beats (Credits)</div>';
+
+  // Beats headline
+  html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px">';
+  html += '<div style="text-align:center;padding:12px;background:var(--surface2);border-radius:8px">';
+  html += '<div style="font-size:20px;font-weight:700;color:#f97316">' + fmtDKK(bt.issued) + '</div>';
+  html += '<div style="font-size:9px;color:var(--text-muted);text-transform:uppercase">Udstedt</div></div>';
+  html += '<div style="text-align:center;padding:12px;background:var(--surface2);border-radius:8px">';
+  html += '<div style="font-size:20px;font-weight:700;color:#22c55e">' + fmtDKK(bt.used) + '</div>';
+  html += '<div style="font-size:9px;color:var(--text-muted);text-transform:uppercase">Brugt</div></div>';
+  html += '<div style="text-align:center;padding:12px;background:var(--surface2);border-radius:8px">';
+  html += '<div style="font-size:20px;font-weight:700;color:#ef4444">' + fmtDKK(bt.unused) + '</div>';
+  html += '<div style="font-size:9px;color:var(--text-muted);text-transform:uppercase">Ubrugt</div></div>';
+  html += '</div>';
+
+  // Usage rate bar
+  html += '<div style="margin-bottom:16px">';
+  html += '<div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-bottom:4px">';
+  html += '<span>Forbrugsrate</span><span style="font-weight:700;color:var(--text)">' + bt.usageRate + '%</span></div>';
+  html += '<div style="height:10px;background:var(--surface2);border-radius:5px;overflow:hidden">';
+  html += '<div class="festhallen-bar" style="height:100%;width:' + bt.usageRate + '%;background:' + grad + ';border-radius:5px"></div>';
+  html += '</div></div>';
+
+  // Sources breakdown
+  html += '<div style="font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:8px">Fordeling af udstedte Beats</div>';
+  const srcTotal = bt.issued || 1;
+  const sources = bt.sources || {};
+  const srcItems = [
+    { label: 'Velkomstbonus', data: sources.welcomeBonus, color: '#3b82f6' },
+    { label: 'Online top-up', data: sources.onlineTopup, color: '#22c55e' },
+    { label: 'Admin-komplementaere', data: sources.adminComp, color: '#eab308' },
+    { label: 'Bingo + praemier', data: sources.bingo, color: '#a855f7' },
+  ].filter(s => s.data);
+  for (const s of srcItems) {
+    const pct = (s.data.amount / srcTotal * 100).toFixed(0);
+    html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">';
+    html += '<div style="width:8px;height:8px;border-radius:2px;background:' + s.color + ';flex-shrink:0"></div>';
+    html += '<div style="flex:1;font-size:12px;color:var(--text)">' + s.label + '</div>';
+    html += '<div style="font-size:11px;color:var(--text-muted)">' + s.data.note + '</div>';
+    html += '<div style="font-size:12px;font-weight:600;min-width:70px;text-align:right">' + fmtDKK(s.data.amount) + '</div>';
+    html += '<div style="font-size:10px;color:var(--text-muted);min-width:30px;text-align:right">' + pct + '%</div>';
+    html += '</div>';
+  }
+  html += '</div>';
+
+  // ── SALG PER TIME ──
+  if (kpi.hourly && kpi.hourly.length > 0) {
+    html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin:0 20px 24px">';
+    html += '<div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:16px">Salg per time (Swedbank SoftPOS)</div>';
+    const maxRev = Math.max(...kpi.hourly.map(h => h.revenue));
+    const peakHour = kpi.hourly.reduce((a, b) => b.revenue > a.revenue ? b : a);
+    html += '<div style="display:flex;align-items:flex-end;gap:4px;height:120px;margin-bottom:8px">';
+    for (const h of kpi.hourly) {
+      const pct = maxRev > 0 ? (h.revenue / maxRev * 100) : 0;
+      const isPeak = h.hour === peakHour.hour;
+      html += '<div style="flex:1;display:flex;flex-direction:column;align-items:center;height:100%">';
+      html += '<div style="flex:1;width:100%;display:flex;align-items:flex-end">';
+      html += '<div class="festhallen-bar" style="width:100%;height:' + pct + '%;background:' + (isPeak ? grad : 'var(--surface2)') + ';border-radius:3px 3px 0 0;border:1px solid ' + (isPeak ? 'transparent' : 'var(--border)') + '"></div>';
+      html += '</div></div>';
+    }
+    html += '</div>';
+    html += '<div style="display:flex;gap:4px">';
+    for (const h of kpi.hourly) {
+      html += '<div style="flex:1;text-align:center;font-size:9px;color:var(--text-muted)">' + h.hour + '</div>';
+    }
+    html += '</div>';
+    html += '<div style="font-size:10px;color:var(--text-muted);margin-top:8px;text-align:center">Peak: kl. ' + peakHour.hour + ' (' + fmtNum(peakHour.orders) + ' ordrer, ' + fmtDKK(peakHour.revenue) + ')</div>';
+    html += '</div>';
+  }
+
+  // ── AFSTEMNING ──
+  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin:0 20px 24px">';
+  html += '<div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:16px">Afstemning: FMS vs. Swedbank</div>';
+  html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px">';
+  html += '<div style="text-align:center;padding:12px;background:var(--surface2);border-radius:8px">';
+  html += '<div style="font-size:18px;font-weight:700;color:#22c55e">' + rc.matchRate + '%</div>';
+  html += '<div style="font-size:9px;color:var(--text-muted);text-transform:uppercase">Match-rate</div></div>';
+  html += '<div style="text-align:center;padding:12px;background:var(--surface2);border-radius:8px">';
+  html += '<div style="font-size:18px;font-weight:700;color:#ef4444">' + fmtNum(rc.missingOrders) + '</div>';
+  html += '<div style="font-size:9px;color:var(--text-muted);text-transform:uppercase">Manglende ordrer</div></div>';
+  html += '<div style="text-align:center;padding:12px;background:var(--surface2);border-radius:8px">';
+  html += '<div style="font-size:18px;font-weight:700;color:#f97316">' + fmtDKK(rc.difference) + '</div>';
+  html += '<div style="font-size:9px;color:var(--text-muted);text-transform:uppercase">Difference</div></div>';
+  html += '</div>';
+  html += '<div style="font-size:11px;color:var(--text-muted);line-height:1.6">';
+  html += '<div>Swedbank total: ' + fmtDKK(rc.swedbankTotal) + ' &middot; FMS total: ' + fmtDKK(rc.fmsTotal) + '</div>';
+  html += '<div>37 SoftPOS-betalinger gik igennem Swedbank men naaede ikke FMS (POS-app forbindelsesfejl). Pengene er sikret.</div>';
+  html += '</div>';
+  html += '</div>';
+
+  // ── OBSERVATIONER ──
+  if (kpi.observations && kpi.observations.length > 0) {
+    html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin:0 20px 24px">';
+    html += '<div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:16px">Observationer</div>';
+    for (const [i, obs] of kpi.observations.entries()) {
+      const isGood = obs.title.includes('100%') || obs.title.includes('afstemt');
+      html += '<div style="padding:10px 12px;margin-bottom:8px;background:var(--surface2);border-radius:8px;border-left:3px solid ' + (isGood ? '#22c55e' : '#f97316') + '">';
+      html += '<div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:2px">' + obs.title + '</div>';
+      html += '<div style="font-size:11px;color:var(--text-muted);line-height:1.5">' + obs.desc + '</div>';
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+
+  // ── FOOTER ──
+  html += '<div style="text-align:center;padding:20px;font-size:10px;color:var(--text-muted);opacity:0.5">';
+  html += 'Rapport genereret 6. april 2026 | LiveCloud ApS | Datakilde: FMS API + Dashboard, Swedbank CSV';
+  html += '</div>';
+
+  html += '</div>';
+  return html;
+}
+
+function animateFesthallen() {
+  setTimeout(() => {
+    document.querySelectorAll('.festhallen-bar').forEach(el => {
+      const w = el.style.width || el.style.height;
+      if (el.style.width) {
+        const target = el.style.width;
+        el.style.width = '0%';
+        requestAnimationFrame(() => { el.style.transition = 'width 1s ease-out'; el.style.width = target; });
+      }
     });
   }, 100);
 }
