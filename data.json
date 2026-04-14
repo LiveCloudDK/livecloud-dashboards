@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-14T06:20:16.302Z",
+    "startDate": "2026-04-14T07:03:36.643Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -1404,17 +1404,6 @@
         "updated": "2026-04-09T09:10:47.135+0200"
       },
       {
-        "key": "LCAP-1153",
-        "summary": "Align app, endpoints, environments og FMS på staging for fuld E2E test",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Jakob Højgård",
-        "priority": "Highest",
-        "type": "Task",
-        "labels": [],
-        "updated": "2026-04-08T13:12:41.651+0200"
-      },
-      {
         "key": "LCAP-1079",
         "summary": "Billettyper: Camping (2/4 adgang), børnebilletter og ledsagerbilletter",
         "status": "Ready for test",
@@ -1428,7 +1417,7 @@
         "updated": "2026-04-08T07:44:18.512+0200"
       }
     ],
-    "testQueueCount": 44,
+    "testQueueCount": 43,
     "readyForReleaseCount": 72,
     "capacityCounts": {
       "michael": {
@@ -1448,7 +1437,7 @@
       },
       "jakob": {
         "active": 4,
-        "testQueue": 4,
+        "testQueue": 3,
         "readyForRelease": 8
       },
       "edwin": {
@@ -1552,5 +1541,5 @@
       }
     }
   ],
-  "generated": "2026-04-14T06:20:21.161Z"
+  "generated": "2026-04-14T07:03:41.595Z"
 }
