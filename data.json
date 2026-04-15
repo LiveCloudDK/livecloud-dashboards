@@ -36,10 +36,23 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-15T09:47:45.215Z",
+    "startDate": "2026-04-15T10:27:57.454Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-1080",
+        "summary": "B2B portal — virksomheder administrerer egne billetter",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-15T11:51:45.640+0200"
+      },
       {
         "key": "LCAP-846",
         "summary": "Map View — Interactive venue map with vendor location pins",
@@ -329,19 +342,6 @@
         "type": "Story",
         "labels": [],
         "updated": "2026-04-13T20:06:51.412+0200"
-      },
-      {
-        "key": "LCAP-1080",
-        "summary": "B2B portal — virksomheder administrerer egne billetter",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-10T13:47:11.648+0200"
       },
       {
         "key": "LCAP-597",
@@ -1788,5 +1788,5 @@
       }
     }
   ],
-  "generated": "2026-04-15T09:47:52.457Z"
+  "generated": "2026-04-15T10:28:05.145Z"
 }
