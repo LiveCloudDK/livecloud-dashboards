@@ -36,10 +36,21 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-15T06:21:07.019Z",
+    "startDate": "2026-04-15T07:04:36.987Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-846",
+        "summary": "Map View — Interactive venue map with vendor location pins",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-15T09:00:18.268+0200"
+      },
       {
         "key": "LCAP-908",
         "summary": "EDGE-10: Delegate guard only checks anchor ticket in bundle",
@@ -393,17 +404,6 @@
         "type": "Story",
         "labels": [],
         "updated": "2026-04-09T07:13:33.242+0200"
-      },
-      {
-        "key": "LCAP-846",
-        "summary": "Map View — Interactive venue map with vendor location pins",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Mikkel Kornval Christoffersen",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [],
-        "updated": "2026-04-09T07:13:31.169+0200"
       },
       {
         "key": "LCAP-1157",
@@ -1788,5 +1788,5 @@
       }
     }
   ],
-  "generated": "2026-04-15T06:21:15.421Z"
+  "generated": "2026-04-15T07:04:43.576Z"
 }
