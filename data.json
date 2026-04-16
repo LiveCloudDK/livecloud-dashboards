@@ -36,10 +36,50 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-16T11:23:48.141Z",
+    "startDate": "2026-04-16T11:47:51.176Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-1077",
+        "summary": "App: Interaktivt festival-kort (map feature)",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-16T13:41:28.135+0200"
+      },
+      {
+        "key": "LCAP-597",
+        "summary": "Mobile App Improvements for V3",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-16T13:40:55.696+0200"
+      },
+      {
+        "key": "LCAP-1218",
+        "summary": "FMS: Set up multiple themes with dynamic app styling based on event/date",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "app",
+          "fms"
+        ],
+        "updated": "2026-04-16T13:35:05.631+0200"
+      },
       {
         "key": "LCAP-1080",
         "summary": "B2B portal — virksomheder administrerer egne billetter",
@@ -89,19 +129,6 @@
           "commerce"
         ],
         "updated": "2026-04-14T16:17:27.041+0200"
-      },
-      {
-        "key": "LCAP-1077",
-        "summary": "App: Interaktivt festival-kort (map feature)",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Edwin Maldonado",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-04-14T15:11:52.405+0200"
       },
       {
         "key": "LCAP-1163",
@@ -342,19 +369,6 @@
         "type": "Story",
         "labels": [],
         "updated": "2026-04-13T20:06:51.412+0200"
-      },
-      {
-        "key": "LCAP-597",
-        "summary": "Mobile App Improvements for V3",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Edwin Maldonado",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-04-09T16:10:47.144+0200"
       },
       {
         "key": "LCAP-1097",
@@ -916,6 +930,33 @@
         "updated": "2026-04-09T14:29:43.841+0200"
       },
       {
+        "key": "LCAP-610",
+        "summary": "When I share a external/ url -link from artist details - the link should try to open the app and not the web",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [
+          "app",
+          "backend"
+        ],
+        "updated": "2026-04-16T13:41:03.924+0200"
+      },
+      {
+        "key": "LCAP-1035",
+        "summary": "POS sale webhook missing payee_reference and payment_order_id for FMS orders",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Bug",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-16T13:36:07.029+0200"
+      },
+      {
         "key": "LCAP-673",
         "summary": "Finansiel routing",
         "status": "Ready for test",
@@ -992,20 +1033,6 @@
           "commerce"
         ],
         "updated": "2026-04-14T11:58:55.752+0200"
-      },
-      {
-        "key": "LCAP-610",
-        "summary": "When I share a external/ url -link from artist details - the link should try to open the app and not the web",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Edwin Maldonado",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [
-          "app",
-          "backend"
-        ],
-        "updated": "2026-04-14T10:57:15.147+0200"
       },
       {
         "key": "LCAP-738",
@@ -1107,19 +1134,6 @@
         "type": "Sub-task",
         "labels": [],
         "updated": "2026-04-09T14:31:29.660+0200"
-      },
-      {
-        "key": "LCAP-1035",
-        "summary": "POS sale webhook missing payee_reference and payment_order_id for FMS orders",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Edwin Maldonado",
-        "priority": "Medium",
-        "type": "Bug",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-04-09T14:31:14.761+0200"
       },
       {
         "key": "LCAP-1073",
@@ -1503,15 +1517,15 @@
       },
       "jakob": {
         "active": 6,
-        "testQueue": 3,
+        "testQueue": 5,
         "readyForRelease": 8,
         "backlog": 22
       },
       "edwin": {
-        "active": 2,
-        "testQueue": 7,
+        "active": 3,
+        "testQueue": 5,
         "readyForRelease": 3,
-        "backlog": 10
+        "backlog": 9
       },
       "simon": {
         "active": 9,
@@ -1818,5 +1832,5 @@
       }
     }
   ],
-  "generated": "2026-04-16T11:23:55.739Z"
+  "generated": "2026-04-16T11:47:56.785Z"
 }
