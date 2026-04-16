@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-16T17:08:59.513Z",
+    "startDate": "2026-04-16T17:44:43.298Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -549,6 +549,17 @@
         "type": "Story",
         "labels": [],
         "updated": "2026-03-16T09:32:45.404+0100"
+      },
+      {
+        "key": "LCAP-1229",
+        "summary": "Ticket transfer og delegation fejl ved partout-billetter",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Bug",
+        "labels": [],
+        "updated": "2026-04-16T19:23:34.409+0200"
       },
       {
         "key": "LCAP-1227",
@@ -1498,10 +1509,10 @@
     "readyForReleaseCount": 40,
     "capacityCounts": {
       "michael": {
-        "active": 33,
+        "active": 34,
         "testQueue": 9,
         "readyForRelease": 0,
-        "backlog": 48
+        "backlog": 47
       },
       "tony": {
         "active": 13,
@@ -1832,5 +1843,5 @@
       }
     }
   ],
-  "generated": "2026-04-16T17:09:06.983Z"
+  "generated": "2026-04-16T17:44:49.812Z"
 }
