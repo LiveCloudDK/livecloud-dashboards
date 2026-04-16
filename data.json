@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-16T07:52:25.456Z",
+    "startDate": "2026-04-16T08:32:38.441Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -539,8 +539,8 @@
       {
         "key": "LCAP-1228",
         "summary": "Delegering af enkelt dag fra partout overfører hele billetten + manglende revoke",
-        "status": "Selected for Development",
-        "statusCategory": "new",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
         "assignee": "Michael Thuren",
         "priority": "High",
         "type": "Bug",
@@ -549,7 +549,7 @@
           "bug",
           "commerce"
         ],
-        "updated": "2026-04-16T08:35:44.665+0200"
+        "updated": "2026-04-16T10:11:35.724+0200"
       },
       {
         "key": "LCAP-1227",
@@ -1818,5 +1818,5 @@
       }
     }
   ],
-  "generated": "2026-04-16T07:52:34.197Z"
+  "generated": "2026-04-16T08:32:46.386Z"
 }
