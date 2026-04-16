@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-16T06:23:10.253Z",
+    "startDate": "2026-04-16T07:05:22.238Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -537,21 +537,6 @@
         "updated": "2026-03-16T09:32:45.404+0100"
       },
       {
-        "key": "LCAP-1227",
-        "summary": "Partout-billet kan ikke assignes til barn (422: access_type must be companion or child)",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "High",
-        "type": "Bug",
-        "labels": [
-          "backend",
-          "bug",
-          "commerce"
-        ],
-        "updated": "2026-04-15T22:32:04.378+0200"
-      },
-      {
         "key": "LCAP-1228",
         "summary": "Delegering af enkelt dag fra partout overfører hele billetten + manglende revoke",
         "status": "Selected for Development",
@@ -564,7 +549,22 @@
           "bug",
           "commerce"
         ],
-        "updated": "2026-04-15T22:32:04.195+0200"
+        "updated": "2026-04-16T08:35:44.665+0200"
+      },
+      {
+        "key": "LCAP-1227",
+        "summary": "Partout-billet kan ikke assignes til barn (422: access_type must be companion or child)",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Bug",
+        "labels": [
+          "backend",
+          "bug",
+          "commerce"
+        ],
+        "updated": "2026-04-16T08:35:43.571+0200"
       },
       {
         "key": "LCAP-977",
@@ -1818,5 +1818,5 @@
       }
     }
   ],
-  "generated": "2026-04-16T06:23:18.161Z"
+  "generated": "2026-04-16T07:05:27.641Z"
 }
