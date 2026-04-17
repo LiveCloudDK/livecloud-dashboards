@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-17T07:06:35.430Z",
+    "startDate": "2026-04-17T07:30:02.792Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -16071,22 +16071,24 @@
         "startsAt": "2026-07-30T00:00:00.000000Z",
         "endsAt": "2026-08-01T00:00:00.000000Z",
         "address": "Søndervang 2, 4100 Ringsted",
-        "artists": 42,
+        "artists": 48,
         "events": 53,
-        "venues": 5,
+        "venues": 7,
         "news": 140,
         "screens": 14,
-        "media": 329,
+        "media": 334,
         "vendors": 0,
         "venueNames": [
           "Anlægsscenen",
           "Reaktoren",
           "Nordscenen",
           "Alpehytten",
-          "Latin Pavillon"
+          "Laden",
+          "Latin Pavillon",
+          "Kærlighedsøen"
         ]
       }
     }
   ],
-  "generated": "2026-04-17T07:06:49.987Z"
+  "generated": "2026-04-17T07:30:17.981Z"
 }
