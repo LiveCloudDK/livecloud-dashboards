@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-17T18:02:14.880Z",
+    "startDate": "2026-04-17T18:32:52.917Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -15730,7 +15730,7 @@
     },
     "LCAP-1219": {
       "key": "LCAP-1219",
-      "summary": "Work Package A: Ticket Transfer & Edge Cases - Consolidated",
+      "summary": "Work Package A: Ticket Transfer & Edge Cases",
       "status": "Backlog",
       "statusCategory": "new",
       "assignee": "Michael Thuren",
@@ -15740,11 +15740,11 @@
         "ai-agent-ready",
         "work-package"
       ],
-      "updated": "2026-04-14T12:21:50.737+0200"
+      "updated": "2026-04-17T20:24:01.287+0200"
     },
     "LCAP-1220": {
       "key": "LCAP-1220",
-      "summary": "Work Package B: Beats & Credits System - Consolidated",
+      "summary": "Work Package B: Beats & Credits System",
       "status": "Backlog",
       "statusCategory": "new",
       "assignee": "Michael Thuren",
@@ -15754,11 +15754,11 @@
         "ai-agent-ready",
         "work-package"
       ],
-      "updated": "2026-04-14T11:59:00.434+0200"
+      "updated": "2026-04-17T20:24:16.953+0200"
     },
     "LCAP-1221": {
       "key": "LCAP-1221",
-      "summary": "Work Package C: B2B Portal Backend - Consolidated",
+      "summary": "Work Package C: B2B Portal Backend",
       "status": "Backlog",
       "statusCategory": "new",
       "assignee": "Michael Thuren",
@@ -15768,11 +15768,11 @@
         "ai-agent-ready",
         "work-package"
       ],
-      "updated": "2026-04-14T12:21:45.022+0200"
+      "updated": "2026-04-17T20:24:23.314+0200"
     },
     "LCAP-1222": {
       "key": "LCAP-1222",
-      "summary": "Work Package D: Gate & Scanner Operations Backend - Consolidated",
+      "summary": "Work Package D: Gate & Scanner Operations Backend",
       "status": "Backlog",
       "statusCategory": "new",
       "assignee": "Michael Thuren",
@@ -15782,11 +15782,11 @@
         "ai-agent-ready",
         "work-package"
       ],
-      "updated": "2026-04-14T12:21:43.426+0200"
+      "updated": "2026-04-17T20:24:26.055+0200"
     },
     "LCAP-1223": {
       "key": "LCAP-1223",
-      "summary": "Work Package E: Vendor & Product Management - Consolidated",
+      "summary": "Work Package E: Vendor & Product Management",
       "status": "Backlog",
       "statusCategory": "new",
       "assignee": "Michael Thuren",
@@ -15796,11 +15796,11 @@
         "ai-agent-ready",
         "work-package"
       ],
-      "updated": "2026-04-14T12:21:49.227+0200"
+      "updated": "2026-04-17T20:24:29.344+0200"
     },
     "LCAP-1224": {
       "key": "LCAP-1224",
-      "summary": "Work Package F: Authentication & Identity - Consolidated",
+      "summary": "Work Package F: Authentication & Identity",
       "status": "Backlog",
       "statusCategory": "new",
       "assignee": "Michael Thuren",
@@ -15810,11 +15810,11 @@
         "ai-agent-ready",
         "work-package"
       ],
-      "updated": "2026-04-14T12:00:06.213+0200"
+      "updated": "2026-04-17T20:24:32.165+0200"
     },
     "LCAP-1225": {
       "key": "LCAP-1225",
-      "summary": "Work Package G: Commerce & Checkout Core - Consolidated",
+      "summary": "Work Package G: Commerce & Checkout Core",
       "status": "Backlog",
       "statusCategory": "new",
       "assignee": "Michael Thuren",
@@ -15824,7 +15824,7 @@
         "ai-agent-ready",
         "work-package"
       ],
-      "updated": "2026-04-14T12:21:40.028+0200"
+      "updated": "2026-04-17T20:24:34.700+0200"
     },
     "LCAP-1226": {
       "key": "LCAP-1226",
@@ -16153,5 +16153,5 @@
       }
     }
   ],
-  "generated": "2026-04-17T18:02:26.846Z"
+  "generated": "2026-04-17T18:33:09.460Z"
 }
