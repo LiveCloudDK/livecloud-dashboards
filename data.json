@@ -36,10 +36,88 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-17T08:32:29.772Z",
+    "startDate": "2026-04-17T09:09:27.547Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-1213",
+        "summary": "Søgning og sortering i akkrediteringslister",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-17T10:38:02.542+0200"
+      },
+      {
+        "key": "LCAP-1212",
+        "summary": "Check-ind og statusstyring for akkreditering",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-17T10:37:59.305+0200"
+      },
+      {
+        "key": "LCAP-1211",
+        "summary": "Import/eksport af akkrediteringslister",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-17T10:37:56.191+0200"
+      },
+      {
+        "key": "LCAP-1210",
+        "summary": "Send adgang — invitations- og gensend-flow",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-17T10:37:53.056+0200"
+      },
+      {
+        "key": "LCAP-1209",
+        "summary": "Listedetalje — person- og adgangshåndtering",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-17T10:37:49.512+0200"
+      },
+      {
+        "key": "LCAP-1208",
+        "summary": "Akkrediteringsoversigt — CRUD for akkrediteringslister",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-17T10:37:46.786+0200"
+      },
       {
         "key": "LCAP-1165",
         "summary": "Ordreholder: fordel Beats frit på tildelte billetter",
@@ -514,6 +592,19 @@
         "updated": "2026-03-16T09:32:45.404+0100"
       },
       {
+        "key": "LCAP-1207",
+        "summary": "FMS: Akkrediterings-interface — listehåndtering og adgangsstyring",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "High",
+        "type": "Story",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-17T10:37:32.671+0200"
+      },
+      {
         "key": "LCAP-331",
         "summary": "Purchase Beats Packages",
         "status": "Selected for Development",
@@ -703,19 +794,6 @@
         "type": "Story",
         "labels": [],
         "updated": "2026-04-14T11:58:39.693+0200"
-      },
-      {
-        "key": "LCAP-1207",
-        "summary": "FMS: Akkrediterings-interface — listehåndtering og adgangsstyring",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Simon Jensen",
-        "priority": "High",
-        "type": "Story",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-04-13T21:40:05.094+0200"
       },
       {
         "key": "LCAP-1168",
@@ -1474,10 +1552,10 @@
         "backlog": 9
       },
       "simon": {
-        "active": 9,
+        "active": 15,
         "testQueue": 6,
         "readyForRelease": 5,
-        "backlog": 23
+        "backlog": 17
       }
     }
   },
@@ -15506,93 +15584,93 @@
     "LCAP-1207": {
       "key": "LCAP-1207",
       "summary": "FMS: Akkrediterings-interface — listehåndtering og adgangsstyring",
-      "status": "Selected for Development",
-      "statusCategory": "new",
+      "status": "In Progress",
+      "statusCategory": "indeterminate",
       "assignee": "Simon Jensen",
       "priority": "High",
       "type": "Story",
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-13T21:40:05.094+0200"
+      "updated": "2026-04-17T10:37:32.671+0200"
     },
     "LCAP-1208": {
       "key": "LCAP-1208",
       "summary": "Akkrediteringsoversigt — CRUD for akkrediteringslister",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "In Progress",
+      "statusCategory": "indeterminate",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-10T13:16:28.056+0200"
+      "updated": "2026-04-17T10:37:46.786+0200"
     },
     "LCAP-1209": {
       "key": "LCAP-1209",
       "summary": "Listedetalje — person- og adgangshåndtering",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "In Progress",
+      "statusCategory": "indeterminate",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-10T13:16:35.722+0200"
+      "updated": "2026-04-17T10:37:49.512+0200"
     },
     "LCAP-1210": {
       "key": "LCAP-1210",
       "summary": "Send adgang — invitations- og gensend-flow",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "In Progress",
+      "statusCategory": "indeterminate",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-10T13:16:43.481+0200"
+      "updated": "2026-04-17T10:37:53.056+0200"
     },
     "LCAP-1211": {
       "key": "LCAP-1211",
       "summary": "Import/eksport af akkrediteringslister",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "In Progress",
+      "statusCategory": "indeterminate",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-10T13:16:51.154+0200"
+      "updated": "2026-04-17T10:37:56.191+0200"
     },
     "LCAP-1212": {
       "key": "LCAP-1212",
       "summary": "Check-ind og statusstyring for akkreditering",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "In Progress",
+      "statusCategory": "indeterminate",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-10T13:16:59.484+0200"
+      "updated": "2026-04-17T10:37:59.305+0200"
     },
     "LCAP-1213": {
       "key": "LCAP-1213",
       "summary": "Søgning og sortering i akkrediteringslister",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "In Progress",
+      "statusCategory": "indeterminate",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-10T13:17:05.262+0200"
+      "updated": "2026-04-17T10:38:02.542+0200"
     },
     "LCAP-1214": {
       "key": "LCAP-1214",
@@ -16090,5 +16168,5 @@
       }
     }
   ],
-  "generated": "2026-04-17T08:32:40.933Z"
+  "generated": "2026-04-17T09:09:39.383Z"
 }
