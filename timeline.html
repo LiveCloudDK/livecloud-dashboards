@@ -4163,25 +4163,22 @@ function renderOverview() {
     return true;
   });
 
-  // Legende: plan vs reality
-  if (window._tickets) {
-    html += '<div style="display:flex;gap:16px;align-items:center;padding:10px 14px;margin-bottom:12px;background:var(--surface);border:1px solid var(--border);border-radius:6px;font-size:11px;color:var(--text-muted);flex-wrap:wrap">';
-    html += '<span style="font-weight:600;color:var(--text)">Tegnforklaring:</span>';
-    html += '<span style="display:inline-flex;align-items:center;gap:6px"><span style="width:28px;height:10px;background:var(--blue);opacity:0.35;border:1px dashed rgba(255,255,255,0.4);border-radius:2px"></span> Plan (kurateret)</span>';
-    html += '<span style="display:inline-flex;align-items:center;gap:6px"><span style="width:28px;height:10px;background:#3b82f630;border:1px solid #3b82f6;border-radius:2px"></span> Reality (live fra Jira)</span>';
-    html += '<span style="display:inline-flex;align-items:center;gap:4px"><span style="color:#22c55e">◂ Nu før plan</span></span>';
-    html += '<span style="display:inline-flex;align-items:center;gap:4px"><span style="color:#ef4444">+Nu forsinket/prognose over plan</span></span>';
-    html += '</div>';
-  }
-
   for (const task of filtered) {
     visibleCount++;
     const persons = task.persons.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(', ');
     const isMilestone = task.milestone;
     const live = computeTaskLiveStatus(task);
     const reality = task.milestone ? null : computeTaskReality(task);
+    const shifted = reality && reality.started;
+    // Shift delta so phase segments follow actual start; keep end at projectedEnd
+    const shiftDelta = shifted ? reality.actualStartCol - task.start : 0;
+    const effectiveEnd = shifted ? reality.projectedEnd : task.start + task.span;
+    const plannedEnd = task.start + task.span;
+    const effectiveSpan = shifted ? (effectiveEnd - reality.actualStartCol) : task.span;
+    const plannedSpan = task.span || 1;
+    const scale = shifted && plannedSpan > 0 ? effectiveSpan / plannedSpan : 1;
 
-    html += `<div class="timeline-row${isMilestone ? ' section-header' : ''}" data-id="${task.id}" style="min-height:56px">`;
+    html += `<div class="timeline-row${isMilestone ? ' section-header' : ''}" data-id="${task.id}" style="min-height:48px">`;
     html += `<div class="row-label" style="font-size:13px">`;
     html += `<span style="width:10px;height:10px;border-radius:3px;background:${wsColors[task.ws] || '#fff'};flex-shrink:0"></span>`;
     html += `<span style="font-weight:600">${task.label}</span>`;
@@ -4191,71 +4188,52 @@ function renderOverview() {
       if (live.inProgress > 0) html += ` <span style="font-size:10px;color:#3b82f6">${live.inProgress} i gang</span>`;
       if (live.inTest > 0) html += ` <span style="font-size:10px;color:#eab308">${live.inTest} test</span>`;
     }
-    // Drift-indikator
-    if (reality && reality.started) {
-      if (reality.startedEarly) {
-        const weeks = Math.round((reality.plannedStart - reality.actualStartCol) * 2);
-        html += ` <span style="font-size:10px;color:#22c55e;font-weight:600">◂ ${weeks}u før plan</span>`;
-      } else if (reality.startedLate) {
-        const weeks = Math.round((reality.actualStartCol - reality.plannedStart) * 2);
-        html += ` <span style="font-size:10px;color:#ef4444;font-weight:600">▸ ${weeks}u efter plan</span>`;
-      }
-      if (reality.pct < 100 && Math.abs(reality.forecastDelta) >= 0.5) {
-        const weeks = Math.round(reality.forecastDelta * 2);
-        const color = weeks > 0 ? '#ef4444' : '#22c55e';
-        html += ` <span style="font-size:10px;color:${color}">${weeks > 0 ? '+' : ''}${weeks}u prognose</span>`;
-      }
+    if (shifted && reality.startedEarly) {
+      const weeks = Math.round((reality.plannedStart - reality.actualStartCol) * 2);
+      html += ` <span style="font-size:10px;color:#22c55e">◂ ${weeks}u tidligere start</span>`;
+    } else if (shifted && reality.startedLate) {
+      const weeks = Math.round((reality.actualStartCol - reality.plannedStart) * 2);
+      html += ` <span style="font-size:10px;color:#ef4444">▸ ${weeks}u senere start</span>`;
     }
     html += `</div>`;
 
-    html += `<div class="bar-track" style="position:relative;min-height:56px">`;
+    html += `<div class="bar-track" style="position:relative">`;
     for (let i = 0; i < visibleCols; i++) {
       html += `<div class="bar-cell${i===0?' today-col':''}"></div>`;
     }
 
-    // PLAN BAR (baseline) — dashed outline at top half, 30% opacity
-    const planOpacity = reality && reality.started ? 0.35 : 1;
+    // Multi-phase bars (skub/scale når reality er aktiv)
     for (const seg of task.phases) {
-      const leftPct = (seg.start / visibleCols * 100);
-      const widthPct = (seg.span / visibleCols * 100);
-      const topPos = reality && reality.started ? '12px' : '50%';
-      const transform = reality && reality.started ? 'none' : 'translateY(-50%)';
-      const borderStyle = reality && reality.started ? 'border:1px dashed rgba(255,255,255,0.4);' : '';
-      html += `<div class="gantt-bar ${seg.phase}" style="left:${leftPct}%;width:${widthPct}%;height:20px;top:${topPos};transform:${transform};opacity:${planOpacity};${borderStyle}border-radius:${seg === task.phases[0] ? '4px 0 0 4px' : seg === task.phases[task.phases.length-1] ? '0 4px 4px 0' : '0'}"
-        data-task='${JSON.stringify({label:task.label,persons,jira:task.jira||'',phase:seg.phase,deps:[],desc:task.desc||'',live,kind:'plan'})}'></div>`;
+      const segStart = shifted ? ((seg.start - task.start) * scale) + reality.actualStartCol : seg.start;
+      const segSpan = shifted ? seg.span * scale : seg.span;
+      const leftPct = (segStart / visibleCols * 100);
+      const widthPct = (segSpan / visibleCols * 100);
+      html += `<div class="gantt-bar ${seg.phase}" style="left:${leftPct}%;width:${widthPct}%;height:26px;border-radius:${seg === task.phases[0] ? '5px 0 0 5px' : seg === task.phases[task.phases.length-1] ? '0 5px 5px 0' : '0'}"
+        data-task='${JSON.stringify({label:task.label,persons,jira:task.jira||'',phase:seg.phase,deps:[],desc:task.desc||'',live})}'></div>`;
     }
 
-    // Single faded background bar for full planned span
-    const fullLeft = (task.start / visibleCols * 100);
-    const fullWidth = (task.span / visibleCols * 100);
-    const bgTop = reality && reality.started ? '12px' : 'calc(50% - 10px)';
-    html += `<div style="position:absolute;left:${fullLeft}%;width:${fullWidth}%;height:20px;top:${bgTop};background:rgba(255,255,255,0.03);border-radius:4px;z-index:1;pointer-events:none"></div>`;
+    // Faded background for full span
+    const fullLeft = ((shifted ? reality.actualStartCol : task.start) / visibleCols * 100);
+    const fullWidth = (effectiveSpan / visibleCols * 100);
+    html += `<div style="position:absolute;left:${fullLeft}%;width:${fullWidth}%;height:26px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.03);border-radius:5px;z-index:1;pointer-events:none"></div>`;
 
-    // REALITY BAR (below plan) — solid, colored by progress
-    if (reality && reality.started) {
-      const rLeft = (reality.actualStartCol / visibleCols * 100);
-      const rWidth = Math.max(1, (reality.projectedEnd - reality.actualStartCol) / visibleCols * 100);
-      const pct = reality.pct;
-      const barColor = pct >= 100 ? '#22c55e' : pct >= 50 ? '#3b82f6' : pct > 0 ? '#eab308' : 'rgba(255,255,255,0.15)';
-      const borderColor = reality.forecastDelta > 0.5 ? '#ef4444' : reality.forecastDelta < -0.5 ? '#22c55e' : 'transparent';
+    // Planned end marker — lodret streg hvor baren oprindeligt sluttede
+    if (shifted && Math.abs(plannedEnd - effectiveEnd) > 0.3) {
+      const plannedEndPct = (plannedEnd / visibleCols * 100);
+      const plannedEndColor = effectiveEnd > plannedEnd ? '#ef4444' : '#22c55e';
+      html += `<div style="position:absolute;left:${plannedEndPct}%;top:50%;transform:translateY(-50%);width:2px;height:30px;background:${plannedEndColor};z-index:4;pointer-events:none" title="Oprindelig plan-deadline"></div>`;
+    }
 
-      html += `<div style="position:absolute;left:${rLeft}%;width:${rWidth}%;height:18px;top:36px;background:${barColor}30;border:1px solid ${barColor};border-right:${borderColor !== 'transparent' ? '2px solid ' + borderColor : '1px solid ' + barColor};border-radius:3px;z-index:2;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:${barColor};overflow:hidden"
-        title="Reality: start col ${reality.actualStartCol.toFixed(1)}, projected end col ${reality.projectedEnd.toFixed(1)}">`;
-      if (rWidth > 5) html += `<span style="text-shadow:0 1px 2px rgba(0,0,0,0.6);color:${pct >= 100 ? '#fff' : barColor}">${pct}%</span>`;
-      // Progress fill inside reality bar
-      if (pct > 0 && pct < 100) {
-        html += `<div style="position:absolute;left:0;top:0;bottom:0;width:${Math.min(pct, 100)}%;background:${barColor};z-index:-1"></div>`;
-      }
-      if (pct >= 100) {
-        html += `<div style="position:absolute;left:0;top:0;bottom:0;right:0;background:${barColor};z-index:-1"></div>`;
-      }
+    // Live progress overlay
+    if (live && live.total > 0) {
+      const donePct = (live.done + live.readyForRelease) / live.total * 100;
+      const testPct = live.inTest / live.total * 100;
+      const progPct = live.inProgress / live.total * 100;
+      html += `<div style="position:absolute;left:${fullLeft}%;width:${fullWidth}%;height:4px;top:calc(50% + 11px);display:flex;background:rgba(0,0,0,0.35);border-radius:0 0 5px 5px;overflow:hidden;z-index:3;pointer-events:none">`;
+      if (donePct > 0) html += `<div style="width:${donePct}%;background:#22c55e"></div>`;
+      if (testPct > 0) html += `<div style="width:${testPct}%;background:#eab308"></div>`;
+      if (progPct > 0) html += `<div style="width:${progPct}%;background:#3b82f6"></div>`;
       html += `</div>`;
-
-      // "I dag" vertikal linje på reality-bar
-      if (reality.nowCol > reality.actualStartCol && reality.nowCol < reality.projectedEnd) {
-        const nowLeft = (reality.nowCol / visibleCols * 100);
-        html += `<div style="position:absolute;left:${nowLeft}%;top:36px;width:1px;height:18px;background:var(--accent);z-index:3;pointer-events:none"></div>`;
-      }
     }
 
     html += '</div></div>';
