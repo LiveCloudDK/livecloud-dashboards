@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-17T06:49:17.027Z",
+    "startDate": "2026-04-17T06:52:17.163Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -15816,6 +15816,32 @@
       "updated": "2026-04-16T19:23:34.409+0200"
     }
   },
+  "velocity": [
+    {
+      "month": "Nov 2025",
+      "tickets": 0
+    },
+    {
+      "month": "Dec 2025",
+      "tickets": 0
+    },
+    {
+      "month": "Jan 2026",
+      "tickets": 0
+    },
+    {
+      "month": "Feb 2026",
+      "tickets": 0
+    },
+    {
+      "month": "Mar 2026",
+      "tickets": 0
+    },
+    {
+      "month": "Apr 2026",
+      "tickets": 0
+    }
+  ],
   "festivals": [
     {
       "id": "festhallen",
@@ -16062,5 +16088,5 @@
       }
     }
   ],
-  "generated": "2026-04-17T06:49:31.914Z"
+  "generated": "2026-04-17T06:52:29.056Z"
 }
