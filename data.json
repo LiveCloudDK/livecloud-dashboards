@@ -36,10 +36,23 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-17T07:30:02.792Z",
+    "startDate": "2026-04-17T07:52:37.257Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-980",
+        "summary": "Profilskærm — vis Beats-saldo og kredit-oversigt",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-17T09:46:51.849+0200"
+      },
       {
         "key": "LCAP-310",
         "summary": "Content Delivery - Festival Management System",
@@ -457,19 +470,6 @@
         "updated": "2026-03-30T13:26:33.499+0200"
       },
       {
-        "key": "LCAP-980",
-        "summary": "Profilskærm — vis Beats-saldo og kredit-oversigt",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Mikkel Kornval Christoffersen",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-03-30T13:26:32.891+0200"
-      },
-      {
         "key": "LCAP-598",
         "summary": "Ticket + Festival ID in wallet",
         "status": "Selected for Development",
@@ -512,6 +512,21 @@
         "type": "Story",
         "labels": [],
         "updated": "2026-03-16T09:32:45.404+0100"
+      },
+      {
+        "key": "LCAP-1228",
+        "summary": "Delegering af enkelt dag fra partout overfører hele billetten + manglende revoke",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Bug",
+        "labels": [
+          "backend",
+          "bug",
+          "commerce"
+        ],
+        "updated": "2026-04-17T09:48:02.969+0200"
       },
       {
         "key": "LCAP-1166",
@@ -562,21 +577,6 @@
           "commerce"
         ],
         "updated": "2026-04-16T12:52:38.413+0200"
-      },
-      {
-        "key": "LCAP-1228",
-        "summary": "Delegering af enkelt dag fra partout overfører hele billetten + manglende revoke",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "High",
-        "type": "Bug",
-        "labels": [
-          "backend",
-          "bug",
-          "commerce"
-        ],
-        "updated": "2026-04-16T10:11:35.724+0200"
       },
       {
         "key": "LCAP-977",
@@ -1456,16 +1456,16 @@
         "backlog": 55
       },
       "mikkel": {
-        "active": 6,
+        "active": 5,
         "testQueue": 4,
         "readyForRelease": 6,
-        "backlog": 11
+        "backlog": 10
       },
       "jakob": {
-        "active": 4,
+        "active": 5,
         "testQueue": 6,
         "readyForRelease": 9,
-        "backlog": 22
+        "backlog": 23
       },
       "edwin": {
         "active": 2,
@@ -12534,13 +12534,13 @@
       "summary": "Profilskærm — vis Beats-saldo og kredit-oversigt",
       "status": "Selected for Development",
       "statusCategory": "new",
-      "assignee": "Mikkel Kornval Christoffersen",
+      "assignee": "Jakob Højgård",
       "priority": "Medium",
       "type": "Story",
       "labels": [
         "app"
       ],
-      "updated": "2026-03-30T13:26:32.891+0200"
+      "updated": "2026-04-17T09:46:51.849+0200"
     },
     "LCAP-981": {
       "key": "LCAP-981",
@@ -12560,13 +12560,13 @@
       "summary": "Profilskærm — Beats transaktionshistorik",
       "status": "Backlog",
       "statusCategory": "new",
-      "assignee": "Mikkel Kornval Christoffersen",
+      "assignee": "Jakob Højgård",
       "priority": "Medium",
       "type": "Story",
       "labels": [
         "app"
       ],
-      "updated": "2026-03-30T13:26:34.018+0200"
+      "updated": "2026-04-17T09:46:45.393+0200"
     },
     "LCAP-983": {
       "key": "LCAP-983",
@@ -15802,7 +15802,7 @@
         "bug",
         "commerce"
       ],
-      "updated": "2026-04-16T10:11:35.724+0200"
+      "updated": "2026-04-17T09:48:02.969+0200"
     },
     "LCAP-1229": {
       "key": "LCAP-1229",
@@ -16071,7 +16071,7 @@
         "startsAt": "2026-07-30T00:00:00.000000Z",
         "endsAt": "2026-08-01T00:00:00.000000Z",
         "address": "Søndervang 2, 4100 Ringsted",
-        "artists": 48,
+        "artists": 46,
         "events": 53,
         "venues": 7,
         "news": 140,
@@ -16090,5 +16090,5 @@
       }
     }
   ],
-  "generated": "2026-04-17T07:30:17.981Z"
+  "generated": "2026-04-17T07:52:53.106Z"
 }
