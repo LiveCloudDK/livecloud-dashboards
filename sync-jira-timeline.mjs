@@ -189,6 +189,43 @@ function issueToSprintIssue(issue) {
   };
 }
 
+// === Fetch monthly velocity (resolved tickets per calendar month, last 6 months) ===
+async function fetchVelocity() {
+  const monthNames = ['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug','Sep','Okt','Nov','Dec'];
+  const now = new Date();
+  const months = [];
+  for (let i = 5; i >= 0; i--) {
+    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    const start = new Date(d.getFullYear(), d.getMonth(), 1);
+    const end = new Date(d.getFullYear(), d.getMonth() + 1, 1);
+    months.push({
+      label: `${monthNames[d.getMonth()]} ${d.getFullYear()}`,
+      start: start.toISOString().slice(0, 10),
+      end: end.toISOString().slice(0, 10),
+    });
+  }
+
+  const results = [];
+  for (const m of months) {
+    try {
+      const jql = `project = LCAP AND status CHANGED TO ("Done", "Closed", "Ready for release") DURING ("${m.start}", "${m.end}")`;
+      const resp = await fetch(`${JIRA_BASE}/rest/api/3/search/jql`, {
+        method: 'POST',
+        headers: { 'Authorization': `Basic ${AUTH}`, 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ jql, maxResults: 0 }),
+      });
+      if (!resp.ok) { results.push({ month: m.label, tickets: 0 }); continue; }
+      const data = await resp.json();
+      const count = data.issues?.totalCount || data.total || 0;
+      results.push({ month: m.label, tickets: count });
+    } catch (e) {
+      results.push({ month: m.label, tickets: 0 });
+    }
+  }
+  console.log(`Velocity: ${results.map(r => `${r.month}:${r.tickets}`).join(', ')}`);
+  return results;
+}
+
 // === Fetch all LCAP tickets (for live status overlay across all views) ===
 async function fetchAllTickets() {
   const jql = 'project = LCAP ORDER BY key ASC';
@@ -348,13 +385,16 @@ async function main() {
   // === Live ticket status map (for overlay on detail + overview) ===
   const tickets = await fetchAllTickets();
 
+  // === Monthly velocity for capacity view ===
+  const velocity = await fetchVelocity();
+
   // === Festival data from FMS ===
   const festivals = await fetchFestivalData();
 
-  const output = { tasks, columns: COLUMNS, wsNames: WS_NAMES, sprint, publicStats, tickets, festivals, generated: new Date().toISOString() };
+  const output = { tasks, columns: COLUMNS, wsNames: WS_NAMES, sprint, publicStats, tickets, velocity, festivals, generated: new Date().toISOString() };
   const fs = await import('node:fs');
   fs.writeFileSync('data.json', JSON.stringify(output, null, 2));
-  console.log(`Wrote data.json (${tasks.length} tasks, sprint: ${sprint ? sprint.name : 'none'}, QA queue: ${sprint?.testQueueCount || 0}, ready for release: ${sprint?.readyForReleaseCount || 0}, tickets: ${Object.keys(tickets).length}, festivals: ${festivals.length})`);
+  console.log(`Wrote data.json (${tasks.length} tasks, sprint: ${sprint ? sprint.name : 'none'}, QA queue: ${sprint?.testQueueCount || 0}, ready for release: ${sprint?.readyForReleaseCount || 0}, tickets: ${Object.keys(tickets).length}, velocity: ${velocity.length} months, festivals: ${festivals.length})`);
 }
 
 // === Public Stats — aggregate Jira data for showcase view ===

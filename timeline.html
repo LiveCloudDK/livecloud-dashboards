@@ -2063,6 +2063,7 @@ let wsNames = {
         if (data.sprint) window._sprintData = data.sprint;
         if (data.publicStats) window._publicStats = data.publicStats;
         if (data.tickets) window._tickets = data.tickets;
+        if (data.velocity) window._velocity = data.velocity;
         if (data.festivals) window._festivals = data.festivals;
         const genDate = new Date(data.generated);
         const dateStr = genDate.toLocaleDateString('da-DK', { day:'numeric', month:'short', year:'numeric' });
@@ -4022,17 +4023,19 @@ function renderCapacity() {
   html += '</div>';
   html += '</div>';
 
-  // Historical velocity
+  // Historical velocity — live from Jira (fallback to hardcoded if no data)
   html += '<div class="velocity-chart">';
-  html += '<h3>Historisk Velocity</h3>';
+  html += '<h3>Historisk Velocity <span style="font-size:11px;font-weight:400;color:var(--text-muted);margin-left:8px">Resolved tickets pr. måned</span></h3>';
 
-  const velocityData = [
-    { month: 'Jan 2026', tickets: 18 },
-    { month: 'Feb 2026', tickets: 24 },
-    { month: 'Mar 2026', tickets: 119 }
-  ];
+  const velocityData = (window._velocity && window._velocity.length > 0)
+    ? window._velocity
+    : [
+        { month: 'Jan 2026', tickets: 18 },
+        { month: 'Feb 2026', tickets: 24 },
+        { month: 'Mar 2026', tickets: 119 }
+      ];
 
-  const maxVelocity = Math.max(...velocityData.map(v => v.tickets));
+  const maxVelocity = Math.max(1, ...velocityData.map(v => v.tickets));
 
   for (const vel of velocityData) {
     const pct = (vel.tickets / maxVelocity * 100);
