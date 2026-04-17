@@ -2062,6 +2062,7 @@ let wsNames = {
         if (data.wsNames && Object.keys(data.wsNames).length > 0) wsNames = data.wsNames;
         if (data.sprint) window._sprintData = data.sprint;
         if (data.publicStats) window._publicStats = data.publicStats;
+        if (data.tickets) window._tickets = data.tickets;
         if (data.festivals) window._festivals = data.festivals;
         const genDate = new Date(data.generated);
         const dateStr = genDate.toLocaleDateString('da-DK', { day:'numeric', month:'short', year:'numeric' });
@@ -2109,6 +2110,114 @@ let wsNames = {
         }
       }
       console.log('syncLiveData: capacityData updated from Jira');
+    }
+
+    // ── Expand Jira key refs from tasks/overviewTasks ────────────────
+    // Accepts: "LCAP-1078,1079,989,990", "LCAP-904-912", "LCAP-1092,LCAP-1195"
+    // Returns: ["LCAP-1078","LCAP-1079","LCAP-989","LCAP-990"]
+    function expandJiraKeys(str) {
+      if (!str || typeof str !== 'string') return [];
+      const keys = new Set();
+      let lastPrefix = 'LCAP';
+      const parts = str.split(/\s*,\s*/);
+      for (let part of parts) {
+        part = part.trim();
+        if (!part) continue;
+        // Range like "LCAP-904-912" or "904-912"
+        const rangeMatch = part.match(/^(?:([A-Z]+)-)?(\d+)-(\d+)$/);
+        if (rangeMatch) {
+          const prefix = rangeMatch[1] || lastPrefix;
+          if (rangeMatch[1]) lastPrefix = prefix;
+          const start = parseInt(rangeMatch[2], 10);
+          const end = parseInt(rangeMatch[3], 10);
+          if (end >= start && (end - start) < 500) {
+            for (let n = start; n <= end; n++) keys.add(`${prefix}-${n}`);
+          }
+          continue;
+        }
+        // Single like "LCAP-1078" or "1078"
+        const singleMatch = part.match(/^(?:([A-Z]+)-)?(\d+)$/);
+        if (singleMatch) {
+          const prefix = singleMatch[1] || lastPrefix;
+          if (singleMatch[1]) lastPrefix = prefix;
+          keys.add(`${prefix}-${singleMatch[2]}`);
+        }
+      }
+      return Array.from(keys);
+    }
+
+    // ── Compute live status breakdown for a task from _tickets map ──
+    // Returns null if no tickets available; otherwise { total, done, inProgress, inTest, readyForRelease, todo, blocked, pct }
+    function computeTaskLiveStatus(task) {
+      const tickets = window._tickets;
+      if (!tickets || !task.jira) return null;
+      const keys = expandJiraKeys(task.jira);
+      if (keys.length === 0) return null;
+
+      const r = { total: 0, done: 0, inProgress: 0, inTest: 0, readyForRelease: 0, todo: 0, blocked: 0, missing: 0 };
+      const testSet = new Set(['ready for testing', 'ready for test', 'ready for test at dev']);
+      for (const k of keys) {
+        const t = tickets[k];
+        if (!t) { r.missing++; continue; }
+        r.total++;
+        const s = (t.status || '').toLowerCase();
+        const cat = t.statusCategory;
+        if (s === 'ready for release') r.readyForRelease++;
+        else if (testSet.has(s)) r.inTest++;
+        else if (cat === 'done') r.done++;
+        else if (cat === 'indeterminate') r.inProgress++;
+        else if (s === 'blocked') r.blocked++;
+        else r.todo++;
+      }
+      const resolved = r.done + r.readyForRelease;
+      r.pct = r.total > 0 ? Math.round(resolved / r.total * 100) : 0;
+      return r;
+    }
+
+    // ── Compute which workstreams have live activity in Jira ────────
+    // Cross-references sprint tickets + curated plan (tasks) → returns { wsId: {active, inTest, done, tickets: []} }
+    function computeActiveWorkstreams() {
+      const result = {};
+      const wsIds = ['1','2','3','4','5','6','7','8','9','10'];
+      wsIds.forEach(ws => { result[ws] = { active: 0, inTest: 0, readyForRelease: 0, tickets: [] }; });
+
+      // Build reverse map: ticket-key → ws (from curated plan)
+      const keyToWs = {};
+      for (const t of tasks) {
+        if (!t.jira || !t.ws || t.ws === 'all') continue;
+        for (const k of expandJiraKeys(t.jira)) keyToWs[k] = t.ws;
+      }
+      for (const t of overviewTasks) {
+        if (!t.jira || !t.ws || t.ws === 'all') continue;
+        for (const k of expandJiraKeys(t.jira)) { if (!keyToWs[k]) keyToWs[k] = t.ws; }
+      }
+
+      const sprint = window._sprintData;
+      if (!sprint || !sprint.issues) return { result, keyToWs };
+
+      const testSet = new Set(['ready for testing', 'ready for test', 'ready for test at dev']);
+      for (const issue of sprint.issues) {
+        let ws = keyToWs[issue.key];
+        if (!ws) {
+          // Fallback to label heuristic
+          const labels = (issue.labels || []).map(l => (l || '').toLowerCase());
+          for (const l of labels) {
+            const m = l.match(/^ws(\d+)(?:-|$)/);
+            if (m) { ws = m[1]; break; }
+          }
+          if (!ws) {
+            const labelToWs = { 'onboarding':'1','pos':'2','app':'3','backend':'4','fms':'4','commerce':'4','swedbank':'4','webshop':'6','vendor-integration':'5' };
+            for (const l of labels) { if (labelToWs[l]) { ws = labelToWs[l]; break; } }
+          }
+        }
+        if (!ws || !result[ws]) continue;
+        result[ws].tickets.push(issue);
+        const s = (issue.status || '').toLowerCase();
+        if (s === 'ready for release') result[ws].readyForRelease++;
+        else if (testSet.has(s)) result[ws].inTest++;
+        else result[ws].active++;
+      }
+      return { result, keyToWs };
     }
 
     // Manual sync button handler
@@ -2303,6 +2412,55 @@ function renderCurrentSprint() {
     h += '<a href="'+b.u+'" target="_blank" style="padding:2px 10px;border-radius:4px;font-size:11px;font-weight:600;background:'+b.c+'15;color:'+b.c+';text-decoration:none;border:1px solid '+b.c+'30">'+b.n+'</a>';
   }
   h += '</div>';
+
+  // ===== WORKSTREAM AKTIVITET =====
+  const wsAct = computeActiveWorkstreams();
+  const wsRes = wsAct.result;
+  const activeWsIds = ['1','2','3','4','5','6','7','8','9','10'].filter(id => {
+    const w = wsRes[id];
+    return (w.active + w.inTest + w.readyForRelease) > 0;
+  });
+  if (activeWsIds.length > 0) {
+    h += '<div style="margin-bottom:20px;background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden">';
+    h += '<div style="padding:10px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px">';
+    h += '<span style="font-size:12px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:0.5px">Aktive workstreams</span>';
+    h += '<span style="font-size:11px;color:var(--text-muted)">' + activeWsIds.length + ' ws har aktivitet</span>';
+    h += '</div>';
+    h += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0">';
+    for (const wsId of activeWsIds) {
+      const w = wsRes[wsId];
+      const color = wsColors[wsId] || '#fff';
+      h += '<div style="padding:10px 14px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)">';
+      h += '<div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">';
+      h += '<span style="width:8px;height:8px;border-radius:2px;background:'+color+'"></span>';
+      h += '<span style="font-size:12px;font-weight:700;color:var(--text)">WS'+wsId+' — '+wsNames[wsId]+'</span>';
+      h += '</div>';
+      h += '<div style="display:flex;gap:10px;font-size:11px;font-weight:600;margin-bottom:6px">';
+      if (w.active > 0) h += '<span style="color:#3b82f6">'+w.active+' i gang</span>';
+      if (w.inTest > 0) h += '<span style="color:#eab308">'+w.inTest+' test</span>';
+      if (w.readyForRelease > 0) h += '<span style="color:#22c55e">'+w.readyForRelease+' ready</span>';
+      h += '</div>';
+      // Top 3 active tickets (prioritized: In Progress → test → ready)
+      const sorted = w.tickets.slice().sort((a, b) => {
+        const aCat = (a.statusCategory === 'indeterminate') ? 0 : ((a.status||'').toLowerCase().includes('test') ? 1 : 2);
+        const bCat = (b.statusCategory === 'indeterminate') ? 0 : ((b.status||'').toLowerCase().includes('test') ? 1 : 2);
+        if (aCat !== bCat) return aCat - bCat;
+        return (pri[a.priority]??9) - (pri[b.priority]??9);
+      }).slice(0, 3);
+      for (const t of sorted) {
+        const stColor = t.statusCategory === 'done' ? '#22c55e' : t.statusCategory === 'indeterminate' ? '#3b82f6' : (t.status||'').toLowerCase().includes('test') ? '#eab308' : 'var(--text-muted)';
+        h += '<a href="'+jiraBase+t.key+'" target="_blank" style="display:block;font-size:11px;padding:2px 0;color:var(--text);text-decoration:none;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="'+(t.summary||'').replace(/"/g,'&quot;')+'">';
+        h += '<span style="font-family:monospace;color:'+stColor+';font-size:10px">'+t.key+'</span> ';
+        h += '<span style="color:var(--text-muted)">'+(t.summary||'').slice(0, 50)+'</span>';
+        h += '</a>';
+      }
+      if (w.tickets.length > 3) {
+        h += '<div style="font-size:10px;color:var(--text-muted);margin-top:3px">+'+(w.tickets.length - 3)+' flere</div>';
+      }
+      h += '</div>';
+    }
+    h += '</div></div>';
+  }
 
   // ===== PER-PERSON SECTIONS =====
   for (const personName of people) {
@@ -2764,6 +2922,44 @@ function renderSprints() {
   html += '<div style="font-size:10px;color:var(--text-muted);display:flex;align-items:center;gap:4px"><div style="width:2px;height:10px;background:var(--red);border-radius:1px"></div> Feature freeze (1. jul)</div>';
   html += '</div>';
   html += '</div>';
+
+  // ── Workstream-aktivitet fra Jira (cross-reference med kurateret plan) ──
+  const wsActivity = computeActiveWorkstreams();
+  const wsResult = wsActivity.result;
+  const wsTotal = Object.values(wsResult).reduce((s, v) => s + v.active + v.inTest + v.readyForRelease, 0);
+  if (wsTotal > 0) {
+    html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:24px">';
+    html += '<div style="display:flex;align-items:baseline;gap:8px;margin-bottom:12px">';
+    html += '<div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Aktivitet pr. workstream</div>';
+    html += '<div style="font-size:10px;color:var(--text-muted)">Live fra Jira — kategoriseret via kurateret plan + labels</div>';
+    html += '</div>';
+    html += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px">';
+    const wsIds = ['1','2','3','4','5','6','7','8','9','10'];
+    for (const wsId of wsIds) {
+      const w = wsResult[wsId];
+      const totalW = w.active + w.inTest + w.readyForRelease;
+      const isActive = totalW > 0;
+      const color = wsColors[wsId] || '#fff';
+      html += `<div style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:10px;${isActive ? '' : 'opacity:0.4'}">`;
+      html += `<div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">`;
+      html += `<span style="width:8px;height:8px;border-radius:2px;background:${color}"></span>`;
+      html += `<span style="font-weight:700;font-size:11px">WS${wsId}</span>`;
+      html += `<span style="font-size:11px;color:var(--text-muted)">${wsNames[wsId] || ''}</span>`;
+      html += `</div>`;
+      if (isActive) {
+        html += `<div style="display:flex;gap:10px;font-size:11px;font-weight:600">`;
+        if (w.active > 0) html += `<span style="color:#3b82f6">${w.active} i gang</span>`;
+        if (w.inTest > 0) html += `<span style="color:#eab308">${w.inTest} test</span>`;
+        if (w.readyForRelease > 0) html += `<span style="color:#22c55e">${w.readyForRelease} ready</span>`;
+        html += `</div>`;
+      } else {
+        html += `<div style="font-size:10px;color:var(--text-muted)">Ingen aktivitet</div>`;
+      }
+      html += '</div>';
+    }
+    html += '</div>';
+    html += '</div>';
+  }
 
   // ── Build Jira ticket counts per person for active sprint (excl. test pipeline) ──
   const jiraPersonCounts = {};
@@ -3882,11 +4078,18 @@ function renderOverview() {
     visibleCount++;
     const persons = task.persons.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(', ');
     const isMilestone = task.milestone;
+    const live = computeTaskLiveStatus(task);
 
     html += `<div class="timeline-row${isMilestone ? ' section-header' : ''}" data-id="${task.id}" style="min-height:48px">`;
     html += `<div class="row-label" style="font-size:13px">`;
     html += `<span style="width:10px;height:10px;border-radius:3px;background:${wsColors[task.ws] || '#fff'};flex-shrink:0"></span>`;
     html += `<span style="font-weight:600">${task.label}</span>`;
+    if (live && live.total > 0) {
+      const chipColor = live.pct===100 ? '#22c55e' : live.inProgress>0 ? '#3b82f6' : live.inTest>0 ? '#eab308' : 'var(--text-muted)';
+      html += ` <span style="font-size:10px;font-weight:600;padding:1px 6px;border-radius:3px;background:${chipColor}20;color:${chipColor}">${live.pct}% · ${live.total}t</span>`;
+      if (live.inProgress > 0) html += ` <span style="font-size:10px;color:#3b82f6">${live.inProgress} i gang</span>`;
+      if (live.inTest > 0) html += ` <span style="font-size:10px;color:#eab308">${live.inTest} test</span>`;
+    }
     html += `</div>`;
 
     html += `<div class="bar-track" style="position:relative">`;
@@ -3899,13 +4102,25 @@ function renderOverview() {
       const leftPct = (seg.start / visibleCols * 100);
       const widthPct = (seg.span / visibleCols * 100);
       html += `<div class="gantt-bar ${seg.phase}" style="left:${leftPct}%;width:${widthPct}%;height:26px;border-radius:${seg === task.phases[0] ? '5px 0 0 5px' : seg === task.phases[task.phases.length-1] ? '0 5px 5px 0' : '0'}"
-        data-task='${JSON.stringify({label:task.label,persons,jira:task.jira||'',phase:seg.phase,deps:[],desc:task.desc||''})}'></div>`;
+        data-task='${JSON.stringify({label:task.label,persons,jira:task.jira||'',phase:seg.phase,deps:[],desc:task.desc||'',live})}'></div>`;
     }
 
     // Single background bar to show full span
     const fullLeft = (task.start / visibleCols * 100);
     const fullWidth = (task.span / visibleCols * 100);
     html += `<div style="position:absolute;left:${fullLeft}%;width:${fullWidth}%;height:26px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.03);border-radius:5px;z-index:1;pointer-events:none"></div>`;
+
+    // Live progress overlay on full span bar
+    if (live && live.total > 0) {
+      const donePct = (live.done + live.readyForRelease) / live.total * 100;
+      const testPct = live.inTest / live.total * 100;
+      const progPct = live.inProgress / live.total * 100;
+      html += `<div style="position:absolute;left:${fullLeft}%;width:${fullWidth}%;height:4px;top:calc(50% + 11px);display:flex;background:rgba(0,0,0,0.35);border-radius:0 0 5px 5px;overflow:hidden;z-index:3;pointer-events:none">`;
+      if (donePct > 0) html += `<div style="width:${donePct}%;background:#22c55e"></div>`;
+      if (testPct > 0) html += `<div style="width:${testPct}%;background:#eab308"></div>`;
+      if (progPct > 0) html += `<div style="width:${progPct}%;background:#3b82f6"></div>`;
+      html += `</div>`;
+    }
 
     html += '</div></div>';
   }
@@ -3964,12 +4179,17 @@ function matchFilters(task) {
 
 function renderRow(task) {
   const persons = task.persons.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(', ');
+  const live = computeTaskLiveStatus(task);
+
   let html = `<div class="timeline-row" data-ws="${task.ws}" data-persons="${task.persons.join(',')}" data-phase="${task.phase}" data-id="${task.id}">`;
   html += `<div class="row-label">`;
   html += `<span style="width:8px;height:8px;border-radius:2px;background:${wsColors[task.ws] || '#666'};flex-shrink:0"></span>`;
   html += `${task.label}`;
   if (task.persons.length <= 2) {
     html += ` <span class="tag tag-person">${persons}</span>`;
+  }
+  if (live && live.total > 0) {
+    html += ` <span class="tag" style="background:${live.pct===100?'#22c55e20':live.inProgress>0?'#3b82f620':live.inTest>0?'#eab30820':'rgba(255,255,255,0.06)'};color:${live.pct===100?'#22c55e':live.inProgress>0?'#3b82f6':live.inTest>0?'#eab308':'var(--text-muted)'};font-size:10px;font-weight:600;padding:1px 6px;border-radius:3px">${live.pct}% · ${live.total}t</span>`;
   }
   html += `</div>`;
 
@@ -3982,8 +4202,24 @@ function renderRow(task) {
   const leftPct = (task.start / visibleCols * 100);
   const widthPct = (task.span / visibleCols * 100);
   const phaseClass = task.phase;
-  html += `<div class="gantt-bar ${phaseClass}" style="left:${leftPct}%;width:${widthPct}%"
-    data-task='${JSON.stringify({label:task.label,persons,jira:task.jira,phase:task.phase,deps:task.deps,desc:task.desc||''})}'>${task.jira ? '●' : ''}</div>`;
+  const tooltipData = JSON.stringify({label:task.label,persons,jira:task.jira,phase:task.phase,deps:task.deps,desc:task.desc||'',live});
+  html += `<div class="gantt-bar ${phaseClass}" style="left:${leftPct}%;width:${widthPct}%;position:absolute;overflow:hidden"
+    data-task='${tooltipData}'>`;
+  // Live progress overlay inside the bar (bottom strip)
+  if (live && live.total > 0) {
+    const donePct = (live.done + live.readyForRelease) / live.total * 100;
+    const testPct = live.inTest / live.total * 100;
+    const progPct = live.inProgress / live.total * 100;
+    html += `<div style="position:absolute;left:0;right:0;bottom:0;height:4px;display:flex;background:rgba(0,0,0,0.35)">`;
+    if (donePct > 0) html += `<div style="width:${donePct}%;background:#22c55e"></div>`;
+    if (testPct > 0) html += `<div style="width:${testPct}%;background:#eab308"></div>`;
+    if (progPct > 0) html += `<div style="width:${progPct}%;background:#3b82f6"></div>`;
+    html += `</div>`;
+    html += `<span style="position:relative;z-index:1;font-size:10px;font-weight:600;text-shadow:0 1px 2px rgba(0,0,0,0.6)">${live.pct}%</span>`;
+  } else {
+    html += task.jira ? '●' : '';
+  }
+  html += `</div>`;
 
   html += '</div></div>';
   return html;
@@ -4054,7 +4290,20 @@ function showTooltip(e) {
   html += `<div class="tt-row"><span class="tt-label">Team</span><span>${data.persons}</span></div>`;
   html += `<div class="tt-row"><span class="tt-label">Fase</span><span>${data.phase}</span></div>`;
   if (data.jira) html += `<div class="tt-row"><span class="tt-label">Jira</span><span>${data.jira}</span></div>`;
-  if (data.deps.length) html += `<div class="tt-row"><span class="tt-label">Afhænger af</span><span>${data.deps.join(', ')}</span></div>`;
+  if (data.deps && data.deps.length) html += `<div class="tt-row"><span class="tt-label">Afhænger af</span><span>${data.deps.join(', ')}</span></div>`;
+  if (data.live && data.live.total > 0) {
+    const l = data.live;
+    html += `<div class="tt-row" style="margin-top:6px;padding-top:6px;border-top:1px solid var(--border)"><span class="tt-label">Live status</span><span style="font-weight:600">${l.pct}% afsluttet (${l.done + l.readyForRelease}/${l.total})</span></div>`;
+    const parts = [];
+    if (l.done > 0) parts.push(`<span style="color:#22c55e">${l.done} done</span>`);
+    if (l.readyForRelease > 0) parts.push(`<span style="color:#22c55e">${l.readyForRelease} ready</span>`);
+    if (l.inTest > 0) parts.push(`<span style="color:#eab308">${l.inTest} test</span>`);
+    if (l.inProgress > 0) parts.push(`<span style="color:#3b82f6">${l.inProgress} i gang</span>`);
+    if (l.todo > 0) parts.push(`<span style="color:var(--text-muted)">${l.todo} to do</span>`);
+    if (l.blocked > 0) parts.push(`<span style="color:#ef4444">${l.blocked} blokeret</span>`);
+    if (l.missing > 0) parts.push(`<span style="color:var(--text-muted)">(${l.missing} ikke fundet)</span>`);
+    if (parts.length) html += `<div style="font-size:11px;margin-top:4px;display:flex;gap:8px;flex-wrap:wrap">${parts.join('')}</div>`;
+  }
   if (data.desc) html += `<div style="margin-top:6px;color:var(--yellow);font-size:11px">${data.desc}</div>`;
   tt.innerHTML = html;
   tt.classList.add('show');

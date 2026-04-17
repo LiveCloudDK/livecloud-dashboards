@@ -189,6 +189,44 @@ function issueToSprintIssue(issue) {
   };
 }
 
+// === Fetch all LCAP tickets (for live status overlay across all views) ===
+async function fetchAllTickets() {
+  const jql = 'project = LCAP ORDER BY key ASC';
+  const fields = ['summary','status','assignee','priority','issuetype','labels','updated'];
+  const tickets = {};
+  let nextPageToken = null;
+  let fetchedCount = 0;
+  do {
+    const body = { jql, maxResults: 200, fields };
+    if (nextPageToken) body.nextPageToken = nextPageToken;
+    const resp = await fetch(`${JIRA_BASE}/rest/api/3/search/jql`, {
+      method: 'POST',
+      headers: { 'Authorization': `Basic ${AUTH}`, 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (!resp.ok) { console.log(`fetchAllTickets JQL failed: ${resp.status}`); break; }
+    const data = await resp.json();
+    for (const issue of (data.issues || [])) {
+      const f = issue.fields;
+      tickets[issue.key] = {
+        key: issue.key,
+        summary: f.summary,
+        status: f.status ? f.status.name : '',
+        statusCategory: f.status?.statusCategory?.key || 'new',
+        assignee: f.assignee ? f.assignee.displayName : null,
+        priority: f.priority ? f.priority.name : 'Medium',
+        type: f.issuetype ? f.issuetype.name : 'Task',
+        labels: (f.labels || []).map(l => l.name || l),
+        updated: f.updated,
+      };
+      fetchedCount++;
+    }
+    nextPageToken = data.nextPageToken || null;
+  } while (nextPageToken);
+  console.log(`Fetched ${fetchedCount} tickets for live status map`);
+  return tickets;
+}
+
 // === Epic transform ===
 function issueToTask(issue) {
   const f = issue.fields;
@@ -307,13 +345,16 @@ async function main() {
   // === Public Stats (for Showcase view) ===
   const publicStats = await fetchPublicStats();
 
+  // === Live ticket status map (for overlay on detail + overview) ===
+  const tickets = await fetchAllTickets();
+
   // === Festival data from FMS ===
   const festivals = await fetchFestivalData();
 
-  const output = { tasks, columns: COLUMNS, wsNames: WS_NAMES, sprint, publicStats, festivals, generated: new Date().toISOString() };
+  const output = { tasks, columns: COLUMNS, wsNames: WS_NAMES, sprint, publicStats, tickets, festivals, generated: new Date().toISOString() };
   const fs = await import('node:fs');
   fs.writeFileSync('data.json', JSON.stringify(output, null, 2));
-  console.log(`Wrote data.json (${tasks.length} tasks, sprint: ${sprint ? sprint.name : 'none'}, QA queue: ${sprint?.testQueueCount || 0}, ready for release: ${sprint?.readyForReleaseCount || 0}, festivals: ${festivals.length})`);
+  console.log(`Wrote data.json (${tasks.length} tasks, sprint: ${sprint ? sprint.name : 'none'}, QA queue: ${sprint?.testQueueCount || 0}, ready for release: ${sprint?.readyForReleaseCount || 0}, tickets: ${Object.keys(tickets).length}, festivals: ${festivals.length})`);
 }
 
 // === Public Stats — aggregate Jira data for showcase view ===
