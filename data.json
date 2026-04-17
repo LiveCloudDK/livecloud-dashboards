@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-17T11:19:06.628Z",
+    "startDate": "2026-04-17T11:46:11.381Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -592,6 +592,17 @@
         "updated": "2026-03-16T09:32:45.404+0100"
       },
       {
+        "key": "LCAP-1229",
+        "summary": "Ticket transfer og delegation fejl ved partout-billetter",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Bug",
+        "labels": [],
+        "updated": "2026-04-17T13:45:44.561+0200"
+      },
+      {
         "key": "LCAP-1207",
         "summary": "FMS: Akkrediterings-interface — listehåndtering og adgangsstyring",
         "status": "In Progress",
@@ -618,21 +629,6 @@
         "updated": "2026-04-17T10:07:32.033+0200"
       },
       {
-        "key": "LCAP-1228",
-        "summary": "Delegering af enkelt dag fra partout overfører hele billetten + manglende revoke",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "High",
-        "type": "Bug",
-        "labels": [
-          "backend",
-          "bug",
-          "commerce"
-        ],
-        "updated": "2026-04-17T09:48:02.969+0200"
-      },
-      {
         "key": "LCAP-1166",
         "summary": "Profil-løs billet: QR-kode → service desk → armbånd",
         "status": "Selected for Development",
@@ -655,32 +651,6 @@
         "type": "Task",
         "labels": [],
         "updated": "2026-04-17T06:41:35.271+0200"
-      },
-      {
-        "key": "LCAP-1229",
-        "summary": "Ticket transfer og delegation fejl ved partout-billetter",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "High",
-        "type": "Bug",
-        "labels": [],
-        "updated": "2026-04-16T19:23:34.409+0200"
-      },
-      {
-        "key": "LCAP-1227",
-        "summary": "Partout-billet kan ikke assignes til barn (422: access_type must be companion or child)",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "High",
-        "type": "Bug",
-        "labels": [
-          "backend",
-          "bug",
-          "commerce"
-        ],
-        "updated": "2026-04-16T12:52:38.413+0200"
       },
       {
         "key": "LCAP-977",
@@ -1291,6 +1261,21 @@
         "updated": "2026-03-30T13:27:45.574+0200"
       },
       {
+        "key": "LCAP-1227",
+        "summary": "Partout-billet kan ikke assignes til barn (422: access_type must be companion or child)",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Bug",
+        "labels": [
+          "backend",
+          "bug",
+          "commerce"
+        ],
+        "updated": "2026-04-17T13:45:29.690+0200"
+      },
+      {
         "key": "LCAP-1214",
         "summary": "API: Sekundære camping-adgange returneres som \"owned\" i stedet for \"unclaimed\"",
         "status": "Ready for test",
@@ -1518,12 +1503,12 @@
         "updated": "2026-04-09T14:30:24.307+0200"
       }
     ],
-    "testQueueCount": 45,
+    "testQueueCount": 46,
     "readyForReleaseCount": 41,
     "capacityCounts": {
       "michael": {
-        "active": 33,
-        "testQueue": 9,
+        "active": 31,
+        "testQueue": 10,
         "readyForRelease": 0,
         "backlog": 47
       },
@@ -15855,7 +15840,7 @@
     "LCAP-1227": {
       "key": "LCAP-1227",
       "summary": "Partout-billet kan ikke assignes til barn (422: access_type must be companion or child)",
-      "status": "In Progress",
+      "status": "Ready for test",
       "statusCategory": "indeterminate",
       "assignee": "Michael Thuren",
       "priority": "High",
@@ -15865,12 +15850,12 @@
         "bug",
         "commerce"
       ],
-      "updated": "2026-04-16T12:52:38.413+0200"
+      "updated": "2026-04-17T13:45:29.690+0200"
     },
     "LCAP-1228": {
       "key": "LCAP-1228",
       "summary": "Delegering af enkelt dag fra partout overfører hele billetten + manglende revoke",
-      "status": "In Progress",
+      "status": "Pending PR",
       "statusCategory": "indeterminate",
       "assignee": "Michael Thuren",
       "priority": "High",
@@ -15880,18 +15865,18 @@
         "bug",
         "commerce"
       ],
-      "updated": "2026-04-17T09:48:02.969+0200"
+      "updated": "2026-04-17T13:45:32.844+0200"
     },
     "LCAP-1229": {
       "key": "LCAP-1229",
       "summary": "Ticket transfer og delegation fejl ved partout-billetter",
-      "status": "Selected for Development",
-      "statusCategory": "new",
+      "status": "In Progress",
+      "statusCategory": "indeterminate",
       "assignee": "Michael Thuren",
       "priority": "High",
       "type": "Bug",
       "labels": [],
-      "updated": "2026-04-16T19:23:34.409+0200"
+      "updated": "2026-04-17T13:45:44.561+0200"
     }
   },
   "velocity": [
@@ -16168,5 +16153,5 @@
       }
     }
   ],
-  "generated": "2026-04-17T11:19:20.066Z"
+  "generated": "2026-04-17T11:46:22.698Z"
 }
