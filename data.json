@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-17T12:17:31.392Z",
+    "startDate": "2026-04-17T12:47:53.921Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -16139,7 +16139,7 @@
         "venues": 7,
         "news": 140,
         "screens": 14,
-        "media": 334,
+        "media": 335,
         "vendors": 0,
         "venueNames": [
           "Anlægsscenen",
@@ -16153,5 +16153,5 @@
       }
     }
   ],
-  "generated": "2026-04-17T12:17:43.752Z"
+  "generated": "2026-04-17T12:48:09.843Z"
 }
