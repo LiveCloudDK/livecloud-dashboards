@@ -36,10 +36,23 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-16T21:50:32.035Z",
+    "startDate": "2026-04-17T05:43:25.903Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-310",
+        "summary": "Content Delivery - Festival Management System",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Epic",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-17T06:44:53.674+0200"
+      },
       {
         "key": "LCAP-1077",
         "summary": "App: Interaktivt festival-kort (map feature)",
@@ -52,19 +65,6 @@
           "app"
         ],
         "updated": "2026-04-16T13:41:28.135+0200"
-      },
-      {
-        "key": "LCAP-597",
-        "summary": "Mobile App Improvements for V3",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Edwin Maldonado",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-04-16T13:40:55.696+0200"
       },
       {
         "key": "LCAP-1218",
@@ -251,19 +251,6 @@
         "updated": "2026-04-14T10:35:37.762+0200"
       },
       {
-        "key": "LCAP-1166",
-        "summary": "Profil-løs billet: QR-kode → service desk → armbånd",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-04-14T10:35:29.037+0200"
-      },
-      {
         "key": "LCAP-915",
         "summary": "EDGE-13: Transfer settlement not scoped by summit",
         "status": "Selected for Development",
@@ -371,19 +358,6 @@
         "updated": "2026-04-13T20:06:51.412+0200"
       },
       {
-        "key": "LCAP-1097",
-        "summary": "NFC-armbånd — kobling til brugerprofil og wallet",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Jakob Højgård",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-04-09T15:24:49.594+0200"
-      },
-      {
         "key": "LCAP-1199",
         "summary": "Ticket type valid_from/valid_to dates display incorrectly on edit page",
         "status": "In Progress",
@@ -418,17 +392,6 @@
         "type": "Story",
         "labels": [],
         "updated": "2026-04-09T07:13:33.242+0200"
-      },
-      {
-        "key": "LCAP-1157",
-        "summary": "Shopify → Ticket Engine: nye billetter med deeplink til app (Mædlfest, Oktoberfest, Julefester)",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Tony Dieu",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [],
-        "updated": "2026-04-08T21:27:20.706+0200"
       },
       {
         "key": "LCAP-1124",
@@ -549,6 +512,30 @@
         "type": "Story",
         "labels": [],
         "updated": "2026-03-16T09:32:45.404+0100"
+      },
+      {
+        "key": "LCAP-1166",
+        "summary": "Profil-løs billet: QR-kode → service desk → armbånd",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-17T06:42:22.431+0200"
+      },
+      {
+        "key": "LCAP-1157",
+        "summary": "Shopify → Ticket Engine: nye billetter med deeplink til app (Mædlfest, Oktoberfest, Julefester)",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [],
+        "updated": "2026-04-17T06:41:35.271+0200"
       },
       {
         "key": "LCAP-1229",
@@ -731,20 +718,6 @@
         "updated": "2026-04-13T21:40:05.094+0200"
       },
       {
-        "key": "LCAP-1216",
-        "summary": "API: GET /tickets — product type og unikke ticket-data pr. underliggende billet",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Tony Dieu",
-        "priority": "High",
-        "type": "Story",
-        "labels": [
-          "api",
-          "tickets"
-        ],
-        "updated": "2026-04-13T11:09:23.837+0200"
-      },
-      {
         "key": "LCAP-1168",
         "summary": "FMS: build own Swedbank Pay integration, migrate online flows from POS",
         "status": "In Progress",
@@ -889,45 +862,6 @@
         "updated": "2026-04-14T11:58:47.564+0200"
       },
       {
-        "key": "LCAP-608",
-        "summary": "Revoked ticket - maby not status but a trace if a ticket delegate or transfere is revoked",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Highest",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-14T11:58:41.689+0200"
-      },
-      {
-        "key": "LCAP-1072",
-        "summary": "App: Scan alle billetter i signup-flow og videresend til andre — claim kun én selv",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Jakob Højgård",
-        "priority": "Highest",
-        "type": "Task",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-04-08T21:25:03.764+0200"
-      },
-      {
-        "key": "LCAP-310",
-        "summary": "Content Delivery - Festival Management System",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Tony Dieu",
-        "priority": "Highest",
-        "type": "Epic",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-03-30T13:27:12.619+0200"
-      },
-      {
         "key": "LCAP-1151",
         "summary": "POS: Remove provider abstraction - go FMS-only",
         "status": "Ready for test",
@@ -941,18 +875,17 @@
         "updated": "2026-04-09T14:29:43.841+0200"
       },
       {
-        "key": "LCAP-610",
-        "summary": "When I share a external/ url -link from artist details - the link should try to open the app and not the web",
+        "key": "LCAP-1097",
+        "summary": "NFC-armbånd — kobling til brugerprofil og wallet",
         "status": "Ready for test",
         "statusCategory": "indeterminate",
         "assignee": "Jakob Højgård",
         "priority": "Medium",
-        "type": "Sub-task",
+        "type": "Story",
         "labels": [
-          "app",
-          "backend"
+          "app"
         ],
-        "updated": "2026-04-16T13:41:03.924+0200"
+        "updated": "2026-04-17T06:42:49.505+0200"
       },
       {
         "key": "LCAP-1035",
@@ -1099,17 +1032,6 @@
         "type": "Sub-task",
         "labels": [],
         "updated": "2026-04-10T09:45:43.634+0200"
-      },
-      {
-        "key": "LCAP-853",
-        "summary": "man skal kunne oprette en artist og inden man trykker gem skal man kunne vælge om den bliver publiceret med det samme eller ej",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Edwin Maldonado",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-10T09:41:06.416+0200"
       },
       {
         "key": "LCAP-1075",
@@ -1401,6 +1323,19 @@
         "updated": "2026-04-07T20:12:13.879+0200"
       },
       {
+        "key": "LCAP-1072",
+        "summary": "App: Scan alle billetter i signup-flow og videresend til andre — claim kun én selv",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Jakob Højgård",
+        "priority": "Highest",
+        "type": "Task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-17T06:42:00.083+0200"
+      },
+      {
         "key": "LCAP-1079",
         "summary": "Billettyper: Camping (2/4 adgang), børnebilletter og ledsagerbilletter",
         "status": "Ready for test",
@@ -1506,19 +1441,19 @@
       }
     ],
     "testQueueCount": 45,
-    "readyForReleaseCount": 40,
+    "readyForReleaseCount": 41,
     "capacityCounts": {
       "michael": {
-        "active": 34,
+        "active": 33,
         "testQueue": 9,
         "readyForRelease": 0,
         "backlog": 47
       },
       "tony": {
-        "active": 13,
+        "active": 12,
         "testQueue": 14,
-        "readyForRelease": 17,
-        "backlog": 58
+        "readyForRelease": 16,
+        "backlog": 55
       },
       "mikkel": {
         "active": 6,
@@ -1527,15 +1462,15 @@
         "backlog": 11
       },
       "jakob": {
-        "active": 6,
-        "testQueue": 5,
-        "readyForRelease": 8,
+        "active": 4,
+        "testQueue": 6,
+        "readyForRelease": 9,
         "backlog": 22
       },
       "edwin": {
-        "active": 3,
-        "testQueue": 5,
-        "readyForRelease": 3,
+        "active": 2,
+        "testQueue": 4,
+        "readyForRelease": 4,
         "backlog": 9
       },
       "simon": {
@@ -1843,5 +1778,5 @@
       }
     }
   ],
-  "generated": "2026-04-16T21:50:39.175Z"
+  "generated": "2026-04-17T05:43:33.558Z"
 }
