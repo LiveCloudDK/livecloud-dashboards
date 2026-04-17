@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-17T18:32:52.917Z",
+    "startDate": "2026-04-17T19:07:14.423Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -1534,7 +1534,7 @@
         "active": 2,
         "testQueue": 4,
         "readyForRelease": 4,
-        "backlog": 9
+        "backlog": 10
       },
       "simon": {
         "active": 15,
@@ -15877,6 +15877,17 @@
       "type": "Bug",
       "labels": [],
       "updated": "2026-04-17T13:45:44.561+0200"
+    },
+    "LCAP-1230": {
+      "key": "LCAP-1230",
+      "summary": "FMS: Venue \"Source\" links point to staging environment instead of production",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Edwin Maldonado",
+      "priority": "High",
+      "type": "Bug",
+      "labels": [],
+      "updated": "2026-04-17T20:33:18.815+0200"
     }
   },
   "velocity": [
@@ -16153,5 +16164,5 @@
       }
     }
   ],
-  "generated": "2026-04-17T18:33:09.460Z"
+  "generated": "2026-04-17T19:07:30.578Z"
 }
