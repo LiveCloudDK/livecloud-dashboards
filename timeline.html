@@ -2192,6 +2192,12 @@ let wsNames = {
       }
       return 0;
     }
+    function todayMarkerHTML() {
+      const nc = fractionalColumn(Date.now()) || 0;
+      const leftPct = (nc / 18 * 100);
+      return `<div style="position:absolute;left:${leftPct}%;top:0;bottom:0;width:2px;background:var(--red);opacity:0.55;z-index:8;pointer-events:none" title="I dag"></div>`;
+    }
+
     function fractionalColumn(d) {
       if (d === null || d === undefined) return null;
       const t = typeof d === 'number' ? d : new Date(d).getTime();
@@ -2206,9 +2212,9 @@ let wsNames = {
     }
 
     // ── Compute reality (actual-start + projected-end) for a task ──
-    // Heuristik: KUN tickets der pt. er aktivt i flow (In Progress / Selected / In Test)
-    // skubber baren. Færdige tickets bidrager til % men ikke til bar-position.
-    // actualStart clampes til max 1 kolonne (~2 uger) før i dag for at undgå støj fra gamle timestamps.
+    // Simplere heuristik: hvis task har aktive tickets (In Progress/Selected/Test) OG
+    // planen er i fremtiden, skub actualStart til NU så baren clearly covers today.
+    // Hvis alt er done, aktualEnd = latest done date.
     function computeTaskReality(task) {
       const tickets = window._tickets;
       if (!tickets || !task.jira) return null;
@@ -2225,7 +2231,6 @@ let wsNames = {
 
       let activeCount = 0;
       let resolvedCount = 0;
-      let activeEarliestUpdate = null;
       let resolvedLatestUpdate = null;
 
       for (const k of keys) {
@@ -2240,35 +2245,34 @@ let wsNames = {
           if (resolvedLatestUpdate === null || ts > resolvedLatestUpdate) resolvedLatestUpdate = ts;
         } else if (activeSet.has(s)) {
           activeCount++;
-          if (activeEarliestUpdate === null || ts < activeEarliestUpdate) activeEarliestUpdate = ts;
         }
       }
 
       if (activeCount === 0 && resolvedCount === 0) return { started: false };
 
-      // actualStart: brug kun aktive tickets. Clamp: ikke mere end 1 kolonne før nu.
+      // actualStart:
+      // - Hvis aktive tickets: skub til at dække NU (plannedStart eller nowCol - 0.3, hvad der er tidligst)
+      // - Hvis kun done: behold plannedStart
       let actualStartCol;
-      if (activeCount > 0 && activeEarliestUpdate !== null) {
-        const raw = fractionalColumn(activeEarliestUpdate);
-        const floor = Math.max(0, nowCol - 1);
-        actualStartCol = Math.max(floor, Math.min(plannedStart, raw));
+      if (activeCount > 0) {
+        actualStartCol = Math.min(plannedStart, Math.max(0, nowCol - 0.3));
       } else {
-        // Kun færdige tickets → behold plannedStart
         actualStartCol = plannedStart;
       }
 
       // projectedEnd
       let projectedEnd;
-      if (live && live.pct >= 100) {
-        projectedEnd = resolvedLatestUpdate !== null ? fractionalColumn(resolvedLatestUpdate) : nowCol;
-      } else if (live && live.pct > 0 && activeCount > 0 && nowCol > actualStartCol + 0.1) {
+      if (live && live.pct >= 100 && resolvedLatestUpdate !== null) {
+        projectedEnd = fractionalColumn(resolvedLatestUpdate);
+      } else if (live && live.pct > 0 && live.pct < 100 && activeCount > 0 && nowCol > actualStartCol + 0.1) {
+        // Ekstrapoler ud fra rate, cap på plannedEnd * 1.5
         const elapsed = nowCol - actualStartCol;
         const projected = actualStartCol + elapsed * (100 / live.pct);
-        projectedEnd = Math.max(nowCol, Math.min(18, projected));
+        projectedEnd = Math.max(nowCol + 0.3, Math.min(Math.max(plannedEnd, plannedEnd * 1.2), projected));
       } else {
-        projectedEnd = plannedEnd;
+        projectedEnd = Math.max(plannedEnd, nowCol + 0.3);
       }
-      projectedEnd = Math.max(actualStartCol + 0.3, projectedEnd);
+      projectedEnd = Math.min(18, Math.max(actualStartCol + 0.5, projectedEnd));
 
       return {
         started: true,
@@ -4224,8 +4228,9 @@ function renderOverview() {
 
     html += `<div class="bar-track" style="position:relative">`;
     for (let i = 0; i < visibleCols; i++) {
-      html += `<div class="bar-cell${i===0?' today-col':''}"></div>`;
+      html += `<div class="bar-cell"></div>`;
     }
+    html += todayMarkerHTML();
 
     // Multi-phase bars (skub/scale når reality er aktiv)
     for (const seg of task.phases) {
@@ -4280,10 +4285,11 @@ function renderDetail() {
 
     html += `<div class="timeline-row section-header" data-ws="${ws}">`;
     html += `<div class="row-label"><span class="tag tag-ws">WS${ws}</span> ${wsNames[ws]}</div>`;
-    html += `<div class="bar-track">`;
+    html += `<div class="bar-track" style="position:relative">`;
     for (let i = 0; i < visibleCols; i++) {
-      html += `<div class="bar-cell${i===0?' today-col':''}"></div>`;
+      html += `<div class="bar-cell"></div>`;
     }
+    html += todayMarkerHTML();
     html += '</div></div>';
 
     for (const task of filtered) {
@@ -4296,8 +4302,9 @@ function renderDetail() {
   const milestones = tasks.filter(t => t.milestone && matchFilters(t));
   if (milestones.length > 0) {
     html += `<div class="timeline-row section-header"><div class="row-label">Milestones</div>`;
-    html += `<div class="bar-track">`;
-    for (let i = 0; i < visibleCols; i++) html += `<div class="bar-cell${i===0?' today-col':''}"></div>`;
+    html += `<div class="bar-track" style="position:relative">`;
+    for (let i = 0; i < visibleCols; i++) html += `<div class="bar-cell"></div>`;
+    html += todayMarkerHTML();
     html += '</div></div>';
     for (const t of milestones) {
       visibleCount++;
@@ -4319,6 +4326,8 @@ function matchFilters(task) {
 function renderRow(task) {
   const persons = task.persons.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(', ');
   const live = computeTaskLiveStatus(task);
+  const reality = task.milestone ? null : computeTaskReality(task);
+  const shifted = reality && reality.started;
 
   let html = `<div class="timeline-row" data-ws="${task.ws}" data-persons="${task.persons.join(',')}" data-phase="${task.phase}" data-id="${task.id}">`;
   html += `<div class="row-label">`;
@@ -4330,16 +4339,23 @@ function renderRow(task) {
   if (live && live.total > 0) {
     html += ` <span class="tag" style="background:${live.pct===100?'#22c55e20':live.inProgress>0?'#3b82f620':live.inTest>0?'#eab30820':'rgba(255,255,255,0.06)'};color:${live.pct===100?'#22c55e':live.inProgress>0?'#3b82f6':live.inTest>0?'#eab308':'var(--text-muted)'};font-size:10px;font-weight:600;padding:1px 6px;border-radius:3px">${live.pct}% · ${live.total}t</span>`;
   }
+  if (shifted && reality.startedEarly) {
+    const weeks = Math.round((reality.plannedStart - reality.actualStartCol) * 2);
+    html += ` <span style="font-size:10px;color:#22c55e">◂ ${weeks}u tidligere</span>`;
+  }
   html += `</div>`;
 
   html += `<div class="bar-track" style="position:relative">`;
   for (let i = 0; i < visibleCols; i++) {
-    html += `<div class="bar-cell${i===0?' today-col':''}"></div>`;
+    html += `<div class="bar-cell"></div>`;
   }
+  html += todayMarkerHTML();
 
-  // Bar
-  const leftPct = (task.start / visibleCols * 100);
-  const widthPct = (task.span / visibleCols * 100);
+  // Bar — brug reality.actualStartCol hvis shifted, ellers task.start
+  const barStart = shifted ? reality.actualStartCol : task.start;
+  const barEnd = shifted ? reality.projectedEnd : (task.start + task.span);
+  const leftPct = (barStart / visibleCols * 100);
+  const widthPct = ((barEnd - barStart) / visibleCols * 100);
   const phaseClass = task.phase;
   const tooltipData = JSON.stringify({label:task.label,persons,jira:task.jira,phase:task.phase,deps:task.deps,desc:task.desc||'',live});
   html += `<div class="gantt-bar ${phaseClass}" style="left:${leftPct}%;width:${widthPct}%;position:absolute;overflow:hidden"
