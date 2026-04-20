@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-20T10:42:33.400Z",
+    "startDate": "2026-04-20T11:13:12.183Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -50,17 +50,6 @@
         "type": "Sub-task",
         "labels": [],
         "updated": "2026-04-20T12:13:16.140+0200"
-      },
-      {
-        "key": "LCAP-1301",
-        "summary": "regler: regelsætter-UI pr. B2B-kunde",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-20T12:13:10.285+0200"
       },
       {
         "key": "LCAP-1300",
@@ -784,19 +773,6 @@
           "fms"
         ],
         "updated": "2026-04-14T11:59:57.737+0200"
-      },
-      {
-        "key": "LCAP-633",
-        "summary": "B2B: Virksomhedsbilletter",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "High",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-14T11:59:16.312+0200"
       },
       {
         "key": "LCAP-332",
@@ -1562,7 +1538,7 @@
     "readyForReleaseCount": 41,
     "capacityCounts": {
       "michael": {
-        "active": 31,
+        "active": 30,
         "testQueue": 10,
         "readyForRelease": 0,
         "backlog": 47
@@ -1592,7 +1568,7 @@
         "backlog": 11
       },
       "simon": {
-        "active": 20,
+        "active": 19,
         "testQueue": 6,
         "readyForRelease": 5,
         "backlog": 64
@@ -8627,15 +8603,15 @@
     "LCAP-633": {
       "key": "LCAP-633",
       "summary": "B2B: Virksomhedsbilletter",
-      "status": "In Progress",
-      "statusCategory": "indeterminate",
+      "status": "Closed",
+      "statusCategory": "done",
       "assignee": "Michael Thuren",
       "priority": "High",
       "type": "Story",
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-14T11:59:16.312+0200"
+      "updated": "2026-04-20T12:58:23.359+0200"
     },
     "LCAP-634": {
       "key": "LCAP-634",
@@ -16717,13 +16693,13 @@
     "LCAP-1301": {
       "key": "LCAP-1301",
       "summary": "regler: regelsætter-UI pr. B2B-kunde",
-      "status": "In Progress",
-      "statusCategory": "indeterminate",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T12:13:10.285+0200"
+      "updated": "2026-04-20T12:59:45.300+0200"
     },
     "LCAP-1302": {
       "key": "LCAP-1302",
@@ -17132,5 +17108,5 @@
       }
     }
   ],
-  "generated": "2026-04-20T10:42:47.051Z"
+  "generated": "2026-04-20T11:13:28.837Z"
 }
