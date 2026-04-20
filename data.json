@@ -36,10 +36,54 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-20T09:13:39.085Z",
+    "startDate": "2026-04-20T09:58:16.383Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-1293",
+        "summary": "akkreditering: import/eksport UI",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-20T11:48:14.950+0200"
+      },
+      {
+        "key": "LCAP-1292",
+        "summary": "akkreditering: invitations-flow UI",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-20T11:47:57.627+0200"
+      },
+      {
+        "key": "LCAP-1291",
+        "summary": "akkreditering: listedetalje UI",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-20T11:47:38.681+0200"
+      },
+      {
+        "key": "LCAP-1290",
+        "summary": "akkreditering: listeoversigt UI",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-20T11:47:34.286+0200"
+      },
       {
         "key": "LCAP-1213",
         "summary": "Søgning og sortering i akkrediteringslister",
@@ -1537,10 +1581,10 @@
         "backlog": 11
       },
       "simon": {
-        "active": 15,
+        "active": 19,
         "testQueue": 6,
         "readyForRelease": 5,
-        "backlog": 65
+        "backlog": 73
       }
     }
   },
@@ -15913,146 +15957,146 @@
     },
     "LCAP-1233": {
       "key": "LCAP-1233",
-      "summary": "B2B Portal — Backend: resterende arbejde",
+      "summary": "B2B Portal — Backend",
       "status": "Backlog",
       "statusCategory": "new",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Task",
       "labels": [],
-      "updated": "2026-04-20T10:44:13.739+0200"
+      "updated": "2026-04-20T11:28:18.156+0200"
     },
     "LCAP-1234": {
       "key": "LCAP-1234",
-      "summary": "B2B Portal — Frontend: resterende arbejde",
+      "summary": "B2B Portal — Frontend",
       "status": "Backlog",
       "statusCategory": "new",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Task",
       "labels": [],
-      "updated": "2026-04-20T10:44:17.812+0200"
+      "updated": "2026-04-20T11:28:11.896+0200"
     },
     "LCAP-1235": {
       "key": "LCAP-1235",
-      "summary": "FMS — Backend: resterende arbejde",
+      "summary": "B2B FMS — Backend",
       "status": "Backlog",
       "statusCategory": "new",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Task",
       "labels": [],
-      "updated": "2026-04-20T10:44:22.618+0200"
+      "updated": "2026-04-20T11:27:52.025+0200"
     },
     "LCAP-1236": {
       "key": "LCAP-1236",
-      "summary": "FMS — Frontend: resterende arbejde",
+      "summary": "B2B FMS — Frontend",
       "status": "Backlog",
       "statusCategory": "new",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Task",
       "labels": [],
-      "updated": "2026-04-20T10:44:28.615+0200"
+      "updated": "2026-04-20T11:28:03.240+0200"
     },
     "LCAP-1237": {
       "key": "LCAP-1237",
-      "summary": "auth: Fortify + panel provider-setup",
-      "status": "Done",
+      "summary": "⚠️ IKKE LAVET — auth: Fortify + panel provider-setup",
+      "status": "Closed",
       "statusCategory": "done",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T10:58:32.301+0200"
+      "updated": "2026-04-20T11:49:05.471+0200"
     },
     "LCAP-1238": {
       "key": "LCAP-1238",
-      "summary": "ordre: ordreholder ser ordrer & fakturastatus",
-      "status": "Done",
+      "summary": "⚠️ IKKE LAVET — ordre: ordreholder ser ordrer & fakturastatus",
+      "status": "Closed",
       "statusCategory": "done",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T10:58:38.586+0200"
+      "updated": "2026-04-20T11:49:10.122+0200"
     },
     "LCAP-1239": {
       "key": "LCAP-1239",
-      "summary": "ordre: frigiv billetter/Beats ved \"Betalt\"",
-      "status": "Done",
+      "summary": "⚠️ IKKE LAVET — ordre: frigiv billetter/Beats ved \"Betalt\"",
+      "status": "Closed",
       "statusCategory": "done",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T10:58:44.007+0200"
+      "updated": "2026-04-20T11:49:14.202+0200"
     },
     "LCAP-1240": {
       "key": "LCAP-1240",
-      "summary": "billet: tildel billet til medarbejder + claim-token",
-      "status": "Done",
+      "summary": "⚠️ IKKE LAVET — billet: tildel billet til medarbejder + claim-token",
+      "status": "Closed",
       "statusCategory": "done",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T10:58:48.023+0200"
+      "updated": "2026-04-20T11:49:18.583+0200"
     },
     "LCAP-1241": {
       "key": "LCAP-1241",
-      "summary": "billet: revoke claimed billet",
-      "status": "Done",
+      "summary": "⚠️ IKKE LAVET — billet: revoke claimed billet",
+      "status": "Closed",
       "statusCategory": "done",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T10:58:54.228+0200"
+      "updated": "2026-04-20T11:49:23.207+0200"
     },
     "LCAP-1242": {
       "key": "LCAP-1242",
-      "summary": "beats: fordel & omfordel på available/distributed",
-      "status": "Done",
+      "summary": "⚠️ IKKE LAVET — beats: fordel & omfordel på available/distributed",
+      "status": "Closed",
       "statusCategory": "done",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T10:58:59.571+0200"
+      "updated": "2026-04-20T11:49:28.433+0200"
     },
     "LCAP-1243": {
       "key": "LCAP-1243",
-      "summary": "beats: omfordel på claimed (revoke-gate)",
-      "status": "Done",
+      "summary": "⚠️ IKKE LAVET — beats: omfordel på claimed (revoke-gate)",
+      "status": "Closed",
       "statusCategory": "done",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T10:59:04.432+0200"
+      "updated": "2026-04-20T11:49:33.661+0200"
     },
     "LCAP-1244": {
       "key": "LCAP-1244",
-      "summary": "claim: public claim-flow + deeplink + mail",
-      "status": "Done",
+      "summary": "⚠️ IKKE LAVET — claim: public claim-flow + deeplink + mail",
+      "status": "Closed",
       "statusCategory": "done",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T10:59:09.263+0200"
+      "updated": "2026-04-20T11:49:43.115+0200"
     },
     "LCAP-1245": {
       "key": "LCAP-1245",
-      "summary": "import: CSV-upload med emails og navne",
-      "status": "Done",
+      "summary": "⚠️ IKKE LAVET — import: CSV-upload med emails og navne",
+      "status": "Closed",
       "statusCategory": "done",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T10:59:14.945+0200"
+      "updated": "2026-04-20T11:49:48.459+0200"
     },
     "LCAP-1246": {
       "key": "LCAP-1246",
@@ -16243,36 +16287,36 @@
     },
     "LCAP-1263": {
       "key": "LCAP-1263",
-      "summary": "kundeoprettelse: OrderHolder + signed-URL invite",
-      "status": "Done",
+      "summary": "⚠️ IKKE LAVET — kundeoprettelse: OrderHolder + signed-URL invite",
+      "status": "Closed",
       "statusCategory": "done",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T11:00:02.306+0200"
+      "updated": "2026-04-20T11:49:55.205+0200"
     },
     "LCAP-1264": {
       "key": "LCAP-1264",
-      "summary": "ordrer: B2B-ordre + fakturastatus-model",
-      "status": "Done",
+      "summary": "⚠️ IKKE LAVET — ordrer: B2B-ordre + fakturastatus-model",
+      "status": "Closed",
       "statusCategory": "done",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T11:00:06.839+0200"
+      "updated": "2026-04-20T11:49:59.726+0200"
     },
     "LCAP-1265": {
       "key": "LCAP-1265",
-      "summary": "ordrer: frigiv billetter+Beats ved \"Betalt\"",
-      "status": "Done",
+      "summary": "⚠️ IKKE LAVET — ordrer: frigiv billetter+Beats ved \"Betalt\"",
+      "status": "Closed",
       "statusCategory": "done",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T11:00:11.587+0200"
+      "updated": "2026-04-20T11:50:04.606+0200"
     },
     "LCAP-1266": {
       "key": "LCAP-1266",
@@ -16541,46 +16585,46 @@
     "LCAP-1290": {
       "key": "LCAP-1290",
       "summary": "akkreditering: listeoversigt UI",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "In Progress",
+      "statusCategory": "indeterminate",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T10:57:52.293+0200"
+      "updated": "2026-04-20T11:47:34.286+0200"
     },
     "LCAP-1291": {
       "key": "LCAP-1291",
       "summary": "akkreditering: listedetalje UI",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "In Progress",
+      "statusCategory": "indeterminate",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T10:57:56.776+0200"
+      "updated": "2026-04-20T11:47:38.681+0200"
     },
     "LCAP-1292": {
       "key": "LCAP-1292",
       "summary": "akkreditering: invitations-flow UI",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "In Progress",
+      "statusCategory": "indeterminate",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T10:58:00.704+0200"
+      "updated": "2026-04-20T11:47:57.627+0200"
     },
     "LCAP-1293": {
       "key": "LCAP-1293",
       "summary": "akkreditering: import/eksport UI",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "In Progress",
+      "statusCategory": "indeterminate",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T10:58:04.256+0200"
+      "updated": "2026-04-20T11:48:14.950+0200"
     },
     "LCAP-1294": {
       "key": "LCAP-1294",
@@ -16669,6 +16713,138 @@
       "type": "Sub-task",
       "labels": [],
       "updated": "2026-04-20T10:57:05.366+0200"
+    },
+    "LCAP-1302": {
+      "key": "LCAP-1302",
+      "summary": "auth: Fortify + panel provider-setup",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Simon Jensen",
+      "priority": "Medium",
+      "type": "Sub-task",
+      "labels": [],
+      "updated": "2026-04-20T11:46:56.414+0200"
+    },
+    "LCAP-1303": {
+      "key": "LCAP-1303",
+      "summary": "ordre: ordreholder ser ordrer & fakturastatus",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Simon Jensen",
+      "priority": "Medium",
+      "type": "Sub-task",
+      "labels": [],
+      "updated": "2026-04-20T11:47:06.883+0200"
+    },
+    "LCAP-1304": {
+      "key": "LCAP-1304",
+      "summary": "ordre: frigiv billetter/Beats ved \"Betalt\"",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Simon Jensen",
+      "priority": "Medium",
+      "type": "Sub-task",
+      "labels": [],
+      "updated": "2026-04-20T11:47:16.936+0200"
+    },
+    "LCAP-1305": {
+      "key": "LCAP-1305",
+      "summary": "billet: tildel billet til medarbejder + claim-token",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Simon Jensen",
+      "priority": "Medium",
+      "type": "Sub-task",
+      "labels": [],
+      "updated": "2026-04-20T11:47:27.712+0200"
+    },
+    "LCAP-1306": {
+      "key": "LCAP-1306",
+      "summary": "billet: revoke claimed billet",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Simon Jensen",
+      "priority": "Medium",
+      "type": "Sub-task",
+      "labels": [],
+      "updated": "2026-04-20T11:47:39.273+0200"
+    },
+    "LCAP-1307": {
+      "key": "LCAP-1307",
+      "summary": "beats: fordel & omfordel på available/distributed",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Simon Jensen",
+      "priority": "Medium",
+      "type": "Sub-task",
+      "labels": [],
+      "updated": "2026-04-20T11:47:49.281+0200"
+    },
+    "LCAP-1308": {
+      "key": "LCAP-1308",
+      "summary": "beats: omfordel på claimed (revoke-gate)",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Simon Jensen",
+      "priority": "Medium",
+      "type": "Sub-task",
+      "labels": [],
+      "updated": "2026-04-20T11:47:59.963+0200"
+    },
+    "LCAP-1309": {
+      "key": "LCAP-1309",
+      "summary": "claim: public claim-flow + deeplink + mail",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Simon Jensen",
+      "priority": "Medium",
+      "type": "Sub-task",
+      "labels": [],
+      "updated": "2026-04-20T11:48:12.179+0200"
+    },
+    "LCAP-1310": {
+      "key": "LCAP-1310",
+      "summary": "import: CSV-upload med emails og navne",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Simon Jensen",
+      "priority": "Medium",
+      "type": "Sub-task",
+      "labels": [],
+      "updated": "2026-04-20T11:48:20.771+0200"
+    },
+    "LCAP-1311": {
+      "key": "LCAP-1311",
+      "summary": "kundeoprettelse: OrderHolder + signed-URL invite",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Simon Jensen",
+      "priority": "Medium",
+      "type": "Sub-task",
+      "labels": [],
+      "updated": "2026-04-20T11:48:36.515+0200"
+    },
+    "LCAP-1312": {
+      "key": "LCAP-1312",
+      "summary": "ordrer: B2B-ordre + fakturastatus-model",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Simon Jensen",
+      "priority": "Medium",
+      "type": "Sub-task",
+      "labels": [],
+      "updated": "2026-04-20T11:48:45.429+0200"
+    },
+    "LCAP-1313": {
+      "key": "LCAP-1313",
+      "summary": "ordrer: frigiv billetter+Beats ved \"Betalt\"",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Simon Jensen",
+      "priority": "Medium",
+      "type": "Sub-task",
+      "labels": [],
+      "updated": "2026-04-20T11:48:54.430+0200"
     }
   },
   "velocity": [
@@ -16945,5 +17121,5 @@
       }
     }
   ],
-  "generated": "2026-04-20T09:13:54.584Z"
+  "generated": "2026-04-20T09:58:29.182Z"
 }
