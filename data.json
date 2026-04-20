@@ -36,10 +36,23 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-17T22:00:45.346Z",
+    "startDate": "2026-04-20T05:52:24.441Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-907",
+        "summary": "EDGE-7: UserCentral email change invalidates pending transfers",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-19T11:25:32.680+0200"
+      },
       {
         "key": "LCAP-1213",
         "summary": "Søgning og sortering i akkrediteringslister",
@@ -244,19 +257,6 @@
           "commerce"
         ],
         "updated": "2026-04-14T17:11:07.503+0200"
-      },
-      {
-        "key": "LCAP-907",
-        "summary": "EDGE-7: UserCentral email change invalidates pending transfers",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-14T16:17:27.041+0200"
       },
       {
         "key": "LCAP-1163",
@@ -1534,13 +1534,13 @@
         "active": 2,
         "testQueue": 4,
         "readyForRelease": 4,
-        "backlog": 10
+        "backlog": 11
       },
       "simon": {
         "active": 15,
         "testQueue": 6,
         "readyForRelease": 5,
-        "backlog": 17
+        "backlog": 18
       }
     }
   },
@@ -11686,7 +11686,7 @@
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-14T16:17:27.041+0200"
+      "updated": "2026-04-19T11:25:32.680+0200"
     },
     "LCAP-908": {
       "key": "LCAP-908",
@@ -15888,6 +15888,28 @@
       "type": "Bug",
       "labels": [],
       "updated": "2026-04-17T20:33:18.815+0200"
+    },
+    "LCAP-1231": {
+      "key": "LCAP-1231",
+      "summary": "FMS: Add URL validation for all URL input fields",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Edwin Maldonado",
+      "priority": "Medium",
+      "type": "Task",
+      "labels": [],
+      "updated": "2026-04-18T10:38:36.510+0200"
+    },
+    "LCAP-1232": {
+      "key": "LCAP-1232",
+      "summary": "Webshop: Login, profile creation, and ticket claim flow",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Simon Jensen",
+      "priority": "High",
+      "type": "Story",
+      "labels": [],
+      "updated": "2026-04-18T10:49:53.602+0200"
     }
   },
   "velocity": [
@@ -16164,5 +16186,5 @@
       }
     }
   ],
-  "generated": "2026-04-17T22:01:01.959Z"
+  "generated": "2026-04-20T05:52:39.899Z"
 }
