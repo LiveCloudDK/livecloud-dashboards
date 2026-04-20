@@ -36,10 +36,126 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-20T11:13:12.183Z",
+    "startDate": "2026-04-20T11:46:30.778Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-1058",
+        "summary": "Inventory opdateres ikke ved ordre/køb",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Bug",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-20T13:45:51.028+0200"
+      },
+      {
+        "key": "LCAP-857",
+        "summary": "Consumer Pre-Order Flow (Food & Beverages)",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Epic",
+        "labels": [],
+        "updated": "2026-04-20T13:39:31.673+0200"
+      },
+      {
+        "key": "LCAP-849",
+        "summary": "FMS Backoffice — Map editor for vendor pin placement",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-20T13:39:19.164+0200"
+      },
+      {
+        "key": "LCAP-848",
+        "summary": "Content API — Map data endpoint for vendor locations",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-20T13:39:13.051+0200"
+      },
+      {
+        "key": "LCAP-845",
+        "summary": "Festival Venue Map — Interactive vendor map with location pins",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Epic",
+        "labels": [],
+        "updated": "2026-04-20T13:39:07.822+0200"
+      },
+      {
+        "key": "LCAP-935",
+        "summary": "Commerce integration test + storefront klargøring",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-20T13:37:28.078+0200"
+      },
+      {
+        "key": "LCAP-497",
+        "summary": "Web Tickets",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Epic",
+        "labels": [],
+        "updated": "2026-04-20T13:34:34.870+0200"
+      },
+      {
+        "key": "LCAP-409",
+        "summary": "Hardware decisions",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-20T13:33:45.104+0200"
+      },
+      {
+        "key": "LCAP-389",
+        "summary": "Migration from Shopify to new commerce",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-20T13:33:34.288+0200"
+      },
+      {
+        "key": "LCAP-122",
+        "summary": "Food and beverage",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-20T13:29:20.459+0200"
+      },
       {
         "key": "LCAP-1289",
         "summary": "ordrer: admin ordreoversigt + filtre",
@@ -61,28 +177,6 @@
         "type": "Sub-task",
         "labels": [],
         "updated": "2026-04-20T12:13:03.822+0200"
-      },
-      {
-        "key": "LCAP-1299",
-        "summary": "b2b-oversigt: dashboard-UI",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-20T12:12:57.905+0200"
-      },
-      {
-        "key": "LCAP-1298",
-        "summary": "profil-løs: service desk-panel",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-20T12:12:52.426+0200"
       },
       {
         "key": "LCAP-1213",
@@ -634,6 +728,45 @@
         "type": "Story",
         "labels": [],
         "updated": "2026-03-16T09:32:45.404+0100"
+      },
+      {
+        "key": "LCAP-1067",
+        "summary": "POS/App: Initier betaling fra POS på kundens app efter identifikation",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-04-20T13:46:15.462+0200"
+      },
+      {
+        "key": "LCAP-1062",
+        "summary": "POS/Backend: Refund Beats til kreditkort",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "pos"
+        ],
+        "updated": "2026-04-20T13:46:09.351+0200"
+      },
+      {
+        "key": "LCAP-1011",
+        "summary": "FMS Admin — masseredigering af produkter og vendors",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-20T13:44:41.112+0200"
       },
       {
         "key": "LCAP-1229",
@@ -1535,43 +1668,43 @@
       }
     ],
     "testQueueCount": 46,
-    "readyForReleaseCount": 41,
+    "readyForReleaseCount": 43,
     "capacityCounts": {
       "michael": {
-        "active": 30,
+        "active": 31,
         "testQueue": 10,
-        "readyForRelease": 0,
-        "backlog": 47
+        "readyForRelease": 2,
+        "backlog": 41
       },
       "tony": {
-        "active": 12,
+        "active": 15,
         "testQueue": 14,
         "readyForRelease": 16,
-        "backlog": 55
+        "backlog": 44
       },
       "mikkel": {
-        "active": 5,
+        "active": 6,
         "testQueue": 4,
         "readyForRelease": 6,
-        "backlog": 10
+        "backlog": 6
       },
       "jakob": {
-        "active": 5,
+        "active": 8,
         "testQueue": 6,
         "readyForRelease": 9,
-        "backlog": 23
+        "backlog": 17
       },
       "edwin": {
-        "active": 2,
+        "active": 4,
         "testQueue": 4,
         "readyForRelease": 4,
-        "backlog": 11
+        "backlog": 9
       },
       "simon": {
-        "active": 19,
+        "active": 20,
         "testQueue": 6,
         "readyForRelease": 5,
-        "backlog": 64
+        "backlog": 72
       }
     }
   },
@@ -2939,7 +3072,7 @@
     "LCAP-122": {
       "key": "LCAP-122",
       "summary": "Food and beverage",
-      "status": "Backlog",
+      "status": "Selected for Development",
       "statusCategory": "new",
       "assignee": "Jakob Højgård",
       "priority": "Medium",
@@ -2947,7 +3080,7 @@
       "labels": [
         "commerce"
       ],
-      "updated": "2026-03-30T13:27:20.774+0200"
+      "updated": "2026-04-20T13:29:20.459+0200"
     },
     "LCAP-123": {
       "key": "LCAP-123",
@@ -2974,35 +3107,35 @@
     "LCAP-125": {
       "key": "LCAP-125",
       "summary": "Relations and Keys",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": null,
       "priority": "Medium",
       "type": "Task",
       "labels": [],
-      "updated": "2026-01-19T11:14:26.791+0100"
+      "updated": "2026-04-20T13:29:37.352+0200"
     },
     "LCAP-126": {
       "key": "LCAP-126",
       "summary": "Lifecycle & States",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": null,
       "priority": "Medium",
       "type": "Task",
       "labels": [],
-      "updated": "2026-01-19T11:14:24.808+0100"
+      "updated": "2026-04-20T13:29:40.870+0200"
     },
     "LCAP-127": {
       "key": "LCAP-127",
       "summary": "Security & Compliance (MVP)",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": null,
       "priority": "Medium",
       "type": "Task",
       "labels": [],
-      "updated": "2026-01-19T11:14:22.901+0100"
+      "updated": "2026-04-20T13:29:48.230+0200"
     },
     "LCAP-128": {
       "key": "LCAP-128",
@@ -3220,15 +3353,15 @@
     "LCAP-147": {
       "key": "LCAP-147",
       "summary": "Payment setup",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": "Jakob Højgård",
       "priority": "Medium",
       "type": "Story",
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-14T09:53:01.914+0200"
+      "updated": "2026-04-20T13:30:09.239+0200"
     },
     "LCAP-148": {
       "key": "LCAP-148",
@@ -5232,13 +5365,13 @@
     "LCAP-329": {
       "key": "LCAP-329",
       "summary": "Beats Conversion",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": null,
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-01-19T11:27:20.693+0100"
+      "updated": "2026-04-20T13:30:25.753+0200"
     },
     "LCAP-330": {
       "key": "LCAP-330",
@@ -5282,11 +5415,11 @@
       "summary": "Low Balance Notifications",
       "status": "Backlog",
       "statusCategory": "new",
-      "assignee": null,
+      "assignee": "Tony Dieu",
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-01-19T11:27:24.241+0100"
+      "updated": "2026-04-20T13:30:36.915+0200"
     },
     "LCAP-334": {
       "key": "LCAP-334",
@@ -5302,13 +5435,13 @@
     "LCAP-335": {
       "key": "LCAP-335",
       "summary": "Create Stalls as Vendors",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": "Michael Thuren",
       "priority": "High",
       "type": "Story",
       "labels": [],
-      "updated": "2026-04-14T11:59:05.008+0200"
+      "updated": "2026-04-20T13:30:43.763+0200"
     },
     "LCAP-336": {
       "key": "LCAP-336",
@@ -5326,11 +5459,11 @@
       "summary": "Manual Order Creation",
       "status": "Backlog",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Simon Jensen",
       "priority": "High",
       "type": "Story",
       "labels": [],
-      "updated": "2026-04-14T11:59:21.367+0200"
+      "updated": "2026-04-20T13:30:58.480+0200"
     },
     "LCAP-338": {
       "key": "LCAP-338",
@@ -5348,11 +5481,11 @@
       "summary": "Re-send Order Confirmation",
       "status": "Backlog",
       "statusCategory": "new",
-      "assignee": null,
+      "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-01-19T11:26:10.854+0100"
+      "updated": "2026-04-20T13:31:07.051+0200"
     },
     "LCAP-340": {
       "key": "LCAP-340",
@@ -5370,33 +5503,33 @@
       "summary": "Order Timer & Reservation",
       "status": "Backlog",
       "statusCategory": "new",
-      "assignee": null,
+      "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-01-19T11:26:01.372+0100"
+      "updated": "2026-04-20T13:31:18.258+0200"
     },
     "LCAP-342": {
       "key": "LCAP-342",
       "summary": "Global Inventory Overview",
       "status": "Backlog",
       "statusCategory": "new",
-      "assignee": null,
+      "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-01-19T11:25:57.329+0100"
+      "updated": "2026-04-20T13:31:27.158+0200"
     },
     "LCAP-343": {
       "key": "LCAP-343",
       "summary": "Schedule Product Publishing",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": null,
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-01-19T11:25:50.967+0100"
+      "updated": "2026-04-20T13:31:33.278+0200"
     },
     "LCAP-344": {
       "key": "LCAP-344",
@@ -5414,22 +5547,22 @@
       "summary": "AI-Assisted Order Creation",
       "status": "Backlog",
       "statusCategory": "new",
-      "assignee": null,
+      "assignee": "Michael Thuren",
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-01-19T11:25:42.940+0100"
+      "updated": "2026-04-20T13:31:42.261+0200"
     },
     "LCAP-346": {
       "key": "LCAP-346",
       "summary": "AI Stock Forecast",
       "status": "Backlog",
       "statusCategory": "new",
-      "assignee": null,
+      "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-01-19T11:25:39.766+0100"
+      "updated": "2026-04-20T13:31:55.286+0200"
     },
     "LCAP-347": {
       "key": "LCAP-347",
@@ -5447,13 +5580,13 @@
     "LCAP-348": {
       "key": "LCAP-348",
       "summary": "Event Webhooks",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": null,
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-01-19T11:25:17.217+0100"
+      "updated": "2026-04-20T13:32:03.619+0200"
     },
     "LCAP-349": {
       "key": "LCAP-349",
@@ -5469,24 +5602,24 @@
     "LCAP-350": {
       "key": "LCAP-350",
       "summary": "Rule-Based Pricing Engine",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": null,
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-01-19T11:25:13.244+0100"
+      "updated": "2026-04-20T13:32:09.511+0200"
     },
     "LCAP-351": {
       "key": "LCAP-351",
       "summary": "Discount Codes & Campaigns",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": null,
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-01-19T11:25:11.484+0100"
+      "updated": "2026-04-20T13:32:15.986+0200"
     },
     "LCAP-352": {
       "key": "LCAP-352",
@@ -5524,13 +5657,13 @@
     "LCAP-355": {
       "key": "LCAP-355",
       "summary": "Beat Flow Analysis",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": null,
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-01-19T11:25:04.421+0100"
+      "updated": "2026-04-20T13:32:34.264+0200"
     },
     "LCAP-356": {
       "key": "LCAP-356",
@@ -5557,13 +5690,13 @@
     "LCAP-358": {
       "key": "LCAP-358",
       "summary": "Tenant Isolation",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": null,
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-01-19T11:24:59.867+0100"
+      "updated": "2026-04-20T13:32:45.252+0200"
     },
     "LCAP-359": {
       "key": "LCAP-359",
@@ -5579,13 +5712,13 @@
     "LCAP-360": {
       "key": "LCAP-360",
       "summary": "Shared Product Library",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": null,
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-01-19T11:24:56.950+0100"
+      "updated": "2026-04-20T13:32:53.224+0200"
     },
     "LCAP-361": {
       "key": "LCAP-361",
@@ -5623,13 +5756,13 @@
     "LCAP-364": {
       "key": "LCAP-364",
       "summary": "Partial Fulfillment & Refunds",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Closed",
+      "statusCategory": "done",
       "assignee": null,
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-01-19T11:24:45.880+0100"
+      "updated": "2026-04-20T13:33:05.981+0200"
     },
     "LCAP-365": {
       "key": "LCAP-365",
@@ -5656,13 +5789,13 @@
     "LCAP-367": {
       "key": "LCAP-367",
       "summary": "Approval Flows for Refunds",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Closed",
+      "statusCategory": "done",
       "assignee": null,
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-01-19T11:24:33.612+0100"
+      "updated": "2026-04-20T13:33:21.020+0200"
     },
     "LCAP-368": {
       "key": "LCAP-368",
@@ -5898,13 +6031,13 @@
     "LCAP-389": {
       "key": "LCAP-389",
       "summary": "Migration from Shopify to new commerce",
-      "status": "Backlog",
+      "status": "Selected for Development",
       "statusCategory": "new",
       "assignee": "Tony Dieu",
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2025-12-23T09:45:09.731+0100"
+      "updated": "2026-04-20T13:33:34.288+0200"
     },
     "LCAP-390": {
       "key": "LCAP-390",
@@ -6118,13 +6251,13 @@
     "LCAP-409": {
       "key": "LCAP-409",
       "summary": "Hardware decisions",
-      "status": "Backlog",
+      "status": "Selected for Development",
       "statusCategory": "new",
       "assignee": "Jakob Højgård",
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2025-12-23T10:07:40.588+0100"
+      "updated": "2026-04-20T13:33:45.104+0200"
     },
     "LCAP-410": {
       "key": "LCAP-410",
@@ -7011,11 +7144,11 @@
       "summary": "Mobile WebView Support & Authentication",
       "status": "Backlog",
       "statusCategory": "new",
-      "assignee": null,
+      "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2025-12-22T10:34:36.253+0100"
+      "updated": "2026-04-20T13:34:07.370+0200"
     },
     "LCAP-491": {
       "key": "LCAP-491",
@@ -7086,13 +7219,13 @@
     "LCAP-497": {
       "key": "LCAP-497",
       "summary": "Web Tickets",
-      "status": "Backlog",
+      "status": "Selected for Development",
       "statusCategory": "new",
-      "assignee": "Tony Dieu",
+      "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Epic",
       "labels": [],
-      "updated": "2026-01-02T10:30:30.667+0100"
+      "updated": "2026-04-20T13:34:34.870+0200"
     },
     "LCAP-498": {
       "key": "LCAP-498",
@@ -7906,15 +8039,15 @@
     "LCAP-571": {
       "key": "LCAP-571",
       "summary": "Logic for binding tickets to users ",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Closed",
+      "statusCategory": "done",
       "assignee": "Tony Dieu",
       "priority": "High",
       "type": "Story",
       "labels": [
         "commerce"
       ],
-      "updated": "2026-03-30T13:27:43.827+0200"
+      "updated": "2026-04-20T13:34:55.045+0200"
     },
     "LCAP-572": {
       "key": "LCAP-572",
@@ -8007,13 +8140,13 @@
     "LCAP-580": {
       "key": "LCAP-580",
       "summary": "Remove everything for internal",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Closed",
+      "statusCategory": "done",
       "assignee": "Tony Dieu",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-01-19T14:34:23.270+0100"
+      "updated": "2026-04-20T13:35:08.661+0200"
     },
     "LCAP-581": {
       "key": "LCAP-581",
@@ -8295,13 +8428,13 @@
     "LCAP-606": {
       "key": "LCAP-606",
       "summary": "Add a time indicator on the schedule timeline and listview that shows a line/ border for the current time of day",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": "Mikkel Kornval Christoffersen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-03-23T09:55:38.896+0100"
+      "updated": "2026-04-20T13:37:55.995+0200"
     },
     "LCAP-607": {
       "key": "LCAP-607",
@@ -8366,24 +8499,24 @@
     "LCAP-612": {
       "key": "LCAP-612",
       "summary": "Conditional tabbar menu, and setup",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Closed",
+      "statusCategory": "done",
       "assignee": "Tony Dieu",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-01-16T10:41:09.286+0100"
+      "updated": "2026-04-20T13:35:56.679+0200"
     },
     "LCAP-613": {
       "key": "LCAP-613",
       "summary": "Improvements for FMS v1.0.0",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": "Edwin Maldonado",
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-03-17T11:55:24.836+0100"
+      "updated": "2026-04-20T13:36:06.698+0200"
     },
     "LCAP-614": {
       "key": "LCAP-614",
@@ -9227,11 +9360,11 @@
       "summary": "Header action, it should possible to select an icon from a list and link to a screen or url",
       "status": "Backlog",
       "statusCategory": "new",
-      "assignee": null,
+      "assignee": "Edwin Maldonado",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-02-09T10:18:57.011+0100"
+      "updated": "2026-04-20T13:36:37.090+0200"
     },
     "LCAP-690": {
       "key": "LCAP-690",
@@ -9561,14 +9694,14 @@
     },
     "LCAP-719": {
       "key": "LCAP-719",
-      "summary": "[Festhallen] Commerce API",
+      "summary": "Commerce API",
       "status": "Backlog",
       "statusCategory": "new",
       "assignee": "Michael Thuren",
       "priority": "Medium",
       "type": "Epic",
       "labels": [],
-      "updated": "2026-04-14T11:59:24.661+0200"
+      "updated": "2026-04-20T13:41:50.195+0200"
     },
     "LCAP-720": {
       "key": "LCAP-720",
@@ -9740,13 +9873,13 @@
     "LCAP-735": {
       "key": "LCAP-735",
       "summary": "Post-TestFlight monitoring and hotfixes",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Closed",
+      "statusCategory": "done",
       "assignee": "Mikkel Kornval Christoffersen",
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-03-02T08:41:35.504+0100"
+      "updated": "2026-04-20T13:42:32.952+0200"
     },
     "LCAP-736": {
       "key": "LCAP-736",
@@ -10134,13 +10267,13 @@
     "LCAP-769": {
       "key": "LCAP-769",
       "summary": "Tickets to multiple access options",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Ready for release",
+      "statusCategory": "indeterminate",
       "assignee": "Michael Thuren",
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-04-14T12:21:43.466+0200"
+      "updated": "2026-04-20T13:38:07.890+0200"
     },
     "LCAP-770": {
       "key": "LCAP-770",
@@ -10167,13 +10300,13 @@
     "LCAP-772": {
       "key": "LCAP-772",
       "summary": "Removing the initial screen from the Tab Menu options causes a backend error because the initial page slug no longer exists in the array",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": "Tony Dieu",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-02-09T10:16:26.830+0100"
+      "updated": "2026-04-20T13:36:49.105+0200"
     },
     "LCAP-773": {
       "key": "LCAP-773",
@@ -10518,7 +10651,7 @@
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-13T21:39:53.568+0200"
+      "updated": "2026-04-20T13:42:08.912+0200"
     },
     "LCAP-804": {
       "key": "LCAP-804",
@@ -10531,7 +10664,7 @@
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-13T21:40:00.131+0200"
+      "updated": "2026-04-20T13:42:11.837+0200"
     },
     "LCAP-805": {
       "key": "LCAP-805",
@@ -10544,7 +10677,7 @@
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-13T21:40:01.761+0200"
+      "updated": "2026-04-20T13:42:15.254+0200"
     },
     "LCAP-806": {
       "key": "LCAP-806",
@@ -10596,7 +10729,7 @@
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-13T21:40:03.375+0200"
+      "updated": "2026-04-20T13:42:25.457+0200"
     },
     "LCAP-810": {
       "key": "LCAP-810",
@@ -10938,24 +11071,24 @@
     "LCAP-837": {
       "key": "LCAP-837",
       "summary": "add artis component",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": "Tony Dieu",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-02-24T14:12:21.234+0100"
+      "updated": "2026-04-20T13:38:23.168+0200"
     },
     "LCAP-838": {
       "key": "LCAP-838",
       "summary": "Add a test editor component",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": "Tony Dieu",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-02-24T14:12:10.233+0100"
+      "updated": "2026-04-20T13:38:39.495+0200"
     },
     "LCAP-840": {
       "key": "LCAP-840",
@@ -11015,13 +11148,13 @@
     "LCAP-845": {
       "key": "LCAP-845",
       "summary": "Festival Venue Map — Interactive vendor map with location pins",
-      "status": "Backlog",
+      "status": "Selected for Development",
       "statusCategory": "new",
       "assignee": "Mikkel Kornval Christoffersen",
       "priority": "Medium",
       "type": "Epic",
       "labels": [],
-      "updated": "2026-04-13T20:06:43.364+0200"
+      "updated": "2026-04-20T13:39:07.822+0200"
     },
     "LCAP-846": {
       "key": "LCAP-846",
@@ -11048,24 +11181,24 @@
     "LCAP-848": {
       "key": "LCAP-848",
       "summary": "Content API — Map data endpoint for vendor locations",
-      "status": "Backlog",
+      "status": "Selected for Development",
       "statusCategory": "new",
       "assignee": "Edwin Maldonado",
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-04-13T20:06:47.527+0200"
+      "updated": "2026-04-20T13:39:13.051+0200"
     },
     "LCAP-849": {
       "key": "LCAP-849",
       "summary": "FMS Backoffice — Map editor for vendor pin placement",
-      "status": "Backlog",
+      "status": "Selected for Development",
       "statusCategory": "new",
       "assignee": "Edwin Maldonado",
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-04-13T20:06:49.510+0200"
+      "updated": "2026-04-20T13:39:19.164+0200"
     },
     "LCAP-850": {
       "key": "LCAP-850",
@@ -11147,13 +11280,13 @@
     "LCAP-857": {
       "key": "LCAP-857",
       "summary": "Consumer Pre-Order Flow (Food & Beverages)",
-      "status": "Backlog",
+      "status": "Selected for Development",
       "statusCategory": "new",
-      "assignee": null,
+      "assignee": "Jakob Højgård",
       "priority": "Medium",
       "type": "Epic",
       "labels": [],
-      "updated": "2026-03-13T14:56:34.679+0100"
+      "updated": "2026-04-20T13:39:31.673+0200"
     },
     "LCAP-858": {
       "key": "LCAP-858",
@@ -11391,22 +11524,22 @@
       "summary": "[Admin] Check-in guest via dashboard — search, one-click check-in, confirmation",
       "status": "Backlog",
       "statusCategory": "new",
-      "assignee": null,
+      "assignee": "Simon Jensen",
       "priority": "High",
       "type": "Story",
       "labels": [],
-      "updated": "2026-03-02T12:44:37.226+0100"
+      "updated": "2026-04-20T13:42:42.588+0200"
     },
     "LCAP-880": {
       "key": "LCAP-880",
       "summary": "[Admin] Revoke check-in — undo check-in with audit log + confirmation dialog",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": null,
       "priority": "High",
       "type": "Story",
       "labels": [],
-      "updated": "2026-03-02T12:44:37.520+0100"
+      "updated": "2026-04-20T13:40:17.241+0200"
     },
     "LCAP-881": {
       "key": "LCAP-881",
@@ -11417,7 +11550,7 @@
       "priority": "High",
       "type": "Story",
       "labels": [],
-      "updated": "2026-03-02T12:44:37.735+0100"
+      "updated": "2026-04-20T13:42:44.203+0200"
     },
     "LCAP-882": {
       "key": "LCAP-882",
@@ -11428,18 +11561,18 @@
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-03-02T12:44:37.980+0100"
+      "updated": "2026-04-20T13:42:47.179+0200"
     },
     "LCAP-883": {
       "key": "LCAP-883",
       "summary": "[Admin] Void / cancel ticket — permanent invalidation with audit trail",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": null,
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-03-02T12:44:38.225+0100"
+      "updated": "2026-04-20T13:43:01.289+0200"
     },
     "LCAP-884": {
       "key": "LCAP-884",
@@ -11602,13 +11735,13 @@
     "LCAP-898": {
       "key": "LCAP-898",
       "summary": "Event screen needs adjustment parameters",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": null,
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-03-06T11:44:36.859+0100"
+      "updated": "2026-04-20T13:43:07.450+0200"
     },
     "LCAP-899": {
       "key": "LCAP-899",
@@ -11980,15 +12113,15 @@
     "LCAP-929": {
       "key": "LCAP-929",
       "summary": "Align ticket type and ticket information",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Ready for release",
+      "statusCategory": "indeterminate",
       "assignee": "Michael Thuren",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [
         "app"
       ],
-      "updated": "2026-04-14T12:21:47.877+0200"
+      "updated": "2026-04-20T13:37:08.143+0200"
     },
     "LCAP-930": {
       "key": "LCAP-930",
@@ -12054,7 +12187,7 @@
     "LCAP-935": {
       "key": "LCAP-935",
       "summary": "Commerce integration test + storefront klargøring",
-      "status": "Backlog",
+      "status": "Selected for Development",
       "statusCategory": "new",
       "assignee": "Michael Thuren",
       "priority": "Medium",
@@ -12062,20 +12195,20 @@
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-14T11:59:31.670+0200"
+      "updated": "2026-04-20T13:37:28.078+0200"
     },
     "LCAP-936": {
       "key": "LCAP-936",
       "summary": "Discount engine — core pricing rules backend",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Closed",
+      "statusCategory": "done",
       "assignee": "Michael Thuren",
       "priority": "Medium",
       "type": "Story",
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-14T11:58:58.729+0200"
+      "updated": "2026-04-20T13:37:35.444+0200"
     },
     "LCAP-937": {
       "key": "LCAP-937",
@@ -12106,15 +12239,15 @@
     "LCAP-939": {
       "key": "LCAP-939",
       "summary": "Discount admin UI — konfiguration af rabatter",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": "Jakob Højgård",
       "priority": "Medium",
       "type": "Story",
       "labels": [
         "fms"
       ],
-      "updated": "2026-03-31T14:04:25.195+0200"
+      "updated": "2026-04-20T13:43:23.608+0200"
     },
     "LCAP-940": {
       "key": "LCAP-940",
@@ -12600,15 +12733,15 @@
     "LCAP-978": {
       "key": "LCAP-978",
       "summary": "Kvitteringer i app — købshistorik under profil",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": "Mikkel Kornval Christoffersen",
       "priority": "Medium",
       "type": "Task",
       "labels": [
         "app"
       ],
-      "updated": "2026-03-31T14:03:02.310+0200"
+      "updated": "2026-04-20T13:43:54.604+0200"
     },
     "LCAP-979": {
       "key": "LCAP-979",
@@ -12652,15 +12785,15 @@
     "LCAP-982": {
       "key": "LCAP-982",
       "summary": "Profilskærm — Beats transaktionshistorik",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": "Jakob Højgård",
       "priority": "Medium",
       "type": "Story",
       "labels": [
         "app"
       ],
-      "updated": "2026-04-17T09:46:45.393+0200"
+      "updated": "2026-04-20T13:44:00.818+0200"
     },
     "LCAP-983": {
       "key": "LCAP-983",
@@ -13027,15 +13160,15 @@
     "LCAP-1011": {
       "key": "LCAP-1011",
       "summary": "FMS Admin — masseredigering af produkter og vendors",
-      "status": "Backlog",
+      "status": "Selected for Development",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Simon Jensen",
       "priority": "High",
       "type": "Task",
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-14T11:59:01.980+0200"
+      "updated": "2026-04-20T13:44:41.112+0200"
     },
     "LCAP-1012": {
       "key": "LCAP-1012",
@@ -13647,15 +13780,15 @@
     "LCAP-1058": {
       "key": "LCAP-1058",
       "summary": "Inventory opdateres ikke ved ordre/køb",
-      "status": "Backlog",
+      "status": "Selected for Development",
       "statusCategory": "new",
-      "assignee": "Tony Dieu",
+      "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Bug",
       "labels": [
         "fms"
       ],
-      "updated": "2026-03-31T14:04:10.289+0200"
+      "updated": "2026-04-20T13:45:51.028+0200"
     },
     "LCAP-1059": {
       "key": "LCAP-1059",
@@ -13686,20 +13819,20 @@
     "LCAP-1061": {
       "key": "LCAP-1061",
       "summary": "POS: Split payment — brug Beats først, betal resten med kort",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Closed",
+      "statusCategory": "done",
       "assignee": "Tony Dieu",
       "priority": "High",
       "type": "Task",
       "labels": [
         "pos"
       ],
-      "updated": "2026-04-13T20:12:30.067+0200"
+      "updated": "2026-04-20T13:46:03.920+0200"
     },
     "LCAP-1062": {
       "key": "LCAP-1062",
       "summary": "POS/Backend: Refund Beats til kreditkort",
-      "status": "Backlog",
+      "status": "Selected for Development",
       "statusCategory": "new",
       "assignee": "Tony Dieu",
       "priority": "High",
@@ -13707,7 +13840,7 @@
       "labels": [
         "pos"
       ],
-      "updated": "2026-04-13T20:12:33.973+0200"
+      "updated": "2026-04-20T13:46:09.351+0200"
     },
     "LCAP-1063": {
       "key": "LCAP-1063",
@@ -13764,7 +13897,7 @@
     "LCAP-1067": {
       "key": "LCAP-1067",
       "summary": "POS/App: Initier betaling fra POS på kundens app efter identifikation",
-      "status": "Backlog",
+      "status": "Selected for Development",
       "statusCategory": "new",
       "assignee": "Tony Dieu",
       "priority": "High",
@@ -13772,7 +13905,7 @@
       "labels": [
         "pos"
       ],
-      "updated": "2026-03-30T13:26:58.181+0200"
+      "updated": "2026-04-20T13:46:15.462+0200"
     },
     "LCAP-1068": {
       "key": "LCAP-1068",
@@ -13999,15 +14132,15 @@
     "LCAP-1085": {
       "key": "LCAP-1085",
       "summary": "POS: Terminaler har udfordringer med at læse kort - undersøg cover-påvirkning",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Closed",
+      "statusCategory": "done",
       "assignee": "Jakob Højgård",
       "priority": "Medium",
       "type": "Bug",
       "labels": [
         "pos"
       ],
-      "updated": "2026-03-31T14:03:17.734+0200"
+      "updated": "2026-04-20T13:46:22.303+0200"
     },
     "LCAP-1086": {
       "key": "LCAP-1086",
@@ -16660,24 +16793,24 @@
     "LCAP-1298": {
       "key": "LCAP-1298",
       "summary": "profil-løs: service desk-panel",
-      "status": "In Progress",
-      "statusCategory": "indeterminate",
+      "status": "Backlog",
+      "statusCategory": "new",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T12:12:52.426+0200"
+      "updated": "2026-04-20T13:33:02.549+0200"
     },
     "LCAP-1299": {
       "key": "LCAP-1299",
       "summary": "b2b-oversigt: dashboard-UI",
-      "status": "In Progress",
-      "statusCategory": "indeterminate",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T12:12:57.905+0200"
+      "updated": "2026-04-20T13:40:17.190+0200"
     },
     "LCAP-1300": {
       "key": "LCAP-1300",
@@ -17108,5 +17241,5 @@
       }
     }
   ],
-  "generated": "2026-04-20T11:13:28.837Z"
+  "generated": "2026-04-20T11:46:44.908Z"
 }
