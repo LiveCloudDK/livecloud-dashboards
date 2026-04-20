@@ -36,53 +36,64 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-20T09:58:16.383Z",
+    "startDate": "2026-04-20T10:42:33.400Z",
     "endDate": null,
     "goal": "",
     "issues": [
       {
-        "key": "LCAP-1293",
-        "summary": "akkreditering: import/eksport UI",
+        "key": "LCAP-1289",
+        "summary": "ordrer: admin ordreoversigt + filtre",
         "status": "In Progress",
         "statusCategory": "indeterminate",
         "assignee": "Simon Jensen",
         "priority": "Medium",
         "type": "Sub-task",
         "labels": [],
-        "updated": "2026-04-20T11:48:14.950+0200"
+        "updated": "2026-04-20T12:13:16.140+0200"
       },
       {
-        "key": "LCAP-1292",
-        "summary": "akkreditering: invitations-flow UI",
+        "key": "LCAP-1301",
+        "summary": "regler: regelsætter-UI pr. B2B-kunde",
         "status": "In Progress",
         "statusCategory": "indeterminate",
         "assignee": "Simon Jensen",
         "priority": "Medium",
         "type": "Sub-task",
         "labels": [],
-        "updated": "2026-04-20T11:47:57.627+0200"
+        "updated": "2026-04-20T12:13:10.285+0200"
       },
       {
-        "key": "LCAP-1291",
-        "summary": "akkreditering: listedetalje UI",
+        "key": "LCAP-1300",
+        "summary": "b2b-oversigt: aktiveringsstatus-visualisering",
         "status": "In Progress",
         "statusCategory": "indeterminate",
         "assignee": "Simon Jensen",
         "priority": "Medium",
         "type": "Sub-task",
         "labels": [],
-        "updated": "2026-04-20T11:47:38.681+0200"
+        "updated": "2026-04-20T12:13:03.822+0200"
       },
       {
-        "key": "LCAP-1290",
-        "summary": "akkreditering: listeoversigt UI",
+        "key": "LCAP-1299",
+        "summary": "b2b-oversigt: dashboard-UI",
         "status": "In Progress",
         "statusCategory": "indeterminate",
         "assignee": "Simon Jensen",
         "priority": "Medium",
         "type": "Sub-task",
         "labels": [],
-        "updated": "2026-04-20T11:47:34.286+0200"
+        "updated": "2026-04-20T12:12:57.905+0200"
+      },
+      {
+        "key": "LCAP-1298",
+        "summary": "profil-løs: service desk-panel",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-20T12:12:52.426+0200"
       },
       {
         "key": "LCAP-1213",
@@ -1581,10 +1592,10 @@
         "backlog": 11
       },
       "simon": {
-        "active": 19,
+        "active": 20,
         "testQueue": 6,
         "readyForRelease": 5,
-        "backlog": 73
+        "backlog": 64
       }
     }
   },
@@ -15997,7 +16008,7 @@
       "priority": "Medium",
       "type": "Task",
       "labels": [],
-      "updated": "2026-04-20T11:28:03.240+0200"
+      "updated": "2026-04-20T12:09:35.645+0200"
     },
     "LCAP-1237": {
       "key": "LCAP-1237",
@@ -16569,150 +16580,150 @@
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T11:00:19.765+0200"
+      "updated": "2026-04-20T12:08:00.049+0200"
     },
     "LCAP-1289": {
       "key": "LCAP-1289",
       "summary": "ordrer: admin ordreoversigt + filtre",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "In Progress",
+      "statusCategory": "indeterminate",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T10:55:15.068+0200"
+      "updated": "2026-04-20T12:13:16.140+0200"
     },
     "LCAP-1290": {
       "key": "LCAP-1290",
       "summary": "akkreditering: listeoversigt UI",
-      "status": "In Progress",
-      "statusCategory": "indeterminate",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T11:47:34.286+0200"
+      "updated": "2026-04-20T12:36:14.613+0200"
     },
     "LCAP-1291": {
       "key": "LCAP-1291",
       "summary": "akkreditering: listedetalje UI",
-      "status": "In Progress",
-      "statusCategory": "indeterminate",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T11:47:38.681+0200"
+      "updated": "2026-04-20T12:36:15.788+0200"
     },
     "LCAP-1292": {
       "key": "LCAP-1292",
       "summary": "akkreditering: invitations-flow UI",
-      "status": "In Progress",
-      "statusCategory": "indeterminate",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T11:47:57.627+0200"
+      "updated": "2026-04-20T12:36:17.059+0200"
     },
     "LCAP-1293": {
       "key": "LCAP-1293",
       "summary": "akkreditering: import/eksport UI",
+      "status": "Done",
+      "statusCategory": "done",
+      "assignee": "Simon Jensen",
+      "priority": "Medium",
+      "type": "Sub-task",
+      "labels": [],
+      "updated": "2026-04-20T12:36:18.137+0200"
+    },
+    "LCAP-1294": {
+      "key": "LCAP-1294",
+      "summary": "akkreditering: check-in panel",
+      "status": "Done",
+      "statusCategory": "done",
+      "assignee": "Simon Jensen",
+      "priority": "Medium",
+      "type": "Sub-task",
+      "labels": [],
+      "updated": "2026-04-20T12:36:19.320+0200"
+    },
+    "LCAP-1295": {
+      "key": "LCAP-1295",
+      "summary": "akkreditering: søgning/sortering",
+      "status": "Done",
+      "statusCategory": "done",
+      "assignee": "Simon Jensen",
+      "priority": "Medium",
+      "type": "Sub-task",
+      "labels": [],
+      "updated": "2026-04-20T12:36:20.510+0200"
+    },
+    "LCAP-1296": {
+      "key": "LCAP-1296",
+      "summary": "check-in: manuel afkrydsnings-UI",
+      "status": "Done",
+      "statusCategory": "done",
+      "assignee": "Simon Jensen",
+      "priority": "Medium",
+      "type": "Sub-task",
+      "labels": [],
+      "updated": "2026-04-20T12:36:21.639+0200"
+    },
+    "LCAP-1297": {
+      "key": "LCAP-1297",
+      "summary": "check-in: kommentar-input",
+      "status": "Done",
+      "statusCategory": "done",
+      "assignee": "Simon Jensen",
+      "priority": "Medium",
+      "type": "Sub-task",
+      "labels": [],
+      "updated": "2026-04-20T12:36:22.721+0200"
+    },
+    "LCAP-1298": {
+      "key": "LCAP-1298",
+      "summary": "profil-løs: service desk-panel",
       "status": "In Progress",
       "statusCategory": "indeterminate",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T11:48:14.950+0200"
-    },
-    "LCAP-1294": {
-      "key": "LCAP-1294",
-      "summary": "akkreditering: check-in panel",
-      "status": "Backlog",
-      "statusCategory": "new",
-      "assignee": "Simon Jensen",
-      "priority": "Medium",
-      "type": "Sub-task",
-      "labels": [],
-      "updated": "2026-04-20T10:58:08.282+0200"
-    },
-    "LCAP-1295": {
-      "key": "LCAP-1295",
-      "summary": "akkreditering: søgning/sortering",
-      "status": "Backlog",
-      "statusCategory": "new",
-      "assignee": "Simon Jensen",
-      "priority": "Medium",
-      "type": "Sub-task",
-      "labels": [],
-      "updated": "2026-04-20T10:58:14.693+0200"
-    },
-    "LCAP-1296": {
-      "key": "LCAP-1296",
-      "summary": "check-in: manuel afkrydsnings-UI",
-      "status": "Backlog",
-      "statusCategory": "new",
-      "assignee": "Simon Jensen",
-      "priority": "Medium",
-      "type": "Sub-task",
-      "labels": [],
-      "updated": "2026-04-20T10:56:14.981+0200"
-    },
-    "LCAP-1297": {
-      "key": "LCAP-1297",
-      "summary": "check-in: kommentar-input",
-      "status": "Backlog",
-      "statusCategory": "new",
-      "assignee": "Simon Jensen",
-      "priority": "Medium",
-      "type": "Sub-task",
-      "labels": [],
-      "updated": "2026-04-20T10:56:26.412+0200"
-    },
-    "LCAP-1298": {
-      "key": "LCAP-1298",
-      "summary": "profil-løs: service desk-panel",
-      "status": "Backlog",
-      "statusCategory": "new",
-      "assignee": "Simon Jensen",
-      "priority": "Medium",
-      "type": "Sub-task",
-      "labels": [],
-      "updated": "2026-04-20T10:56:36.316+0200"
+      "updated": "2026-04-20T12:12:52.426+0200"
     },
     "LCAP-1299": {
       "key": "LCAP-1299",
       "summary": "b2b-oversigt: dashboard-UI",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "In Progress",
+      "statusCategory": "indeterminate",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T10:56:47.936+0200"
+      "updated": "2026-04-20T12:12:57.905+0200"
     },
     "LCAP-1300": {
       "key": "LCAP-1300",
       "summary": "b2b-oversigt: aktiveringsstatus-visualisering",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "In Progress",
+      "statusCategory": "indeterminate",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T10:56:56.348+0200"
+      "updated": "2026-04-20T12:13:03.822+0200"
     },
     "LCAP-1301": {
       "key": "LCAP-1301",
       "summary": "regler: regelsætter-UI pr. B2B-kunde",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "In Progress",
+      "statusCategory": "indeterminate",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T10:57:05.366+0200"
+      "updated": "2026-04-20T12:13:10.285+0200"
     },
     "LCAP-1302": {
       "key": "LCAP-1302",
@@ -17121,5 +17132,5 @@
       }
     }
   ],
-  "generated": "2026-04-20T09:58:29.182Z"
+  "generated": "2026-04-20T10:42:47.051Z"
 }
