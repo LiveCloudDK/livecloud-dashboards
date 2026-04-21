@@ -3397,10 +3397,10 @@ function renderShowcase() {
   const festivals = window._festivals || [];
   const pf = window._publicFeatures || {};
 
-  const totalFeatures = ps.totalFeatures || 245;
-  const featuresDone = ps.featuresDone || 89;
-  const featuresInProgress = ps.featuresInProgress || 76;
-  const featuresInTest = ps.featuresInTest || 51;
+  const totalFeatures = ps.totalFeatures || 0;
+  const featuresDone = ps.featuresDone || 0;
+  const featuresInProgress = ps.featuresInProgress || 0;
+  const featuresInTest = ps.featuresInTest || 0;
   const pctDone = totalFeatures > 0 ? Math.round(featuresDone / totalFeatures * 100) : 0;
 
   // Festival countdown
@@ -3985,8 +3985,8 @@ function renderCapacity() {
   html += '</div>';
 
   // Test queue (real Jira data — excludes "Ready for release")
-  const _testQueueCount = (window._sprintData && window._sprintData.testQueueCount) || 51;
-  const _readyForReleaseCount = (window._sprintData && window._sprintData.readyForReleaseCount) || 59;
+  const _testQueueCount = (window._sprintData && window._sprintData.testQueueCount) || 0;
+  const _readyForReleaseCount = (window._sprintData && window._sprintData.readyForReleaseCount) || 0;
   html += '<div class="capacity-card">';
   html += '<h3>QA-kø</h3>';
   html += '<div class="metric">';
@@ -4155,13 +4155,11 @@ function renderCapacity() {
   html += '<div class="velocity-chart">';
   html += '<h3>Historisk Velocity <span style="font-size:11px;font-weight:400;color:var(--text-muted);margin-left:8px">Resolved tickets pr. måned</span></h3>';
 
-  const velocityData = (window._velocity && window._velocity.length > 0)
-    ? window._velocity
-    : [
-        { month: 'Jan 2026', tickets: 18 },
-        { month: 'Feb 2026', tickets: 24 },
-        { month: 'Mar 2026', tickets: 119 }
-      ];
+  const velocityData = (window._velocity && window._velocity.length > 0) ? window._velocity : [];
+
+  if (velocityData.length === 0) {
+    html += '<div style="color:var(--text-muted);font-size:12px;padding:12px">Velocity-data indlæses fra Jira ved næste sync.</div>';
+  }
 
   const maxVelocity = Math.max(1, ...velocityData.map(v => v.tickets));
 

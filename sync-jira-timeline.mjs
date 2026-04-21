@@ -1,14 +1,21 @@
 #!/usr/bin/env node
 /**
  * sync-jira-timeline.mjs
- * Fetches epics + active sprint from Jira LCAP and generates data.json.
- * Uses POST /rest/api/3/search/jql for epics and sprint issues.
+ * Henter ALLE issues fra Jira-board 37 (LCAP) i ét kald og deriverer alt fra det:
+ *   - tasks (epics med start/due date)
+ *   - sprint (active sprint-objekt: In Progress + Selected + test-pipeline + ready for release)
+ *   - tickets (map af alle issues på boardet → live status)
+ *   - publicStats (pr. status + pr. workstream-label)
+ *   - capacityCounts (pr. person)
+ * Plus separate queries til velocity (historisk) og FMS festival-data.
  */
 
 const JIRA_BASE = process.env.JIRA_BASE_URL || 'https://u-ii-u.atlassian.net';
 const JIRA_EMAIL = process.env.JIRA_EMAIL;
 const JIRA_TOKEN = process.env.JIRA_API_TOKEN;
 const AUTH = Buffer.from(`${JIRA_EMAIL}:${JIRA_TOKEN}`).toString('base64');
+
+const BOARD_ID = 37;
 
 const PERIOD_STARTS = [
   new Date('2026-03-16'), new Date('2026-04-01'), new Date('2026-04-16'),
@@ -66,121 +73,44 @@ function computeSpan(s, e) {
   return Math.max(1, ep - sp + 1);
 }
 
-async function jiraGet(path) {
-  const resp = await fetch(`${JIRA_BASE}${path}`, { headers: { 'Authorization': `Basic ${AUTH}`, 'Accept': 'application/json' } });
-  if (!resp.ok) throw new Error(`Jira GET ${path} failed: ${resp.status}`);
-  return resp.json();
-}
-
-async function fetchEpics() {
-  const jql = 'project = LCAP AND issuetype = Epic ORDER BY rank ASC';
-  const fields = ['summary','status','assignee','priority','labels','customfield_10015','customfield_10022','duedate'];
-  let all = [];
-  let nextPageToken = null;
-  do {
-    const body = { jql, fields, maxResults: 100 };
-    if (nextPageToken) body.nextPageToken = nextPageToken;
-    const resp = await fetch(`${JIRA_BASE}/rest/api/3/search/jql`, {
-      method: 'POST',
-      headers: { 'Authorization': `Basic ${AUTH}`, 'Accept': 'application/json', 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
+// === Fetch ALL issues on board 37 (paginated) ===
+async function fetchBoardIssues() {
+  const fields = [
+    'summary','status','assignee','priority','issuetype','labels','updated','created',
+    'customfield_10015','customfield_10022','duedate','parent'
+  ].join(',');
+  const all = [];
+  let startAt = 0;
+  const maxResults = 100;
+  while (true) {
+    const url = `${JIRA_BASE}/rest/agile/1.0/board/${BOARD_ID}/issue?startAt=${startAt}&maxResults=${maxResults}&fields=${fields}`;
+    const resp = await fetch(url, {
+      headers: { 'Authorization': `Basic ${AUTH}`, 'Accept': 'application/json' }
     });
-    if (!resp.ok) throw new Error(`Epic search failed: ${resp.status}`);
+    if (!resp.ok) {
+      const body = await resp.text().catch(() => '');
+      throw new Error(`Board ${BOARD_ID} fetch failed: ${resp.status} ${body.slice(0, 200)}`);
+    }
     const data = await resp.json();
-    all = all.concat(data.issues || []);
-    nextPageToken = data.nextPageToken || null;
-  } while (nextPageToken);
-  console.log(`Fetched ${all.length} epics`);
+    const batch = data.issues || [];
+    all.push(...batch);
+    const total = data.total || 0;
+    if (batch.length === 0 || startAt + batch.length >= total) break;
+    startAt += batch.length;
+    if (startAt > 5000) break; // safety
+  }
+  console.log(`Fetched ${all.length} issues from board ${BOARD_ID}`);
   return all;
 }
 
-// === Active work fetching (Kanban-compatible — no sprint boards needed) ===
-async function fetchCurrentSprint() {
-  // Fetch all active work: In Progress + Selected for Development
-  // This replaces sprint-based queries since all boards are Kanban
-  const jql = 'project = LCAP AND status IN ("In Progress", "Selected for Development") ORDER BY priority ASC, updated DESC';
-  const fields = ['summary','status','assignee','priority','issuetype','labels','updated'];
-  let allIssues = [];
-  let nextPageToken = null;
-  do {
-    const body = { jql, maxResults: 200, fields };
-    if (nextPageToken) body.nextPageToken = nextPageToken;
-    const resp = await fetch(`${JIRA_BASE}/rest/api/3/search/jql`, {
-      method: 'POST',
-      headers: { 'Authorization': `Basic ${AUTH}`, 'Accept': 'application/json', 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    });
-    if (!resp.ok) { console.log(`Active work JQL failed: ${resp.status}`); break; }
-    const data = await resp.json();
-    allIssues = allIssues.concat(data.issues || []);
-    nextPageToken = data.nextPageToken || null;
-  } while (nextPageToken);
-
-  if (allIssues.length === 0) {
-    console.log('No active issues found');
-    return null;
-  }
-
-  // Fetch issues in QA pipeline (excluding "Ready for release" — those are already tested)
-  const testJql = 'project = LCAP AND status IN ("Ready for testing", "Ready for test", "READY FOR TEST AT DEV") ORDER BY priority ASC, updated DESC';
-  let testIssues = [];
-  nextPageToken = null;
-  do {
-    const body = { jql: testJql, maxResults: 200, fields };
-    if (nextPageToken) body.nextPageToken = nextPageToken;
-    const resp = await fetch(`${JIRA_BASE}/rest/api/3/search/jql`, {
-      method: 'POST',
-      headers: { 'Authorization': `Basic ${AUTH}`, 'Accept': 'application/json', 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    });
-    if (!resp.ok) { console.log(`Test pipeline JQL failed: ${resp.status}`); break; }
-    const data = await resp.json();
-    testIssues = testIssues.concat(data.issues || []);
-    nextPageToken = data.nextPageToken || null;
-  } while (nextPageToken);
-
-  // Fetch "Ready for release" separately (tested, awaiting deploy)
-  const releaseJql = 'project = LCAP AND status = "Ready for release" ORDER BY priority ASC, updated DESC';
-  let releaseIssues = [];
-  nextPageToken = null;
-  do {
-    const body = { jql: releaseJql, maxResults: 200, fields };
-    if (nextPageToken) body.nextPageToken = nextPageToken;
-    const resp = await fetch(`${JIRA_BASE}/rest/api/3/search/jql`, {
-      method: 'POST',
-      headers: { 'Authorization': `Basic ${AUTH}`, 'Accept': 'application/json', 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    });
-    if (!resp.ok) { console.log(`Release pipeline JQL failed: ${resp.status}`); break; }
-    const data = await resp.json();
-    releaseIssues = releaseIssues.concat(data.issues || []);
-    nextPageToken = data.nextPageToken || null;
-  } while (nextPageToken);
-
-  const combinedIssues = [...allIssues, ...testIssues];
-  console.log(`Found ${allIssues.length} active + ${testIssues.length} in QA + ${releaseIssues.length} ready for release = ${allIssues.length + testIssues.length + releaseIssues.length} total issues`);
-
-  // Return as a synthetic "sprint" object for compatibility with the dashboard
-  return {
-    name: 'Aktivt Sprint',
-    state: 'active',
-    startDate: new Date().toISOString(),
-    endDate: null,
-    goal: '',
-    issues: combinedIssues,
-    testQueueCount: testIssues.length,
-    readyForReleaseCount: releaseIssues.length,
-    releaseIssues: releaseIssues.map(issueToSprintIssue),
-  };
-}
-
+// === Transforms ===
 function issueToSprintIssue(issue) {
   const f = issue.fields;
   return {
     key: issue.key,
     summary: f.summary,
-    status: f.status.name,
-    statusCategory: f.status.statusCategory.key,
+    status: f.status ? f.status.name : '',
+    statusCategory: f.status?.statusCategory?.key || 'new',
     assignee: f.assignee ? f.assignee.displayName : null,
     priority: f.priority ? f.priority.name : 'Medium',
     type: f.issuetype ? f.issuetype.name : 'Task',
@@ -189,82 +119,22 @@ function issueToSprintIssue(issue) {
   };
 }
 
-// === Fetch monthly velocity (resolved tickets per calendar month, last 6 months) ===
-async function fetchVelocity() {
-  const monthNames = ['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug','Sep','Okt','Nov','Dec'];
-  const now = new Date();
-  const months = [];
-  for (let i = 5; i >= 0; i--) {
-    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
-    const start = new Date(d.getFullYear(), d.getMonth(), 1);
-    const end = new Date(d.getFullYear(), d.getMonth() + 1, 1);
-    months.push({
-      label: `${monthNames[d.getMonth()]} ${d.getFullYear()}`,
-      start: start.toISOString().slice(0, 10),
-      end: end.toISOString().slice(0, 10),
-    });
-  }
-
-  const results = [];
-  for (const m of months) {
-    try {
-      const jql = `project = LCAP AND status CHANGED TO ("Done", "Closed", "Ready for release") DURING ("${m.start}", "${m.end}")`;
-      const resp = await fetch(`${JIRA_BASE}/rest/api/3/search/jql`, {
-        method: 'POST',
-        headers: { 'Authorization': `Basic ${AUTH}`, 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ jql, maxResults: 0 }),
-      });
-      if (!resp.ok) { results.push({ month: m.label, tickets: 0 }); continue; }
-      const data = await resp.json();
-      const count = data.issues?.totalCount || data.total || 0;
-      results.push({ month: m.label, tickets: count });
-    } catch (e) {
-      results.push({ month: m.label, tickets: 0 });
-    }
-  }
-  console.log(`Velocity: ${results.map(r => `${r.month}:${r.tickets}`).join(', ')}`);
-  return results;
+function issueToTicket(issue) {
+  const f = issue.fields;
+  return {
+    key: issue.key,
+    summary: f.summary,
+    status: f.status ? f.status.name : '',
+    statusCategory: f.status?.statusCategory?.key || 'new',
+    assignee: f.assignee ? f.assignee.displayName : null,
+    priority: f.priority ? f.priority.name : 'Medium',
+    type: f.issuetype ? f.issuetype.name : 'Task',
+    labels: (f.labels || []).map(l => l.name || l),
+    updated: f.updated,
+    created: f.created,
+  };
 }
 
-// === Fetch all LCAP tickets (for live status overlay across all views) ===
-async function fetchAllTickets() {
-  const jql = 'project = LCAP ORDER BY key ASC';
-  const fields = ['summary','status','assignee','priority','issuetype','labels','updated'];
-  const tickets = {};
-  let nextPageToken = null;
-  let fetchedCount = 0;
-  do {
-    const body = { jql, maxResults: 200, fields };
-    if (nextPageToken) body.nextPageToken = nextPageToken;
-    const resp = await fetch(`${JIRA_BASE}/rest/api/3/search/jql`, {
-      method: 'POST',
-      headers: { 'Authorization': `Basic ${AUTH}`, 'Accept': 'application/json', 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    });
-    if (!resp.ok) { console.log(`fetchAllTickets JQL failed: ${resp.status}`); break; }
-    const data = await resp.json();
-    for (const issue of (data.issues || [])) {
-      const f = issue.fields;
-      tickets[issue.key] = {
-        key: issue.key,
-        summary: f.summary,
-        status: f.status ? f.status.name : '',
-        statusCategory: f.status?.statusCategory?.key || 'new',
-        assignee: f.assignee ? f.assignee.displayName : null,
-        priority: f.priority ? f.priority.name : 'Medium',
-        type: f.issuetype ? f.issuetype.name : 'Task',
-        labels: (f.labels || []).map(l => l.name || l),
-        updated: f.updated,
-      };
-      fetchedCount++;
-    }
-    nextPageToken = data.nextPageToken || null;
-  } while (nextPageToken);
-  console.log(`Fetched ${fetchedCount} tickets for live status map`);
-  return tickets;
-}
-
-// === Epic transform ===
 function issueToTask(issue) {
   const f = issue.fields;
   let ws = 'all';
@@ -290,139 +160,91 @@ function issueToTask(issue) {
   };
 }
 
-// === Main ===
-async function main() {
-  const epics = await fetchEpics();
-  const tasks = epics.map(issueToTask).filter(t => t.start !== null);
+// === Derive sprint + capacity + publicStats from board issues ===
+function deriveSprint(boardIssues) {
+  const activeStatuses = new Set(['In Progress', 'Selected for Development']);
+  const testStatuses = new Set(['Ready for testing', 'Ready for test', 'READY FOR TEST AT DEV']);
+  const releaseStatus = 'Ready for release';
 
-  let sprint = null;
-  const sprintData = await fetchCurrentSprint();
-  // Compute per-person ticket counts from raw Jira data
-  let capacityCounts = null;
-  if (sprintData) {
-    const personCounts = {};
-    const knownPersons = ['michael', 'tony', 'mikkel', 'jakob', 'edwin', 'simon'];
-    knownPersons.forEach(p => { personCounts[p] = { active: 0, testQueue: 0, readyForRelease: 0, backlog: 0 }; });
+  const activeIssues = boardIssues.filter(i => activeStatuses.has(i.fields.status?.name));
+  const testIssues = boardIssues.filter(i => testStatuses.has(i.fields.status?.name));
+  const releaseIssues = boardIssues.filter(i => i.fields.status?.name === releaseStatus);
 
-    // Count active issues (In Progress + Selected for Development) per person
-    for (const issue of sprintData.issues) {
-      const assignee = issue.fields?.assignee?.displayName;
-      if (!assignee) continue;
-      const person = normalizePerson(assignee);
-      if (person && personCounts[person]) personCounts[person].active++;
-    }
-
-    // Count test queue issues per person (from the raw testIssues stored in sprintData)
-    // We already have testQueueCount and readyForReleaseCount as totals
-    // For per-person breakdown, we need the raw issues — let's use sprint.issues statuses
-    // Actually the combinedIssues includes test issues, so we can re-derive from status
-    for (const issue of sprintData.issues) {
-      const status = issue.fields?.status?.name;
-      const assignee = issue.fields?.assignee?.displayName;
-      if (!assignee) continue;
-      const person = normalizePerson(assignee);
-      if (!person || !personCounts[person]) continue;
-      if (['Ready for testing', 'Ready for test', 'READY FOR TEST AT DEV'].includes(status)) {
-        personCounts[person].testQueue++;
-        personCounts[person].active--; // Don't double-count
-      }
-    }
-
-    // Count ready for release per person
-    for (const issue of (sprintData.releaseIssues || [])) {
-      if (!issue.assignee) continue;
-      const person = normalizePerson(issue.assignee);
-      if (person && personCounts[person]) personCounts[person].readyForRelease++;
-    }
-
-    // Count backlog per person
-    const backlogJql = 'project = LCAP AND status = "Backlog" AND assignee IS NOT EMPTY ORDER BY assignee ASC';
-    let backlogIssues = [];
-    let bpToken = null;
-    do {
-      const body = { jql: backlogJql, maxResults: 200, fields: ['assignee'] };
-      if (bpToken) body.nextPageToken = bpToken;
-      const resp = await fetch(`${JIRA_BASE}/rest/api/3/search/jql`, {
-        method: 'POST',
-        headers: { 'Authorization': `Basic ${AUTH}`, 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      });
-      if (!resp.ok) { console.log(`Backlog JQL failed: ${resp.status}`); break; }
-      const data = await resp.json();
-      backlogIssues = backlogIssues.concat(data.issues || []);
-      bpToken = data.nextPageToken || null;
-    } while (bpToken);
-
-    for (const issue of backlogIssues) {
-      const assignee = issue.fields?.assignee?.displayName;
-      if (!assignee) continue;
-      const person = normalizePerson(assignee);
-      if (person && personCounts[person]) personCounts[person].backlog++;
-    }
-    console.log(`Fetched ${backlogIssues.length} assigned backlog issues`);
-
-    capacityCounts = personCounts;
-    console.log('Per-person counts:', JSON.stringify(personCounts));
-
-    sprint = {
-      name: sprintData.name,
-      state: sprintData.state,
-      startDate: sprintData.startDate,
-      endDate: sprintData.endDate,
-      goal: sprintData.goal || '',
-      issues: sprintData.issues.map(issueToSprintIssue),
-      testQueueCount: sprintData.testQueueCount || 0,
-      readyForReleaseCount: sprintData.readyForReleaseCount || 0,
-      capacityCounts,
-    };
-  } else {
-    console.log('No active or future sprint found');
+  if (activeIssues.length === 0 && testIssues.length === 0 && releaseIssues.length === 0) {
+    return null;
   }
 
-  // === Public Stats (for Showcase view) ===
-  const publicStats = await fetchPublicStats();
+  const combined = [...activeIssues, ...testIssues];
+  const sortByPri = (a, b) => {
+    const pri = { Highest:0, High:1, Medium:2, Low:3, Lowest:4 };
+    const pa = pri[a.fields.priority?.name] ?? 9;
+    const pb = pri[b.fields.priority?.name] ?? 9;
+    if (pa !== pb) return pa - pb;
+    return new Date(b.fields.updated).getTime() - new Date(a.fields.updated).getTime();
+  };
+  combined.sort(sortByPri);
+  releaseIssues.sort(sortByPri);
 
-  // === Live ticket status map (for overlay on detail + overview) ===
-  const tickets = await fetchAllTickets();
+  // Per-person counts
+  const knownPersons = ['michael', 'tony', 'mikkel', 'jakob', 'edwin', 'simon'];
+  const personCounts = {};
+  knownPersons.forEach(p => { personCounts[p] = { active: 0, testQueue: 0, readyForRelease: 0, backlog: 0 }; });
 
-  // === Monthly velocity for capacity view ===
-  const velocity = await fetchVelocity();
+  for (const issue of activeIssues) {
+    const assignee = issue.fields?.assignee?.displayName;
+    if (!assignee) continue;
+    const person = normalizePerson(assignee);
+    if (person && personCounts[person]) personCounts[person].active++;
+  }
+  for (const issue of testIssues) {
+    const assignee = issue.fields?.assignee?.displayName;
+    if (!assignee) continue;
+    const person = normalizePerson(assignee);
+    if (person && personCounts[person]) personCounts[person].testQueue++;
+  }
+  for (const issue of releaseIssues) {
+    const assignee = issue.fields?.assignee?.displayName;
+    if (!assignee) continue;
+    const person = normalizePerson(assignee);
+    if (person && personCounts[person]) personCounts[person].readyForRelease++;
+  }
+  for (const issue of boardIssues) {
+    if (issue.fields.status?.name !== 'Backlog') continue;
+    const assignee = issue.fields?.assignee?.displayName;
+    if (!assignee) continue;
+    const person = normalizePerson(assignee);
+    if (person && personCounts[person]) personCounts[person].backlog++;
+  }
 
-  // === Festival data from FMS ===
-  const festivals = await fetchFestivalData();
-
-  const output = { tasks, columns: COLUMNS, wsNames: WS_NAMES, sprint, publicStats, tickets, velocity, festivals, generated: new Date().toISOString() };
-  const fs = await import('node:fs');
-  fs.writeFileSync('data.json', JSON.stringify(output, null, 2));
-  console.log(`Wrote data.json (${tasks.length} tasks, sprint: ${sprint ? sprint.name : 'none'}, QA queue: ${sprint?.testQueueCount || 0}, ready for release: ${sprint?.readyForReleaseCount || 0}, tickets: ${Object.keys(tickets).length}, velocity: ${velocity.length} months, festivals: ${festivals.length})`);
+  return {
+    name: 'Aktivt Sprint',
+    state: 'active',
+    startDate: new Date().toISOString(),
+    endDate: null,
+    goal: '',
+    issues: combined.map(issueToSprintIssue),
+    testQueueCount: testIssues.length,
+    readyForReleaseCount: releaseIssues.length,
+    releaseIssues: releaseIssues.map(issueToSprintIssue),
+    capacityCounts: personCounts,
+  };
 }
 
-// === Public Stats — aggregate Jira data for showcase view ===
-async function fetchPublicStats() {
-  const statusGroups = {
-    done: '"Done", "Closed"',
-    readyForRelease: '"Ready for release"',
-    inTest: '"Ready for testing", "Ready for test", "READY FOR TEST AT DEV"',
-    inProgress: '"In Progress", "Selected for Development"',
-    backlog: '"Backlog"',
-  };
+function derivePublicStats(boardIssues) {
+  const statusCounts = { done: 0, readyForRelease: 0, inTest: 0, inProgress: 0, backlog: 0 };
+  const testStatuses = new Set(['Ready for testing', 'Ready for test', 'READY FOR TEST AT DEV']);
+  const activeStatuses = new Set(['In Progress', 'Selected for Development']);
+  const doneStatuses = new Set(['Done', 'Closed']);
 
-  const counts = {};
-  for (const [key, statuses] of Object.entries(statusGroups)) {
-    try {
-      const jql = `project = LCAP AND status IN (${statuses})`;
-      const resp = await fetch(`${JIRA_BASE}/rest/api/3/search/jql`, {
-        method: 'POST',
-        headers: { 'Authorization': `Basic ${AUTH}`, 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ jql, maxResults: 0 }),
-      });
-      if (!resp.ok) { counts[key] = 0; continue; }
-      const data = await resp.json();
-      counts[key] = data.issues?.totalCount || data.total || 0;
-    } catch (e) { counts[key] = 0; }
+  for (const issue of boardIssues) {
+    const s = issue.fields.status?.name || '';
+    if (doneStatuses.has(s)) statusCounts.done++;
+    else if (s === 'Ready for release') statusCounts.readyForRelease++;
+    else if (testStatuses.has(s)) statusCounts.inTest++;
+    else if (activeStatuses.has(s)) statusCounts.inProgress++;
+    else if (s === 'Backlog') statusCounts.backlog++;
   }
 
-  // Per-workstream breakdown (done vs total) using labels
   const wsLabels = {
     'Onboarding': 'ws1-onboarding', 'POS': 'ws2-pos', 'App': 'ws3-app',
     'Backend': 'ws4-backend', 'B2B': 'ws5-b2b', 'Webshop': 'ws6-webshop',
@@ -431,42 +253,68 @@ async function fetchPublicStats() {
   };
   const byWorkstream = {};
   for (const [wsName, label] of Object.entries(wsLabels)) {
-    try {
-      const doneJql = `project = LCAP AND labels = "${label}" AND status IN ("Done", "Closed", "Ready for release")`;
-      const totalJql = `project = LCAP AND labels = "${label}"`;
-      const [doneResp, totalResp] = await Promise.all([
-        fetch(`${JIRA_BASE}/rest/api/3/search/jql`, { method: 'POST', headers: { 'Authorization': `Basic ${AUTH}`, 'Accept': 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify({ jql: doneJql, maxResults: 0 }) }),
-        fetch(`${JIRA_BASE}/rest/api/3/search/jql`, { method: 'POST', headers: { 'Authorization': `Basic ${AUTH}`, 'Accept': 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify({ jql: totalJql, maxResults: 0 }) }),
-      ]);
-      const doneData = doneResp.ok ? await doneResp.json() : { issues: { totalCount: 0 } };
-      const totalData = totalResp.ok ? await totalResp.json() : { issues: { totalCount: 0 } };
-      byWorkstream[wsName] = {
-        done: doneData.issues?.totalCount || doneData.total || 0,
-        total: totalData.issues?.totalCount || totalData.total || 0,
-      };
-    } catch (e) {
-      byWorkstream[wsName] = { done: 0, total: 0 };
-    }
+    const matching = boardIssues.filter(i => (i.fields.labels || []).some(l => (l.name || l) === label));
+    const done = matching.filter(i => {
+      const s = i.fields.status?.name || '';
+      return doneStatuses.has(s) || s === 'Ready for release';
+    }).length;
+    byWorkstream[wsName] = { done, total: matching.length };
   }
 
-  const totalFeatures = counts.done + counts.readyForRelease + counts.inTest + counts.inProgress + counts.backlog;
-  const featuresDone = counts.done + counts.readyForRelease;
-
-  console.log(`Public stats: ${featuresDone}/${totalFeatures} done (${counts.done} done, ${counts.readyForRelease} ready for release, ${counts.inTest} in test, ${counts.inProgress} in progress, ${counts.backlog} backlog)`);
+  const totalFeatures = statusCounts.done + statusCounts.readyForRelease + statusCounts.inTest + statusCounts.inProgress + statusCounts.backlog;
+  const featuresDone = statusCounts.done + statusCounts.readyForRelease;
 
   return {
     totalFeatures,
     featuresDone,
-    featuresInProgress: counts.inProgress,
-    featuresInTest: counts.inTest,
-    featuresReadyForRelease: counts.readyForRelease,
-    featuresDoneCount: counts.done,
-    featuresBacklog: counts.backlog,
+    featuresInProgress: statusCounts.inProgress,
+    featuresInTest: statusCounts.inTest,
+    featuresReadyForRelease: statusCounts.readyForRelease,
+    featuresDoneCount: statusCounts.done,
+    featuresBacklog: statusCounts.backlog,
     byWorkstream,
   };
 }
 
-// === Festival data from FMS APIs ===
+// === Monthly velocity (requires changelog/DURING JQL, project-scoped) ===
+async function fetchVelocity() {
+  const monthNames = ['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug','Sep','Okt','Nov','Dec'];
+  const now = new Date();
+  const months = [];
+  for (let i = 5; i >= 0; i--) {
+    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    const start = new Date(d.getFullYear(), d.getMonth(), 1);
+    const end = new Date(d.getFullYear(), d.getMonth() + 1, 1);
+    months.push({
+      label: `${monthNames[d.getMonth()]} ${d.getFullYear()}`,
+      start: start.toISOString().slice(0, 10),
+      end: end.toISOString().slice(0, 10),
+    });
+  }
+
+  const results = [];
+  for (const m of months) {
+    try {
+      // Scope to board's filter: use project JQL (board filter already applies project=LCAP)
+      const jql = `project = LCAP AND status CHANGED TO ("Done", "Closed", "Ready for release") DURING ("${m.start}", "${m.end}")`;
+      const resp = await fetch(`${JIRA_BASE}/rest/api/3/search/jql`, {
+        method: 'POST',
+        headers: { 'Authorization': `Basic ${AUTH}`, 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ jql, maxResults: 0 }),
+      });
+      if (!resp.ok) { results.push({ month: m.label, tickets: 0 }); continue; }
+      const data = await resp.json();
+      const count = data.issues?.totalCount || data.total || 0;
+      results.push({ month: m.label, tickets: count });
+    } catch (e) {
+      results.push({ month: m.label, tickets: 0 });
+    }
+  }
+  console.log(`Velocity: ${results.map(r => `${r.month}:${r.tickets}`).join(', ')}`);
+  return results;
+}
+
+// === Festival data from FMS APIs (unchanged) ===
 async function fetchFestivalData() {
   let featuresConfig;
   try {
@@ -484,9 +332,7 @@ async function fetchFestivalData() {
       const resp = await fetch(fest.fmsUrl, { headers: { 'Accept': 'application/json' } });
       if (!resp.ok) { result.apiStatus = 'error'; result.apiError = resp.status; results.push(result); continue; }
       const data = await resp.json();
-      // Extract what we can — structure may vary, we'll log it on first run
       result.apiStatus = 'ok';
-      // FMS API wraps content under a `data` key
       const inner = data.data || data;
       const flat = typeof inner === 'object' && !Array.isArray(inner) ? inner : {};
       const meta = flat.metadata || {};
@@ -514,6 +360,53 @@ async function fetchFestivalData() {
     results.push(result);
   }
   return results;
+}
+
+// === Main ===
+async function main() {
+  const boardIssues = await fetchBoardIssues();
+
+  // Epics → timeline-tasks
+  const epics = boardIssues.filter(i => i.fields.issuetype?.name === 'Epic');
+  const tasks = epics.map(issueToTask).filter(t => t.start !== null);
+  console.log(`Extracted ${epics.length} epics (${tasks.length} with valid start dates)`);
+
+  // All tickets map (live status overlay)
+  const tickets = {};
+  for (const issue of boardIssues) {
+    tickets[issue.key] = issueToTicket(issue);
+  }
+
+  // Synthetic sprint
+  const sprint = deriveSprint(boardIssues);
+  console.log(`Sprint: ${sprint ? `${sprint.issues.length} active+test, ${sprint.readyForReleaseCount} ready for release` : 'none'}`);
+  if (sprint) console.log('Per-person counts:', JSON.stringify(sprint.capacityCounts));
+
+  // Aggregated stats
+  const publicStats = derivePublicStats(boardIssues);
+  console.log(`Public stats: ${publicStats.featuresDone}/${publicStats.totalFeatures} done`);
+
+  // Historical velocity (separate query)
+  const velocity = await fetchVelocity();
+
+  // Festival data (FMS)
+  const festivals = await fetchFestivalData();
+
+  const output = {
+    tasks,
+    columns: COLUMNS,
+    wsNames: WS_NAMES,
+    sprint,
+    publicStats,
+    tickets,
+    velocity,
+    festivals,
+    boardId: BOARD_ID,
+    generated: new Date().toISOString(),
+  };
+  const fs = await import('node:fs');
+  fs.writeFileSync('data.json', JSON.stringify(output, null, 2));
+  console.log(`Wrote data.json (board ${BOARD_ID}: ${boardIssues.length} issues, ${tasks.length} tasks, sprint: ${sprint ? sprint.name : 'none'}, tickets: ${Object.keys(tickets).length}, velocity: ${velocity.length} months, festivals: ${festivals.length})`);
 }
 
 main().catch(e => { console.error(e); process.exit(1); });
