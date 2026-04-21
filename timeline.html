@@ -2393,14 +2393,27 @@ function renderCurrentSprint() {
       '<p style="margin-top:8px;font-size:13px">Data synkroniseres hver time p\u00e5 hverdage (07-19 CET).</p></div>';
   }
 
-  // ── Ensure manually-tracked issues are present (survives Jira sync) ──
-  const manualIssues = [
-    { key:'LCAP-1153', summary:'Align app, endpoints, environments og FMS på staging for fuld E2E test',
-      status:'In Progress', statusCategory:'indeterminate', assignee:'Edwin Maldonado',
-      assignees:['Edwin Maldonado','Mikkel Kornval Christoffersen'], priority:'Highest', type:'Task', labels:[], updated:'2026-04-07T15:30:00.000+0200' }
-  ];
-  for (const mi of manualIssues) {
-    if (!sprint.issues.some(i => i.key === mi.key)) sprint.issues.unshift(mi);
+  // ── Ensure manually-tracked issues are present med LIVE Jira-status ──
+  // Hent faktisk status fra window._tickets (undgå stale hardcoded values).
+  // Skip hvis ticket er Done/Closed (så ryger den ud af sprint-viewet naturligt).
+  const manuallyTrackedKeys = ['LCAP-1153'];
+  for (const key of manuallyTrackedKeys) {
+    if (sprint.issues.some(i => i.key === key)) continue;
+    const live = window._tickets && window._tickets[key];
+    if (!live) continue;
+    const s = (live.status || '').toLowerCase();
+    if (s === 'done' || s === 'closed' || live.statusCategory === 'done') continue;
+    sprint.issues.unshift({
+      key: live.key,
+      summary: live.summary,
+      status: live.status,
+      statusCategory: live.statusCategory,
+      assignee: live.assignee,
+      priority: live.priority,
+      type: live.type,
+      labels: live.labels || [],
+      updated: live.updated,
+    });
   }
 
   // ── Team config ──
