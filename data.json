@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-21T19:41:46.615Z",
+    "startDate": "2026-04-21T20:08:49.533Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -642,6 +642,19 @@
         "updated": "2026-04-02T08:28:52.805+0200"
       },
       {
+        "key": "LCAP-1078",
+        "summary": "Delegate access — end-to-end færdiggørelse og test",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Jakob Højgård",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-21T22:08:11.781+0200"
+      },
+      {
         "key": "LCAP-1289",
         "summary": "ordrer: admin ordreoversigt + filtre",
         "status": "In Progress",
@@ -1161,19 +1174,6 @@
           "commerce"
         ],
         "updated": "2026-04-14T10:35:53.427+0200"
-      },
-      {
-        "key": "LCAP-1078",
-        "summary": "Delegate access — end-to-end færdiggørelse og test",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-14T10:35:43.147+0200"
       },
       {
         "key": "LCAP-492",
@@ -2193,16 +2193,16 @@
     ],
     "capacityCounts": {
       "michael": {
-        "active": 32,
+        "active": 31,
         "testQueue": 10,
         "readyForRelease": 2,
-        "backlog": 39
+        "backlog": 34
       },
       "tony": {
         "active": 15,
         "testQueue": 14,
         "readyForRelease": 16,
-        "backlog": 48
+        "backlog": 50
       },
       "mikkel": {
         "active": 6,
@@ -2211,7 +2211,7 @@
         "backlog": 7
       },
       "jakob": {
-        "active": 8,
+        "active": 9,
         "testQueue": 6,
         "readyForRelease": 9,
         "backlog": 13
@@ -2226,18 +2226,18 @@
         "active": 19,
         "testQueue": 6,
         "readyForRelease": 5,
-        "backlog": 80
+        "backlog": 81
       }
     }
   },
   "publicStats": {
-    "totalFeatures": 1309,
-    "featuresDone": 944,
+    "totalFeatures": 1310,
+    "featuresDone": 947,
     "featuresInProgress": 84,
     "featuresInTest": 46,
     "featuresReadyForRelease": 43,
-    "featuresDoneCount": 901,
-    "featuresBacklog": 235,
+    "featuresDoneCount": 904,
+    "featuresBacklog": 233,
     "byWorkstream": {
       "Onboarding": {
         "done": 0,
@@ -15706,13 +15706,13 @@
       "summary": "Delegate access — end-to-end færdiggørelse og test",
       "status": "In Progress",
       "statusCategory": "indeterminate",
-      "assignee": "Michael Thuren",
+      "assignee": "Jakob Højgård",
       "priority": "Medium",
       "type": "Story",
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-14T10:35:43.147+0200",
+      "updated": "2026-04-21T22:08:11.781+0200",
       "created": "2026-03-29T17:41:02.158+0200"
     },
     "LCAP-1079": {
@@ -17634,21 +17634,21 @@
       "summary": "Work Package A: Ticket Transfer & Edge Cases",
       "status": "Backlog",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Tony Dieu",
       "priority": "High",
       "type": "Task",
       "labels": [
         "ai-agent-ready",
         "work-package"
       ],
-      "updated": "2026-04-17T20:24:01.287+0200",
+      "updated": "2026-04-21T21:55:42.927+0200",
       "created": "2026-04-14T10:32:07.067+0200"
     },
     "LCAP-1220": {
       "key": "LCAP-1220",
       "summary": "Work Package B: Beats & Credits System",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": "Michael Thuren",
       "priority": "High",
       "type": "Task",
@@ -17656,7 +17656,7 @@
         "ai-agent-ready",
         "work-package"
       ],
-      "updated": "2026-04-17T20:24:16.953+0200",
+      "updated": "2026-04-21T21:53:17.942+0200",
       "created": "2026-04-14T10:32:24.637+0200"
     },
     "LCAP-1221": {
@@ -17664,14 +17664,14 @@
       "summary": "Work Package C: B2B Portal Backend",
       "status": "Backlog",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Simon Jensen",
       "priority": "High",
       "type": "Task",
       "labels": [
         "ai-agent-ready",
         "work-package"
       ],
-      "updated": "2026-04-17T20:24:23.314+0200",
+      "updated": "2026-04-21T21:52:02.034+0200",
       "created": "2026-04-14T10:32:54.689+0200"
     },
     "LCAP-1222": {
@@ -17692,8 +17692,8 @@
     "LCAP-1223": {
       "key": "LCAP-1223",
       "summary": "Work Package E: Vendor & Product Management",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Closed",
+      "statusCategory": "done",
       "assignee": "Michael Thuren",
       "priority": "Medium",
       "type": "Task",
@@ -17701,14 +17701,14 @@
         "ai-agent-ready",
         "work-package"
       ],
-      "updated": "2026-04-17T20:24:29.344+0200",
+      "updated": "2026-04-21T22:06:29.719+0200",
       "created": "2026-04-14T10:33:46.894+0200"
     },
     "LCAP-1224": {
       "key": "LCAP-1224",
       "summary": "Work Package F: Authentication & Identity",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Closed",
+      "statusCategory": "done",
       "assignee": "Michael Thuren",
       "priority": "High",
       "type": "Task",
@@ -17716,7 +17716,7 @@
         "ai-agent-ready",
         "work-package"
       ],
-      "updated": "2026-04-17T20:24:32.165+0200",
+      "updated": "2026-04-21T22:06:23.535+0200",
       "created": "2026-04-14T10:34:14.225+0200"
     },
     "LCAP-1225": {
@@ -17724,14 +17724,14 @@
       "summary": "Work Package G: Commerce & Checkout Core",
       "status": "Backlog",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Tony Dieu",
       "priority": "High",
       "type": "Task",
       "labels": [
         "ai-agent-ready",
         "work-package"
       ],
-      "updated": "2026-04-17T20:24:34.700+0200",
+      "updated": "2026-04-21T21:51:55.536+0200",
       "created": "2026-04-14T11:58:33.516+0200"
     },
     "LCAP-1226": {
@@ -18797,6 +18797,21 @@
       "labels": [],
       "updated": "2026-04-20T12:59:45.300+0200",
       "created": "2026-04-20T10:57:05.231+0200"
+    },
+    "LCAP-1314": {
+      "key": "LCAP-1314",
+      "summary": "Work Package H: Commerce Backend Stabilization - Consolidated",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Michael Thuren",
+      "priority": "High",
+      "type": "Task",
+      "labels": [
+        "ai-agent-ready",
+        "work-package"
+      ],
+      "updated": "2026-04-21T22:08:32.028+0200",
+      "created": "2026-04-21T22:07:53.542+0200"
     }
   },
   "velocity": [
@@ -19074,5 +19089,5 @@
     }
   ],
   "boardId": 37,
-  "generated": "2026-04-21T19:41:50.617Z"
+  "generated": "2026-04-21T20:08:53.586Z"
 }
