@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-22T06:22:32.770Z",
+    "startDate": "2026-04-22T07:06:54.495Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -2196,7 +2196,7 @@
         "active": 31,
         "testQueue": 10,
         "readyForRelease": 2,
-        "backlog": 34
+        "backlog": 35
       },
       "tony": {
         "active": 15,
@@ -2231,13 +2231,13 @@
     }
   },
   "publicStats": {
-    "totalFeatures": 1310,
+    "totalFeatures": 1312,
     "featuresDone": 947,
     "featuresInProgress": 84,
     "featuresInTest": 46,
     "featuresReadyForRelease": 43,
     "featuresDoneCount": 904,
-    "featuresBacklog": 233,
+    "featuresBacklog": 235,
     "byWorkstream": {
       "Onboarding": {
         "done": 0,
@@ -17731,7 +17731,7 @@
         "ai-agent-ready",
         "work-package"
       ],
-      "updated": "2026-04-21T21:51:55.536+0200",
+      "updated": "2026-04-22T08:31:02.465+0200",
       "created": "2026-04-14T11:58:33.516+0200"
     },
     "LCAP-1226": {
@@ -18810,8 +18810,36 @@
         "ai-agent-ready",
         "work-package"
       ],
-      "updated": "2026-04-21T22:08:32.028+0200",
+      "updated": "2026-04-22T08:30:47.749+0200",
       "created": "2026-04-21T22:07:53.542+0200"
+    },
+    "LCAP-1315": {
+      "key": "LCAP-1315",
+      "summary": "Work Package J: Gate & Scanner Backend Hardening",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Michael Thuren",
+      "priority": "High",
+      "type": "Epic",
+      "labels": [
+        "ai-agent-ready",
+        "gate-scanner",
+        "work-package"
+      ],
+      "updated": "2026-04-22T08:55:41.496+0200",
+      "created": "2026-04-22T08:42:17.619+0200"
+    },
+    "LCAP-1316": {
+      "key": "LCAP-1316",
+      "summary": "Guest App: Profile photo upload prompt and onboarding guide",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": null,
+      "priority": "Medium",
+      "type": "Task",
+      "labels": [],
+      "updated": "2026-04-22T08:43:44.059+0200",
+      "created": "2026-04-22T08:43:43.879+0200"
     }
   },
   "velocity": [
@@ -19089,5 +19117,5 @@
     }
   ],
   "boardId": 37,
-  "generated": "2026-04-22T06:22:37.089Z"
+  "generated": "2026-04-22T07:06:59.768Z"
 }
