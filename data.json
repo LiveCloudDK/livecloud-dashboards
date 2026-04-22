@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-22T21:05:25.485Z",
+    "startDate": "2026-04-22T21:33:07.931Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -2188,7 +2188,7 @@
         "active": 10,
         "testQueue": 11,
         "readyForRelease": 2,
-        "backlog": 26
+        "backlog": 28
       },
       "tony": {
         "active": 28,
@@ -2223,13 +2223,13 @@
     }
   },
   "publicStats": {
-    "totalFeatures": 1319,
+    "totalFeatures": 1321,
     "featuresDone": 951,
     "featuresInProgress": 81,
     "featuresInTest": 48,
     "featuresReadyForRelease": 43,
     "featuresDoneCount": 908,
-    "featuresBacklog": 239,
+    "featuresBacklog": 241,
     "byWorkstream": {
       "Onboarding": {
         "done": 0,
@@ -20250,6 +20250,43 @@
       "updated": "2026-04-22T20:49:29.195+0200",
       "created": "2026-04-22T20:31:03.876+0200",
       "duedate": "2026-04-29"
+    },
+    "LCAP-1323": {
+      "key": "LCAP-1323",
+      "summary": "Work Package N: Edge Case Hardening",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Michael Thuren",
+      "priority": "High",
+      "type": "Epic",
+      "labels": [
+        "ai-agent-ready",
+        "edge-cases",
+        "ringsted-critical",
+        "work-package"
+      ],
+      "updated": "2026-04-22T23:31:00.654+0200",
+      "created": "2026-04-22T23:31:00.309+0200",
+      "duedate": null
+    },
+    "LCAP-1324": {
+      "key": "LCAP-1324",
+      "summary": "Work Package O: Partout & Delegate Ticket Reliability",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Michael Thuren",
+      "priority": "High",
+      "type": "Epic",
+      "labels": [
+        "ai-agent-ready",
+        "delegate",
+        "partout",
+        "ringsted-critical",
+        "work-package"
+      ],
+      "updated": "2026-04-22T23:32:22.153+0200",
+      "created": "2026-04-22T23:32:21.857+0200",
+      "duedate": null
     }
   },
   "velocity": [
@@ -20527,5 +20564,5 @@
     }
   ],
   "boardId": 37,
-  "generated": "2026-04-22T21:05:29.567Z"
+  "generated": "2026-04-22T21:33:10.857Z"
 }
