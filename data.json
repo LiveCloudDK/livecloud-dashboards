@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-22T18:06:47.462Z",
+    "startDate": "2026-04-22T18:37:55.786Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -2208,7 +2208,7 @@
         "active": 6,
         "testQueue": 4,
         "readyForRelease": 6,
-        "backlog": 7
+        "backlog": 8
       },
       "jakob": {
         "active": 9,
@@ -2226,18 +2226,18 @@
         "active": 19,
         "testQueue": 6,
         "readyForRelease": 5,
-        "backlog": 81
+        "backlog": 82
       }
     }
   },
   "publicStats": {
-    "totalFeatures": 1316,
+    "totalFeatures": 1318,
     "featuresDone": 947,
     "featuresInProgress": 83,
     "featuresInTest": 47,
     "featuresReadyForRelease": 43,
     "featuresDoneCount": 904,
-    "featuresBacklog": 239,
+    "featuresBacklog": 241,
     "byWorkstream": {
       "Onboarding": {
         "done": 0,
@@ -18846,11 +18846,11 @@
       "summary": "Guest App: Profile photo upload prompt and onboarding guide",
       "status": "Backlog",
       "statusCategory": "new",
-      "assignee": null,
+      "assignee": "Mikkel Kornval Christoffersen",
       "priority": "Medium",
       "type": "Task",
       "labels": [],
-      "updated": "2026-04-22T08:43:44.059+0200",
+      "updated": "2026-04-22T20:21:07.718+0200",
       "created": "2026-04-22T08:43:43.879+0200"
     },
     "LCAP-1317": {
@@ -18902,6 +18902,34 @@
       ],
       "updated": "2026-04-22T10:02:33.519+0200",
       "created": "2026-04-22T09:34:46.172+0200"
+    },
+    "LCAP-1321": {
+      "key": "LCAP-1321",
+      "summary": "[MILESTONE] App Ticket Sales — Full purchase flow ready for internal test",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": null,
+      "priority": "Highest",
+      "type": "Task",
+      "labels": [
+        "milestone"
+      ],
+      "updated": "2026-04-22T20:30:50.873+0200",
+      "created": "2026-04-22T20:30:50.573+0200"
+    },
+    "LCAP-1322": {
+      "key": "LCAP-1322",
+      "summary": "[MILESTONE] B2B Portal + Accreditation — Ready for internal test",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Simon Jensen",
+      "priority": "Highest",
+      "type": "Task",
+      "labels": [
+        "milestone"
+      ],
+      "updated": "2026-04-22T20:31:04.108+0200",
+      "created": "2026-04-22T20:31:03.876+0200"
     }
   },
   "velocity": [
@@ -19179,5 +19207,5 @@
     }
   ],
   "boardId": 37,
-  "generated": "2026-04-22T18:06:50.660Z"
+  "generated": "2026-04-22T18:37:58.784Z"
 }
