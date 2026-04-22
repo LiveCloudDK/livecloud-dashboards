@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-22T07:06:54.495Z",
+    "startDate": "2026-04-22T07:52:39.256Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -642,6 +642,19 @@
         "updated": "2026-04-02T08:28:52.805+0200"
       },
       {
+        "key": "LCAP-1077",
+        "summary": "App: Interaktivt festival-kort (map feature)",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Edwin Maldonado",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-22T09:37:39.200+0200"
+      },
+      {
         "key": "LCAP-1078",
         "summary": "Delegate access — end-to-end færdiggørelse og test",
         "status": "In Progress",
@@ -960,19 +973,6 @@
           "app"
         ],
         "updated": "2026-04-17T06:42:49.505+0200"
-      },
-      {
-        "key": "LCAP-1077",
-        "summary": "App: Interaktivt festival-kort (map feature)",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Edwin Maldonado",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-04-16T13:41:28.135+0200"
       },
       {
         "key": "LCAP-1035",
@@ -1671,7 +1671,7 @@
         "updated": "2026-04-09T14:29:43.841+0200"
       }
     ],
-    "testQueueCount": 46,
+    "testQueueCount": 47,
     "readyForReleaseCount": 43,
     "releaseIssues": [
       {
@@ -2196,7 +2196,7 @@
         "active": 31,
         "testQueue": 10,
         "readyForRelease": 2,
-        "backlog": 35
+        "backlog": 38
       },
       "tony": {
         "active": 15,
@@ -2217,8 +2217,8 @@
         "backlog": 13
       },
       "edwin": {
-        "active": 4,
-        "testQueue": 4,
+        "active": 3,
+        "testQueue": 5,
         "readyForRelease": 4,
         "backlog": 9
       },
@@ -2231,13 +2231,13 @@
     }
   },
   "publicStats": {
-    "totalFeatures": 1312,
+    "totalFeatures": 1315,
     "featuresDone": 947,
-    "featuresInProgress": 84,
-    "featuresInTest": 46,
+    "featuresInProgress": 83,
+    "featuresInTest": 47,
     "featuresReadyForRelease": 43,
     "featuresDoneCount": 904,
-    "featuresBacklog": 235,
+    "featuresBacklog": 238,
     "byWorkstream": {
       "Onboarding": {
         "done": 0,
@@ -15690,7 +15690,7 @@
     "LCAP-1077": {
       "key": "LCAP-1077",
       "summary": "App: Interaktivt festival-kort (map feature)",
-      "status": "In Progress",
+      "status": "Ready for test",
       "statusCategory": "indeterminate",
       "assignee": "Edwin Maldonado",
       "priority": "Medium",
@@ -15698,7 +15698,7 @@
       "labels": [
         "app"
       ],
-      "updated": "2026-04-16T13:41:28.135+0200",
+      "updated": "2026-04-22T09:37:39.200+0200",
       "created": "2026-03-29T17:41:01.339+0200"
     },
     "LCAP-1078": {
@@ -18840,6 +18840,56 @@
       "labels": [],
       "updated": "2026-04-22T08:43:44.059+0200",
       "created": "2026-04-22T08:43:43.879+0200"
+    },
+    "LCAP-1317": {
+      "key": "LCAP-1317",
+      "summary": "Work Package K: Notification & Communication Infrastructure",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Michael Thuren",
+      "priority": "High",
+      "type": "Epic",
+      "labels": [
+        "ai-agent-ready",
+        "notifications",
+        "work-package"
+      ],
+      "updated": "2026-04-22T09:29:28.050+0200",
+      "created": "2026-04-22T09:29:27.216+0200"
+    },
+    "LCAP-1318": {
+      "key": "LCAP-1318",
+      "summary": "Work Package L: Admin Tools & Reporting",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Michael Thuren",
+      "priority": "High",
+      "type": "Epic",
+      "labels": [
+        "admin-reporting",
+        "ai-agent-ready",
+        "work-package"
+      ],
+      "updated": "2026-04-22T09:31:50.671+0200",
+      "created": "2026-04-22T09:31:50.407+0200"
+    },
+    "LCAP-1319": {
+      "key": "LCAP-1319",
+      "summary": "Work Package M: Security, Resilience & GDPR Compliance",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Michael Thuren",
+      "priority": "High",
+      "type": "Epic",
+      "labels": [
+        "ai-agent-ready",
+        "gdpr",
+        "resilience",
+        "security",
+        "work-package"
+      ],
+      "updated": "2026-04-22T09:34:46.433+0200",
+      "created": "2026-04-22T09:34:46.172+0200"
     }
   },
   "velocity": [
@@ -19117,5 +19167,5 @@
     }
   ],
   "boardId": 37,
-  "generated": "2026-04-22T07:06:59.768Z"
+  "generated": "2026-04-22T07:52:42.319Z"
 }
