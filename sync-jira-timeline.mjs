@@ -132,6 +132,7 @@ function issueToTicket(issue) {
     labels: (f.labels || []).map(l => l.name || l),
     updated: f.updated,
     created: f.created,
+    duedate: f.duedate || null,
   };
 }
 

@@ -1938,6 +1938,10 @@ let tasks = [
   { id:'beats-mgr', label:'Manager Beats-tildeling med begrundelse', ws:'4', persons:['michael'], start:2, span:2, phase:'build', jira:'LCAP-1084', deps:[] },
 
   // Feature freeze 1. jul = Jul H1 (col 7)
+  // Milestones — internal test-deadlines 31. maj (Maj H2 = col 4)
+  { id:'ms-ticket-sales', label:'[MILESTONE] App Ticket Sales klar til internal test (31. maj)', ws:'all', persons:['michael','mikkel','edwin','jakob'], start:4.6, span:0.3, phase:'critical', jira:'LCAP-1321', deps:[], milestone: true, desc:'Full purchase flow ready for internal test. Due 31. maj 2026.' },
+  { id:'ms-b2b-portal', label:'[MILESTONE] B2B Portal + Accreditation klar til internal test (31. maj)', ws:'5', persons:['simon'], start:4.6, span:0.3, phase:'critical', jira:'LCAP-1322', deps:[], milestone: true, desc:'B2B portal + accreditation ready for internal test. Due 31. maj 2026.' },
+
   { id:'freeze', label:'FEATURE FREEZE 1. JULI', ws:'all', persons:['jakob','tony','michael','mikkel','edwin'], start:7, span:0.3, phase:'critical', jira:'', deps:[], milestone: true },
 
   // Fase 3  -  Polish + Scale (Jul H1 = 1-15. jul, FØR festival)
@@ -1979,6 +1983,8 @@ const overviewTasks = [
   { id:'ov-10', label:'WS10  -  Check-in / Gates', ws:'10', persons:['jakob','tony','edwin','michael'], start:2, span:5, phases:[{start:2,span:1,phase:'build'},{start:3,span:3,phase:'build'},{start:6,span:1,phase:'test'}], desc:'Gate design, hardware, software, integrations-test.', jira:'LCAP-1083,984' },
   { id:'ov-festxp', label:'App  -  Festival Experience & Community', ws:'3', persons:['mikkel','edwin','michael'], start:4, span:4, phases:[{start:4,span:1,phase:'build'},{start:5,span:1,phase:'build'},{start:6,span:1,phase:'build'},{start:7,span:1,phase:'test'}], desc:'Kort, boder, community, gamification, CDP, pre-order. Epic LCAP-1102 (8 stories).', jira:'LCAP-1102-1110' },
   { id:'ov-ops', label:'Festival Ops  -  personale, support, vagter', ws:'7', persons:['jakob','edwin'], start:4, span:4, phases:[{start:4,span:3,phase:'build'},{start:6,span:2,phase:'meeting'}], desc:'Rekruttér supportere, onboard personale, planlæg vagtordning.', jira:'' },
+  { id:'ov-ms-ticket-sales', label:'MILESTONE — App Ticket Sales internal test (31. maj)', ws:'all', persons:['michael','mikkel','edwin','jakob'], start:4.6, span:0.3, phases:[{start:4.6,span:0.3,phase:'critical'}], desc:'Full purchase flow ready for internal test. Due 31. maj 2026.', jira:'LCAP-1321', milestone:true },
+  { id:'ov-ms-b2b-portal', label:'MILESTONE — B2B Portal + Accreditation internal test (31. maj)', ws:'5', persons:['simon'], start:4.6, span:0.3, phases:[{start:4.6,span:0.3,phase:'critical'}], desc:'B2B portal + accreditation ready for internal test. Due 31. maj 2026.', jira:'LCAP-1322', milestone:true },
   { id:'ov-freeze', label:'FEATURE FREEZE 1. JULI', ws:'all', persons:['jakob','tony','michael','mikkel','edwin'], start:7, span:0.3, phases:[{start:7,span:0.3,phase:'critical'}], desc:'Alt build og test færdigt. Kun bugfix herefter.', jira:'', milestone:true },
   { id:'ov-polish', label:'Polish + Load Test + Workshops (1-15. jul)', ws:'all', persons:['jakob','tony','michael','mikkel','edwin'], start:7, span:1, phases:[{start:7,span:1,phase:'scale'}], desc:'Load testing 20K, rehearsal, personale-workshops. Alt FØR festival.', jira:'' },
   { id:'ov-buffer', label:'BUFFER  -  uventede issues (16-29. jul)', ws:'all', persons:['jakob','tony','michael','mikkel','edwin'], start:8, span:1, phases:[{start:8,span:1,phase:'critical'}], desc:'2 uger reserveret til uventede problemer og last-minute fixes.', jira:'' },
