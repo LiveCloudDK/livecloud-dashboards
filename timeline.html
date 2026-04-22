@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>LiveCloud  -  Roadmap Timeline</title>
 <style>
   @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -2055,7 +2058,7 @@ let wsNames = {
     async function loadTimelineData() {
       try {
         const cacheBust = Date.now();
-        const resp = await fetch('data.json?v=' + cacheBust);
+        const resp = await fetch('data.json?v=' + cacheBust, { cache: 'no-store' });
         if (!resp.ok) throw new Error('HTTP ' + resp.status);
         const data = await resp.json();
         if (data.tasks && data.tasks.length > 0) tasks = data.tasks;
@@ -2068,21 +2071,31 @@ let wsNames = {
         if (data.festivals) window._festivals = data.festivals;
         window._lastGenerated = data.generated;
         const genDate = new Date(data.generated);
-        const dateStr = genDate.toLocaleDateString('da-DK', { day:'numeric', month:'short', year:'numeric' });
-        const timeStr = genDate.toLocaleTimeString('da-DK', { hour:'2-digit', minute:'2-digit' });
+        // Eksplicit hour12:false + padded fallback i tilfælde af locale-støj
+        const dd = String(genDate.getDate()).padStart(2, '0');
+        const monthNames = ['jan','feb','mar','apr','maj','jun','jul','aug','sep','okt','nov','dec'];
+        const mm = monthNames[genDate.getMonth()];
+        const yyyy = genDate.getFullYear();
+        const hh = String(genDate.getHours()).padStart(2, '0');
+        const mi = String(genDate.getMinutes()).padStart(2, '0');
+        const dateStr = `${dd}. ${mm}. ${yyyy}`;
+        const timeStr = `${hh}:${mi}`;
         const el = document.querySelector('.subtitle');
         if (el) el.textContent = 'Synkroniseret fra Jira: ' + dateStr;
         const metaEl = document.getElementById('last-updated');
-        if (metaEl) metaEl.textContent = 'Opdateret: ' + dateStr + ' kl. ' + timeStr;
+        if (metaEl) {
+          metaEl.textContent = 'Opdateret: ' + dateStr + ' kl. ' + timeStr;
+          metaEl.title = 'Raw ISO: ' + data.generated + ' | Board: ' + (data.boardId || '?');
+        }
         const mobileSyncBtn = document.getElementById('mobile-sync-trigger');
         if (mobileSyncBtn) mobileSyncBtn.title = 'Opdateret: ' + dateStr + ' kl. ' + timeStr;
-        console.log('Loaded ' + tasks.length + ' tasks from data.json (' + data.generated + ')');
+        console.log('[sync] data.generated=' + data.generated + ' local=' + dateStr + ' ' + timeStr + ' tickets=' + Object.keys(data.tickets || {}).length);
       } catch (err) {
         console.warn('data.json not available, using fallback tasks:', err.message);
       }
       // Load curated public features for showcase view
       try {
-        const pfResp = await fetch('public-features.json?v=' + Date.now());
+        const pfResp = await fetch('public-features.json?v=' + Date.now(), { cache: 'no-store' });
         if (pfResp.ok) {
           window._publicFeatures = await pfResp.json();
           console.log('Loaded public-features.json');
