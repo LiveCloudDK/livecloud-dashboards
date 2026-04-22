@@ -6,6 +6,7 @@
 <title>LiveCloud  -  Roadmap Timeline</title>
 <style>
   @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes toast-slide { from { transform: translateX(20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
   :root {
     --bg: #0f1117;
     --surface: #1a1d27;
@@ -2065,6 +2066,7 @@ let wsNames = {
         if (data.tickets) window._tickets = data.tickets;
         if (data.velocity) window._velocity = data.velocity;
         if (data.festivals) window._festivals = data.festivals;
+        window._lastGenerated = data.generated;
         const genDate = new Date(data.generated);
         const dateStr = genDate.toLocaleDateString('da-DK', { day:'numeric', month:'short', year:'numeric' });
         const timeStr = genDate.toLocaleTimeString('da-DK', { hour:'2-digit', minute:'2-digit' });
@@ -2337,6 +2339,36 @@ let wsNames = {
     }
 
     // Manual sync button handler
+    // ── Toast ──
+    function showToast(msg, kind) {
+      const existing = document.getElementById('sync-toast');
+      if (existing) existing.remove();
+      const t = document.createElement('div');
+      t.id = 'sync-toast';
+      const colors = { ok: '#22c55e', info: '#3b82f6', warn: '#eab308', err: '#ef4444' };
+      const c = colors[kind] || colors.info;
+      t.style.cssText = `position:fixed;top:20px;right:20px;z-index:1000;background:var(--surface);border:1px solid ${c};border-left:4px solid ${c};border-radius:8px;padding:10px 14px;font-size:13px;color:var(--text);box-shadow:0 4px 16px rgba(0,0,0,0.3);max-width:340px;animation:toast-slide 0.2s ease-out`;
+      t.innerHTML = msg;
+      document.body.appendChild(t);
+      setTimeout(() => { if (t.parentNode) t.remove(); }, 5000);
+    }
+
+    // Hvor lang tid siden en sync?
+    function relativeTime(date) {
+      const diff = (Date.now() - date.getTime()) / 1000;
+      if (diff < 60) return Math.round(diff) + ' sek. siden';
+      if (diff < 3600) return Math.round(diff / 60) + ' min. siden';
+      if (diff < 86400) return Math.round(diff / 3600) + ' t. siden';
+      return Math.round(diff / 86400) + ' d. siden';
+    }
+
+    // ── Trigger real Jira-sync via GitHub Actions workflow_dispatch ──
+    // Åbner workflow-siden i ny tab hvor brugeren kan klikke "Run workflow"
+    window._triggerJiraSync = function() {
+      window.open('https://github.com/LiveCloudDK/livecloud-dashboards/actions/workflows/sync-timeline.yml', '_blank');
+      showToast('Klik <strong>Run workflow → main → Run workflow</strong> i GitHub.<br>Data opdateres om ~60 sek.<br>Tryk derefter <strong>Sync</strong> her igen.', 'info');
+    };
+
     window._syncJira = async function() {
       const btn = document.getElementById('sync-btn');
       const mobileBtn = document.getElementById('mobile-sync-trigger');
@@ -2345,23 +2377,37 @@ let wsNames = {
       btn.disabled = true;
       if (icon) icon.style.animation = 'spin 0.8s linear infinite';
       if (mobileBtn) { mobileBtn.style.animation = 'spin 0.8s linear infinite'; mobileBtn.disabled = true; }
+      const prevGenerated = window._lastGenerated || null;
       try {
         await loadTimelineData();
         render();
-        if (icon) { icon.style.animation = 'none'; icon.textContent = '\u2714'; }
-        if (mobileBtn) { mobileBtn.style.animation = 'none'; mobileBtn.textContent = '\u2714'; }
-        btn.style.cssText = 'color:var(--green);border-color:var(--green)';
+        const newGenerated = window._lastGenerated;
+        const hasNewData = !prevGenerated || (newGenerated && newGenerated !== prevGenerated);
+
+        if (icon) { icon.style.animation = 'none'; icon.textContent = hasNewData ? '\u2714' : '\u25CB'; }
+        if (mobileBtn) { mobileBtn.style.animation = 'none'; mobileBtn.textContent = hasNewData ? '\u2714' : '\u25CB'; }
+        btn.style.cssText = hasNewData
+          ? 'color:var(--green);border-color:var(--green)'
+          : 'color:var(--yellow);border-color:var(--yellow)';
+
+        if (hasNewData) {
+          showToast('<strong>Ny data hentet</strong><br>Fra Jira: ' + new Date(newGenerated).toLocaleTimeString('da-DK', {hour:'2-digit',minute:'2-digit'}), 'ok');
+        } else {
+          const age = newGenerated ? relativeTime(new Date(newGenerated)) : 'ukendt';
+          showToast('<strong>Ingen ny data</strong><br>Seneste sync: ' + age + '<br><a href="#" onclick="window._triggerJiraSync();return false" style="color:var(--accent-light);text-decoration:underline">Kør frisk Jira-sync →</a>', 'warn');
+        }
       } catch (e) {
         console.error('Sync failed:', e);
         if (icon) { icon.style.animation = 'none'; icon.textContent = '\u2717'; }
         btn.style.cssText = 'color:var(--red);border-color:var(--red)';
+        showToast('<strong>Sync fejlede</strong><br>' + e.message, 'err');
       }
       setTimeout(() => {
         if (icon) icon.textContent = '\u21BB';
         if (mobileBtn) { mobileBtn.textContent = '\u21BB'; mobileBtn.disabled = false; }
         btn.disabled = false;
         btn.style.cssText = '';
-      }, 2000);
+      }, 3000);
     };
 
 
