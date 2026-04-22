@@ -36,10 +36,49 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-22T21:33:07.931Z",
+    "startDate": "2026-04-22T22:02:11.686Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-989",
+        "summary": "Delegate revoke — gæst kan tilbagekalde en delegeret dag",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Highest",
+        "type": "Sub-task",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-22T23:46:59.239+0200"
+      },
+      {
+        "key": "LCAP-1027",
+        "summary": "Fix sku constraints for products",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Highest",
+        "type": "Initiative",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-22T23:44:43.323+0200"
+      },
+      {
+        "key": "LCAP-1079",
+        "summary": "Billettyper: Camping (2/4 adgang), børnebilletter og ledsagerbilletter",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Highest",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-22T23:40:13.404+0200"
+      },
       {
         "key": "LCAP-963",
         "summary": "Inventory datamodel — vendor lager + centrallager",
@@ -78,45 +117,6 @@
           "app"
         ],
         "updated": "2026-04-17T06:42:00.083+0200"
-      },
-      {
-        "key": "LCAP-1079",
-        "summary": "Billettyper: Camping (2/4 adgang), børnebilletter og ledsagerbilletter",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Highest",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-14T12:21:49.265+0200"
-      },
-      {
-        "key": "LCAP-1027",
-        "summary": "Fix sku constraints for products",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Highest",
-        "type": "Initiative",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-04-14T11:59:42.526+0200"
-      },
-      {
-        "key": "LCAP-989",
-        "summary": "Delegate revoke — gæst kan tilbagekalde en delegeret dag",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Highest",
-        "type": "Sub-task",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-14T11:58:46.155+0200"
       },
       {
         "key": "LCAP-998",
@@ -184,6 +184,19 @@
         "updated": "2026-04-09T14:30:24.307+0200"
       },
       {
+        "key": "LCAP-1166",
+        "summary": "Profil-løs billet: QR-kode → service desk → armbånd",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-22T23:42:49.008+0200"
+      },
+      {
         "key": "LCAP-1228",
         "summary": "Delegering af enkelt dag fra partout overfører hele billetten + manglende revoke",
         "status": "Ready for test",
@@ -196,7 +209,51 @@
           "bug",
           "commerce"
         ],
-        "updated": "2026-04-22T22:10:43.854+0200"
+        "updated": "2026-04-22T23:42:29.541+0200"
+      },
+      {
+        "key": "LCAP-1227",
+        "summary": "Partout-billet kan ikke assignes til barn (422: access_type must be companion or child)",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Bug",
+        "labels": [
+          "backend",
+          "bug",
+          "commerce"
+        ],
+        "updated": "2026-04-22T23:42:24.770+0200"
+      },
+      {
+        "key": "LCAP-992",
+        "summary": "Admin dashboard — brugeradministration i UserCentral",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-22T23:39:39.397+0200"
+      },
+      {
+        "key": "LCAP-1200",
+        "summary": "Push Notification Service — transaktionelle push-beskeder",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "backend",
+          "infrastructure",
+          "notifications",
+          "ringsted-critical"
+        ],
+        "updated": "2026-04-22T23:39:09.492+0200"
       },
       {
         "key": "LCAP-334",
@@ -299,22 +356,6 @@
         "updated": "2026-04-22T21:46:10.566+0200"
       },
       {
-        "key": "LCAP-1200",
-        "summary": "Push Notification Service — transaktionelle push-beskeder",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "High",
-        "type": "Task",
-        "labels": [
-          "backend",
-          "infrastructure",
-          "notifications",
-          "ringsted-critical"
-        ],
-        "updated": "2026-04-22T21:26:01.628+0200"
-      },
-      {
         "key": "LCAP-1067",
         "summary": "POS/App: Initier betaling fra POS på kundens app efter identifikation",
         "status": "Selected for Development",
@@ -354,21 +395,6 @@
         "updated": "2026-04-20T13:44:41.112+0200"
       },
       {
-        "key": "LCAP-1227",
-        "summary": "Partout-billet kan ikke assignes til barn (422: access_type must be companion or child)",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "High",
-        "type": "Bug",
-        "labels": [
-          "backend",
-          "bug",
-          "commerce"
-        ],
-        "updated": "2026-04-17T13:45:29.690+0200"
-      },
-      {
         "key": "LCAP-1207",
         "summary": "FMS: Akkrediterings-interface — listehåndtering og adgangsstyring",
         "status": "In Progress",
@@ -382,19 +408,6 @@
         "updated": "2026-04-17T10:37:32.671+0200"
       },
       {
-        "key": "LCAP-1166",
-        "summary": "Profil-løs billet: QR-kode → service desk → armbånd",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "High",
-        "type": "Task",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-04-17T06:42:22.431+0200"
-      },
-      {
         "key": "LCAP-1157",
         "summary": "Shopify → Ticket Engine: nye billetter med deeplink til app (Mædlfest, Oktoberfest, Julefester)",
         "status": "In Progress",
@@ -404,19 +417,6 @@
         "type": "Task",
         "labels": [],
         "updated": "2026-04-17T06:41:35.271+0200"
-      },
-      {
-        "key": "LCAP-992",
-        "summary": "Admin dashboard — brugeradministration i UserCentral",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "High",
-        "type": "Task",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-04-14T12:00:06.245+0200"
       },
       {
         "key": "LCAP-1214",
@@ -632,6 +632,171 @@
           "pos"
         ],
         "updated": "2026-04-02T08:28:52.805+0200"
+      },
+      {
+        "key": "LCAP-764",
+        "summary": "Cart implementation",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-22T23:44:09.869+0200"
+      },
+      {
+        "key": "LCAP-757",
+        "summary": "Payment API endpoint",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-22T23:44:05.893+0200"
+      },
+      {
+        "key": "LCAP-756",
+        "summary": "Balance API endpoint",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-22T23:44:02.227+0200"
+      },
+      {
+        "key": "LCAP-755",
+        "summary": "Credit management core system",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-22T23:43:58.904+0200"
+      },
+      {
+        "key": "LCAP-748",
+        "summary": "Cart and order management",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-22T23:43:53.577+0200"
+      },
+      {
+        "key": "LCAP-673",
+        "summary": "Finansiel routing",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-22T23:43:49.538+0200"
+      },
+      {
+        "key": "LCAP-915",
+        "summary": "EDGE-13: Transfer settlement not scoped by summit",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [
+          "app"
+        ],
+        "updated": "2026-04-22T23:43:45.854+0200"
+      },
+      {
+        "key": "LCAP-914",
+        "summary": "EDGE-12: Token proliferation on repeated exchange",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-22T23:43:42.145+0200"
+      },
+      {
+        "key": "LCAP-913",
+        "summary": "EDGE-8: Summit ID overwritten on every exchange",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-22T23:43:38.677+0200"
+      },
+      {
+        "key": "LCAP-910",
+        "summary": "EDGE-14: Bundle movement resolution not scoped by recipient",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-22T23:43:34.945+0200"
+      },
+      {
+        "key": "LCAP-909",
+        "summary": "EDGE-11: Partial bundle transfer is silent",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-22T23:43:31.300+0200"
+      },
+      {
+        "key": "LCAP-908",
+        "summary": "EDGE-10: Delegate guard only checks anchor ticket in bundle",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-22T23:43:27.771+0200"
+      },
+      {
+        "key": "LCAP-907",
+        "summary": "EDGE-7: UserCentral email change invalidates pending transfers",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Sub-task",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-22T23:43:24.366+0200"
       },
       {
         "key": "LCAP-492",
@@ -974,19 +1139,6 @@
         "updated": "2026-04-20T10:44:28.559+0200"
       },
       {
-        "key": "LCAP-907",
-        "summary": "EDGE-7: UserCentral email change invalidates pending transfers",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-19T11:25:32.680+0200"
-      },
-      {
         "key": "LCAP-810",
         "summary": "B2B Portal: Ticket allocation + distribution resources",
         "status": "In Progress",
@@ -1077,19 +1229,6 @@
         "updated": "2026-04-15T09:00:18.268+0200"
       },
       {
-        "key": "LCAP-908",
-        "summary": "EDGE-10: Delegate guard only checks anchor ticket in bundle",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-14T17:11:07.503+0200"
-      },
-      {
         "key": "LCAP-1163",
         "summary": "FMS: B2B kundeoprettelse (ordreholder-konto)",
         "status": "In Progress",
@@ -1099,145 +1238,6 @@
         "type": "Task",
         "labels": [],
         "updated": "2026-04-14T14:40:55.104+0200"
-      },
-      {
-        "key": "LCAP-673",
-        "summary": "Finansiel routing",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-14T12:21:40.063+0200"
-      },
-      {
-        "key": "LCAP-764",
-        "summary": "Cart implementation",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-14T11:59:29.024+0200"
-      },
-      {
-        "key": "LCAP-757",
-        "summary": "Payment API endpoint",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-14T11:59:27.732+0200"
-      },
-      {
-        "key": "LCAP-748",
-        "summary": "Cart and order management",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-14T11:59:26.348+0200"
-      },
-      {
-        "key": "LCAP-756",
-        "summary": "Balance API endpoint",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-14T11:58:57.333+0200"
-      },
-      {
-        "key": "LCAP-755",
-        "summary": "Credit management core system",
-        "status": "Ready for test",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-14T11:58:55.752+0200"
-      },
-      {
-        "key": "LCAP-915",
-        "summary": "EDGE-13: Transfer settlement not scoped by summit",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [
-          "app"
-        ],
-        "updated": "2026-04-14T10:35:20.240+0200"
-      },
-      {
-        "key": "LCAP-914",
-        "summary": "EDGE-12: Token proliferation on repeated exchange",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-14T10:35:18.306+0200"
-      },
-      {
-        "key": "LCAP-913",
-        "summary": "EDGE-8: Summit ID overwritten on every exchange",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-14T10:35:16.681+0200"
-      },
-      {
-        "key": "LCAP-910",
-        "summary": "EDGE-14: Bundle movement resolution not scoped by recipient",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-14T10:35:15.182+0200"
-      },
-      {
-        "key": "LCAP-909",
-        "summary": "EDGE-11: Partial bundle transfer is silent",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-14T10:35:13.693+0200"
       },
       {
         "key": "LCAP-738",
@@ -1837,17 +1837,6 @@
         "updated": "2026-03-13T10:59:37.380+0100"
       },
       {
-        "key": "LCAP-769",
-        "summary": "Tickets to multiple access options",
-        "status": "Ready for release",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [],
-        "updated": "2026-04-20T13:38:07.890+0200"
-      },
-      {
         "key": "LCAP-929",
         "summary": "Align ticket type and ticket information",
         "status": "Ready for release",
@@ -1858,7 +1847,18 @@
         "labels": [
           "app"
         ],
-        "updated": "2026-04-20T13:37:08.143+0200"
+        "updated": "2026-04-22T23:44:18.513+0200"
+      },
+      {
+        "key": "LCAP-769",
+        "summary": "Tickets to multiple access options",
+        "status": "Ready for release",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-22T23:44:13.265+0200"
       },
       {
         "key": "LCAP-597",
@@ -2188,7 +2188,7 @@
         "active": 10,
         "testQueue": 11,
         "readyForRelease": 2,
-        "backlog": 28
+        "backlog": 29
       },
       "tony": {
         "active": 28,
@@ -2223,13 +2223,13 @@
     }
   },
   "publicStats": {
-    "totalFeatures": 1321,
+    "totalFeatures": 1322,
     "featuresDone": 951,
     "featuresInProgress": 81,
     "featuresInTest": 48,
     "featuresReadyForRelease": 43,
     "featuresDoneCount": 908,
-    "featuresBacklog": 241,
+    "featuresBacklog": 242,
     "byWorkstream": {
       "Onboarding": {
         "done": 0,
@@ -4202,7 +4202,7 @@
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-14T10:36:10.961+0200",
+      "updated": "2026-04-22T23:40:38.889+0200",
       "created": "2026-01-19T11:13:08.288+0100",
       "duedate": null
     },
@@ -8068,7 +8068,7 @@
       "priority": "High",
       "type": "Story",
       "labels": [],
-      "updated": "2026-04-14T11:59:06.560+0200",
+      "updated": "2026-04-22T23:40:20.991+0200",
       "created": "2025-11-11T14:51:06.249+0100",
       "duedate": null
     },
@@ -8094,7 +8094,7 @@
       "priority": "High",
       "type": "Story",
       "labels": [],
-      "updated": "2026-04-14T11:59:08.006+0200",
+      "updated": "2026-04-22T23:40:25.625+0200",
       "created": "2025-11-11T14:51:51.221+0100",
       "duedate": null
     },
@@ -8120,7 +8120,7 @@
       "priority": "High",
       "type": "Story",
       "labels": [],
-      "updated": "2026-04-14T11:59:09.407+0200",
+      "updated": "2026-04-22T23:40:30.133+0200",
       "created": "2025-11-11T14:52:32.494+0100",
       "duedate": null
     },
@@ -8182,10 +8182,10 @@
       "status": "Backlog",
       "statusCategory": "new",
       "assignee": "Michael Thuren",
-      "priority": "Medium",
+      "priority": "High",
       "type": "Story",
       "labels": [],
-      "updated": "2026-04-20T13:31:42.261+0200",
+      "updated": "2026-04-22T23:56:21.631+0200",
       "created": "2025-11-11T14:54:13.536+0100",
       "duedate": null
     },
@@ -8224,7 +8224,7 @@
       "priority": "High",
       "type": "Story",
       "labels": [],
-      "updated": "2026-04-14T11:59:11.187+0200",
+      "updated": "2026-04-22T23:40:34.879+0200",
       "created": "2025-11-11T14:56:07.596+0100",
       "duedate": null
     },
@@ -11387,7 +11387,7 @@
       "priority": "Medium",
       "type": "Epic",
       "labels": [],
-      "updated": "2026-04-20T13:41:50.195+0200",
+      "updated": "2026-04-22T23:44:39.939+0200",
       "created": "2026-02-06T15:28:48.757+0100",
       "duedate": null
     },
@@ -11402,7 +11402,7 @@
       "labels": [
         "app"
       ],
-      "updated": "2026-04-20T13:37:08.143+0200",
+      "updated": "2026-04-22T23:44:18.513+0200",
       "created": "2026-03-13T11:31:17.844+0100",
       "duedate": null
     },
@@ -11573,7 +11573,7 @@
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-14T11:59:26.348+0200",
+      "updated": "2026-04-22T23:43:53.577+0200",
       "created": "2026-02-06T15:42:18.638+0100",
       "duedate": null
     },
@@ -11659,7 +11659,7 @@
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-14T11:59:29.024+0200",
+      "updated": "2026-04-22T23:44:09.869+0200",
       "created": "2026-02-06T15:47:41.728+0100",
       "duedate": null
     },
@@ -11674,7 +11674,7 @@
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-14T12:21:40.063+0200",
+      "updated": "2026-04-22T23:43:49.538+0200",
       "created": "2026-01-29T11:16:47.395+0100",
       "duedate": null
     },
@@ -11812,7 +11812,7 @@
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-14T11:58:46.155+0200",
+      "updated": "2026-04-22T23:46:59.239+0200",
       "created": "2026-03-17T16:01:03.476+0100",
       "duedate": null
     },
@@ -11915,7 +11915,7 @@
       "priority": "High",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-14T11:59:43.809+0200",
+      "updated": "2026-04-22T23:44:23.452+0200",
       "created": "2026-04-08T11:27:45.895+0200",
       "duedate": null
     },
@@ -11930,7 +11930,7 @@
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-14T11:58:55.752+0200",
+      "updated": "2026-04-22T23:43:58.904+0200",
       "created": "2026-02-06T15:44:26.421+0100",
       "duedate": null
     },
@@ -11945,7 +11945,7 @@
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-14T11:58:57.333+0200",
+      "updated": "2026-04-22T23:44:02.227+0200",
       "created": "2026-02-06T15:44:35.253+0100",
       "duedate": null
     },
@@ -11960,7 +11960,7 @@
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-14T11:59:27.732+0200",
+      "updated": "2026-04-22T23:44:05.893+0200",
       "created": "2026-02-06T15:44:45.458+0100",
       "duedate": null
     },
@@ -12020,7 +12020,7 @@
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-14T11:59:00.477+0200",
+      "updated": "2026-04-22T23:42:53.627+0200",
       "created": "2026-03-14T10:33:34.470+0100",
       "duedate": null
     },
@@ -13096,7 +13096,7 @@
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-04-20T13:38:07.890+0200",
+      "updated": "2026-04-22T23:44:13.265+0200",
       "created": "2026-02-09T08:52:39.343+0100",
       "duedate": null
     },
@@ -13728,7 +13728,7 @@
       "priority": "High",
       "type": "Bug",
       "labels": [],
-      "updated": "2026-04-14T12:21:41.675+0200",
+      "updated": "2026-04-22T23:44:36.227+0200",
       "created": "2026-02-23T15:41:51.210+0100",
       "duedate": null
     },
@@ -13767,7 +13767,7 @@
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-04-14T10:35:46.604+0200",
+      "updated": "2026-04-22T23:42:44.207+0200",
       "created": "2026-02-24T09:06:32.859+0100",
       "duedate": null
     },
@@ -14076,7 +14076,7 @@
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-19T11:25:32.680+0200",
+      "updated": "2026-04-22T23:43:24.366+0200",
       "created": "2026-03-10T09:08:06.981+0100",
       "duedate": null
     },
@@ -14091,7 +14091,7 @@
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-14T17:11:07.503+0200",
+      "updated": "2026-04-22T23:43:27.771+0200",
       "created": "2026-03-10T09:08:43.104+0100",
       "duedate": null
     },
@@ -14106,7 +14106,7 @@
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-14T10:35:13.693+0200",
+      "updated": "2026-04-22T23:43:31.300+0200",
       "created": "2026-03-10T09:09:15.765+0100",
       "duedate": null
     },
@@ -14121,7 +14121,7 @@
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-14T10:35:15.182+0200",
+      "updated": "2026-04-22T23:43:34.945+0200",
       "created": "2026-03-10T09:15:53.704+0100",
       "duedate": null
     },
@@ -14164,7 +14164,7 @@
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-14T10:35:16.681+0200",
+      "updated": "2026-04-22T23:43:38.677+0200",
       "created": "2026-03-10T09:17:40.462+0100",
       "duedate": null
     },
@@ -14177,7 +14177,7 @@
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-14T10:35:18.306+0200",
+      "updated": "2026-04-22T23:43:42.145+0200",
       "created": "2026-03-10T09:18:18.393+0100",
       "duedate": null
     },
@@ -14192,7 +14192,7 @@
       "labels": [
         "app"
       ],
-      "updated": "2026-04-14T10:35:20.240+0200",
+      "updated": "2026-04-22T23:43:45.854+0200",
       "created": "2026-03-10T09:18:49.018+0100",
       "duedate": null
     },
@@ -15347,7 +15347,7 @@
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-14T11:58:43.230+0200",
+      "updated": "2026-04-22T23:42:34.685+0200",
       "created": "2026-03-17T10:43:37.766+0100",
       "duedate": null
     },
@@ -15362,7 +15362,7 @@
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-14T11:58:44.849+0200",
+      "updated": "2026-04-22T23:42:39.369+0200",
       "created": "2026-03-17T10:43:39.516+0100",
       "duedate": null
     },
@@ -15437,7 +15437,7 @@
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-14T12:00:06.245+0200",
+      "updated": "2026-04-22T23:39:39.397+0200",
       "created": "2026-03-19T08:58:07.913+0100",
       "duedate": null
     },
@@ -15738,7 +15738,7 @@
         "pos",
         "ringsted-critical"
       ],
-      "updated": "2026-04-22T21:25:11.989+0200",
+      "updated": "2026-04-22T23:39:47.356+0200",
       "created": "2026-03-25T14:12:01.098+0100",
       "duedate": null
     },
@@ -15754,7 +15754,7 @@
         "pos",
         "ringsted-critical"
       ],
-      "updated": "2026-04-22T21:25:22.845+0200",
+      "updated": "2026-04-22T23:39:51.741+0200",
       "created": "2026-03-25T15:09:38.615+0100",
       "duedate": null
     },
@@ -15801,7 +15801,7 @@
         "pos",
         "ringsted-critical"
       ],
-      "updated": "2026-04-22T21:25:41.217+0200",
+      "updated": "2026-04-22T23:39:59.312+0200",
       "created": "2026-03-25T16:02:16.446+0100",
       "duedate": null
     },
@@ -15967,7 +15967,7 @@
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-14T11:59:42.526+0200",
+      "updated": "2026-04-22T23:44:43.323+0200",
       "created": "2026-03-26T12:30:33.668+0100",
       "duedate": null
     },
@@ -16803,7 +16803,7 @@
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-14T12:21:49.265+0200",
+      "updated": "2026-04-22T23:40:13.404+0200",
       "created": "2026-03-29T17:41:02.802+0200",
       "duedate": "2026-04-07"
     },
@@ -18021,7 +18021,7 @@
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-17T06:42:22.431+0200",
+      "updated": "2026-04-22T23:42:49.008+0200",
       "created": "2026-04-08T12:05:41.269+0200",
       "duedate": null
     },
@@ -18577,7 +18577,7 @@
         "notifications",
         "ringsted-critical"
       ],
-      "updated": "2026-04-22T21:26:01.628+0200",
+      "updated": "2026-04-22T23:39:09.492+0200",
       "created": "2026-04-09T11:54:39.276+0200",
       "duedate": null
     },
@@ -18652,7 +18652,7 @@
       "priority": "Highest",
       "type": "Initiative",
       "labels": [],
-      "updated": "2026-04-10T10:16:20.484+0200",
+      "updated": "2026-04-22T23:44:47.015+0200",
       "created": "2026-04-10T10:15:46.472+0200",
       "duedate": null
     },
@@ -18903,7 +18903,7 @@
         "ringsted-critical",
         "work-package"
       ],
-      "updated": "2026-04-22T21:24:26.775+0200",
+      "updated": "2026-04-22T23:37:01.382+0200",
       "created": "2026-04-14T10:33:18.979+0200",
       "duedate": null
     },
@@ -18981,7 +18981,7 @@
         "bug",
         "commerce"
       ],
-      "updated": "2026-04-17T13:45:29.690+0200",
+      "updated": "2026-04-22T23:42:24.770+0200",
       "created": "2026-04-15T22:06:38.375+0200",
       "duedate": null
     },
@@ -18998,7 +18998,7 @@
         "bug",
         "commerce"
       ],
-      "updated": "2026-04-22T22:10:43.854+0200",
+      "updated": "2026-04-22T23:42:29.541+0200",
       "created": "2026-04-15T22:06:51.560+0200",
       "duedate": null
     },
@@ -20132,7 +20132,7 @@
         "ai-agent-ready",
         "work-package"
       ],
-      "updated": "2026-04-22T08:30:47.749+0200",
+      "updated": "2026-04-22T23:44:39.975+0200",
       "created": "2026-04-21T22:07:53.542+0200",
       "duedate": null
     },
@@ -20198,7 +20198,7 @@
         "ringsted-critical",
         "work-package"
       ],
-      "updated": "2026-04-22T21:24:59.818+0200",
+      "updated": "2026-04-22T23:44:47.055+0200",
       "created": "2026-04-22T09:31:50.407+0200",
       "duedate": null
     },
@@ -20265,7 +20265,7 @@
         "ringsted-critical",
         "work-package"
       ],
-      "updated": "2026-04-22T23:31:00.654+0200",
+      "updated": "2026-04-22T23:43:45.883+0200",
       "created": "2026-04-22T23:31:00.309+0200",
       "duedate": null
     },
@@ -20284,8 +20284,26 @@
         "ringsted-critical",
         "work-package"
       ],
-      "updated": "2026-04-22T23:32:22.153+0200",
+      "updated": "2026-04-22T23:46:59.278+0200",
       "created": "2026-04-22T23:32:21.857+0200",
+      "duedate": null
+    },
+    "LCAP-1325": {
+      "key": "LCAP-1325",
+      "summary": "Work Package P: Growth & Promotional Features",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Michael Thuren",
+      "priority": "Medium",
+      "type": "Epic",
+      "labels": [
+        "ai-agent-ready",
+        "growth",
+        "post-ringsted",
+        "work-package"
+      ],
+      "updated": "2026-04-22T23:33:08.950+0200",
+      "created": "2026-04-22T23:33:08.702+0200",
       "duedate": null
     }
   },
@@ -20564,5 +20582,5 @@
     }
   ],
   "boardId": 37,
-  "generated": "2026-04-22T21:33:10.857Z"
+  "generated": "2026-04-22T22:02:14.793Z"
 }
