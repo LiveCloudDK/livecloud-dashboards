@@ -36,10 +36,36 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-22T19:42:42.835Z",
+    "startDate": "2026-04-22T20:10:11.682Z",
     "endDate": null,
     "goal": "",
     "issues": [
+      {
+        "key": "LCAP-963",
+        "summary": "Inventory datamodel — vendor lager + centrallager",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Highest",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-22T22:01:25.260+0200"
+      },
+      {
+        "key": "LCAP-964",
+        "summary": "Inventory API — lager endpoints",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "Highest",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-22T22:01:16.281+0200"
+      },
       {
         "key": "LCAP-1072",
         "summary": "App: Scan alle billetter i signup-flow og videresend til andre — claim kun én selv",
@@ -65,32 +91,6 @@
           "commerce"
         ],
         "updated": "2026-04-14T12:21:49.265+0200"
-      },
-      {
-        "key": "LCAP-964",
-        "summary": "Inventory API — lager endpoints",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Highest",
-        "type": "Task",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-04-14T11:59:56.353+0200"
-      },
-      {
-        "key": "LCAP-963",
-        "summary": "Inventory datamodel — vendor lager + centrallager",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Highest",
-        "type": "Task",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-04-14T11:59:54.732+0200"
       },
       {
         "key": "LCAP-1027",
@@ -184,6 +184,106 @@
         "updated": "2026-04-09T14:30:24.307+0200"
       },
       {
+        "key": "LCAP-334",
+        "summary": "Refund & Transfer Beats",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-22T22:02:13.017+0200"
+      },
+      {
+        "key": "LCAP-332",
+        "summary": "Spend Beats On-Site",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-22T22:01:58.983+0200"
+      },
+      {
+        "key": "LCAP-331",
+        "summary": "Purchase Beats Packages",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-22T22:01:47.110+0200"
+      },
+      {
+        "key": "LCAP-968",
+        "summary": "Bulk-væsker — liter/enheds-beregning og spild",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-22T21:49:04.147+0200"
+      },
+      {
+        "key": "LCAP-967",
+        "summary": "Sammensatte produkter — ingrediens-lagertræk",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-22T21:48:53.948+0200"
+      },
+      {
+        "key": "LCAP-966",
+        "summary": "Stikprøve-flow — fysisk lagerkontrol",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-22T21:48:43.032+0200"
+      },
+      {
+        "key": "LCAP-965",
+        "summary": "Salgshastighed og lagerstatus — grøn/gul/rød beregning",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-22T21:48:33.783+0200"
+      },
+      {
+        "key": "LCAP-977",
+        "summary": "Kvitterings-API — købshistorik og transaktionslog",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "High",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-22T21:46:10.566+0200"
+      },
+      {
         "key": "LCAP-1200",
         "summary": "Push Notification Service — transaktionelle push-beskeder",
         "status": "Selected for Development",
@@ -267,19 +367,6 @@
         "updated": "2026-04-17T10:37:32.671+0200"
       },
       {
-        "key": "LCAP-331",
-        "summary": "Purchase Beats Packages",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "High",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-17T10:07:32.033+0200"
-      },
-      {
         "key": "LCAP-1166",
         "summary": "Profil-løs billet: QR-kode → service desk → armbånd",
         "status": "Selected for Development",
@@ -304,19 +391,6 @@
         "updated": "2026-04-17T06:41:35.271+0200"
       },
       {
-        "key": "LCAP-977",
-        "summary": "Kvitterings-API — købshistorik og transaktionslog",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "High",
-        "type": "Task",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-04-14T12:21:38.509+0200"
-      },
-      {
         "key": "LCAP-992",
         "summary": "Admin dashboard — brugeradministration i UserCentral",
         "status": "In Progress",
@@ -328,80 +402,6 @@
           "fms"
         ],
         "updated": "2026-04-14T12:00:06.245+0200"
-      },
-      {
-        "key": "LCAP-968",
-        "summary": "Bulk-væsker — liter/enheds-beregning og spild",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "High",
-        "type": "Task",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-04-14T12:00:02.739+0200"
-      },
-      {
-        "key": "LCAP-967",
-        "summary": "Sammensatte produkter — ingrediens-lagertræk",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "High",
-        "type": "Task",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-04-14T12:00:00.854+0200"
-      },
-      {
-        "key": "LCAP-966",
-        "summary": "Stikprøve-flow — fysisk lagerkontrol",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "High",
-        "type": "Task",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-04-14T11:59:59.283+0200"
-      },
-      {
-        "key": "LCAP-965",
-        "summary": "Salgshastighed og lagerstatus — grøn/gul/rød beregning",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "High",
-        "type": "Task",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-04-14T11:59:57.737+0200"
-      },
-      {
-        "key": "LCAP-332",
-        "summary": "Spend Beats On-Site",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "High",
-        "type": "Story",
-        "labels": [],
-        "updated": "2026-04-14T11:58:53.672+0200"
-      },
-      {
-        "key": "LCAP-334",
-        "summary": "Refund & Transfer Beats",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "High",
-        "type": "Story",
-        "labels": [],
-        "updated": "2026-04-14T11:58:39.693+0200"
       },
       {
         "key": "LCAP-1214",
@@ -619,6 +619,115 @@
         "updated": "2026-04-02T08:28:52.805+0200"
       },
       {
+        "key": "LCAP-492",
+        "summary": "B2B Ticket Purchase & Invitation Workflows",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-22T22:09:01.993+0200"
+      },
+      {
+        "key": "LCAP-674",
+        "summary": "B2B ticket handling",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-22T22:08:50.155+0200"
+      },
+      {
+        "key": "LCAP-935",
+        "summary": "Commerce integration test + storefront klargøring",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-22T22:08:39.911+0200"
+      },
+      {
+        "key": "LCAP-969",
+        "summary": "Inventory dashboard widget — real-time lagerstatus",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-22T22:08:29.707+0200"
+      },
+      {
+        "key": "LCAP-1165",
+        "summary": "Ordreholder: fordel Beats frit på tildelte billetter",
+        "status": "Selected for Development",
+        "statusCategory": "new",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [
+          "fms"
+        ],
+        "updated": "2026-04-22T22:08:17.811+0200"
+      },
+      {
+        "key": "LCAP-765",
+        "summary": "Checkout flow + delivery options",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Simon Jensen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-22T22:02:42.716+0200"
+      },
+      {
+        "key": "LCAP-671",
+        "summary": "Checkout API",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [
+          "commerce"
+        ],
+        "updated": "2026-04-22T22:01:35.553+0200"
+      },
+      {
+        "key": "LCAP-832",
+        "summary": "Age verification at POS — block alcohol sales to minors",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-22T22:00:55.226+0200"
+      },
+      {
+        "key": "LCAP-1164",
+        "summary": "B2B ordrehåndtering + fakturastatus-tracking",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Tony Dieu",
+        "priority": "Medium",
+        "type": "Task",
+        "labels": [],
+        "updated": "2026-04-22T22:00:42.725+0200"
+      },
+      {
         "key": "LCAP-1077",
         "summary": "App: Interaktivt festival-kort (map feature)",
         "status": "Ready for test",
@@ -711,19 +820,6 @@
         "type": "Epic",
         "labels": [],
         "updated": "2026-04-20T13:39:07.822+0200"
-      },
-      {
-        "key": "LCAP-935",
-        "summary": "Commerce integration test + storefront klargøring",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-04-20T13:37:28.078+0200"
       },
       {
         "key": "LCAP-497",
@@ -876,19 +972,6 @@
         "updated": "2026-04-19T11:25:32.680+0200"
       },
       {
-        "key": "LCAP-1165",
-        "summary": "Ordreholder: fordel Beats frit på tildelte billetter",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-04-17T10:07:32.159+0200"
-      },
-      {
         "key": "LCAP-810",
         "summary": "B2B Portal: Ticket allocation + distribution resources",
         "status": "In Progress",
@@ -900,17 +983,6 @@
           "fms"
         ],
         "updated": "2026-04-17T10:05:49.230+0200"
-      },
-      {
-        "key": "LCAP-1164",
-        "summary": "B2B ordrehåndtering + fakturastatus-tracking",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [],
-        "updated": "2026-04-17T10:04:03.708+0200"
       },
       {
         "key": "LCAP-980",
@@ -1027,43 +1099,6 @@
         "updated": "2026-04-14T12:21:40.063+0200"
       },
       {
-        "key": "LCAP-969",
-        "summary": "Inventory dashboard widget — real-time lagerstatus",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-04-14T12:00:04.414+0200"
-      },
-      {
-        "key": "LCAP-832",
-        "summary": "Age verification at POS — block alcohol sales to minors",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [],
-        "updated": "2026-04-14T11:59:41.000+0200"
-      },
-      {
-        "key": "LCAP-765",
-        "summary": "Checkout flow + delivery options",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-14T11:59:30.410+0200"
-      },
-      {
         "key": "LCAP-764",
         "summary": "Cart implementation",
         "status": "Ready for test",
@@ -1127,41 +1162,6 @@
           "commerce"
         ],
         "updated": "2026-04-14T11:58:55.752+0200"
-      },
-      {
-        "key": "LCAP-674",
-        "summary": "B2B ticket handling",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [],
-        "updated": "2026-04-14T10:35:55.161+0200"
-      },
-      {
-        "key": "LCAP-671",
-        "summary": "Checkout API",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-14T10:35:53.427+0200"
-      },
-      {
-        "key": "LCAP-492",
-        "summary": "B2B Ticket Purchase & Invitation Workflows",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Michael Thuren",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [],
-        "updated": "2026-04-14T10:35:41.443+0200"
       },
       {
         "key": "LCAP-915",
@@ -2170,16 +2170,16 @@
     ],
     "capacityCounts": {
       "michael": {
-        "active": 29,
+        "active": 10,
         "testQueue": 10,
         "readyForRelease": 2,
-        "backlog": 38
+        "backlog": 26
       },
       "tony": {
-        "active": 15,
+        "active": 28,
         "testQueue": 14,
         "readyForRelease": 16,
-        "backlog": 50
+        "backlog": 59
       },
       "mikkel": {
         "active": 6,
@@ -2200,21 +2200,21 @@
         "backlog": 9
       },
       "simon": {
-        "active": 19,
+        "active": 25,
         "testQueue": 6,
         "readyForRelease": 5,
-        "backlog": 82
+        "backlog": 83
       }
     }
   },
   "publicStats": {
     "totalFeatures": 1318,
-    "featuresDone": 949,
+    "featuresDone": 951,
     "featuresInProgress": 81,
     "featuresInTest": 47,
     "featuresReadyForRelease": 43,
-    "featuresDoneCount": 906,
-    "featuresBacklog": 241,
+    "featuresDoneCount": 908,
+    "featuresBacklog": 239,
     "byWorkstream": {
       "Onboarding": {
         "done": 0,
@@ -4209,28 +4209,28 @@
       "summary": "Web \"min side\" login",
       "status": "Backlog",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-14T10:36:12.408+0200",
+      "updated": "2026-04-22T22:02:53.229+0200",
       "created": "2026-01-19T11:13:32.221+0100",
       "duedate": null
     },
     "LCAP-627": {
       "key": "LCAP-627",
       "summary": "Criipto/MitID setup",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": "Michael Thuren",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-14T10:36:14.190+0200",
+      "updated": "2026-04-22T22:09:12.271+0200",
       "created": "2026-01-19T11:13:39.852+0100",
       "duedate": null
     },
@@ -4304,13 +4304,13 @@
       "summary": "Payment Gateway Integration",
       "status": "Backlog",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Tony Dieu",
       "priority": "High",
       "type": "Story",
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-14T11:59:22.707+0200",
+      "updated": "2026-04-22T21:49:14.002+0200",
       "created": "2025-11-11T14:54:52.708+0100",
       "duedate": null
     },
@@ -7967,13 +7967,13 @@
       "summary": "Checkout Flow",
       "status": "Backlog",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Tony Dieu",
       "priority": "High",
       "type": "Story",
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-14T11:59:19.736+0200",
+      "updated": "2026-04-22T21:49:24.049+0200",
       "created": "2025-11-11T14:47:57.404+0100",
       "duedate": null
     },
@@ -7982,13 +7982,13 @@
       "summary": "Purchase Beats Packages",
       "status": "Selected for Development",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Tony Dieu",
       "priority": "High",
       "type": "Story",
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-17T10:07:32.033+0200",
+      "updated": "2026-04-22T22:01:47.110+0200",
       "created": "2025-11-11T14:48:24.491+0100",
       "duedate": null
     },
@@ -7997,11 +7997,11 @@
       "summary": "Spend Beats On-Site",
       "status": "Selected for Development",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Tony Dieu",
       "priority": "High",
       "type": "Story",
       "labels": [],
-      "updated": "2026-04-14T11:58:53.672+0200",
+      "updated": "2026-04-22T22:01:58.983+0200",
       "created": "2025-11-11T14:48:50.566+0100",
       "duedate": null
     },
@@ -8023,11 +8023,11 @@
       "summary": "Refund & Transfer Beats",
       "status": "Selected for Development",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Tony Dieu",
       "priority": "High",
       "type": "Story",
       "labels": [],
-      "updated": "2026-04-14T11:58:39.693+0200",
+      "updated": "2026-04-22T22:02:13.017+0200",
       "created": "2025-11-11T14:49:36.930+0100",
       "duedate": null
     },
@@ -8424,13 +8424,13 @@
     "LCAP-366": {
       "key": "LCAP-366",
       "summary": "Role-Based Access Control (RBAC)",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": "Michael Thuren",
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-04-14T11:59:12.716+0200",
+      "updated": "2026-04-22T22:09:19.756+0200",
       "created": "2025-11-11T15:18:16.624+0100",
       "duedate": null
     },
@@ -9442,11 +9442,11 @@
       "summary": "VIP guests: can have free bar free food in some stalls",
       "status": "Backlog",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Tony Dieu",
       "priority": "High",
       "type": "Story",
       "labels": [],
-      "updated": "2026-04-14T11:59:14.338+0200",
+      "updated": "2026-04-22T22:03:27.537+0200",
       "created": "2025-12-19T13:33:40.149+0100",
       "duedate": null
     },
@@ -9481,11 +9481,11 @@
       "summary": "B2B Ticket Purchase & Invitation Workflows",
       "status": "Selected for Development",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-04-14T10:35:41.443+0200",
+      "updated": "2026-04-22T22:09:01.993+0200",
       "created": "2025-12-22T08:59:33.180+0100",
       "duedate": null
     },
@@ -11593,13 +11593,13 @@
       "summary": "Checkout flow + delivery options",
       "status": "In Progress",
       "statusCategory": "indeterminate",
-      "assignee": "Michael Thuren",
+      "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Story",
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-14T11:59:30.410+0200",
+      "updated": "2026-04-22T22:02:42.716+0200",
       "created": "2026-02-06T15:47:57.284+0100",
       "duedate": null
     },
@@ -11608,13 +11608,13 @@
       "summary": "Checkout API",
       "status": "In Progress",
       "statusCategory": "indeterminate",
-      "assignee": "Michael Thuren",
+      "assignee": "Tony Dieu",
       "priority": "Medium",
       "type": "Story",
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-14T10:35:53.427+0200",
+      "updated": "2026-04-22T22:01:35.553+0200",
       "created": "2026-01-29T11:16:05.863+0100",
       "duedate": null
     },
@@ -11954,13 +11954,13 @@
       "summary": "Commerce integration test + storefront klargøring",
       "status": "Selected for Development",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Story",
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-20T13:37:28.078+0200",
+      "updated": "2026-04-22T22:08:39.911+0200",
       "created": "2026-03-13T17:34:36.129+0100",
       "duedate": null
     },
@@ -12444,11 +12444,11 @@
       "summary": "B2B ticket handling",
       "status": "Selected for Development",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-04-14T10:35:55.161+0200",
+      "updated": "2026-04-22T22:08:50.155+0200",
       "created": "2026-01-29T11:17:06.677+0100",
       "duedate": null
     },
@@ -13641,11 +13641,11 @@
       "summary": "Age verification at POS — block alcohol sales to minors",
       "status": "In Progress",
       "statusCategory": "indeterminate",
-      "assignee": "Michael Thuren",
+      "assignee": "Tony Dieu",
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-04-14T11:59:41.000+0200",
+      "updated": "2026-04-22T22:00:55.226+0200",
       "created": "2026-02-24T10:39:26.854+0100",
       "duedate": null
     },
@@ -14936,13 +14936,13 @@
       "summary": "Lagerstyring — vendor inventory management",
       "status": "Backlog",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Tony Dieu",
       "priority": "High",
       "type": "Epic",
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-14T11:59:47.638+0200",
+      "updated": "2026-04-22T21:47:28.267+0200",
       "created": "2026-03-16T15:39:03.547+0100",
       "duedate": null
     },
@@ -14981,13 +14981,13 @@
       "summary": "Salgshastighed og lagerstatus — grøn/gul/rød beregning",
       "status": "Backlog",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Tony Dieu",
       "priority": "High",
       "type": "Task",
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-14T11:59:49.416+0200",
+      "updated": "2026-04-22T21:47:37.387+0200",
       "created": "2026-03-16T15:40:20.480+0100",
       "duedate": null
     },
@@ -14996,13 +14996,13 @@
       "summary": "Stikprøve-flow — fysisk lagerkontrol",
       "status": "Backlog",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Tony Dieu",
       "priority": "High",
       "type": "Task",
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-14T11:59:51.326+0200",
+      "updated": "2026-04-22T21:47:47.643+0200",
       "created": "2026-03-16T15:40:21.886+0100",
       "duedate": null
     },
@@ -15011,13 +15011,13 @@
       "summary": "Sammensatte produkter — ingrediens-lagertræk",
       "status": "Backlog",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Tony Dieu",
       "priority": "High",
       "type": "Task",
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-14T11:59:52.837+0200",
+      "updated": "2026-04-22T21:48:07.363+0200",
       "created": "2026-03-16T15:40:23.335+0100",
       "duedate": null
     },
@@ -15056,13 +15056,13 @@
       "summary": "Inventory datamodel — vendor lager + centrallager",
       "status": "Selected for Development",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Tony Dieu",
       "priority": "Highest",
       "type": "Task",
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-14T11:59:54.732+0200",
+      "updated": "2026-04-22T22:01:25.260+0200",
       "created": "2026-03-16T15:40:26.986+0100",
       "duedate": null
     },
@@ -15071,13 +15071,13 @@
       "summary": "Inventory API — lager endpoints",
       "status": "Selected for Development",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Tony Dieu",
       "priority": "Highest",
       "type": "Task",
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-14T11:59:56.353+0200",
+      "updated": "2026-04-22T22:01:16.281+0200",
       "created": "2026-03-16T15:40:28.284+0100",
       "duedate": null
     },
@@ -15086,13 +15086,13 @@
       "summary": "Salgshastighed og lagerstatus — grøn/gul/rød beregning",
       "status": "Selected for Development",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Tony Dieu",
       "priority": "High",
       "type": "Task",
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-14T11:59:57.737+0200",
+      "updated": "2026-04-22T21:48:33.783+0200",
       "created": "2026-03-16T15:40:29.814+0100",
       "duedate": null
     },
@@ -15101,13 +15101,13 @@
       "summary": "Stikprøve-flow — fysisk lagerkontrol",
       "status": "Selected for Development",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Tony Dieu",
       "priority": "High",
       "type": "Task",
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-14T11:59:59.283+0200",
+      "updated": "2026-04-22T21:48:43.032+0200",
       "created": "2026-03-16T15:40:31.088+0100",
       "duedate": null
     },
@@ -15116,13 +15116,13 @@
       "summary": "Sammensatte produkter — ingrediens-lagertræk",
       "status": "Selected for Development",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Tony Dieu",
       "priority": "High",
       "type": "Task",
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-14T12:00:00.854+0200",
+      "updated": "2026-04-22T21:48:53.948+0200",
       "created": "2026-03-16T15:40:32.394+0100",
       "duedate": null
     },
@@ -15131,13 +15131,13 @@
       "summary": "Bulk-væsker — liter/enheds-beregning og spild",
       "status": "Selected for Development",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Tony Dieu",
       "priority": "High",
       "type": "Task",
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-14T12:00:02.739+0200",
+      "updated": "2026-04-22T21:49:04.147+0200",
       "created": "2026-03-16T15:40:33.844+0100",
       "duedate": null
     },
@@ -15146,13 +15146,13 @@
       "summary": "Inventory dashboard widget — real-time lagerstatus",
       "status": "Selected for Development",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Task",
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-14T12:00:04.414+0200",
+      "updated": "2026-04-22T22:08:29.707+0200",
       "created": "2026-03-16T15:40:35.235+0100",
       "duedate": null
     },
@@ -15266,13 +15266,13 @@
       "summary": "Kvitterings-API — købshistorik og transaktionslog",
       "status": "In Progress",
       "statusCategory": "indeterminate",
-      "assignee": "Michael Thuren",
+      "assignee": "Tony Dieu",
       "priority": "High",
       "type": "Task",
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-14T12:21:38.509+0200",
+      "updated": "2026-04-22T21:46:10.566+0200",
       "created": "2026-03-16T21:36:29.413+0100",
       "duedate": null
     },
@@ -15763,14 +15763,14 @@
       "summary": "Bonus Beats ved køb - konfigurerbare discount tiers",
       "status": "Backlog",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Tony Dieu",
       "priority": "High",
       "type": "Task",
       "labels": [
         "pos",
         "ringsted-critical"
       ],
-      "updated": "2026-04-22T21:25:31.985+0200",
+      "updated": "2026-04-22T22:02:25.460+0200",
       "created": "2026-03-25T15:40:40.883+0100",
       "duedate": null
     },
@@ -17080,13 +17080,13 @@
       "summary": "Swedbank API — træk af transaktioner og kvitteringer",
       "status": "Backlog",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Tony Dieu",
       "priority": "Medium",
       "type": "Story",
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-14T11:59:18.346+0200",
+      "updated": "2026-04-22T22:03:38.234+0200",
       "created": "2026-03-30T13:24:17.308+0200",
       "duedate": null
     },
@@ -17972,11 +17972,11 @@
       "summary": "B2B ordrehåndtering + fakturastatus-tracking",
       "status": "In Progress",
       "statusCategory": "indeterminate",
-      "assignee": "Michael Thuren",
+      "assignee": "Tony Dieu",
       "priority": "Medium",
       "type": "Task",
       "labels": [],
-      "updated": "2026-04-17T10:04:03.708+0200",
+      "updated": "2026-04-22T22:00:42.725+0200",
       "created": "2026-04-08T12:05:39.332+0200",
       "duedate": null
     },
@@ -17985,13 +17985,13 @@
       "summary": "Ordreholder: fordel Beats frit på tildelte billetter",
       "status": "Selected for Development",
       "statusCategory": "new",
-      "assignee": "Michael Thuren",
+      "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Task",
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-17T10:07:32.159+0200",
+      "updated": "2026-04-22T22:08:17.811+0200",
       "created": "2026-04-08T12:05:40.309+0200",
       "duedate": null
     },
@@ -20512,5 +20512,5 @@
     }
   ],
   "boardId": 37,
-  "generated": "2026-04-22T19:42:47.110Z"
+  "generated": "2026-04-22T20:10:15.520Z"
 }
