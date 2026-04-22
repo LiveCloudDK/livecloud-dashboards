@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-22T22:02:11.686Z",
+    "startDate": "2026-04-22T22:20:57.361Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -18899,11 +18899,11 @@
       "priority": "High",
       "type": "Task",
       "labels": [
-        "ai-agent-ready",
-        "ringsted-critical",
-        "work-package"
+        "prio-tier-2",
+        "rank-4",
+        "ringsted-blocker"
       ],
-      "updated": "2026-04-22T23:37:01.382+0200",
+      "updated": "2026-04-23T00:13:00.064+0200",
       "created": "2026-04-14T10:33:18.979+0200",
       "duedate": null
     },
@@ -20126,13 +20126,13 @@
       "status": "Backlog",
       "statusCategory": "new",
       "assignee": "Michael Thuren",
-      "priority": "High",
+      "priority": "Highest",
       "type": "Task",
       "labels": [
-        "ai-agent-ready",
-        "work-package"
+        "prio-tier-1",
+        "rank-1"
       ],
-      "updated": "2026-04-22T23:44:39.975+0200",
+      "updated": "2026-04-23T00:12:46.336+0200",
       "created": "2026-04-21T22:07:53.542+0200",
       "duedate": null
     },
@@ -20145,12 +20145,11 @@
       "priority": "High",
       "type": "Epic",
       "labels": [
-        "ai-agent-ready",
-        "gate-scanner",
-        "ringsted-critical",
-        "work-package"
+        "prio-tier-2",
+        "rank-5",
+        "ringsted-blocker"
       ],
-      "updated": "2026-04-22T21:24:36.624+0200",
+      "updated": "2026-04-23T00:13:03.757+0200",
       "created": "2026-04-22T08:42:17.619+0200",
       "duedate": null
     },
@@ -20176,11 +20175,11 @@
       "priority": "High",
       "type": "Epic",
       "labels": [
-        "ai-agent-ready",
-        "notifications",
-        "work-package"
+        "prio-tier-2",
+        "rank-7",
+        "ringsted-blocker"
       ],
-      "updated": "2026-04-22T09:29:28.050+0200",
+      "updated": "2026-04-23T00:13:10.965+0200",
       "created": "2026-04-22T09:29:27.216+0200",
       "duedate": null
     },
@@ -20193,12 +20192,11 @@
       "priority": "High",
       "type": "Epic",
       "labels": [
-        "admin-reporting",
-        "ai-agent-ready",
-        "ringsted-critical",
-        "work-package"
+        "prio-tier-2",
+        "rank-6",
+        "ringsted-blocker"
       ],
-      "updated": "2026-04-22T23:44:47.055+0200",
+      "updated": "2026-04-23T00:13:07.395+0200",
       "created": "2026-04-22T09:31:50.407+0200",
       "duedate": null
     },
@@ -20211,13 +20209,11 @@
       "priority": "High",
       "type": "Epic",
       "labels": [
-        "ai-agent-ready",
-        "gdpr",
-        "resilience",
-        "security",
-        "work-package"
+        "prio-tier-2",
+        "rank-8",
+        "ringsted-blocker"
       ],
-      "updated": "2026-04-22T10:02:33.519+0200",
+      "updated": "2026-04-23T00:13:14.371+0200",
       "created": "2026-04-22T09:34:46.172+0200",
       "duedate": null
     },
@@ -20260,12 +20256,11 @@
       "priority": "High",
       "type": "Epic",
       "labels": [
-        "ai-agent-ready",
-        "edge-cases",
-        "ringsted-critical",
-        "work-package"
+        "prio-tier-2",
+        "rank-3",
+        "ringsted-blocker"
       ],
-      "updated": "2026-04-22T23:43:45.883+0200",
+      "updated": "2026-04-23T00:12:56.061+0200",
       "created": "2026-04-22T23:31:00.309+0200",
       "duedate": null
     },
@@ -20275,16 +20270,13 @@
       "status": "Backlog",
       "statusCategory": "new",
       "assignee": "Michael Thuren",
-      "priority": "High",
+      "priority": "Highest",
       "type": "Epic",
       "labels": [
-        "ai-agent-ready",
-        "delegate",
-        "partout",
-        "ringsted-critical",
-        "work-package"
+        "prio-tier-1",
+        "rank-2"
       ],
-      "updated": "2026-04-22T23:46:59.278+0200",
+      "updated": "2026-04-23T00:12:51.857+0200",
       "created": "2026-04-22T23:32:21.857+0200",
       "duedate": null
     },
@@ -20294,15 +20286,14 @@
       "status": "Backlog",
       "statusCategory": "new",
       "assignee": "Michael Thuren",
-      "priority": "Medium",
+      "priority": "High",
       "type": "Epic",
       "labels": [
-        "ai-agent-ready",
-        "growth",
-        "post-ringsted",
-        "work-package"
+        "prio-tier-2",
+        "rank-9",
+        "ringsted-blocker"
       ],
-      "updated": "2026-04-22T23:33:08.950+0200",
+      "updated": "2026-04-23T00:13:17.696+0200",
       "created": "2026-04-22T23:33:08.702+0200",
       "duedate": null
     }
@@ -20582,5 +20573,5 @@
     }
   ],
   "boardId": 37,
-  "generated": "2026-04-22T22:02:14.793Z"
+  "generated": "2026-04-22T22:21:01.093Z"
 }
