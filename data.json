@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-22T19:08:46.899Z",
+    "startDate": "2026-04-22T19:42:42.835Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -104,19 +104,6 @@
           "fms"
         ],
         "updated": "2026-04-14T11:59:42.526+0200"
-      },
-      {
-        "key": "LCAP-990",
-        "summary": "Transfer revoke — kontoholder kan tilbagekalde overført billet",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "Highest",
-        "type": "Sub-task",
-        "labels": [
-          "commerce"
-        ],
-        "updated": "2026-04-14T11:58:47.564+0200"
       },
       {
         "key": "LCAP-989",
@@ -207,9 +194,10 @@
         "labels": [
           "backend",
           "infrastructure",
-          "notifications"
+          "notifications",
+          "ringsted-critical"
         ],
-        "updated": "2026-04-20T13:52:22.209+0200"
+        "updated": "2026-04-22T21:26:01.628+0200"
       },
       {
         "key": "LCAP-1067",
@@ -249,17 +237,6 @@
           "fms"
         ],
         "updated": "2026-04-20T13:44:41.112+0200"
-      },
-      {
-        "key": "LCAP-1229",
-        "summary": "Ticket transfer og delegation fejl ved partout-billetter",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Michael Thuren",
-        "priority": "High",
-        "type": "Bug",
-        "labels": [],
-        "updated": "2026-04-17T13:45:44.561+0200"
       },
       {
         "key": "LCAP-1227",
@@ -2193,7 +2170,7 @@
     ],
     "capacityCounts": {
       "michael": {
-        "active": 31,
+        "active": 29,
         "testQueue": 10,
         "readyForRelease": 2,
         "backlog": 38
@@ -2232,11 +2209,11 @@
   },
   "publicStats": {
     "totalFeatures": 1318,
-    "featuresDone": 947,
-    "featuresInProgress": 83,
+    "featuresDone": 949,
+    "featuresInProgress": 81,
     "featuresInTest": 47,
     "featuresReadyForRelease": 43,
-    "featuresDoneCount": 904,
+    "featuresDoneCount": 906,
     "featuresBacklog": 241,
     "byWorkstream": {
       "Onboarding": {
@@ -11827,15 +11804,15 @@
     "LCAP-990": {
       "key": "LCAP-990",
       "summary": "Transfer revoke — kontoholder kan tilbagekalde overført billet",
-      "status": "In Progress",
-      "statusCategory": "indeterminate",
+      "status": "Closed",
+      "statusCategory": "done",
       "assignee": "Michael Thuren",
       "priority": "Highest",
       "type": "Sub-task",
       "labels": [
         "commerce"
       ],
-      "updated": "2026-04-14T11:58:47.564+0200",
+      "updated": "2026-04-22T21:27:20.977+0200",
       "created": "2026-03-17T16:01:04.987+0100",
       "duedate": null
     },
@@ -15743,9 +15720,10 @@
       "priority": "High",
       "type": "Task",
       "labels": [
-        "pos"
+        "pos",
+        "ringsted-critical"
       ],
-      "updated": "2026-04-14T11:59:03.594+0200",
+      "updated": "2026-04-22T21:25:11.989+0200",
       "created": "2026-03-25T14:12:01.098+0100",
       "duedate": null
     },
@@ -15758,9 +15736,10 @@
       "priority": "High",
       "type": "Task",
       "labels": [
-        "pos"
+        "pos",
+        "ringsted-critical"
       ],
-      "updated": "2026-04-14T11:58:48.999+0200",
+      "updated": "2026-04-22T21:25:22.845+0200",
       "created": "2026-03-25T15:09:38.615+0100",
       "duedate": null
     },
@@ -15788,9 +15767,10 @@
       "priority": "High",
       "type": "Task",
       "labels": [
-        "pos"
+        "pos",
+        "ringsted-critical"
       ],
-      "updated": "2026-04-14T11:58:50.441+0200",
+      "updated": "2026-04-22T21:25:31.985+0200",
       "created": "2026-03-25T15:40:40.883+0100",
       "duedate": null
     },
@@ -15803,9 +15783,10 @@
       "priority": "High",
       "type": "Task",
       "labels": [
-        "pos"
+        "pos",
+        "ringsted-critical"
       ],
-      "updated": "2026-04-14T12:21:46.505+0200",
+      "updated": "2026-04-22T21:25:41.217+0200",
       "created": "2026-03-25T16:02:16.446+0100",
       "duedate": null
     },
@@ -16427,9 +16408,10 @@
       "priority": "High",
       "type": "Bug",
       "labels": [
-        "app"
+        "app",
+        "ringsted-critical"
       ],
-      "updated": "2026-04-14T11:59:39.460+0200",
+      "updated": "2026-04-22T21:24:48.590+0200",
       "created": "2026-03-29T10:23:29.302+0200",
       "duedate": null
     },
@@ -18577,9 +18559,10 @@
       "labels": [
         "backend",
         "infrastructure",
-        "notifications"
+        "notifications",
+        "ringsted-critical"
       ],
-      "updated": "2026-04-20T13:52:22.209+0200",
+      "updated": "2026-04-22T21:26:01.628+0200",
       "created": "2026-04-09T11:54:39.276+0200",
       "duedate": null
     },
@@ -18902,9 +18885,10 @@
       "type": "Task",
       "labels": [
         "ai-agent-ready",
+        "ringsted-critical",
         "work-package"
       ],
-      "updated": "2026-04-17T20:24:26.055+0200",
+      "updated": "2026-04-22T21:24:26.775+0200",
       "created": "2026-04-14T10:33:18.979+0200",
       "duedate": null
     },
@@ -19006,13 +18990,13 @@
     "LCAP-1229": {
       "key": "LCAP-1229",
       "summary": "Ticket transfer og delegation fejl ved partout-billetter",
-      "status": "In Progress",
-      "statusCategory": "indeterminate",
+      "status": "Closed",
+      "statusCategory": "done",
       "assignee": "Michael Thuren",
       "priority": "High",
       "type": "Bug",
       "labels": [],
-      "updated": "2026-04-17T13:45:44.561+0200",
+      "updated": "2026-04-22T21:27:32.024+0200",
       "created": "2026-04-15T22:18:08.640+0200",
       "duedate": null
     },
@@ -20148,9 +20132,10 @@
       "labels": [
         "ai-agent-ready",
         "gate-scanner",
+        "ringsted-critical",
         "work-package"
       ],
-      "updated": "2026-04-22T08:55:41.496+0200",
+      "updated": "2026-04-22T21:24:36.624+0200",
       "created": "2026-04-22T08:42:17.619+0200",
       "duedate": null
     },
@@ -20195,9 +20180,10 @@
       "labels": [
         "admin-reporting",
         "ai-agent-ready",
+        "ringsted-critical",
         "work-package"
       ],
-      "updated": "2026-04-22T09:31:50.671+0200",
+      "updated": "2026-04-22T21:24:59.818+0200",
       "created": "2026-04-22T09:31:50.407+0200",
       "duedate": null
     },
@@ -20526,5 +20512,5 @@
     }
   ],
   "boardId": 37,
-  "generated": "2026-04-22T19:08:51.011Z"
+  "generated": "2026-04-22T19:42:47.110Z"
 }
