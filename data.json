@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-22T12:19:41.428Z",
+    "startDate": "2026-04-22T12:50:05.258Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -2231,13 +2231,13 @@
     }
   },
   "publicStats": {
-    "totalFeatures": 1315,
+    "totalFeatures": 1316,
     "featuresDone": 947,
     "featuresInProgress": 83,
     "featuresInTest": 47,
     "featuresReadyForRelease": 43,
     "featuresDoneCount": 904,
-    "featuresBacklog": 238,
+    "featuresBacklog": 239,
     "byWorkstream": {
       "Onboarding": {
         "done": 0,
@@ -18114,6 +18114,18 @@
       "updated": "2026-04-20T11:48:20.771+0200",
       "created": "2026-04-20T11:48:20.627+0200"
     },
+    "LCAP-1320": {
+      "key": "LCAP-1320",
+      "summary": "B2B — Invite-link capture + UserCentral/FMS exchange",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": null,
+      "priority": "Medium",
+      "type": "Sub-task",
+      "labels": [],
+      "updated": "2026-04-22T14:26:24.689+0200",
+      "created": "2026-04-22T14:26:21.820+0200"
+    },
     "LCAP-1234": {
       "key": "LCAP-1234",
       "summary": "B2B Portal — Frontend",
@@ -19167,5 +19179,5 @@
     }
   ],
   "boardId": 37,
-  "generated": "2026-04-22T12:19:45.878Z"
+  "generated": "2026-04-22T12:50:09.482Z"
 }
