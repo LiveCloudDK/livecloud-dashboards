@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-22T12:50:05.258Z",
+    "startDate": "2026-04-22T13:32:19.424Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -19160,7 +19160,7 @@
         "endsAt": "2026-08-01T00:00:00.000000Z",
         "address": "Søndervang 2, 4100 Ringsted",
         "artists": 51,
-        "events": 59,
+        "events": 60,
         "venues": 7,
         "news": 141,
         "screens": 14,
@@ -19179,5 +19179,5 @@
     }
   ],
   "boardId": 37,
-  "generated": "2026-04-22T12:50:09.482Z"
+  "generated": "2026-04-22T13:32:23.900Z"
 }
