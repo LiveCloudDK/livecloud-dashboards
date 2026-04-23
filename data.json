@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-23T08:34:46.825Z",
+    "startDate": "2026-04-23T09:14:36.726Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -632,6 +632,17 @@
           "pos"
         ],
         "updated": "2026-04-02T08:28:52.805+0200"
+      },
+      {
+        "key": "LCAP-847",
+        "summary": "Map View — Category filter and vendor search on map",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Mikkel Kornval Christoffersen",
+        "priority": "Medium",
+        "type": "Story",
+        "labels": [],
+        "updated": "2026-04-23T10:35:20.882+0200"
       },
       {
         "key": "LCAP-764",
@@ -1439,17 +1450,6 @@
         "type": "Sub-task",
         "labels": [],
         "updated": "2026-04-09T10:44:38.943+0200"
-      },
-      {
-        "key": "LCAP-847",
-        "summary": "Map View — Category filter and vendor search on map",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Mikkel Kornval Christoffersen",
-        "priority": "Medium",
-        "type": "Story",
-        "labels": [],
-        "updated": "2026-04-09T07:13:33.242+0200"
       },
       {
         "key": "LCAP-1084",
@@ -14225,13 +14225,13 @@
     "LCAP-847": {
       "key": "LCAP-847",
       "summary": "Map View — Category filter and vendor search on map",
-      "status": "Selected for Development",
-      "statusCategory": "new",
+      "status": "In Progress",
+      "statusCategory": "indeterminate",
       "assignee": "Mikkel Kornval Christoffersen",
       "priority": "Medium",
       "type": "Story",
       "labels": [],
-      "updated": "2026-04-09T07:13:33.242+0200",
+      "updated": "2026-04-23T10:35:20.882+0200",
       "created": "2026-02-27T09:01:46.171+0100",
       "duedate": null
     },
@@ -20573,5 +20573,5 @@
     }
   ],
   "boardId": 37,
-  "generated": "2026-04-23T08:34:49.870Z"
+  "generated": "2026-04-23T09:14:40.705Z"
 }
