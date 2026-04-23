@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-23T15:26:56.814Z",
+    "startDate": "2026-04-23T16:50:10.002Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -2210,7 +2210,7 @@
         "active": 11,
         "testQueue": 12,
         "readyForRelease": 2,
-        "backlog": 26
+        "backlog": 30
       },
       "tony": {
         "active": 28,
@@ -2245,13 +2245,13 @@
     }
   },
   "publicStats": {
-    "totalFeatures": 1322,
+    "totalFeatures": 1326,
     "featuresDone": 952,
     "featuresInProgress": 82,
     "featuresInTest": 49,
     "featuresReadyForRelease": 43,
     "featuresDoneCount": 909,
-    "featuresBacklog": 239,
+    "featuresBacklog": 243,
     "byWorkstream": {
       "Onboarding": {
         "done": 0,
@@ -20318,6 +20318,74 @@
       "updated": "2026-04-23T00:13:17.696+0200",
       "created": "2026-04-22T23:33:08.702+0200",
       "duedate": null
+    },
+    "LCAP-1327": {
+      "key": "LCAP-1327",
+      "summary": "FMS: Multi-select og bulk actions på tickets (og andre lister)",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Michael Thuren",
+      "priority": "High",
+      "type": "Task",
+      "labels": [
+        "bulk-actions",
+        "fms-admin",
+        "ringsted-blocker"
+      ],
+      "updated": "2026-04-23T18:43:22.067+0200",
+      "created": "2026-04-23T18:43:21.479+0200",
+      "duedate": null
+    },
+    "LCAP-1326": {
+      "key": "LCAP-1326",
+      "summary": "FMS: Multi-select og bulk actions på tickets (og andre lister)",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Michael Thuren",
+      "priority": "High",
+      "type": "Task",
+      "labels": [
+        "bulk-actions",
+        "fms-admin",
+        "ringsted-blocker"
+      ],
+      "updated": "2026-04-23T18:43:22.677+0200",
+      "created": "2026-04-23T18:43:21.480+0200",
+      "duedate": null
+    },
+    "LCAP-1328": {
+      "key": "LCAP-1328",
+      "summary": "FMS: Admin re-assign og admin claim af billetter på attendee-niveau",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Michael Thuren",
+      "priority": "High",
+      "type": "Task",
+      "labels": [
+        "fms-admin",
+        "ringsted-blocker",
+        "ticket-management"
+      ],
+      "updated": "2026-04-23T18:43:44.954+0200",
+      "created": "2026-04-23T18:43:44.666+0200",
+      "duedate": null
+    },
+    "LCAP-1329": {
+      "key": "LCAP-1329",
+      "summary": "FMS: Admin re-assign og admin claim af billetter på attendee-niveau",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Michael Thuren",
+      "priority": "High",
+      "type": "Task",
+      "labels": [
+        "fms-admin",
+        "ringsted-blocker",
+        "ticket-management"
+      ],
+      "updated": "2026-04-23T18:43:45.377+0200",
+      "created": "2026-04-23T18:43:44.817+0200",
+      "duedate": null
     }
   },
   "velocity": [
@@ -20595,5 +20663,5 @@
     }
   ],
   "boardId": 37,
-  "generated": "2026-04-23T15:26:59.717Z"
+  "generated": "2026-04-23T16:50:13.555Z"
 }
