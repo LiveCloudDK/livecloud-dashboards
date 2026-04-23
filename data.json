@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-23T06:26:28.425Z",
+    "startDate": "2026-04-23T07:09:31.353Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -2188,7 +2188,7 @@
         "active": 10,
         "testQueue": 11,
         "readyForRelease": 2,
-        "backlog": 29
+        "backlog": 28
       },
       "tony": {
         "active": 28,
@@ -2224,12 +2224,12 @@
   },
   "publicStats": {
     "totalFeatures": 1322,
-    "featuresDone": 951,
+    "featuresDone": 952,
     "featuresInProgress": 81,
     "featuresInTest": 48,
     "featuresReadyForRelease": 43,
-    "featuresDoneCount": 908,
-    "featuresBacklog": 242,
+    "featuresDoneCount": 909,
+    "featuresBacklog": 241,
     "byWorkstream": {
       "Onboarding": {
         "done": 0,
@@ -13722,13 +13722,13 @@
     "LCAP-827": {
       "key": "LCAP-827",
       "summary": "Fejl på start af session",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Closed",
+      "statusCategory": "done",
       "assignee": "Michael Thuren",
       "priority": "High",
       "type": "Bug",
       "labels": [],
-      "updated": "2026-04-22T23:44:36.227+0200",
+      "updated": "2026-04-23T08:27:15.221+0200",
       "created": "2026-02-23T15:41:51.210+0100",
       "duedate": null
     },
@@ -20573,5 +20573,5 @@
     }
   ],
   "boardId": 37,
-  "generated": "2026-04-23T06:26:32.535Z"
+  "generated": "2026-04-23T07:09:35.431Z"
 }
