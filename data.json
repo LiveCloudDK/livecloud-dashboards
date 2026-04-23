@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-23T11:32:09.694Z",
+    "startDate": "2026-04-23T12:05:28.203Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -643,6 +643,17 @@
           "pos"
         ],
         "updated": "2026-04-02T08:28:52.805+0200"
+      },
+      {
+        "key": "LCAP-719",
+        "summary": "Commerce API",
+        "status": "In Progress",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "Medium",
+        "type": "Epic",
+        "labels": [],
+        "updated": "2026-04-23T13:38:37.496+0200"
       },
       {
         "key": "LCAP-847",
@@ -2196,10 +2207,10 @@
     ],
     "capacityCounts": {
       "michael": {
-        "active": 10,
+        "active": 11,
         "testQueue": 12,
         "readyForRelease": 2,
-        "backlog": 27
+        "backlog": 26
       },
       "tony": {
         "active": 28,
@@ -2236,11 +2247,11 @@
   "publicStats": {
     "totalFeatures": 1322,
     "featuresDone": 952,
-    "featuresInProgress": 81,
+    "featuresInProgress": 82,
     "featuresInTest": 49,
     "featuresReadyForRelease": 43,
     "featuresDoneCount": 909,
-    "featuresBacklog": 240,
+    "featuresBacklog": 239,
     "byWorkstream": {
       "Onboarding": {
         "done": 0,
@@ -11392,13 +11403,13 @@
     "LCAP-719": {
       "key": "LCAP-719",
       "summary": "Commerce API",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "In Progress",
+      "statusCategory": "indeterminate",
       "assignee": "Michael Thuren",
       "priority": "Medium",
       "type": "Epic",
       "labels": [],
-      "updated": "2026-04-22T23:44:39.939+0200",
+      "updated": "2026-04-23T13:38:37.496+0200",
       "created": "2026-02-06T15:28:48.757+0100",
       "duedate": null
     },
@@ -20584,5 +20595,5 @@
     }
   ],
   "boardId": 37,
-  "generated": "2026-04-23T11:32:13.144Z"
+  "generated": "2026-04-23T12:05:31.613Z"
 }
