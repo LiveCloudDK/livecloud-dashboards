@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-23T21:30:38.733Z",
+    "startDate": "2026-04-23T22:00:54.146Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -20663,5 +20663,5 @@
     }
   ],
   "boardId": 37,
-  "generated": "2026-04-23T21:30:42.207Z"
+  "generated": "2026-04-23T22:00:58.255Z"
 }
