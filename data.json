@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-23T09:55:04.802Z",
+    "startDate": "2026-04-23T10:30:17.840Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -182,6 +182,17 @@
           "app"
         ],
         "updated": "2026-04-09T14:30:24.307+0200"
+      },
+      {
+        "key": "LCAP-1161",
+        "summary": "Export af tickets giver et export af produkter, uden tickets",
+        "status": "Ready for test",
+        "statusCategory": "indeterminate",
+        "assignee": "Michael Thuren",
+        "priority": "High",
+        "type": "Sub-task",
+        "labels": [],
+        "updated": "2026-04-23T12:26:56.153+0200"
       },
       {
         "key": "LCAP-1166",
@@ -1663,7 +1674,7 @@
         "updated": "2026-04-09T14:29:43.841+0200"
       }
     ],
-    "testQueueCount": 48,
+    "testQueueCount": 49,
     "readyForReleaseCount": 43,
     "releaseIssues": [
       {
@@ -2186,9 +2197,9 @@
     "capacityCounts": {
       "michael": {
         "active": 10,
-        "testQueue": 11,
+        "testQueue": 12,
         "readyForRelease": 2,
-        "backlog": 28
+        "backlog": 27
       },
       "tony": {
         "active": 28,
@@ -2226,10 +2237,10 @@
     "totalFeatures": 1322,
     "featuresDone": 952,
     "featuresInProgress": 81,
-    "featuresInTest": 48,
+    "featuresInTest": 49,
     "featuresReadyForRelease": 43,
     "featuresDoneCount": 909,
-    "featuresBacklog": 241,
+    "featuresBacklog": 240,
     "byWorkstream": {
       "Onboarding": {
         "done": 0,
@@ -11909,13 +11920,13 @@
     "LCAP-1161": {
       "key": "LCAP-1161",
       "summary": "Export af tickets giver et export af produkter, uden tickets",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Ready for test",
+      "statusCategory": "indeterminate",
       "assignee": "Michael Thuren",
       "priority": "High",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-22T23:44:23.452+0200",
+      "updated": "2026-04-23T12:26:56.153+0200",
       "created": "2026-04-08T11:27:45.895+0200",
       "duedate": null
     },
@@ -20573,5 +20584,5 @@
     }
   ],
   "boardId": 37,
-  "generated": "2026-04-23T09:55:08.534Z"
+  "generated": "2026-04-23T10:30:21.528Z"
 }
