@@ -3504,6 +3504,37 @@ const soldOutBadge = (status) => {
   return null;
 };
 
+// Provider normalization — gruppér fx Ticketmaster.dk + .se + (Live Nation) → "Ticketmaster"
+const normalizePos = (s) => {
+  if (!s) return 'Ukendt';
+  const v = s.toLowerCase();
+  if (v.includes('onlinepos')) return 'OnlinePOS';
+  if (v.includes('livecloud')) return 'LiveCloud';
+  if (v.includes('live nation')) return 'Live Nation (ej oplyst)';
+  if (v.includes('wristband-free') || v.includes('wristband free')) return 'Wristband-free';
+  if (v.includes('rfid') || v.includes('chip-armbånd') || v.includes('chip i armbånd') || v.includes('chip-armbaand')) return 'Eget RFID/chip-system';
+  if (v.includes('apple') || v.includes('google pay') || v.includes('kun kort')) return 'Kun kort/mobil';
+  return 'Andet/ikke oplyst';
+};
+const normalizeTicket = (s) => {
+  if (!s) return 'Ukendt';
+  const v = s.toLowerCase();
+  if (v.includes('tickster')) return 'Tickster';
+  if (v.includes('ticketmaster')) return 'Ticketmaster';
+  if (v.includes('united tickets')) return 'United Tickets';
+  if (v.includes('billetten')) return 'Billetten';
+  if (v.includes('smukshop') || v.includes('venue manager')) return 'Venue Manager';
+  if (v.includes('metaltix')) return 'Metaltix';
+  if (v.includes('egen')) return 'Egen shop';
+  return 'Andet';
+};
+// Filter state (pr. view)
+window._annualFilters = window._annualFilters || { pos: 'all', ticket: 'all' };
+function setAnnualFilter(kind, value) {
+  window._annualFilters[kind] = value;
+  if (typeof render === 'function') render();
+}
+
 const annualKeyDates = [
   { date:'2026-04-29', label:'LCAP-1322 B2B Portal internal test', color:'#eab308', icon:'◆' },
   { date:'2026-05-14', label:'LCAP-1321 App Ticket Sales internal test', color:'#eab308', icon:'◆' },
@@ -3529,9 +3560,27 @@ function renderAnnualPlan() {
   const flag = (c) => c === 'DK' ? '🇩🇰' : c === 'SE' ? '🇸🇪' : c === 'DE' ? '🇩🇪' : '';
 
   const source = (window._annualFestivals && window._annualFestivals.length > 0) ? window._annualFestivals : annualFestivals2026Fallback;
-  const sorted = source.slice().sort((a, b) => new Date(a.start) - new Date(b.start));
-  const primary = sorted.find(f => f.primary);
+  const allSorted = source.slice().sort((a, b) => new Date(a.start) - new Date(b.start));
+  const primary = allSorted.find(f => f.primary);
   const meta = window._annualFestivalsMeta || {};
+  const filters = window._annualFilters || { pos: 'all', ticket: 'all' };
+
+  // Apply filter
+  const sorted = allSorted.filter(f => {
+    if (filters.pos !== 'all' && normalizePos(f.pos) !== filters.pos) return false;
+    if (filters.ticket !== 'all' && normalizeTicket(f.ticketProvider) !== filters.ticket) return false;
+    return true;
+  });
+
+  // Build filter chip groups from full dataset (so chips don't disappear when filtered)
+  const posCounts = {};
+  const ticketCounts = {};
+  for (const f of allSorted) {
+    const p = normalizePos(f.pos);
+    const t = normalizeTicket(f.ticketProvider);
+    posCounts[p] = (posCounts[p] || 0) + 1;
+    ticketCounts[t] = (ticketCounts[t] || 0) + 1;
+  }
 
   let html = '<div style="padding:20px;max-width:1400px;margin:0 auto">';
 
@@ -3560,6 +3609,33 @@ function renderAnnualPlan() {
     html += `<div style="text-align:right"><div style="font-size:24px;font-weight:800;color:${primary.color}">${primary.attendees.toLocaleString('da-DK')}</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">forventede gæster</div></div>`;
     html += '</div>';
   }
+
+  // Filter chips — POS + Ticket provider
+  const chipGroup = (kind, active, counts) => {
+    const total = allSorted.length;
+    const entries = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    let h = '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">';
+    h += `<button onclick="setAnnualFilter('${kind}','all')" style="font-size:11px;padding:5px 10px;border-radius:999px;border:1px solid ${active==='all' ? 'var(--text)' : 'var(--border)'};background:${active==='all' ? 'var(--text)' : 'transparent'};color:${active==='all' ? 'var(--bg)' : 'var(--text-muted)'};cursor:pointer;font-weight:600">Alle <span style="opacity:0.6">${total}</span></button>`;
+    for (const [name, count] of entries) {
+      const isActive = active === name;
+      h += `<button onclick="setAnnualFilter('${kind}',${JSON.stringify(name)})" style="font-size:11px;padding:5px 10px;border-radius:999px;border:1px solid ${isActive ? 'var(--text)' : 'var(--border)'};background:${isActive ? 'var(--text)' : 'transparent'};color:${isActive ? 'var(--bg)' : 'var(--text-muted)'};cursor:pointer;font-weight:600">${name} <span style="opacity:0.6">${count}</span></button>`;
+    }
+    h += '</div>';
+    return h;
+  };
+  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:16px;display:grid;gap:10px">';
+  html += '<div style="display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:center">';
+  html += '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">POS-system</div>';
+  html += chipGroup('pos', filters.pos, posCounts);
+  html += '</div>';
+  html += '<div style="display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:center">';
+  html += '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Billet</div>';
+  html += chipGroup('ticket', filters.ticket, ticketCounts);
+  html += '</div>';
+  if (filters.pos !== 'all' || filters.ticket !== 'all') {
+    html += `<div style="font-size:11px;color:var(--text-muted);border-top:1px solid var(--border);padding-top:8px">Viser ${sorted.length} af ${allSorted.length} festivals · <button onclick="setAnnualFilter('pos','all');setAnnualFilter('ticket','all')" style="background:none;border:none;color:var(--red);text-decoration:underline;cursor:pointer;font-size:11px;padding:0">Nulstil filtre</button></div>`;
+  }
+  html += '</div>';
 
   // Month headers (Jan-Dec)
   const months = ['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug','Sep','Okt','Nov','Dec'];
