@@ -2111,6 +2111,20 @@ let wsNames = {
       } catch (e) {
         console.warn('public-features.json not available:', e.message);
       }
+      // Load annual festivals (årsplan) — editable without touching timeline.html
+      try {
+        const afResp = await fetch('annual-festivals.json?v=' + Date.now(), { cache: 'no-store' });
+        if (afResp.ok) {
+          const af = await afResp.json();
+          if (af && Array.isArray(af.festivals)) {
+            window._annualFestivals = af.festivals;
+            window._annualFestivalsMeta = { year: af.year, criteria: af.criteria, updated: af.updated };
+            console.log('Loaded annual-festivals.json (' + af.festivals.length + ' festivals)');
+          }
+        }
+      } catch (e) {
+        console.warn('annual-festivals.json not available, using inline fallback:', e.message);
+      }
       // Sync derived data from Jira into shared state
       syncLiveData();
     }
@@ -3464,19 +3478,31 @@ function renderSprints() {
 
 // ===== ÅRSPLAN VIEW =====
 // Årsplan 2026 — Ringsted Festival som primær, plus andre festivals med ≥20k deltagere + Wacken + Sweden Rock
-const annualFestivals2026 = [
-  { id:'jelling', name:'Jelling Musikfestival', city:'Jelling', country:'DK', start:'2026-05-21', end:'2026-05-24', attendees:40000, color:'#9333ea', url:'https://jellingmusikfestival.dk' },
-  { id:'sweden-rock', name:'Sweden Rock Festival', city:'Sölvesborg', country:'SE', start:'2026-06-03', end:'2026-06-06', attendees:35000, color:'#f59e0b', url:'https://swedenrock.com' },
-  { id:'heartland', name:'Heartland Festival', city:'Egeskov', country:'DK', start:'2026-06-04', end:'2026-06-06', attendees:30000, color:'#06b6d4', url:'https://heartlandfestival.dk' },
-  { id:'northside', name:'NorthSide Festival', city:'Aarhus', country:'DK', start:'2026-06-05', end:'2026-06-07', attendees:35000, color:'#10b981', url:'https://northside.dk' },
-  { id:'copenhell', name:'Copenhell', city:'København', country:'DK', start:'2026-06-17', end:'2026-06-20', attendees:30000, color:'#dc2626', url:'https://copenhell.dk' },
-  { id:'tinderbox', name:'Tinderbox', city:'Odense', country:'DK', start:'2026-06-25', end:'2026-06-27', attendees:45000, color:'#8b5cf6', url:'https://tinderbox.dk' },
-  { id:'roskilde', name:'Roskilde Festival', city:'Roskilde', country:'DK', start:'2026-06-27', end:'2026-07-04', attendees:130000, color:'#6366f1', url:'https://roskilde-festival.dk' },
-  { id:'gron', name:'Grøn Koncert (tour)', city:'8 byer', country:'DK', start:'2026-07-17', end:'2026-07-25', attendees:100000, color:'#84cc16', url:'https://gronkoncert.dk' },
-  { id:'wacken', name:'Wacken Open Air', city:'Wacken', country:'DE', start:'2026-07-29', end:'2026-08-01', attendees:85000, color:'#64748b', url:'https://wacken.com' },
-  { id:'ringsted', name:'Ringsted Festival', city:'Ringsted', country:'DK', start:'2026-07-30', end:'2026-08-01', attendees:20000, color:'#ec4899', primary:true, url:'https://ringstedfestival.dk' },
-  { id:'smukfest', name:'Smukfest', city:'Skanderborg', country:'DK', start:'2026-08-05', end:'2026-08-09', attendees:50000, color:'#f97316', url:'https://smukfest.dk' },
+// Data loades dynamisk fra annual-festivals.json (se loadTimelineData). Denne inline-liste er fallback
+// hvis JSON-filen ikke er tilgængelig. Rediger annual-festivals.json for at opdatere løbende.
+const annualFestivals2026Fallback = [
+  { id:'jelling', name:'Jelling Musikfestival', city:'Jelling', country:'DK', start:'2026-05-21', end:'2026-05-24', attendees:40000, color:'#9333ea', url:'https://jellingmusikfestival.dk', soldOut:'partial', soldOutNote:'Partout udsolgt · dagsbilletter tilbage', ticketProvider:'Egen billetshop', pos:'Eget betalingskort (chip-armbånd)' },
+  { id:'distortion', name:'Copenhagen Distortion', city:'København', country:'DK', start:'2026-06-03', end:'2026-06-07', attendees:100000, color:'#f472b6', url:'https://cphdistortion.dk', soldOut:'no', soldOutNote:'Åbent billetsalg', ticketProvider:'Egen shop', pos:'Ikke offentliggjort' },
+  { id:'sweden-rock', name:'Sweden Rock Festival', city:'Sölvesborg', country:'SE', start:'2026-06-03', end:'2026-06-06', attendees:35000, color:'#f59e0b', url:'https://swedenrock.com', soldOut:'partial', soldOutNote:'3-dages udsolgt', ticketProvider:'Ticketmaster.se', pos:'Kort, cashless' },
+  { id:'northside', name:'NorthSide Festival', city:'Aarhus', country:'DK', start:'2026-06-04', end:'2026-06-06', attendees:35000, color:'#10b981', url:'https://northside.dk', soldOut:'partial', soldOutNote:'Partout udsolgt', ticketProvider:'United Tickets DK', pos:'Cashless' },
+  { id:'heartland', name:'Heartland Festival', city:'Egeskov', country:'DK', start:'2026-06-18', end:'2026-06-20', attendees:30000, color:'#06b6d4', url:'https://heartlandfestival.dk', soldOut:'no', soldOutNote:'Tilgængelig', ticketProvider:'Ticketmaster.dk', pos:'Cashless, mobile tickets' },
+  { id:'copenhell', name:'Copenhell', city:'København', country:'DK', start:'2026-06-24', end:'2026-06-27', attendees:30000, color:'#dc2626', url:'https://copenhell.dk', soldOut:'no', soldOutNote:'Tilgængelig', ticketProvider:'Ticketmaster.dk', pos:'Cashless' },
+  { id:'tinderbox', name:'Tinderbox', city:'Odense', country:'DK', start:'2026-06-25', end:'2026-06-27', attendees:45000, color:'#8b5cf6', url:'https://tinderbox.dk', soldOut:'partial', soldOutNote:'Partout udsolgt', ticketProvider:'United Tickets DK', pos:'Cashless' },
+  { id:'roskilde', name:'Roskilde Festival', city:'Roskilde', country:'DK', start:'2026-06-27', end:'2026-07-04', attendees:130000, color:'#6366f1', url:'https://roskilde-festival.dk', soldOut:'partial', soldOutNote:'2-dages delvist udsolgt', ticketProvider:'Smart Ticket + Ticketmaster', pos:'Eget betalingsarmbånd' },
+  { id:'nibe', name:'Nibe Festival', city:'Nibe', country:'DK', start:'2026-07-01', end:'2026-07-04', attendees:20000, color:'#14b8a6', url:'https://nibefestival.dk', soldOut:'yes', soldOutNote:'Partout totalt udsolgt', ticketProvider:'Billetten', pos:'Eget Nibe-møntkort' },
+  { id:'gron', name:'Grøn Koncert (tour)', city:'8 byer', country:'DK', start:'2026-07-17', end:'2026-07-25', attendees:100000, color:'#84cc16', url:'https://gronkoncert.dk', soldOut:'yes', soldOutNote:'Hele turnéen udsolgt', ticketProvider:'Billetten A/S', pos:'Kun kort' },
+  { id:'wacken', name:'Wacken Open Air', city:'Wacken', country:'DE', start:'2026-07-29', end:'2026-08-01', attendees:85000, color:'#64748b', url:'https://wacken.com', soldOut:'partial', soldOutNote:'Faster & Harder udsolgt', ticketProvider:'Metaltix', pos:'RFID-armbånd, cashless' },
+  { id:'ringsted', name:'Ringsted Festival', city:'Ringsted', country:'DK', start:'2026-07-30', end:'2026-08-01', attendees:20000, color:'#ec4899', primary:true, url:'https://ringstedfestival.dk', soldOut:'yes', soldOutNote:'Udsolgt på rekordtid', ticketProvider:'Egen billetshop', pos:'LiveCloud (Beats / NFC)' },
+  { id:'smukfest', name:'Smukfest', city:'Skanderborg', country:'DK', start:'2026-08-05', end:'2026-08-09', attendees:50000, color:'#f97316', url:'https://smukfest.dk', soldOut:'yes', soldOutNote:'Fuldt udsolgt · venteliste', ticketProvider:'Smukshop', pos:'Cashless' },
 ];
+
+// Sold-out badge helper
+const soldOutBadge = (status) => {
+  if (status === 'yes') return { label:'UDSOLGT', bg:'#ef4444', fg:'#fff' };
+  if (status === 'partial') return { label:'DELVIST UDSOLGT', bg:'#eab308', fg:'#000' };
+  if (status === 'no') return { label:'ÅBENT', bg:'#22c55e', fg:'#000' };
+  return null;
+};
 
 const annualKeyDates = [
   { date:'2026-04-29', label:'LCAP-1322 B2B Portal internal test', color:'#eab308', icon:'◆' },
@@ -3502,8 +3528,10 @@ function renderAnnualPlan() {
   };
   const flag = (c) => c === 'DK' ? '🇩🇰' : c === 'SE' ? '🇸🇪' : c === 'DE' ? '🇩🇪' : '';
 
-  const sorted = annualFestivals2026.slice().sort((a, b) => new Date(a.start) - new Date(b.start));
+  const source = (window._annualFestivals && window._annualFestivals.length > 0) ? window._annualFestivals : annualFestivals2026Fallback;
+  const sorted = source.slice().sort((a, b) => new Date(a.start) - new Date(b.start));
   const primary = sorted.find(f => f.primary);
+  const meta = window._annualFestivalsMeta || {};
 
   let html = '<div style="padding:20px;max-width:1400px;margin:0 auto">';
 
@@ -3552,11 +3580,14 @@ function renderAnnualPlan() {
     const isPrimary = !!fest.primary;
     const rowHeight = isPrimary ? 44 : 30;
 
+    const rowBadge = soldOutBadge(fest.soldOut);
     html += `<div style="display:grid;grid-template-columns:180px 1fr;gap:12px;align-items:center;margin-bottom:6px;padding:${isPrimary ? '4px 0' : '0'};${isPrimary ? 'background:rgba(236,72,153,0.05);border-radius:8px;' : ''}">`;
     // Label column
     html += '<div style="display:flex;align-items:center;gap:6px;font-size:12px">';
     html += `<span style="font-size:14px">${flag(fest.country)}</span>`;
-    html += `<div style="min-width:0"><div style="${isPrimary ? 'font-weight:700;color:var(--text)' : 'color:var(--text)'};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${fest.name}</div>`;
+    html += `<div style="min-width:0"><div style="${isPrimary ? 'font-weight:700;color:var(--text)' : 'color:var(--text)'};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:4px">${fest.name}`;
+    if (rowBadge) html += ` <span style="font-size:8px;padding:1px 4px;background:${rowBadge.bg};color:${rowBadge.fg};border-radius:2px;font-weight:700;letter-spacing:0.3px;flex-shrink:0" title="${fest.soldOutNote || ''}">${fest.soldOut === 'yes' ? '●' : fest.soldOut === 'partial' ? '◐' : '○'}</span>`;
+    html += `</div>`;
     html += `<div style="font-size:10px;color:var(--text-muted)">${fest.attendees.toLocaleString('da-DK')} · ${fmtDate(fest.start)}–${fmtDate(fest.end)}</div></div>`;
     html += '</div>';
     // Bar column
@@ -3631,18 +3662,30 @@ function renderAnnualPlan() {
 
   // Festival liste med detaljer
   html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px">';
-  html += '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:12px">Festival-oversigt</div>';
-  html += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px">';
+  html += '<div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:12px">';
+  html += '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Festival-oversigt · billet + POS</div>';
+  if (meta.updated) html += `<div style="font-size:10px;color:var(--text-muted)">Data opdateret: ${meta.updated}</div>`;
+  html += '</div>';
+  html += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px">';
   for (const f of sorted) {
     const isPrimary = !!f.primary;
+    const badge = soldOutBadge(f.soldOut);
     html += `<a href="${f.url}" target="_blank" style="display:block;background:var(--surface2);border:1px solid ${isPrimary ? f.color : 'var(--border)'};border-left:3px solid ${f.color};border-radius:8px;padding:10px 12px;text-decoration:none;color:var(--text);transition:background 0.1s" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background='var(--surface2)'">`;
-    html += `<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">`;
+    html += `<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;flex-wrap:wrap">`;
     html += `<span style="font-size:13px">${flag(f.country)}</span>`;
     html += `<span style="font-size:13px;font-weight:${isPrimary ? '700' : '600'};color:var(--text)">${f.name}</span>`;
     if (isPrimary) html += ` <span style="font-size:9px;padding:1px 5px;background:${f.color}30;color:${f.color};border-radius:3px;font-weight:700;letter-spacing:0.5px">PRIMÆR</span>`;
+    if (badge) html += ` <span style="font-size:9px;padding:2px 6px;background:${badge.bg};color:${badge.fg};border-radius:3px;font-weight:700;letter-spacing:0.5px">${badge.label}</span>`;
     html += '</div>';
     html += `<div style="font-size:11px;color:var(--text-muted)">${f.city} · ${fmtDate(f.start)}–${fmtDate(f.end)}</div>`;
     html += `<div style="font-size:11px;color:${f.color};font-weight:600;margin-top:2px">${f.attendees.toLocaleString('da-DK')} gæster</div>`;
+    if (f.soldOutNote || f.ticketProvider || f.pos) {
+      html += '<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);display:grid;gap:3px">';
+      if (f.soldOutNote) html += `<div style="font-size:10px;color:var(--text-muted)"><span style="color:var(--text);font-weight:600">Status:</span> ${f.soldOutNote}</div>`;
+      if (f.ticketProvider) html += `<div style="font-size:10px;color:var(--text-muted)"><span style="color:var(--text);font-weight:600">Billet:</span> ${f.ticketProvider}</div>`;
+      if (f.pos) html += `<div style="font-size:10px;color:var(--text-muted)"><span style="color:var(--text);font-weight:600">POS:</span> ${f.pos}</div>`;
+      html += '</div>';
+    }
     html += '</a>';
   }
   html += '</div></div>';
