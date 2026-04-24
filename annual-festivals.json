@@ -17,7 +17,7 @@
       "soldOut": "partial",
       "soldOutNote": "Partout udsolgt · dagsbilletter tilbage",
       "ticketProvider": "Billetten (billetten.dk)",
-      "pos": "Eget betalingskort med chip i armbånd"
+      "pos": "Egen chip-armbånd-løsning · fra 2026 MobilePay på card booths · POS-leverandør ikke offentliggjort"
     },
     {
       "id": "distortion",
@@ -32,7 +32,7 @@
       "soldOut": "no",
       "soldOutNote": "Åbent billetsalg",
       "ticketProvider": "Tickster",
-      "pos": "Gadefest-format · kort/mobil ved barer"
+      "pos": "Wristband-free (kun digitale tickets) · kort/mobil ved barer · POS-leverandør ikke offentliggjort"
     },
     {
       "id": "sweden-rock",
@@ -62,7 +62,7 @@
       "soldOut": "partial",
       "soldOutNote": "Partout udsolgt",
       "ticketProvider": "United Tickets DK",
-      "pos": "Cashless (kort/mobil) · specifik leverandør ikke offentliggjort"
+      "pos": "OnlinePOS"
     },
     {
       "id": "heartland",
@@ -77,7 +77,7 @@
       "soldOut": "no",
       "soldOutNote": "Billetter tilgængelige",
       "ticketProvider": "Ticketmaster.dk",
-      "pos": "Kun kort + Apple/Google Pay (ingen chip-armbånd)"
+      "pos": "Kun kort + Apple/Google Pay (ingen chip-armbånd) · POS-leverandør ikke offentliggjort (Live Nation-ejet)"
     },
     {
       "id": "vielsker",
@@ -107,7 +107,7 @@
       "soldOut": "no",
       "soldOutNote": "Billetter tilgængelige",
       "ticketProvider": "Ticketmaster.dk (Live Nation)",
-      "pos": "Cashless · specifik leverandør ikke offentliggjort"
+      "pos": "Cashless · POS-leverandør ikke offentliggjort (Live Nation-ejet)"
     },
     {
       "id": "tinderbox",
@@ -122,7 +122,7 @@
       "soldOut": "partial",
       "soldOutNote": "Partout udsolgt · dagsbilletter tilbage",
       "ticketProvider": "United Tickets DK",
-      "pos": "Cashless · specifik leverandør ikke offentliggjort"
+      "pos": "OnlinePOS"
     },
     {
       "id": "roskilde",
@@ -152,7 +152,7 @@
       "soldOut": "yes",
       "soldOutNote": "Partout totalt udsolgt",
       "ticketProvider": "Billetten (billetten.dk)",
-      "pos": "Eget Nibe-møntkort (chip i armbånd)"
+      "pos": "OnlinePOS (white-labeled som Nibe-møntkort · chip i armbånd)"
     },
     {
       "id": "gron",
@@ -167,7 +167,7 @@
       "soldOut": "yes",
       "soldOutNote": "Hele turnéen udsolgt",
       "ticketProvider": "Billetten A/S",
-      "pos": "Kun kort (ingen MobilePay/kontant)"
+      "pos": "OnlinePOS · kun kort (ingen MobilePay/kontant)"
     },
     {
       "id": "wacken",
