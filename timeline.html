@@ -1772,6 +1772,7 @@
     <label>Visning</label>
     <button class="filter-btn view-btn active" data-view="detail">Detaljeret</button>
     <button class="filter-btn view-btn" data-view="overview">Overordnet</button>
+    <button class="filter-btn view-btn" data-view="annual">&Aring;rsplan</button>
     <button class="filter-btn view-btn" data-view="sprints">Sprints</button>
     <button class="filter-btn view-btn" data-view="capacity">Kapacitet</button>
     <button class="filter-btn view-btn" data-view="current-sprint">Aktivt Sprint</button>
@@ -1805,6 +1806,7 @@
     <button class="mobile-tab" data-view="current-sprint" data-icon="&#x25B6;">Sprint</button>
     <button class="mobile-tab active" data-view="sprints" data-icon="&#x2630;">Sprints</button>
     <button class="mobile-tab" data-view="overview" data-icon="&#x25A3;">Overblik</button>
+    <button class="mobile-tab" data-view="annual" data-icon="&#x1F4C5;">&Aring;rsplan</button>
     <button class="mobile-tab" data-view="detail" data-icon="&#x2261;">Gantt</button>
     <button class="mobile-tab" data-view="capacity" data-icon="&#x25CF;">Kapacitet</button>
     <button class="mobile-tab" data-view="showcase" data-icon="&#x2726;">Showcase</button>
@@ -2441,7 +2443,7 @@ const personColors = {
 
 // ===== RENDER =====
 // Restore view from URL hash (e.g. #current-sprint)
-const validViews = ['detail','overview','sprints','capacity','current-sprint','showcase'];
+const validViews = ['detail','overview','annual','sprints','capacity','current-sprint','showcase'];
 const hashView = location.hash.replace('#','');
 const state = { ws: 'all', person: 'all', phase: 'all', view: validViews.includes(hashView) ? hashView : 'detail' };
 
@@ -2888,6 +2890,10 @@ function render() {
     html = renderCapacity();
     tl.innerHTML = html;
     updateCapacityStats();
+  } else if (state.view === 'annual') {
+    legend.style.display = 'none';
+    html = renderAnnualPlan();
+    tl.innerHTML = html;
   } else if (state.view === 'sprints') {
     legend.style.display = 'none';
     html = renderSprints();
@@ -3453,6 +3459,195 @@ function renderSprints() {
 
   html += '</div>';
   document.getElementById('stat-visible').textContent = visibleCount;
+  return html;
+}
+
+// ===== ÅRSPLAN VIEW =====
+// Årsplan 2026 — Ringsted Festival som primær, plus andre festivals med ≥20k deltagere + Wacken + Sweden Rock
+const annualFestivals2026 = [
+  { id:'jelling', name:'Jelling Musikfestival', city:'Jelling', country:'DK', start:'2026-05-21', end:'2026-05-24', attendees:40000, color:'#9333ea', url:'https://jellingmusikfestival.dk' },
+  { id:'sweden-rock', name:'Sweden Rock Festival', city:'Sölvesborg', country:'SE', start:'2026-06-03', end:'2026-06-06', attendees:35000, color:'#f59e0b', url:'https://swedenrock.com' },
+  { id:'heartland', name:'Heartland Festival', city:'Egeskov', country:'DK', start:'2026-06-04', end:'2026-06-06', attendees:30000, color:'#06b6d4', url:'https://heartlandfestival.dk' },
+  { id:'northside', name:'NorthSide Festival', city:'Aarhus', country:'DK', start:'2026-06-05', end:'2026-06-07', attendees:35000, color:'#10b981', url:'https://northside.dk' },
+  { id:'copenhell', name:'Copenhell', city:'København', country:'DK', start:'2026-06-17', end:'2026-06-20', attendees:30000, color:'#dc2626', url:'https://copenhell.dk' },
+  { id:'tinderbox', name:'Tinderbox', city:'Odense', country:'DK', start:'2026-06-25', end:'2026-06-27', attendees:45000, color:'#8b5cf6', url:'https://tinderbox.dk' },
+  { id:'roskilde', name:'Roskilde Festival', city:'Roskilde', country:'DK', start:'2026-06-27', end:'2026-07-04', attendees:130000, color:'#6366f1', url:'https://roskilde-festival.dk' },
+  { id:'gron', name:'Grøn Koncert (tour)', city:'8 byer', country:'DK', start:'2026-07-17', end:'2026-07-25', attendees:100000, color:'#84cc16', url:'https://gronkoncert.dk' },
+  { id:'wacken', name:'Wacken Open Air', city:'Wacken', country:'DE', start:'2026-07-29', end:'2026-08-01', attendees:85000, color:'#64748b', url:'https://wacken.com' },
+  { id:'ringsted', name:'Ringsted Festival', city:'Ringsted', country:'DK', start:'2026-07-30', end:'2026-08-01', attendees:20000, color:'#ec4899', primary:true, url:'https://ringstedfestival.dk' },
+  { id:'smukfest', name:'Smukfest', city:'Skanderborg', country:'DK', start:'2026-08-05', end:'2026-08-09', attendees:50000, color:'#f97316', url:'https://smukfest.dk' },
+];
+
+const annualKeyDates = [
+  { date:'2026-04-29', label:'LCAP-1322 B2B Portal internal test', color:'#eab308', icon:'◆' },
+  { date:'2026-05-14', label:'LCAP-1321 App Ticket Sales internal test', color:'#eab308', icon:'◆' },
+  { date:'2026-07-01', label:'Feature Freeze', color:'#ef4444', icon:'✕' },
+];
+
+function renderAnnualPlan() {
+  const year = 2026;
+  const yearStart = new Date(`${year}-01-01`).getTime();
+  const yearEnd = new Date(`${year}-12-31T23:59:59`).getTime();
+  const yearSpan = yearEnd - yearStart;
+  const pctOf = (dateStr) => {
+    const t = new Date(dateStr).getTime();
+    return Math.max(0, Math.min(100, ((t - yearStart) / yearSpan) * 100));
+  };
+  const nowPct = pctOf(new Date().toISOString());
+  const fmtDate = (d) => {
+    const dt = new Date(d);
+    const day = dt.getDate();
+    const months = ['jan','feb','mar','apr','maj','jun','jul','aug','sep','okt','nov','dec'];
+    return `${day}. ${months[dt.getMonth()]}`;
+  };
+  const flag = (c) => c === 'DK' ? '🇩🇰' : c === 'SE' ? '🇸🇪' : c === 'DE' ? '🇩🇪' : '';
+
+  const sorted = annualFestivals2026.slice().sort((a, b) => new Date(a.start) - new Date(b.start));
+  const primary = sorted.find(f => f.primary);
+
+  let html = '<div style="padding:20px;max-width:1400px;margin:0 auto">';
+
+  // Header
+  html += '<div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px">';
+  html += `<div><h2 style="color:var(--text);margin:0;font-size:24px;font-weight:800">Årsplan ${year}</h2>`;
+  html += '<div style="font-size:13px;color:var(--text-muted);margin-top:4px">Ringsted Festival som primær · Andre danske festivals med ≥20k deltagere · Wacken + Sweden Rock</div></div>';
+  if (primary) {
+    const daysToPrimary = Math.ceil((new Date(primary.start) - new Date()) / (1000 * 60 * 60 * 24));
+    const color = daysToPrimary <= 30 ? '#ef4444' : daysToPrimary <= 60 ? '#eab308' : '#3b82f6';
+    html += `<div style="padding:10px 16px;background:${color}15;border:1px solid ${color}40;border-radius:10px;display:flex;align-items:center;gap:10px">`;
+    html += `<div style="font-size:28px;font-weight:800;color:${color};line-height:1">${daysToPrimary > 0 ? daysToPrimary : 0}</div>`;
+    html += `<div style="font-size:11px;color:${color};line-height:1.2">dage til<br><strong>Ringsted Festival</strong></div>`;
+    html += '</div>';
+  }
+  html += '</div>';
+
+  // Primary festival highlight card
+  if (primary) {
+    html += `<div style="background:linear-gradient(135deg,${primary.color}25,${primary.color}08);border:2px solid ${primary.color};border-radius:14px;padding:18px;margin-bottom:28px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">`;
+    html += '<div>';
+    html += `<div style="font-size:10px;font-weight:700;letter-spacing:1.5px;color:${primary.color};text-transform:uppercase;margin-bottom:4px">PRIMÆR · ${flag(primary.country)} ${primary.country}</div>`;
+    html += `<div style="font-size:22px;font-weight:800;color:var(--text)">${primary.name}</div>`;
+    html += `<div style="font-size:13px;color:var(--text-muted);margin-top:2px">${primary.city} · ${fmtDate(primary.start)} – ${fmtDate(primary.end)} ${year}</div>`;
+    html += '</div>';
+    html += `<div style="text-align:right"><div style="font-size:24px;font-weight:800;color:${primary.color}">${primary.attendees.toLocaleString('da-DK')}</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">forventede gæster</div></div>`;
+    html += '</div>';
+  }
+
+  // Month headers (Jan-Dec)
+  const months = ['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug','Sep','Okt','Nov','Dec'];
+  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:24px;position:relative">';
+  html += '<div style="display:grid;grid-template-columns:180px 1fr;gap:12px;align-items:center;margin-bottom:10px">';
+  html += '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Festival</div>';
+  html += '<div style="position:relative"><div style="display:grid;grid-template-columns:repeat(12,1fr);gap:0">';
+  for (const m of months) {
+    html += `<div style="font-size:10px;color:var(--text-muted);text-align:center;padding:2px 0;border-left:1px solid var(--border)">${m}</div>`;
+  }
+  html += '</div></div></div>';
+
+  // Festival rows
+  for (const fest of sorted) {
+    const leftPct = pctOf(fest.start);
+    const rightPct = pctOf(fest.end);
+    const widthPct = Math.max(0.5, rightPct - leftPct);
+    const isPrimary = !!fest.primary;
+    const rowHeight = isPrimary ? 44 : 30;
+
+    html += `<div style="display:grid;grid-template-columns:180px 1fr;gap:12px;align-items:center;margin-bottom:6px;padding:${isPrimary ? '4px 0' : '0'};${isPrimary ? 'background:rgba(236,72,153,0.05);border-radius:8px;' : ''}">`;
+    // Label column
+    html += '<div style="display:flex;align-items:center;gap:6px;font-size:12px">';
+    html += `<span style="font-size:14px">${flag(fest.country)}</span>`;
+    html += `<div style="min-width:0"><div style="${isPrimary ? 'font-weight:700;color:var(--text)' : 'color:var(--text)'};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${fest.name}</div>`;
+    html += `<div style="font-size:10px;color:var(--text-muted)">${fest.attendees.toLocaleString('da-DK')} · ${fmtDate(fest.start)}–${fmtDate(fest.end)}</div></div>`;
+    html += '</div>';
+    // Bar column
+    html += `<div style="position:relative;height:${rowHeight}px;background:var(--surface2);border-radius:6px;overflow:hidden">`;
+    // Month gridlines
+    for (let mi = 1; mi < 12; mi++) {
+      html += `<div style="position:absolute;left:${mi/12*100}%;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.04);z-index:1"></div>`;
+    }
+    // Festival bar
+    const barOpacity = isPrimary ? 1 : 0.85;
+    html += `<a href="${fest.url}" target="_blank" style="position:absolute;left:${leftPct}%;width:${widthPct}%;top:4px;bottom:4px;background:${fest.color};opacity:${barOpacity};border-radius:4px;z-index:2;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#fff;font-size:${isPrimary ? '11px' : '9px'};font-weight:700;overflow:hidden;white-space:nowrap;padding:0 4px;box-shadow:${isPrimary ? '0 2px 12px ' + fest.color + '60' : 'none'}" title="${fest.name} · ${fest.city} · ${fmtDate(fest.start)}–${fmtDate(fest.end)} · ${fest.attendees.toLocaleString('da-DK')} gæster">`;
+    if (widthPct > 3) html += `${fmtDate(fest.start)}`;
+    html += '</a>';
+    // Today marker on each row
+    if (nowPct > 0 && nowPct < 100) {
+      html += `<div style="position:absolute;left:${nowPct}%;top:0;bottom:0;width:2px;background:var(--red);opacity:0.5;z-index:3;pointer-events:none"></div>`;
+    }
+    html += '</div>';
+    html += '</div>';
+  }
+
+  // Key dates (milestones, feature freeze)
+  html += '<div style="display:grid;grid-template-columns:180px 1fr;gap:12px;align-items:center;margin-top:16px;padding-top:12px;border-top:1px solid var(--border)">';
+  html += '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Milestones</div>';
+  html += '<div style="position:relative;height:30px">';
+  for (let mi = 1; mi < 12; mi++) {
+    html += `<div style="position:absolute;left:${mi/12*100}%;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.04);z-index:1"></div>`;
+  }
+  for (const kd of annualKeyDates) {
+    const leftPct = pctOf(kd.date);
+    html += `<div style="position:absolute;left:${leftPct}%;top:0;bottom:0;width:2px;background:${kd.color};z-index:3" title="${kd.label} (${fmtDate(kd.date)})"></div>`;
+    html += `<div style="position:absolute;left:${leftPct}%;top:0;transform:translateX(-50%);font-size:14px;color:${kd.color};z-index:4;pointer-events:none">${kd.icon}</div>`;
+  }
+  // Today marker
+  if (nowPct > 0 && nowPct < 100) {
+    html += `<div style="position:absolute;left:${nowPct}%;top:0;bottom:0;width:2px;background:var(--red);opacity:0.8;z-index:4;pointer-events:none" title="I dag"></div>`;
+  }
+  html += '</div></div>';
+
+  html += '</div>'; // close card
+
+  // Legend
+  html += '<div style="display:flex;gap:20px;flex-wrap:wrap;padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:10px;font-size:11px;color:var(--text-muted);margin-bottom:24px">';
+  html += '<div style="display:flex;align-items:center;gap:6px"><div style="width:14px;height:8px;background:#ec4899;border-radius:2px"></div> Ringsted Festival (primær)</div>';
+  html += '<div style="display:flex;align-items:center;gap:6px"><span>🇩🇰</span> Danske festivals ≥20k gæster</div>';
+  html += '<div style="display:flex;align-items:center;gap:6px"><span>🇸🇪</span> Sverige</div>';
+  html += '<div style="display:flex;align-items:center;gap:6px"><span>🇩🇪</span> Tyskland</div>';
+  html += '<div style="display:flex;align-items:center;gap:6px"><div style="width:2px;height:12px;background:var(--red)"></div> I dag</div>';
+  html += '<div style="display:flex;align-items:center;gap:6px"><span style="color:#eab308">◆</span> LCAP milestone</div>';
+  html += '<div style="display:flex;align-items:center;gap:6px"><span style="color:#ef4444">✕</span> Feature freeze</div>';
+  html += '</div>';
+
+  // Conflict/overlap advarsler for Ringsted
+  if (primary) {
+    const pStart = new Date(primary.start).getTime();
+    const pEnd = new Date(primary.end).getTime();
+    const overlaps = sorted.filter(f => {
+      if (f.id === primary.id) return false;
+      const fs = new Date(f.start).getTime();
+      const fe = new Date(f.end).getTime();
+      return fs <= pEnd && fe >= pStart;
+    });
+    if (overlaps.length > 0) {
+      html += '<div style="background:#ef444410;border:1px solid #ef444440;border-radius:10px;padding:14px;margin-bottom:24px">';
+      html += '<div style="font-size:13px;font-weight:700;color:#ef4444;margin-bottom:6px">⚠ Overlap med Ringsted Festival (' + fmtDate(primary.start) + '–' + fmtDate(primary.end) + ')</div>';
+      for (const f of overlaps) {
+        html += `<div style="font-size:12px;color:var(--text);margin:3px 0">${flag(f.country)} <strong>${f.name}</strong> · ${fmtDate(f.start)}–${fmtDate(f.end)} · ${f.attendees.toLocaleString('da-DK')} gæster</div>`;
+      }
+      html += '</div>';
+    }
+  }
+
+  // Festival liste med detaljer
+  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px">';
+  html += '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:12px">Festival-oversigt</div>';
+  html += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px">';
+  for (const f of sorted) {
+    const isPrimary = !!f.primary;
+    html += `<a href="${f.url}" target="_blank" style="display:block;background:var(--surface2);border:1px solid ${isPrimary ? f.color : 'var(--border)'};border-left:3px solid ${f.color};border-radius:8px;padding:10px 12px;text-decoration:none;color:var(--text);transition:background 0.1s" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background='var(--surface2)'">`;
+    html += `<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">`;
+    html += `<span style="font-size:13px">${flag(f.country)}</span>`;
+    html += `<span style="font-size:13px;font-weight:${isPrimary ? '700' : '600'};color:var(--text)">${f.name}</span>`;
+    if (isPrimary) html += ` <span style="font-size:9px;padding:1px 5px;background:${f.color}30;color:${f.color};border-radius:3px;font-weight:700;letter-spacing:0.5px">PRIMÆR</span>`;
+    html += '</div>';
+    html += `<div style="font-size:11px;color:var(--text-muted)">${f.city} · ${fmtDate(f.start)}–${fmtDate(f.end)}</div>`;
+    html += `<div style="font-size:11px;color:${f.color};font-weight:600;margin-top:2px">${f.attendees.toLocaleString('da-DK')} gæster</div>`;
+    html += '</a>';
+  }
+  html += '</div></div>';
+
+  html += '</div>'; // close main container
   return html;
 }
 
