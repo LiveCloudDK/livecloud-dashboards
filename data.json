@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-23T22:00:54.146Z",
+    "startDate": "2026-04-24T05:47:46.855Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -2210,7 +2210,7 @@
         "active": 11,
         "testQueue": 12,
         "readyForRelease": 2,
-        "backlog": 30
+        "backlog": 28
       },
       "tony": {
         "active": 28,
@@ -2246,12 +2246,12 @@
   },
   "publicStats": {
     "totalFeatures": 1326,
-    "featuresDone": 952,
+    "featuresDone": 954,
     "featuresInProgress": 82,
     "featuresInTest": 49,
     "featuresReadyForRelease": 43,
-    "featuresDoneCount": 909,
-    "featuresBacklog": 243,
+    "featuresDoneCount": 911,
+    "featuresBacklog": 241,
     "byWorkstream": {
       "Onboarding": {
         "done": 0,
@@ -20322,8 +20322,8 @@
     "LCAP-1327": {
       "key": "LCAP-1327",
       "summary": "FMS: Multi-select og bulk actions på tickets (og andre lister)",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Closed",
+      "statusCategory": "done",
       "assignee": "Michael Thuren",
       "priority": "High",
       "type": "Task",
@@ -20332,7 +20332,7 @@
         "fms-admin",
         "ringsted-blocker"
       ],
-      "updated": "2026-04-23T18:43:22.067+0200",
+      "updated": "2026-04-24T07:09:10.457+0200",
       "created": "2026-04-23T18:43:21.479+0200",
       "duedate": null
     },
@@ -20373,8 +20373,8 @@
     "LCAP-1329": {
       "key": "LCAP-1329",
       "summary": "FMS: Admin re-assign og admin claim af billetter på attendee-niveau",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Closed",
+      "statusCategory": "done",
       "assignee": "Michael Thuren",
       "priority": "High",
       "type": "Task",
@@ -20383,7 +20383,7 @@
         "ringsted-blocker",
         "ticket-management"
       ],
-      "updated": "2026-04-23T18:43:45.377+0200",
+      "updated": "2026-04-24T07:09:15.115+0200",
       "created": "2026-04-23T18:43:44.817+0200",
       "duedate": null
     }
@@ -20663,5 +20663,5 @@
     }
   ],
   "boardId": 37,
-  "generated": "2026-04-23T22:00:58.255Z"
+  "generated": "2026-04-24T05:47:50.626Z"
 }
