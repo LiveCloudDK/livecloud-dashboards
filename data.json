@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-24T12:19:06.733Z",
+    "startDate": "2026-04-24T12:48:43.585Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -965,17 +965,6 @@
           "commerce"
         ],
         "updated": "2026-04-21T22:08:11.781+0200"
-      },
-      {
-        "key": "LCAP-1289",
-        "summary": "ordrer: admin ordreoversigt + filtre",
-        "status": "In Progress",
-        "statusCategory": "indeterminate",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Sub-task",
-        "labels": [],
-        "updated": "2026-04-20T14:03:59.004+0200"
       },
       {
         "key": "LCAP-1058",
@@ -2237,21 +2226,21 @@
         "backlog": 9
       },
       "simon": {
-        "active": 25,
+        "active": 24,
         "testQueue": 6,
         "readyForRelease": 5,
-        "backlog": 83
+        "backlog": 82
       }
     }
   },
   "publicStats": {
     "totalFeatures": 1326,
-    "featuresDone": 954,
-    "featuresInProgress": 82,
+    "featuresDone": 956,
+    "featuresInProgress": 81,
     "featuresInTest": 49,
     "featuresReadyForRelease": 43,
-    "featuresDoneCount": 911,
-    "featuresBacklog": 241,
+    "featuresDoneCount": 913,
+    "featuresBacklog": 240,
     "byWorkstream": {
       "Onboarding": {
         "done": 0,
@@ -19976,13 +19965,13 @@
     "LCAP-1289": {
       "key": "LCAP-1289",
       "summary": "ordrer: admin ordreoversigt + filtre",
-      "status": "In Progress",
-      "statusCategory": "indeterminate",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T14:03:59.004+0200",
+      "updated": "2026-04-24T14:27:18.409+0200",
       "created": "2026-04-20T10:55:14.817+0200",
       "duedate": null
     },
@@ -20093,13 +20082,13 @@
     "LCAP-1298": {
       "key": "LCAP-1298",
       "summary": "profil-løs: service desk-panel",
-      "status": "Backlog",
-      "statusCategory": "new",
+      "status": "Done",
+      "statusCategory": "done",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Sub-task",
       "labels": [],
-      "updated": "2026-04-20T14:02:39.622+0200",
+      "updated": "2026-04-24T14:27:08.476+0200",
       "created": "2026-04-20T10:56:36.138+0200",
       "duedate": null
     },
@@ -20663,5 +20652,5 @@
     }
   ],
   "boardId": 37,
-  "generated": "2026-04-24T12:19:10.748Z"
+  "generated": "2026-04-24T12:48:47.821Z"
 }
