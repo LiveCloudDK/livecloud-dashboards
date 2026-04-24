@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-24T09:42:52.181Z",
+    "startDate": "2026-04-24T10:14:17.534Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -20643,12 +20643,12 @@
         "startsAt": "2026-07-30T00:00:00.000000Z",
         "endsAt": "2026-08-01T00:00:00.000000Z",
         "address": "Søndervang 2, 4100 Ringsted",
-        "artists": 51,
-        "events": 60,
+        "artists": 58,
+        "events": 67,
         "venues": 7,
         "news": 142,
         "screens": 14,
-        "media": 348,
+        "media": 349,
         "vendors": 0,
         "venueNames": [
           "Anlægsscenen",
@@ -20663,5 +20663,5 @@
     }
   ],
   "boardId": 37,
-  "generated": "2026-04-24T09:42:56.503Z"
+  "generated": "2026-04-24T10:14:21.008Z"
 }
