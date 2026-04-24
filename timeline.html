@@ -3528,12 +3528,24 @@ const normalizeTicket = (s) => {
   if (v.includes('egen')) return 'Egen shop';
   return 'Andet';
 };
-// Filter state (pr. view)
-window._annualFilters = window._annualFilters || { pos: 'all', ticket: 'all' };
-function setAnnualFilter(kind, value) {
-  window._annualFilters[kind] = value;
+// Grouping state (pr. view)
+window._annualGroupBy = window._annualGroupBy || 'date';
+function setAnnualGroup(value) {
+  window._annualGroupBy = value;
   if (typeof render === 'function') render();
 }
+// Format kr.-beløb
+const fmtKr = (amt) => {
+  if (amt === null || amt === undefined) return null;
+  const abs = Math.abs(amt);
+  const sign = amt < 0 ? '-' : '';
+  if (abs >= 1000000000) return sign + (abs / 1000000000).toFixed(1).replace('.', ',') + ' mia. kr.';
+  if (abs >= 1000000) {
+    const v = abs / 1000000;
+    return sign + (v >= 100 ? Math.round(v) : v.toFixed(1).replace('.', ',')) + ' mio. kr.';
+  }
+  return sign + (abs / 1000).toFixed(0) + 't. kr.';
+};
 
 const annualKeyDates = [
   { date:'2026-04-29', label:'LCAP-1322 B2B Portal internal test', color:'#eab308', icon:'◆' },
@@ -3560,27 +3572,10 @@ function renderAnnualPlan() {
   const flag = (c) => c === 'DK' ? '🇩🇰' : c === 'SE' ? '🇸🇪' : c === 'DE' ? '🇩🇪' : '';
 
   const source = (window._annualFestivals && window._annualFestivals.length > 0) ? window._annualFestivals : annualFestivals2026Fallback;
-  const allSorted = source.slice().sort((a, b) => new Date(a.start) - new Date(b.start));
-  const primary = allSorted.find(f => f.primary);
+  const sorted = source.slice().sort((a, b) => new Date(a.start) - new Date(b.start));
+  const primary = sorted.find(f => f.primary);
   const meta = window._annualFestivalsMeta || {};
-  const filters = window._annualFilters || { pos: 'all', ticket: 'all' };
-
-  // Apply filter
-  const sorted = allSorted.filter(f => {
-    if (filters.pos !== 'all' && normalizePos(f.pos) !== filters.pos) return false;
-    if (filters.ticket !== 'all' && normalizeTicket(f.ticketProvider) !== filters.ticket) return false;
-    return true;
-  });
-
-  // Build filter chip groups from full dataset (so chips don't disappear when filtered)
-  const posCounts = {};
-  const ticketCounts = {};
-  for (const f of allSorted) {
-    const p = normalizePos(f.pos);
-    const t = normalizeTicket(f.ticketProvider);
-    posCounts[p] = (posCounts[p] || 0) + 1;
-    ticketCounts[t] = (ticketCounts[t] || 0) + 1;
-  }
+  const groupBy = window._annualGroupBy || 'date';
 
   let html = '<div style="padding:20px;max-width:1400px;margin:0 auto">';
 
@@ -3609,33 +3604,6 @@ function renderAnnualPlan() {
     html += `<div style="text-align:right"><div style="font-size:24px;font-weight:800;color:${primary.color}">${primary.attendees.toLocaleString('da-DK')}</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">forventede gæster</div></div>`;
     html += '</div>';
   }
-
-  // Filter chips — POS + Ticket provider
-  const chipGroup = (kind, active, counts) => {
-    const total = allSorted.length;
-    const entries = Object.entries(counts).sort((a, b) => b[1] - a[1]);
-    let h = '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">';
-    h += `<button onclick="setAnnualFilter('${kind}','all')" style="font-size:11px;padding:5px 10px;border-radius:999px;border:1px solid ${active==='all' ? 'var(--text)' : 'var(--border)'};background:${active==='all' ? 'var(--text)' : 'transparent'};color:${active==='all' ? 'var(--bg)' : 'var(--text-muted)'};cursor:pointer;font-weight:600">Alle <span style="opacity:0.6">${total}</span></button>`;
-    for (const [name, count] of entries) {
-      const isActive = active === name;
-      h += `<button onclick="setAnnualFilter('${kind}',${JSON.stringify(name)})" style="font-size:11px;padding:5px 10px;border-radius:999px;border:1px solid ${isActive ? 'var(--text)' : 'var(--border)'};background:${isActive ? 'var(--text)' : 'transparent'};color:${isActive ? 'var(--bg)' : 'var(--text-muted)'};cursor:pointer;font-weight:600">${name} <span style="opacity:0.6">${count}</span></button>`;
-    }
-    h += '</div>';
-    return h;
-  };
-  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:16px;display:grid;gap:10px">';
-  html += '<div style="display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:center">';
-  html += '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">POS-system</div>';
-  html += chipGroup('pos', filters.pos, posCounts);
-  html += '</div>';
-  html += '<div style="display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:center">';
-  html += '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Billet</div>';
-  html += chipGroup('ticket', filters.ticket, ticketCounts);
-  html += '</div>';
-  if (filters.pos !== 'all' || filters.ticket !== 'all') {
-    html += `<div style="font-size:11px;color:var(--text-muted);border-top:1px solid var(--border);padding-top:8px">Viser ${sorted.length} af ${allSorted.length} festivals · <button onclick="setAnnualFilter('pos','all');setAnnualFilter('ticket','all')" style="background:none;border:none;color:var(--red);text-decoration:underline;cursor:pointer;font-size:11px;padding:0">Nulstil filtre</button></div>`;
-  }
-  html += '</div>';
 
   // Month headers (Jan-Dec)
   const months = ['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug','Sep','Okt','Nov','Dec'];
@@ -3736,35 +3704,115 @@ function renderAnnualPlan() {
     }
   }
 
-  // Festival liste med detaljer
-  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px">';
-  html += '<div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:12px">';
-  html += '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Festival-oversigt · billet + POS</div>';
-  if (meta.updated) html += `<div style="font-size:10px;color:var(--text-muted)">Data opdateret: ${meta.updated}</div>`;
-  html += '</div>';
-  html += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px">';
-  for (const f of sorted) {
+  // ===== Festival liste med detaljer — grupperet =====
+  const renderFestivalCard = (f) => {
     const isPrimary = !!f.primary;
     const badge = soldOutBadge(f.soldOut);
-    html += `<a href="${f.url}" target="_blank" style="display:block;background:var(--surface2);border:1px solid ${isPrimary ? f.color : 'var(--border)'};border-left:3px solid ${f.color};border-radius:8px;padding:10px 12px;text-decoration:none;color:var(--text);transition:background 0.1s" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background='var(--surface2)'">`;
-    html += `<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;flex-wrap:wrap">`;
-    html += `<span style="font-size:13px">${flag(f.country)}</span>`;
-    html += `<span style="font-size:13px;font-weight:${isPrimary ? '700' : '600'};color:var(--text)">${f.name}</span>`;
-    if (isPrimary) html += ` <span style="font-size:9px;padding:1px 5px;background:${f.color}30;color:${f.color};border-radius:3px;font-weight:700;letter-spacing:0.5px">PRIMÆR</span>`;
-    if (badge) html += ` <span style="font-size:9px;padding:2px 6px;background:${badge.bg};color:${badge.fg};border-radius:3px;font-weight:700;letter-spacing:0.5px">${badge.label}</span>`;
-    html += '</div>';
-    html += `<div style="font-size:11px;color:var(--text-muted)">${f.city} · ${fmtDate(f.start)}–${fmtDate(f.end)}</div>`;
-    html += `<div style="font-size:11px;color:${f.color};font-weight:600;margin-top:2px">${f.attendees.toLocaleString('da-DK')} gæster</div>`;
-    if (f.soldOutNote || f.ticketProvider || f.pos) {
-      html += '<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);display:grid;gap:3px">';
-      if (f.soldOutNote) html += `<div style="font-size:10px;color:var(--text-muted)"><span style="color:var(--text);font-weight:600">Status:</span> ${f.soldOutNote}</div>`;
-      if (f.ticketProvider) html += `<div style="font-size:10px;color:var(--text-muted)"><span style="color:var(--text);font-weight:600">Billet:</span> ${f.ticketProvider}</div>`;
-      if (f.pos) html += `<div style="font-size:10px;color:var(--text-muted)"><span style="color:var(--text);font-weight:600">POS:</span> ${f.pos}</div>`;
-      html += '</div>';
+    const fin = f.finance || {};
+    const revStr = fmtKr(fin.revenue);
+    const profStr = fmtKr(fin.profit);
+    let card = `<a href="${f.url}" target="_blank" style="display:block;background:var(--surface2);border:1px solid ${isPrimary ? f.color : 'var(--border)'};border-left:3px solid ${f.color};border-radius:8px;padding:10px 12px;text-decoration:none;color:var(--text);transition:background 0.1s" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background='var(--surface2)'">`;
+    card += `<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;flex-wrap:wrap">`;
+    card += `<span style="font-size:13px">${flag(f.country)}</span>`;
+    card += `<span style="font-size:13px;font-weight:${isPrimary ? '700' : '600'};color:var(--text)">${f.name}</span>`;
+    if (isPrimary) card += ` <span style="font-size:9px;padding:1px 5px;background:${f.color}30;color:${f.color};border-radius:3px;font-weight:700;letter-spacing:0.5px">PRIMÆR</span>`;
+    if (badge) card += ` <span style="font-size:9px;padding:2px 6px;background:${badge.bg};color:${badge.fg};border-radius:3px;font-weight:700;letter-spacing:0.5px">${badge.label}</span>`;
+    card += '</div>';
+    card += `<div style="font-size:11px;color:var(--text-muted)">${f.city} · ${fmtDate(f.start)}–${fmtDate(f.end)}</div>`;
+    card += `<div style="font-size:11px;color:${f.color};font-weight:600;margin-top:2px">${f.attendees.toLocaleString('da-DK')} gæster</div>`;
+    // Finance row
+    if (revStr || profStr) {
+      card += `<div style="font-size:11px;color:var(--text);font-weight:600;margin-top:4px;display:flex;gap:10px;flex-wrap:wrap">`;
+      if (revStr) card += `<span><span style="color:var(--text-muted);font-weight:500">Oms. ${fin.year}:</span> ${revStr}</span>`;
+      if (profStr) {
+        const profColor = fin.profit >= 0 ? '#22c55e' : '#ef4444';
+        card += `<span><span style="color:var(--text-muted);font-weight:500">Resultat:</span> <span style="color:${profColor}">${profStr}</span></span>`;
+      }
+      card += '</div>';
     }
-    html += '</a>';
+    if (f.soldOutNote || f.ticketProvider || f.pos || fin.note) {
+      card += '<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);display:grid;gap:3px">';
+      if (f.soldOutNote) card += `<div style="font-size:10px;color:var(--text-muted)"><span style="color:var(--text);font-weight:600">Status:</span> ${f.soldOutNote}</div>`;
+      if (f.ticketProvider) card += `<div style="font-size:10px;color:var(--text-muted)"><span style="color:var(--text);font-weight:600">Billet:</span> ${f.ticketProvider}</div>`;
+      if (f.pos) card += `<div style="font-size:10px;color:var(--text-muted)"><span style="color:var(--text);font-weight:600">POS:</span> ${f.pos}</div>`;
+      if (fin.note) card += `<div style="font-size:10px;color:var(--text-muted)"><span style="color:var(--text);font-weight:600">Økonomi:</span> ${fin.note}</div>`;
+      card += '</div>';
+    }
+    card += '</a>';
+    return card;
+  };
+
+  // Gruppering
+  const groupKey = (f) => {
+    if (groupBy === 'pos') return normalizePos(f.pos);
+    if (groupBy === 'ticket') return normalizeTicket(f.ticketProvider);
+    if (groupBy === 'status') {
+      if (f.soldOut === 'yes') return 'Udsolgt';
+      if (f.soldOut === 'partial') return 'Delvist udsolgt';
+      if (f.soldOut === 'no') return 'Åbent';
+      return 'Ukendt status';
+    }
+    return 'Alle festivals';
+  };
+  const groups = {};
+  for (const f of sorted) {
+    const k = groupKey(f);
+    if (!groups[k]) groups[k] = [];
+    groups[k].push(f);
+  }
+  // Sorter grupper: størst først (efter antal gæster)
+  const groupOrder = Object.keys(groups).sort((a, b) => {
+    const sumA = groups[a].reduce((s, f) => s + (f.attendees || 0), 0);
+    const sumB = groups[b].reduce((s, f) => s + (f.attendees || 0), 0);
+    return sumB - sumA;
+  });
+
+  // Grupperings-toggle
+  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:16px">';
+  html += '<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">';
+  html += '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Grupper efter</div>';
+  const groupOptions = [
+    { key: 'date', label: 'Dato' },
+    { key: 'pos', label: 'POS-leverandør' },
+    { key: 'ticket', label: 'Billetudbyder' },
+    { key: 'status', label: 'Udsolgt-status' },
+  ];
+  for (const opt of groupOptions) {
+    const active = groupBy === opt.key;
+    html += `<button onclick="setAnnualGroup('${opt.key}')" style="font-size:11px;padding:6px 12px;border-radius:999px;border:1px solid ${active ? 'var(--text)' : 'var(--border)'};background:${active ? 'var(--text)' : 'transparent'};color:${active ? 'var(--bg)' : 'var(--text-muted)'};cursor:pointer;font-weight:600">${opt.label}</button>`;
   }
   html += '</div></div>';
+
+  // Festival-oversigt (grupperet)
+  html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px">';
+  html += '<div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:12px">';
+  html += '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Festival-oversigt · billet + POS + omsætning</div>';
+  if (meta.updated) html += `<div style="font-size:10px;color:var(--text-muted)">Data opdateret: ${meta.updated}</div>`;
+  html += '</div>';
+
+  for (const gName of groupOrder) {
+    const items = groups[gName];
+    // Aggregat for gruppen
+    const totalAttendees = items.reduce((s, f) => s + (f.attendees || 0), 0);
+    const totalRevenue = items.reduce((s, f) => s + ((f.finance && f.finance.revenue) || 0), 0);
+    const hasRevenue = items.some(f => f.finance && f.finance.revenue);
+    const revenueStr = hasRevenue ? fmtKr(totalRevenue) : null;
+    const revenueCoverage = items.filter(f => f.finance && f.finance.revenue).length;
+
+    if (groupBy !== 'date') {
+      html += '<div style="margin-bottom:18px">';
+      html += `<div style="display:flex;align-items:baseline;gap:10px;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);flex-wrap:wrap">`;
+      html += `<div style="font-size:14px;font-weight:700;color:var(--text)">${gName}</div>`;
+      html += `<div style="font-size:11px;color:var(--text-muted)">${items.length} festival${items.length > 1 ? 's' : ''} · ${totalAttendees.toLocaleString('da-DK')} gæster`;
+      if (revenueStr) html += ` · omsætning ≥${revenueStr} <span style="opacity:0.6">(${revenueCoverage}/${items.length} festivals)</span>`;
+      html += '</div></div>';
+    }
+    html += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px">';
+    for (const f of items) html += renderFestivalCard(f);
+    html += '</div>';
+    if (groupBy !== 'date') html += '</div>';
+  }
+  html += '</div>';
 
   html += '</div>'; // close main container
   return html;

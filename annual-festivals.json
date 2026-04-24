@@ -1,5 +1,5 @@
 {
-  "_comment": "Årsplan-festivals for annual view. Opdatér denne fil løbende — ændringer reflekteres uden at røre timeline.html. soldOut: 'yes' | 'partial' | 'no' | null. Marker felter med '?' hvis ikke bekræftet.",
+  "_comment": "Årsplan-festivals for annual view. Opdatér denne fil løbende — ændringer reflekteres uden at røre timeline.html. soldOut: 'yes' | 'partial' | 'no' | null. finance: omsætning og overskud fra seneste offentlige regnskab (typisk 2024); 'null' hvor ikke offentliggjort.",
   "year": 2026,
   "criteria": "Ringsted Festival (primær) · Andre danske festivals med ≥20k deltagere · Wacken + Sweden Rock",
   "updated": "2026-04-24",
@@ -17,7 +17,13 @@
       "soldOut": "partial",
       "soldOutNote": "Partout udsolgt · dagsbilletter tilbage",
       "ticketProvider": "Billetten (billetten.dk)",
-      "pos": "Egen chip-armbånd-løsning · fra 2026 MobilePay på card booths · POS-leverandør ikke offentliggjort"
+      "pos": "Egen chip-armbånd-løsning · fra 2026 MobilePay på card booths · POS-leverandør ikke offentliggjort",
+      "finance": {
+        "year": 2024,
+        "revenue": null,
+        "profit": 6000000,
+        "note": "Non-profit · ~6 mio. kr. overskud 2024 (8 mio. 2023) · donerer alt til velgørenhed"
+      }
     },
     {
       "id": "distortion",
@@ -32,7 +38,13 @@
       "soldOut": "no",
       "soldOutNote": "Åbent billetsalg",
       "ticketProvider": "Tickster",
-      "pos": "Wristband-free (kun digitale tickets) · kort/mobil ved barer · POS-leverandør ikke offentliggjort"
+      "pos": "Wristband-free (kun digitale tickets) · kort/mobil ved barer · POS-leverandør ikke offentliggjort",
+      "finance": {
+        "year": 2024,
+        "revenue": null,
+        "profit": null,
+        "note": "Regnskab ikke offentligt tilgængeligt"
+      }
     },
     {
       "id": "sweden-rock",
@@ -47,7 +59,13 @@
       "soldOut": "partial",
       "soldOutNote": "3-dages udsolgt · dagsbilletter tilbage",
       "ticketProvider": "Ticketmaster.se",
-      "pos": "Kort, cashless"
+      "pos": "Kort, cashless",
+      "finance": {
+        "year": 2024,
+        "revenue": null,
+        "profit": null,
+        "note": "Estimat $5-25M · ikke detaljeret offentliggjort"
+      }
     },
     {
       "id": "northside",
@@ -62,7 +80,13 @@
       "soldOut": "partial",
       "soldOutNote": "Partout udsolgt",
       "ticketProvider": "United Tickets DK",
-      "pos": "OnlinePOS"
+      "pos": "OnlinePOS",
+      "finance": {
+        "year": 2024,
+        "revenue": null,
+        "profit": -6600000,
+        "note": "Underskud 6,6 mio. kr. 2024 · DTD Group-ejet"
+      }
     },
     {
       "id": "heartland",
@@ -77,7 +101,13 @@
       "soldOut": "no",
       "soldOutNote": "Billetter tilgængelige",
       "ticketProvider": "Ticketmaster.dk",
-      "pos": "Kun kort + Apple/Google Pay (ingen chip-armbånd) · POS-leverandør ikke offentliggjort (Live Nation-ejet)"
+      "pos": "Kun kort + Apple/Google Pay (ingen chip-armbånd) · POS-leverandør ikke offentliggjort (Live Nation-ejet)",
+      "finance": {
+        "year": 2024,
+        "revenue": null,
+        "profit": -20000000,
+        "note": "Underskud 20 mio. kr. 2024 (vejrrelateret) · Live Nation-ejet"
+      }
     },
     {
       "id": "vielsker",
@@ -92,7 +122,13 @@
       "soldOut": null,
       "soldOutNote": "2-dages festival (90'erne + 2000'erne), nyt format efter tour blev nedlagt",
       "ticketProvider": "Ticketmaster.dk",
-      "pos": "Cashless · specifik leverandør ikke offentliggjort"
+      "pos": "Cashless · specifik leverandør ikke offentliggjort",
+      "finance": {
+        "year": 2024,
+        "revenue": null,
+        "profit": null,
+        "note": "Ejet af REKOM Group · ikke separat offentliggjort"
+      }
     },
     {
       "id": "copenhell",
@@ -107,7 +143,13 @@
       "soldOut": "no",
       "soldOutNote": "Billetter tilgængelige",
       "ticketProvider": "Ticketmaster.dk (Live Nation)",
-      "pos": "Cashless · POS-leverandør ikke offentliggjort (Live Nation-ejet)"
+      "pos": "Cashless · POS-leverandør ikke offentliggjort (Live Nation-ejet)",
+      "finance": {
+        "year": 2024,
+        "revenue": null,
+        "profit": null,
+        "note": "Del af Live Nation DK (bruttoresultat 58 mio. 2023) · ikke separat offentliggjort"
+      }
     },
     {
       "id": "tinderbox",
@@ -122,7 +164,13 @@
       "soldOut": "partial",
       "soldOutNote": "Partout udsolgt · dagsbilletter tilbage",
       "ticketProvider": "United Tickets DK",
-      "pos": "OnlinePOS"
+      "pos": "OnlinePOS",
+      "finance": {
+        "year": 2024,
+        "revenue": null,
+        "profit": null,
+        "note": "DTD Group · udbytte 30,5 mio. kr. udtrukket 2024 (koncern-tal)"
+      }
     },
     {
       "id": "roskilde",
@@ -137,7 +185,13 @@
       "soldOut": "partial",
       "soldOutNote": "2-dages delvist udsolgt",
       "ticketProvider": "Tickster (ny partner 2025-2028)",
-      "pos": "OnlinePOS · NFC-chip-armbånd"
+      "pos": "OnlinePOS · NFC-chip-armbånd",
+      "finance": {
+        "year": 2024,
+        "revenue": null,
+        "profit": 13500000,
+        "note": "Non-profit · overskud 13,5 mio. kr. doneres fuldt ud · foreningen i alt 19,6 mio."
+      }
     },
     {
       "id": "nibe",
@@ -152,7 +206,13 @@
       "soldOut": "yes",
       "soldOutNote": "Partout totalt udsolgt",
       "ticketProvider": "Billetten (billetten.dk)",
-      "pos": "OnlinePOS (white-labeled som Nibe-møntkort · chip i armbånd)"
+      "pos": "OnlinePOS (white-labeled som Nibe-møntkort · chip i armbånd)",
+      "finance": {
+        "year": 2024,
+        "revenue": 49900000,
+        "profit": 1700000,
+        "note": "Omsætningsrekord 49,9 mio. kr. · primær drift -0,6 mio. · 2 mio. doneret til velgørenhed"
+      }
     },
     {
       "id": "gron",
@@ -167,7 +227,13 @@
       "soldOut": "yes",
       "soldOutNote": "Hele turnéen udsolgt",
       "ticketProvider": "Billetten A/S",
-      "pos": "OnlinePOS · kun kort (ingen MobilePay/kontant)"
+      "pos": "OnlinePOS · kun kort (ingen MobilePay/kontant)",
+      "finance": {
+        "year": 2024,
+        "revenue": null,
+        "profit": null,
+        "note": "Udsolgt på rekordtid · 180.500 gæster · overskud går til Muskelsvindfonden"
+      }
     },
     {
       "id": "wacken",
@@ -182,7 +248,13 @@
       "soldOut": "partial",
       "soldOutNote": "Faster & Harder udsolgt · Louder tilbage",
       "ticketProvider": "Metaltix",
-      "pos": "RFID-armbånd (eget Wacken cashless-system)"
+      "pos": "RFID-armbånd (eget Wacken cashless-system)",
+      "finance": {
+        "year": 2024,
+        "revenue": 211000000,
+        "profit": null,
+        "note": "~€28,3 mio. alene fra billetter (85.000 × €333) · samlet omsætning ikke offentliggjort"
+      }
     },
     {
       "id": "ringsted",
@@ -198,7 +270,13 @@
       "soldOut": "yes",
       "soldOutNote": "Udsolgt på rekordtid · venteliste",
       "ticketProvider": "Egen shop (billetter.ringsted-festival.dk)",
-      "pos": "LiveCloud · Beats / NFC-armbånd"
+      "pos": "LiveCloud · Beats / NFC-armbånd",
+      "finance": {
+        "year": 2024,
+        "revenue": null,
+        "profit": 7900000,
+        "note": "Bruttoresultat 14,4 mio. kr. · resultat før skat 7,9 mio. trods skybrud/teltkollaps"
+      }
     },
     {
       "id": "smukfest",
@@ -213,7 +291,13 @@
       "soldOut": "yes",
       "soldOutNote": "Fuldt udsolgt · venteliste",
       "ticketProvider": "Smukshop (Venue Manager CMP)",
-      "pos": "OnlinePOS · chip i armbånd + Smukfest Cashless app"
+      "pos": "OnlinePOS · chip i armbånd + Smukfest Cashless app",
+      "finance": {
+        "year": 2024,
+        "revenue": 282500000,
+        "profit": 7400000,
+        "note": "Rekord-omsætning trods regn · overskud ned fra 15,7 mio. i 2023"
+      }
     }
   ]
 }
