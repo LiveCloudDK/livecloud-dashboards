@@ -80,6 +80,21 @@
       "pos": "Kun kort + Apple/Google Pay (ingen chip-armbånd)"
     },
     {
+      "id": "vielsker",
+      "name": "Vi Elsker Festival",
+      "city": "Rødovre (Espelunden)",
+      "country": "DK",
+      "start": "2026-06-19",
+      "end": "2026-06-20",
+      "attendees": 25000,
+      "color": "#ef4444",
+      "url": "https://vielsker.dk",
+      "soldOut": null,
+      "soldOutNote": "2-dages festival (90'erne + 2000'erne), nyt format efter tour blev nedlagt",
+      "ticketProvider": "Ticketmaster.dk",
+      "pos": "Cashless · specifik leverandør ikke offentliggjort"
+    },
+    {
       "id": "copenhell",
       "name": "Copenhell",
       "city": "København",
