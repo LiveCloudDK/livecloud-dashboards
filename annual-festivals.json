@@ -454,6 +454,27 @@
       }
     },
     {
+      "id": "tonder",
+      "name": "Tønder Festival",
+      "city": "Tønder",
+      "country": "DK",
+      "start": "2026-08-26",
+      "end": "2026-08-29",
+      "attendees": 15000,
+      "color": "#a16207",
+      "url": "https://tf.dk",
+      "soldOut": "no",
+      "soldOutNote": "Folk · roots · americana · country",
+      "ticketProvider": "Billetten.dk",
+      "pos": "Cashless · POS-leverandør ikke offentligt",
+      "finance": {
+        "year": 2024,
+        "revenue": null,
+        "profit": null,
+        "note": "International folk-festival · op til 30 koncerter dagligt på flere scener"
+      }
+    },
+    {
       "id": "smukfest",
       "name": "Smukfest",
       "city": "Skanderborg",
@@ -472,6 +493,88 @@
         "revenue": 282500000,
         "profit": 7400000,
         "note": "Rekord-omsætning trods regn · overskud ned fra 15,7 mio. i 2023"
+      }
+    }
+  ],
+  "events": [
+    {
+      "id": "aalborg-karneval",
+      "name": "Aalborg Karneval",
+      "type": "carnival",
+      "city": "Aalborg (Kildeparken)",
+      "country": "DK",
+      "start": "2026-05-23",
+      "end": "2026-05-23",
+      "attendees": 80000,
+      "color": "#a855f7",
+      "url": "https://aalborgkarneval.dk",
+      "ticketProvider": "Egen shop / Billetten",
+      "pos": "Distribueret cashless · ikke offentligt",
+      "finance": {
+        "year": 2024,
+        "revenue": null,
+        "profit": null,
+        "note": "Nordeuropas største karneval · 80.000+ deltagere i parade gennem Aalborg · Foreningen Aalborg Karneval"
+      }
+    },
+    {
+      "id": "roskilde-dyrskue",
+      "name": "Roskilde Dyrskue",
+      "type": "fair",
+      "city": "Roskilde (Dyrskuepladsen)",
+      "country": "DK",
+      "start": "2026-05-29",
+      "end": "2026-05-31",
+      "attendees": 120000,
+      "color": "#16a34a",
+      "url": "https://www.roskildedyrskue.dk",
+      "ticketProvider": "Egen shop",
+      "pos": "Cashless · POS-leverandør ikke offentligt",
+      "finance": {
+        "year": 2025,
+        "revenue": null,
+        "profit": null,
+        "note": "Danmarks største dyrskue · 120.000+ besøgende 2025 · landbrugsmaskiner, hesteshow, traktor pull"
+      }
+    },
+    {
+      "id": "folkemodet",
+      "name": "Folkemødet",
+      "type": "political",
+      "city": "Allinge (Bornholm)",
+      "country": "DK",
+      "start": "2026-06-11",
+      "end": "2026-06-13",
+      "attendees": 60000,
+      "color": "#0284c7",
+      "url": "https://folkemoedet.dk",
+      "ticketProvider": "Gratis adgang",
+      "pos": "Distribueret POS hos boder · F&B, ingen central løsning",
+      "finance": {
+        "year": 2024,
+        "revenue": null,
+        "profit": null,
+        "note": "Danmarks største demokratifestival · ~60.000 årlige deltagere · gratis adgang"
+      }
+    },
+    {
+      "id": "aarhus-festuge",
+      "name": "Aarhus Festuge",
+      "type": "cultural",
+      "city": "Aarhus",
+      "country": "DK",
+      "start": "2026-08-28",
+      "end": "2026-09-06",
+      "attendees": 200000,
+      "color": "#be185d",
+      "url": "https://aarhusfestuge.dk",
+      "ticketProvider": "Distribueret · Ticketmaster + lokale spillesteder",
+      "pos": "Distribueret · ingen central løsning",
+      "finance": {
+        "year": 2024,
+        "revenue": null,
+        "profit": null,
+        "note": "10 dages bykulturfestival · ~1000 events på tværs af kunst, musik, teater, arkitektur · siden 1965"
       }
     }
   ]
