@@ -1,7 +1,7 @@
 {
   "_comment": "Årsplan-festivals for annual view. Opdatér denne fil løbende — ændringer reflekteres uden at røre timeline.html. soldOut: 'yes' | 'partial' | 'no' | null. finance: omsætning og overskud fra seneste offentlige regnskab (typisk 2024); 'null' hvor ikke offentliggjort.",
   "year": 2026,
-  "criteria": "Ringsted Festival (primær) · Andre danske festivals med ≥20k deltagere",
+  "criteria": "Ringsted Festival (primær) · Andre danske festivals med ≥10k deltagere",
   "updated": "2026-04-25",
   "candidates": {
     "_comment": "Top kandidater til LiveCloud-platformen 2027. Score 1-10 baseret på størrelses-match, ejerskab, økonomi, POS-skifte-evne og forretningsgrundlag.",
@@ -138,6 +138,27 @@
       }
     },
     {
+      "id": "skive",
+      "name": "Skive Festival",
+      "city": "Skive (Strandtangen)",
+      "country": "DK",
+      "start": "2026-06-04",
+      "end": "2026-06-06",
+      "attendees": 14000,
+      "color": "#65a30d",
+      "url": "https://skivefestival.dk",
+      "soldOut": "no",
+      "soldOutNote": "Billetsalg åbnede 30. september 2025",
+      "ticketProvider": "Egen shop (shop.skivefestival.dk)",
+      "pos": "Cashless · POS-leverandør ikke offentligt oplyst",
+      "finance": {
+        "year": 2023,
+        "revenue": null,
+        "profit": null,
+        "note": "Forening · solidt overskud doneres til frivillige foreninger der bemander festivalen · 14.000 udsolgt 2023 (største på 6 år)"
+      }
+    },
+    {
       "id": "sweden-rock",
       "name": "Sweden Rock Festival",
       "city": "Sölvesborg",
@@ -243,6 +264,27 @@
       }
     },
     {
+      "id": "thyrock",
+      "name": "Thy Rock",
+      "city": "Thisted (Dyrskuepladsen)",
+      "country": "DK",
+      "start": "2026-06-26",
+      "end": "2026-06-27",
+      "attendees": 11500,
+      "color": "#92400e",
+      "url": "https://thyrock.dk",
+      "soldOut": "partial",
+      "soldOutNote": "+20% YoY på forhåndssalg · 7.500 solgt før festival",
+      "ticketProvider": "Ticketmaster.dk",
+      "pos": "Eget Thy Rock value card (20 kr. depositum) · cashless · POS-leverandør ikke offentligt",
+      "finance": {
+        "year": 2024,
+        "revenue": 18000000,
+        "profit": null,
+        "note": "Rekord-omsætning 18 mio. kr. · 424.000 kr. udloddet til hver af 8 lokale foreninger (3,4 mio. total) · arrangeres af Komiteen for Kulturevent Thy"
+      }
+    },
+    {
       "id": "tinderbox",
       "name": "Tinderbox",
       "city": "Odense",
@@ -303,6 +345,48 @@
         "revenue": 49900000,
         "profit": 1700000,
         "note": "Omsætningsrekord 49,9 mio. kr. · primær drift -0,6 mio. · 2 mio. doneret til velgørenhed"
+      }
+    },
+    {
+      "id": "vig",
+      "name": "Vig Festival",
+      "city": "Vig (Odsherred)",
+      "country": "DK",
+      "start": "2026-07-08",
+      "end": "2026-07-11",
+      "attendees": 17000,
+      "color": "#facc15",
+      "url": "https://vigfestival.dk",
+      "soldOut": "no",
+      "soldOutNote": "Familievenlig · 3.000 børn under 12 gratis · 3.000 frivillige",
+      "ticketProvider": "Ticketmaster.dk",
+      "pos": "Cashless · vendors leaser POS-terminaler gennem festivalen · leverandør ikke offentligt",
+      "finance": {
+        "year": 2022,
+        "revenue": null,
+        "profit": 8157000,
+        "note": "Rekord-overskud 8,2 mio. kr. (2022) · 1,9 mio. til hver af 3 moder-organisationer · forening drevet af Odsherred-foreningsliv"
+      }
+    },
+    {
+      "id": "musikilejet",
+      "name": "Musik i Lejet",
+      "city": "Vejby Strand (Tisvildeleje)",
+      "country": "DK",
+      "start": "2026-07-16",
+      "end": "2026-07-18",
+      "attendees": 17000,
+      "color": "#0ea5e9",
+      "url": "https://musikilejet.dk",
+      "soldOut": "partial",
+      "soldOutNote": "Partout-billetter sælger hurtigt · trendy ungt publikum",
+      "ticketProvider": "SeeTickets",
+      "pos": "Cashless · POS-leverandør ikke offentligt",
+      "finance": {
+        "year": 2024,
+        "revenue": null,
+        "profit": null,
+        "note": "§8a almennyttig forening · doneret 1,86 mio. kr. (2024) · 3x vækst fra 2023 (0,67 mio.) · momsfri"
       }
     },
     {

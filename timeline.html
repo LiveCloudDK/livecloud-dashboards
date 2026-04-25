@@ -3583,7 +3583,7 @@ function renderAnnualPlan() {
   // Header
   html += '<div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px">';
   html += `<div><h2 style="color:var(--text);margin:0;font-size:24px;font-weight:800">Årsplan ${year}</h2>`;
-  html += '<div style="font-size:13px;color:var(--text-muted);margin-top:4px">Ringsted Festival som primær · Andre danske festivals med ≥20k deltagere</div></div>';
+  html += '<div style="font-size:13px;color:var(--text-muted);margin-top:4px">Ringsted Festival som primær · Andre danske festivals med ≥10k deltagere</div></div>';
   if (primary) {
     const daysToPrimary = Math.ceil((new Date(primary.start) - new Date()) / (1000 * 60 * 60 * 24));
     const color = daysToPrimary <= 30 ? '#ef4444' : daysToPrimary <= 60 ? '#eab308' : '#3b82f6';
@@ -3717,7 +3717,7 @@ function renderAnnualPlan() {
   // Legend
   html += '<div style="display:flex;gap:20px;flex-wrap:wrap;padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:10px;font-size:11px;color:var(--text-muted);margin-bottom:24px">';
   html += '<div style="display:flex;align-items:center;gap:6px"><div style="width:14px;height:8px;background:#ec4899;border-radius:2px"></div> Ringsted Festival (primær)</div>';
-  html += '<div style="display:flex;align-items:center;gap:6px"><span>🇩🇰</span> Danske festivals ≥20k gæster</div>';
+  html += '<div style="display:flex;align-items:center;gap:6px"><span>🇩🇰</span> Danske festivals ≥10k gæster</div>';
   html += '<div style="display:flex;align-items:center;gap:6px"><span>🇸🇪</span> Sverige</div>';
   html += '<div style="display:flex;align-items:center;gap:6px"><span>🇩🇪</span> Tyskland</div>';
   html += '<div style="display:flex;align-items:center;gap:6px"><div style="width:2px;height:12px;background:var(--red)"></div> I dag</div>';
