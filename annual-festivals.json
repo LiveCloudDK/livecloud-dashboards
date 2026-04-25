@@ -5,7 +5,7 @@
   "updated": "2026-04-25",
   "candidates": {
     "_comment": "Top kandidater til LiveCloud-platformen 2027. Score 1-10 baseret på størrelses-match, ejerskab, økonomi, POS-skifte-evne og forretningsgrundlag.",
-    "benchmark": "Ringsted Festival: 20.000 gæster · ApS, single-owner (Anders Sørensen) · 20 fuldtidsansatte · Festhallen som indendørs venue 51 uger/år · 7,9 mio. kr. resultat før skat (2024)",
+    "benchmark": "Ringsted Festival: 17.000 gæster pr. festivaldag (heraf ~4.000 campers) · ApS, single-owner (Anders Sørensen) · 20 fuldtidsansatte · Festhallen som indendørs venue 51 uger/år · 7,9 mio. kr. resultat før skat (2024)",
     "list": [
       {
         "rank": 1,
@@ -82,7 +82,7 @@
         "city": "Nibe (Skalskoven)",
         "country": "DK",
         "score": 6,
-        "size": "20.000 daglige gæster (eksakt match til Ringsted)",
+        "size": "20.000 daglige gæster (let større end Ringsteds 17k)",
         "ownership": "Forening · donerer overskud til velgørenhed",
         "finance": "Omsætning 49,9 mio. kr. 2024 (rekord) · 1,7 mio. overskud · primær drift -0,6 mio.",
         "format": "4-dages skovfestival (1-4. juli)",
@@ -438,7 +438,7 @@
       "country": "DK",
       "start": "2026-07-30",
       "end": "2026-08-01",
-      "attendees": 20000,
+      "attendees": 17000,
       "color": "#ec4899",
       "primary": true,
       "url": "https://ringstedfestival.dk",
