@@ -36,7 +36,7 @@
   "sprint": {
     "name": "Aktivt Sprint",
     "state": "active",
-    "startDate": "2026-04-24T21:45:44.855Z",
+    "startDate": "2026-04-25T08:43:58.879Z",
     "endDate": null,
     "goal": "",
     "issues": [
@@ -865,19 +865,6 @@
           "fms"
         ],
         "updated": "2026-04-22T22:08:39.911+0200"
-      },
-      {
-        "key": "LCAP-969",
-        "summary": "Inventory dashboard widget — real-time lagerstatus",
-        "status": "Selected for Development",
-        "statusCategory": "new",
-        "assignee": "Simon Jensen",
-        "priority": "Medium",
-        "type": "Task",
-        "labels": [
-          "fms"
-        ],
-        "updated": "2026-04-22T22:08:29.707+0200"
       },
       {
         "key": "LCAP-1165",
@@ -2199,7 +2186,7 @@
         "active": 11,
         "testQueue": 12,
         "readyForRelease": 2,
-        "backlog": 28
+        "backlog": 29
       },
       "tony": {
         "active": 28,
@@ -2226,7 +2213,7 @@
         "backlog": 9
       },
       "simon": {
-        "active": 24,
+        "active": 23,
         "testQueue": 6,
         "readyForRelease": 5,
         "backlog": 82
@@ -2234,13 +2221,13 @@
     }
   },
   "publicStats": {
-    "totalFeatures": 1326,
-    "featuresDone": 956,
-    "featuresInProgress": 81,
+    "totalFeatures": 1327,
+    "featuresDone": 957,
+    "featuresInProgress": 80,
     "featuresInTest": 49,
     "featuresReadyForRelease": 43,
-    "featuresDoneCount": 913,
-    "featuresBacklog": 240,
+    "featuresDoneCount": 914,
+    "featuresBacklog": 241,
     "byWorkstream": {
       "Onboarding": {
         "done": 0,
@@ -14968,7 +14955,7 @@
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-22T21:47:28.267+0200",
+      "updated": "2026-04-25T10:25:27.522+0200",
       "created": "2026-03-16T15:39:03.547+0100",
       "duedate": null
     },
@@ -15073,7 +15060,7 @@
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-09T09:10:01.336+0200",
+      "updated": "2026-04-25T10:24:33.227+0200",
       "created": "2026-03-16T15:40:25.828+0100",
       "duedate": null
     },
@@ -15170,15 +15157,15 @@
     "LCAP-969": {
       "key": "LCAP-969",
       "summary": "Inventory dashboard widget — real-time lagerstatus",
-      "status": "Selected for Development",
-      "statusCategory": "new",
+      "status": "Closed",
+      "statusCategory": "done",
       "assignee": "Simon Jensen",
       "priority": "Medium",
       "type": "Task",
       "labels": [
         "fms"
       ],
-      "updated": "2026-04-22T22:08:29.707+0200",
+      "updated": "2026-04-25T10:25:23.196+0200",
       "created": "2026-03-16T15:40:35.235+0100",
       "duedate": null
     },
@@ -20375,6 +20362,24 @@
       "updated": "2026-04-24T07:09:15.115+0200",
       "created": "2026-04-23T18:43:44.817+0200",
       "duedate": null
+    },
+    "LCAP-1330": {
+      "key": "LCAP-1330",
+      "summary": "Configurable dashboard widgets - delt widget-framework (UI + backend)",
+      "status": "Backlog",
+      "statusCategory": "new",
+      "assignee": "Michael Thuren",
+      "priority": "Medium",
+      "type": "Story",
+      "labels": [
+        "admin-tools",
+        "dashboard",
+        "widgets",
+        "wp-l"
+      ],
+      "updated": "2026-04-25T10:37:16.171+0200",
+      "created": "2026-04-25T10:25:04.827+0200",
+      "duedate": null
     }
   },
   "velocity": [
@@ -20652,5 +20657,5 @@
     }
   ],
   "boardId": 37,
-  "generated": "2026-04-24T21:45:48.271Z"
+  "generated": "2026-04-25T08:44:05.111Z"
 }
