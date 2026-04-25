@@ -2119,6 +2119,7 @@ let wsNames = {
           if (af && Array.isArray(af.festivals)) {
             window._annualFestivals = af.festivals;
             window._annualFestivalsMeta = { year: af.year, criteria: af.criteria, updated: af.updated };
+            window._annualCandidates = af.candidates || null;
             console.log('Loaded annual-festivals.json (' + af.festivals.length + ' festivals)');
           }
         }
@@ -3582,7 +3583,7 @@ function renderAnnualPlan() {
   // Header
   html += '<div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px">';
   html += `<div><h2 style="color:var(--text);margin:0;font-size:24px;font-weight:800">Årsplan ${year}</h2>`;
-  html += '<div style="font-size:13px;color:var(--text-muted);margin-top:4px">Ringsted Festival som primær · Andre danske festivals med ≥20k deltagere · Wacken + Sweden Rock</div></div>';
+  html += '<div style="font-size:13px;color:var(--text-muted);margin-top:4px">Ringsted Festival som primær · Andre danske festivals med ≥20k deltagere</div></div>';
   if (primary) {
     const daysToPrimary = Math.ceil((new Date(primary.start) - new Date()) / (1000 * 60 * 60 * 24));
     const color = daysToPrimary <= 30 ? '#ef4444' : daysToPrimary <= 60 ? '#eab308' : '#3b82f6';
@@ -3603,6 +3604,46 @@ function renderAnnualPlan() {
     html += '</div>';
     html += `<div style="text-align:right"><div style="font-size:24px;font-weight:800;color:${primary.color}">${primary.attendees.toLocaleString('da-DK')}</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">forventede gæster</div></div>`;
     html += '</div>';
+  }
+
+  // ===== Top 5 LiveCloud-kandidater =====
+  const candidates = window._annualCandidates;
+  if (candidates && Array.isArray(candidates.list) && candidates.list.length > 0) {
+    html += '<div style="background:linear-gradient(135deg,#ec489908,#f9731608);border:1px solid #ec489940;border-radius:14px;padding:18px;margin-bottom:24px">';
+    html += '<div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:6px">';
+    html += '<div style="font-size:11px;font-weight:700;letter-spacing:1.5px;color:#ec4899;text-transform:uppercase">★ Top 5 LiveCloud-kandidater · 2027-pipeline</div>';
+    html += '<div style="font-size:10px;color:var(--text-muted)">Score 1-10: størrelse · ejerskab · økonomi · POS-skifte-evne · forretningsgrundlag</div>';
+    html += '</div>';
+    if (candidates.benchmark) {
+      html += `<div style="font-size:11px;color:var(--text-muted);background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin-bottom:12px"><span style="color:var(--text);font-weight:600">Benchmark — Ringsted Festival:</span> ${candidates.benchmark}</div>`;
+    }
+    html += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px">';
+    for (const c of candidates.list) {
+      const scoreColor = c.score >= 9 ? '#22c55e' : c.score >= 7 ? '#eab308' : c.score >= 5 ? '#f97316' : '#ef4444';
+      html += `<a href="${c.url}" target="_blank" style="display:block;background:var(--surface);border:1px solid var(--border);border-left:4px solid ${scoreColor};border-radius:10px;padding:12px 14px;text-decoration:none;color:var(--text);transition:all 0.15s" onmouseover="this.style.background='var(--surface2)';this.style.borderColor='${scoreColor}'" onmouseout="this.style.background='var(--surface)';this.style.borderColor='var(--border)'">`;
+      html += '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px">';
+      html += `<div style="display:flex;align-items:center;gap:8px"><div style="font-size:18px;font-weight:800;color:${scoreColor};line-height:1">#${c.rank}</div><div><div style="font-size:14px;font-weight:700;color:var(--text);line-height:1.1">${c.name}</div><div style="font-size:11px;color:var(--text-muted)">${c.city}</div></div></div>`;
+      html += `<div style="font-size:24px;font-weight:800;color:${scoreColor};line-height:1">${c.score}<span style="font-size:11px;opacity:0.6">/10</span></div>`;
+      html += '</div>';
+      const rows = [
+        ['Størrelse', c.size],
+        ['Ejerskab', c.ownership],
+        ['Økonomi', c.finance],
+        ['Format', c.format],
+        ['Nuværende stack', c.currentStack],
+        ['Skifte-evne', c.switchEase],
+        ['Match til Ringsted', c.ringstedFit],
+        ['Watch-outs', c.watchOuts],
+      ];
+      html += '<div style="display:grid;gap:4px;font-size:11px">';
+      for (const [label, val] of rows) {
+        if (!val) continue;
+        const labelColor = label === 'Watch-outs' ? '#ef4444' : label === 'Skifte-evne' || label === 'Match til Ringsted' ? '#22c55e' : 'var(--text)';
+        html += `<div style="line-height:1.4"><span style="color:${labelColor};font-weight:600">${label}:</span> <span style="color:var(--text-muted)">${val}</span></div>`;
+      }
+      html += '</div></a>';
+    }
+    html += '</div></div>';
   }
 
   // Month headers (Jan-Dec)
